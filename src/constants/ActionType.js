@@ -1,0 +1,9 @@
+export const GET_BOOKTAGS = 'GET_BOOKTAGS'
+export const GET_ALLBOOK = 'GET_ALLBOOK'
+export const GET_BOOK_BY_ID = 'GET_BOOK_BY_ID'
+export const GET_BOOK_BY_TYPE_ID = 'GET_BOOK_BY_TYPE_ID'
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const GET_CART = 'GET_CART';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const SET_CURRENT_USER_INFO = 'SET_CURRENT_USER_INFO';
+export const GET_ERRORS = 'GET_ERRORS';

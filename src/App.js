@@ -1,24 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import HomePage from './components/pages/HomePage'
+import Login from './components/pages/LoginPage'
+import { Route, Switch , BrowserRouter as Router} from "react-router-dom";
+import Regiser from './components/pages/RegisterPage'
+import ScrollToTop from 'react-router-scroll-top'
+import SearchPage from './components/pages/SearchPage'
+
+import BookDetailPage from './components/pages/BookDetailPage'
+import ShoppingCartPage from './components/pages/ShoppingCartPage'
+
+import './resources/styles.css';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {/* <HomePage></HomePage> */}
+    <Router>
+      <Switch>
+            <ScrollToTop>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={Login} />
+            <Route  path="/register" component={Regiser} />
+            <Route path="/search" component={SearchPage}/>
+            {/* <Route path="/book/:book_id" component={SearchPage}></Route> */}
+            <Route path="/details/:book_id" component={BookDetailPage}></Route>
+            <Route path="/cart" component={ShoppingCartPage}></Route>
+            </ScrollToTop>
+        </Switch>
+    </Router>
     </div>
   );
 }
