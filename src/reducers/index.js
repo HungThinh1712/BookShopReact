@@ -8,6 +8,6 @@ const appReducer = combineReducers({
     bookTags:bookTagsReducer,
     books:booksReducer,
     cart: cartReducer,
-    auth: authReducer
+    auth: authReducer,
 });
 export default appReducer;

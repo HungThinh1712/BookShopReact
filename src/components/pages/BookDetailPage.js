@@ -77,7 +77,6 @@ const BookDetailPage = (props) => {
     discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
     coverPrice={book.coverPrice}
     title={book.bookName}
-
     image={book.image}
     valueraiting={book.rating}
   ></Card>)
@@ -89,11 +88,11 @@ const BookDetailPage = (props) => {
       <Header></Header>
       {selectedBook != null ? <div>
         <BookDetail
-          id = {selectedBook.id}
+          bookId = {selectedBook.id}
           price={selectedBook.price}
           discount={Math.ceil(((selectedBook.coverPrice - selectedBook.price) / selectedBook.coverPrice) * 100)}
           coverPrice={selectedBook.coverPrice}
-          title={selectedBook.bookName}
+          name={selectedBook.bookName}
           image={selectedBook.image}
           bookTypeName={selectedBook.bookTypeName}
           publishingHouseName={selectedBook.publishingHouseName}

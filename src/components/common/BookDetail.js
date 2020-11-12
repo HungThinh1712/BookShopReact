@@ -6,7 +6,7 @@ import Rating from '@material-ui/lab/Rating';
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Button from '@material-ui/core/Button'
 import CartIcon from '../../image/ic-cart@2x.png'
-import {  useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import * as cartActions from './../../actions/cartAction'
 const useStyles = makeStyles((theme) => ({
 
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'red'
     },
     card_info : {
-        fontWeight: '600', fontSize: '12px', fontFamily: 'Arial'
+        fontWeight: '600', fontSize: '12px'
     },
     mgleft :{
         marginLeft:'40px',
@@ -95,7 +95,10 @@ const useStyles = makeStyles((theme) => ({
 
 const BookDetail = (props) => {
     const dispatch = useDispatch();
+    const isLogined = useSelector(state => state.auth ? state.auth.isAuthenticated : false);
     const [amount, setAmount] = useState(1);
+
+   
     const handleDecrease = () => {
         if (amount - 1 >= 0) {
             setAmount(amount - 1)
@@ -108,10 +111,24 @@ const BookDetail = (props) => {
         setAmount(e.target.value)
     };
 
-    const handleAddToCart = () => {
-        for (let i = 0; i < amount; i++) {
-            dispatch(cartActions.addToCart(props))
+  
+
+    
+    const handleAddToCart = () => {        
+
+       dispatch(cartActions.addToCart(props,amount))
+        if(isLogined===true){
+
+            const objectItemToAdd ={
+                ...props,...{'amount':amount}
+            }
+            let arr = [];
+            arr.push(objectItemToAdd)
+            console.log(arr)
+                 dispatch(cartActions.addToCartofCurrentUser(arr))
+
         }
+      
     };
     const classes = useStyles();
     return (
@@ -123,7 +140,7 @@ const BookDetail = (props) => {
                         </div>
                         <div className ={classes.mgleft}>
                             <Grid container style={{ marginBottom: '0.5em', height: '50px' }}>
-                                <span className={classes.card_title_detail}>{props.title}</span>
+                                <span className={classes.card_title_detail}>{props.name}</span>
                             </Grid>
                             <div style={{ marginBottom: '0.5em'}}>
                                 <Rating size='small' name="read-only" value={props.valueraiting} readOnly />

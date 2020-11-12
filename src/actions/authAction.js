@@ -1,20 +1,16 @@
 import axios from 'axios';
 import setAuthToken from '../authentication/setAuthToken'
 import jwt_decode from 'jwt-decode';
-import {message} from 'antd';
 import * as Types from '../constants/ActionType'
+import * as cartActions from './../actions/cartAction'
 
 
 
 // 🔓  Login - Get user token
-export const loginUser = (userData, history) => async (dispatch) => {
- 
-    
-
+export const loginUser = (userData, history,shoppingCartData) => async (dispatch) => {
     await axios.post('https://localhost:44352/api/Auth', userData)
-        .then(res =>  {
-           
-            if (res.status===200) {
+        .then(res =>  {  
+            if (res.status===200 ) {
                 //Save to localStorage
                
                 const token = res.data;
@@ -26,11 +22,10 @@ export const loginUser = (userData, history) => async (dispatch) => {
                 // the token includes user info but it is encoded
                 // to decode we use jwt-decode
                 //Decode token to get user data
-                const decoded = jwt_decode(token);
+                const decoded = jwt_decode(localStorage.getItem('jwtToken')!=null ? localStorage.getItem('jwtToken') : token );
                 // Set current user
                 dispatch(setCurrentUser(decoded));
-                //dispatch(setCurrentUserInfo());
-                message.success("Login Successful");
+                dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))
                 history.push('/')
             } else {
                 let errors;
@@ -70,6 +65,9 @@ export const setCurrentUserInfo = (userId) => async (dispatch) => {
     axios.get(`https://localhost:44352/api/Users/Get?id=${userId}`)
         .then(res => {
             if (res.status===200) {
+                
+                localStorage.setItem('userData', JSON.stringify(res.data));
+               
                 dispatch( {
                     type: Types.SET_CURRENT_USER_INFO,
                     payload: res.data
@@ -86,6 +84,8 @@ export const setCurrentUserInfo = (userId) => async (dispatch) => {
 
 };
 
+
+
 // 🔒 Set logged  in user
 export const setCurrentUser = (decoded) =>  (dispatch) => {
     dispatch({
@@ -93,5 +93,34 @@ export const setCurrentUser = (decoded) =>  (dispatch) => {
         payload: decoded
     });
     dispatch(setCurrentUserInfo(decoded.sub))
+   
+};
+export const updateAddressOfCurrentUser = (updatedUser,history) => async (dispatch) => {
+    await axios({
+        
+        method: 'put',
+        url: `https://localhost:44352/api/Users/UpdateAddress`,
+        headers: {}, 
+        data: {
+            updatedUser
+        }
+      }).then(res => {
+        if (res.status===200) {
+         
+            history.push('/')
+            localStorage.setItem('userData', JSON.stringify(res.data));
+            dispatch( {
+                type: Types.UPDATE_USER_ADDRESS,
+                payload: res.data
+            })
+        } else {
+            console.log(res);
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+    })
+        
 };
 

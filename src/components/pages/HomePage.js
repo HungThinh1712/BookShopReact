@@ -10,8 +10,10 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from 'react-redux'
 import {getBooksRequest} from '../../actions/booksAction'
-import * as bookActions from '../../actions/booksAction'
 import SnackBarLoginSuccess from '../common/SnackBarLoginSuccess'
+import Footer from '../common/Footer'
+import Progress from '../common/ProgressBar'
+
 
 
 
@@ -62,13 +64,13 @@ const HomePage = (props) => {
     const books = useSelector(state=>state.books.books)
     const isLogined = useSelector(state => state.auth ? state.auth.isAuthenticated : false);
     const currentUser = useSelector(state => state.auth.userData ? state.auth.userData : null);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {   
-        dispatch(getBooksRequest(indexPage))
+        dispatch(getBooksRequest(indexPage));
+        setLoading(true)
     }, [indexPage])
   
-
-
-
+    
   const loadMore = () =>{
       setIndexPage(indexPage + 1)
 
@@ -96,11 +98,13 @@ const HomePage = (props) => {
 
     const classes = useStyles();
         return (
-          books.length > 0 ? <div >
+          books.length > 0 ? <div style={{backgroundColor:'#f2f2f2'}}>
+              <div >
                 <Header></Header>
+               
                 <div  style = {{display:"flex"}}>
                     <ProductTag></ProductTag>
-                    <Slide></Slide>
+                   
                 </div>
                 <BookNav title ="Sách tiếng việt" />
                <Paper className = {`cover_container ${classes.container}`}>
@@ -142,11 +146,14 @@ const HomePage = (props) => {
                     <SnackBarLoginSuccess
                         open = {openSnackBar}
                         onClose={handleCloseSnackBar}
-                        currentUser ={currentUser.fullName}
+                        currentUser ={currentUser ? currentUser.fullName : null}
                         />
                 </Paper>
+              
 
-            </div> : null
+            </div>
+            <div style={{paddingTop:'180px',backgroundColor:'#f2f2f2'}}><Footer/></div>
+          </div> : <Progress/>
         );
 }
 

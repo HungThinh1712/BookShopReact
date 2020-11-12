@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {  useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,7 +18,10 @@ import Logo from './../Images/logo_hcmute.png'
 import MenuIcon from '@material-ui/icons/Menu'
 import { withRouter } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import * as cartAction from './../../actions/cartAction'
+import * as bookAction from '../../actions/booksAction'
 import SnackBar from '../common/SnackBarLoginSuccess'
+import Progress from '../common/ProgressBar'
 const useStyles = makeStyles((theme) => ({
 
   grow: {
@@ -133,14 +136,11 @@ const useStyles = makeStyles((theme) => ({
 
 const  PrimarySearchAppBar = (props) => {
   const classes = useStyles();
-
-  const [openSnackBar, setopenSnackBar] = React.useState(false);
-
-  
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const cartAmount = useSelector(state => state.cart.items ? Object.keys(state.cart.items).length : null);
- 
+  const [flagSearch,setFlagSearch] = React.useState(false)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -161,6 +161,20 @@ const  PrimarySearchAppBar = (props) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
+  const [searchString,setSearchString] = useState(props.searchString ? props.searchString : "")
+  const handleSearchStringChange = (e) => {
+    setSearchString(e.target.value);
+};
+  const handleSearchClick =()=>{
+    props.history.push(`/search/${searchString}`);
+
+  }
+  useEffect(()=>{
+    if(userId !=null){
+      dispatch(cartAction.getCartByUserIdRequest(userId))
+    }
+  },[userId])
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -225,22 +239,25 @@ const  PrimarySearchAppBar = (props) => {
           <IconButton className ={classes.menuIcon} aria-label="show 4 new mails" color="inherit">
               <MenuIcon />
           </IconButton>
-           <img  className={classes.logo} src={Logo} alt=""/>
+           <img  onClick={() => props.history.push("/")}  className={classes.logo} src={Logo} alt=""/>
            <div style= {{flexGrow:'0.04'}}></div>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography  onClick={() => props.history.push("/")} className={classes.title} variant="h6" noWrap>
             Tina
           </Typography>
           <div className={classes.search}>
             
-            <InputBase
+            <InputBase onChange ={handleSearchStringChange}
               placeholder="Tìm kiếm sản phẩm..."
+              defaultValue ={searchString}
               classes={{
                 root: classes.inputRoot,
               }}
             />
-            <IconButton  onClick={() => props.history.push("/search")}  >
+            {searchString !=="" ? <IconButton  onClick={handleSearchClick}   >
                 <SearchIcon />
-              </IconButton>
+              </IconButton>: <IconButton  onClick={handleSearchClick} disabled   >
+                <SearchIcon />
+              </IconButton>}
           </div>
           <div style= {{flexGrow:'1'}}></div>
          

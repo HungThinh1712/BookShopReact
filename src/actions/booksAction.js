@@ -34,7 +34,6 @@ export const getBookByIdRequest = (id) => async (dispatch) => {
 }
 
 export const getBookByTypeIdRequest = (typeId) => async (dispatch) => {
-    console.log(typeId)
     await axios.get(`https://localhost:44352/api/Books/GetBookByTypeId?typeID=${typeId}`)
         .then(res => {
             dispatch({
@@ -46,6 +45,21 @@ export const getBookByTypeIdRequest = (typeId) => async (dispatch) => {
             console.log('Error' + err);
         }
         );
+}
+
+export const searchBookByNameRequest = (name) => async (dispatch) => {
+    await axios.get(`https://localhost:44352/api/Books/SearchBookByName?name=${name}`)
+        .then(res => {
+            dispatch({
+                type: Types.SEARCH_BOOK,  //this call test dispatch. to dispsatch to our reducer
+                searchedResultBooks: res.data
+            });
+        })
+        .catch(err => {
+            console.log('Error' + err);
+        }
+        );
 
 }
+
 

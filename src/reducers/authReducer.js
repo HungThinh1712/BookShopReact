@@ -2,11 +2,12 @@
 import * as Types from './../constants/ActionType'
 
 import isEmpty from '../authentication/is-empty';
-
+const isAuthenticated =  localStorage.getItem('jwtToken')!= null ? true : false
+const userData = localStorage.getItem("userData") !=null ? localStorage.getItem("userData") : null
 const initialState = {
-    isAuthenticated: false,
+    isAuthenticated: isAuthenticated,
     user: {},
-    userData: {}
+    userData: JSON.parse(userData)
 };
 
 export default function (state = initialState, action) {
@@ -21,6 +22,11 @@ export default function (state = initialState, action) {
             return{
                 ...state,
                userData: action.payload
+            };
+        case Types.UPDATE_USER_ADDRESS:
+            return{
+                ...state,
+                userData: action.payload
             };
         default:
             return state;

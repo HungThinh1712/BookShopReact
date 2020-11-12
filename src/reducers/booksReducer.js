@@ -3,6 +3,7 @@ const initialState = {
     books: [],
     selectedBook: null,
     suggestedBooks:[], 
+    searchedResultBooks : []
 };
 
 export default function  (state = initialState, action) {
@@ -25,6 +26,11 @@ export default function  (state = initialState, action) {
                 ...state,
                 suggestedBooks: action.suggestedBooks
             };
+        case Types.SEARCH_BOOK:
+            return{
+                ...state,
+                searchedResultBooks: action.searchedResultBooks
+            }
         default: return state;
     }
 }
