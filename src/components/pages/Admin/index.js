@@ -30,7 +30,6 @@ const index = () => {
                                 </div>
                             </div>
 
-         
                             <div className="col-xl-5 col-sm-6 mb-5">
                                 <div className="card text-white bg-warning o-hidden h-100">
                                     <div className="card-body">

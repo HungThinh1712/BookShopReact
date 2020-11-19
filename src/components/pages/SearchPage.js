@@ -72,7 +72,7 @@ const SearchPage = (props) => {
             ></Card>)  
         return (
             <div>
-                <Header></Header>
+                <Header searchString={searchString}></Header>
               
                 <div  >
                   <div className={classes.drop_down} >

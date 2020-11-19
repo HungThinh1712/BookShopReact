@@ -100,9 +100,10 @@ const BookDetail = (props) => {
 
    
     const handleDecrease = () => {
-        if (amount - 1 >= 0) {
+        if (amount - 1 > 0) {
             setAmount(amount - 1)
         }
+        
     };
     const handleIncrease = () => {
         setAmount(amount + 1)

@@ -4,7 +4,6 @@ import App from './App'
 import store from './configStore'
 import { Provider } from 'react-redux'
 import setAuthToken from './authentication/setAuthToken'
-import {} from 'react-redux'
 
 if(localStorage.getItem('jwtToken')){
   setAuthToken(localStorage.getItem('jwtToken'))

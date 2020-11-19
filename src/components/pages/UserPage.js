@@ -1,16 +1,12 @@
 import React from 'react';
-import SideBarAdmin from '../common/SideBarAdminPage'
-import Header from '../common/Header'
-import { Paper } from '@material-ui/core';
+import {useSelector} from 'react-redux'
+import LoginPage from '../pages/LoginPage'
+import ProfilePage from '../pages/ProfileUserPage'
+
 const UserPage = () => {
+    const isLogined = useSelector(state => state.auth ? state.auth.isAuthenticated : false);
     return (
-        <div>
-            <Header/>
-            <div style={{display:'flex'}}>
-                <SideBarAdmin />
-   
-            </div>
-        </div>
+        isLogined ? <ProfilePage/>: <LoginPage/>
     );
 };
 

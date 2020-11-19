@@ -1,7 +1,7 @@
 /*====================
         Vnese Books
 ======================*/
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap'); */
 .home-header {
     background: #fafafa;
     border: 1px solid #e5e5e5;
@@ -436,4 +436,461 @@ html {
     }
   }
 
+/*====================
+    Admin Page
+======================*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input {
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+.forms-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.signin-signup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 5;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0rem 5rem;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+form.sign-up-form {
+  opacity: 1;
+  z-index: 2;
+}
+
+form.sign-in-form {
+  z-index: 2;
+}
+
+.title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.input-field {
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 6px 0;
+  height: 50px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 5% 95%;
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 0.9rem;
+  margin-top: -3px;
+}
+
+.input-field input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 450;
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: -2px;
+  margin-left: 10px;
+}
+
+.input-field input::placeholder {
+  color: #aaa;
+  font-weight: 450;
+}
+
+.input-field .register {
+  margin: 1000px;
+  height: 45px;
+}
+
+
+/* Login input - field   */
+.input-field-login {
+  max-width: 420px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.input-field-login i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+
+.input-field-login input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.input-field-login input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.sex {
+  margin: 8px 0;
+}
+
+.social-text {
+  padding: 0.7rem 0;
+  font-size: 1rem;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon {
+  height: 46px;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.45rem;
+  color: #333;
+  border-radius: 50%;
+  border: 1px solid #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  color: #4481eb;
+  border-color: #4481eb;
+}
+
+.btn-loginpage {
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  max-width: 420px;
+  width: 100%;
+}
+.btn_register {
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  max-width: 380px;
+  width: 100%;
+}
+
+
+.btn-loginpage:hover {
+  background-color: #4d84e2;
+}
+ @media (max-width: 870px) {
+  
+  .signin-signup {
+    width: 100%;
+    top: 90%;
+    transform: translate(-50%, -100%);
+    transition: 1s 0.8s ease-in-out;
+  
+  }
+
+  .signin-signup,
+  .container.sign-up-mode .signin-signup {
+    left: 50%;
+  }
+
+  
+  .btn-loginpage.transparent {
+    width: 110px;
+    height: 35px;
+    font-size: 0.7rem;
+  }
+
+  
+  .container.sign-up-mode:before {
+    transform: translate(-50%, 100%);
+    bottom: 32%;
+    right: initial;
+  }
+
+  .container.sign-up-mode .left-panel .image,
+  .container.sign-up-mode .left-panel .content {
+    transform: translateY(-300px);
+  }
+
+  .container.sign-up-mode .right-panel .image,
+  .container.sign-up-mode .right-panel .content {
+    transform: translateY(0px);
+  }
+
+  .right-panel .image,
+  .right-panel .content {
+    transform: translateY(300px);
+  }
+
+  .container.sign-up-mode .signin-signup {
+    top: 15%;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 570px) {
+  form {
+    padding: 0 1.5rem;
+  }
+
+  .image {
+    display: none;
+  }
+  .panel .content {
+    padding: 0.5rem 1rem;
+  }
+  .container {
+    padding: 1.5rem;
+  }
+
+  .container:before {
+    bottom: 72%;
+    left: 50%;
+  }
+
+  .container.sign-up-mode:before {
+    bottom: 28%;
+    left: 50%;
+  }
+} 
+
+
+/*====================
+   cart Page
+======================*/
+
+.mt-100 {
+  margin-top: 100px
+}
+
+.card {
+  margin-bottom: 30px;
+  border: 0;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  letter-spacing: .5px;
+  border-radius: 8px;
+  -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+  box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05)
+}
+
+.card .card-header {
+  background-color: #fff;
+  border-bottom: none;
+  padding: 24px;
+  border-bottom: 1px solid #f6f7fb;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px
+}
+
+.card-header:first-child {
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+}
+
+.card .card-body {
+  padding: 30px;
+  background-color: transparent
+}
+
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #4466f2 !important;
+  border-color: #4466f2 !important
+}
+
+/*====================
+   User Page
+======================*/
+body-userpage {
+  background: #F1F3FA;
+}
+
+.profile {  
+  margin: 20px 0;
+}
+  
+.profile-sidebar {  
+  padding: 10px 10px 140px 10px;  
+  background: #5995fd;
+}   
+   
+.profile-userpic img {  
+  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;  
+  height: 30%;  
+  -webkit-border-radius: 50% !important;  
+  -moz-border-radius: 50% !important;  
+  border-radius: 50% !important;
+}
+    
+.profile-usertitle {  
+  text-align: center;  
+  margin-top: 10px;
+  }
+   
+.profile-usertitle-name {  
+  color: #fff;  
+  font-size: 16px;  
+  font-weight: 600;  
+  margin-bottom: 7px;
+  }
+    
+.profile-userbuttons {  
+  text-align: center;  
+  margin-top: 10px;
+  }
+    
+.profile-userbuttons .btn {  
+  text-transform: uppercase;  
+  font-size: 11px;  
+  font-weight: 600;  
+  padding: 6px 15px;  
+  margin-right: 5px;
+  }
+   
+.profile-userbuttons .btn:last-child {  
+  margin-right: 0px;
+}    
+
+.nav-link {
+  color: white;
+}
+
+.profile-usermenu a:hover {
+  background-color: white;
+  cursor: pointer;
+}
+.profile-usermenu {  
+  margin-top: 30px;
+}   
+   
+.profile-content {  
+  padding: 20px;  
+  background: #fff;  
+  min-height: 460px;
+  
+}
+
+.profile-content p {  
+  font-size: 20px;
+}
+
+.input-field-userpage {
+  max-width: 490px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 15px 0;
+  height: 40px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 5% 95%;
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.input-field-userpage i {
+  text-align: center;
+  line-height: 42px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 17px;
+}
+
+.input-field-userpage input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 450;
+  font-size: 17px;
+  color: #333;
+  margin-top: -2px;
+  margin-left: 10px;
+}
+
+.input-field-userpage input::placeholder {
+  color: #aaa;
+  font-weight: 450;
+}
+
+.sex {
+    margin: 10px 0 0 10px;
+}

@@ -8,6 +8,7 @@ import * as cartActions from '../../actions/cartAction'
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import {useSelector} from "react-redux";
+import {toastError} from '../common/ToastHelper'
 const useStyles = makeStyles((theme) => ({
 
 
@@ -69,6 +70,7 @@ const ShoppingCartPage = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items ? state.cart : []);
+  const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
 
   const showCartItems = Object.values(cartItems.items).map((cartItem)=>
 
@@ -78,7 +80,7 @@ const ShoppingCartPage = (props) => {
       title = {cartItem.name}
       price = {cartItem.price}
       coverPrice = {cartItem.coverPrice}
-      discount = {cartItem.discount}
+      discount = {Math.ceil(((cartItem.coverPrice - cartItem.price) / cartItem.coverPrice) * 100)}
       amount = {cartItem.amount}
       image ={cartItem.image}
       bookId ={cartItem.bookId}
@@ -91,7 +93,15 @@ const ShoppingCartPage = (props) => {
     </div>
   )
   const GetTotalMoney = Object.values(cartItems.items).reduce((totalMoney, cartItem) => totalMoney + cartItem.amount*cartItem.price, 0);
-
+  const handleClick = () =>{
+    if(userData){
+      props.history.push('/address_shipping')
+    }
+    else{
+      props.history.push('/login')
+      toastError("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!")
+    }
+  }
   return (
     <div>
       <Header></Header>
@@ -104,22 +114,35 @@ const ShoppingCartPage = (props) => {
             <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
               <h6>Tạm tính: </h6>
               <div style={{ flexGrow: '1' }} />
-              <h6>{GetTotalMoney.toFixed(3)}đ</h6>
+              <h6>{GetTotalMoney.toFixed(3).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</h6>
             </div>
             <Divider />
             <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
               <h6>Thành tiền: </h6>
               <div style={{ flexGrow: '1' }} />
-              <h6>{GetTotalMoney.toFixed(3)}đ</h6>
+              <h6>{GetTotalMoney.toFixed(3).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</h6>
             </div>
 
           </Paper>
-          <Button className={classes.button_order} variant="contained" color="primary" onClick={() => props.history.push("/address_shipping")}>
+          <Button className={classes.button_order} variant="contained" color="primary" onClick={handleClick}>
             Tiến hành đặt hàng
       </Button>
         </div>
 
-      </div>:<h1 style={{marginTop:"200px"}}>Hiện tại không có sản phẩm trong giỏ hàng</h1>}
+      </div>:<div class="container-fluid mt-100">
+    <div className="row">
+        <div className="col-md-12">
+            <div className="card">
+                <div className="card-body cart">
+                    <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" className="img-fluid mb-4 mr-3"/>
+                        <h3><strong>Bạn chưa có sản phẩm trong giỏ hàng</strong></h3>
+                        <h4>Thêm một vài sản phẩm vào giỏ hàng để bé thỏ nhà mình có tiền mua váy</h4> <button href="#" class="btn btn-primary cart-btn-transform m-3" onClick={()=>props.history.push('/')}>Tiếp tục mua sắm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>}
 
     </div>
   );

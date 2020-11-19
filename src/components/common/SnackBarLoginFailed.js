@@ -27,8 +27,8 @@ export default function CustomizedSnackbars(props) {
   return (
     <div className={classes.root}>
       <Snackbar open={props.open} autoHideDuration={5000} onClose={props.onClose} >
-        <Alert  severity="success" style={{backgroundColor:'blue'}}>
-          {`Chào mừng trở lại ${props.currentUser}`}
+        <Alert  severity="error">
+          {`Tên đăng nhập hoặc mật khẩu không đúng`}
         </Alert>
       </Snackbar>      
     </div>

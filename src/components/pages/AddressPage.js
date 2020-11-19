@@ -5,7 +5,7 @@ import HeaderInPayment from '../common/HeaderInPayment'
 const AddressPage = () => {
     return (
         <div>
-            <HeaderInPayment/>
+            <HeaderInPayment step ={1}/>
             <AddressZone/>
         </div>
     );

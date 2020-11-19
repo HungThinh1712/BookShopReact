@@ -19,9 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { withRouter } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import * as cartAction from './../../actions/cartAction'
-import * as bookAction from '../../actions/booksAction'
 import SnackBar from '../common/SnackBarLoginSuccess'
-import Progress from '../common/ProgressBar'
 const useStyles = makeStyles((theme) => ({
 
   grow: {
@@ -268,7 +266,7 @@ const  PrimarySearchAppBar = (props) => {
               </Badge>
             </IconButton>
             <div style= {{flexGrow: 0.3}}></div>
-            <IconButton    color="inherit" onClick={() => props.history.push("/login")}>            
+            <IconButton    color="inherit" onClick={() => props.history.push("/user_page")}>            
                 < AccountCircle/>
             </IconButton>
             <IconButton onClick={() => props.history.push("/cart")} style={{ outline: 'none !important',boxShadow: 'none'}} color ="inherit"            

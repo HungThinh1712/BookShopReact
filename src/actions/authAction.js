@@ -24,27 +24,24 @@ export const loginUser = (userData, history,shoppingCartData) => async (dispatch
                 //Decode token to get user data
                 const decoded = jwt_decode(localStorage.getItem('jwtToken')!=null ? localStorage.getItem('jwtToken') : token );
                 // Set current user
-                dispatch(setCurrentUser(decoded));
-                dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))
-                history.push('/')
+               
+                if(decoded.admin==="False"){
+                    dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))
+                    dispatch(setCurrentUser(decoded));
+                    history.push('/')
+                }
+                else{
+                    history.push('/admin_page')
+                }
             } else {
-                let errors;
-                if (res.data.error === "Invalid credentials") {    // username already exists
-                    errors = {"username": "Username or password is not correct"}
-                } else if (res.data.error === "Please provide an email and password") {
-                    errors = {"username": "Please provide an email and password!"}
-                } else if(res.data.error === "Password is not correct"){
-                    errors = {"username": "Password is not correct!"}
-                }
-                else {
-                    let res_ = res.data.error;
-                    let res__ = res_.replace('User validation failed: ', '{"') + '"}';
-                    let errObj = res__.replace(new RegExp(': ', 'g'), '" : "').replace(new RegExp(', ', 'g'), '", "');
-                    errors = JSON.parse(errObj);
-                }
+                let error;
+                if(res.data.errors!==undefined)
+                    error = "Email không hợp lê"
+                else
+                    error = res.data
                 dispatch({
                     type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
-                    payload: errors //sets payload to errors coming from server
+                    payload: error //sets payload to errors coming from server
                 });
             }
         })
@@ -107,7 +104,7 @@ export const updateAddressOfCurrentUser = (updatedUser,history) => async (dispat
       }).then(res => {
         if (res.status===200) {
          
-            history.push('/')
+            history.push('/address_shipping')
             localStorage.setItem('userData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_USER_ADDRESS,

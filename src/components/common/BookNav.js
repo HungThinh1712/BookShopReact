@@ -4,9 +4,15 @@ const useStyles = makeStyles((theme) => ({
 
 	root: {
 	 
-	  [theme.breakpoints.up('sm')]: {
+	  [theme.breakpoints.down('sm')]: {
 		marginLeft:'0px',
-        marginRight:'0px',
+		marginRight:'0px',
+		marginTop: '90px',
+	  },
+	  [theme.breakpoints.down('md')]: {
+		marginLeft:'0px',
+		marginRight:'0px',
+		marginTop: '90px',
 	  },
 	  [theme.breakpoints.up('lg')]: {
 		marginLeft:'87px',
@@ -15,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
 	  [theme.breakpoints.down('xs')]: {
 		marginLeft:'0px',
 		marginRight:'0px',
-		fontSize:'20px'
+		fontSize:'20px',
+		marginTop: '90px',
 	  },
 	},
 	all_book: {

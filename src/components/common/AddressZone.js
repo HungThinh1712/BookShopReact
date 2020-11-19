@@ -80,13 +80,16 @@ const HeaderinPayment = (props) => {
     <div  >
       {specificAddress ? <div className={classes.address_zone} >
         <div >
-          <div style={{ fontWeight: '800'}}  >2. Địa chỉ giao hàng</div>
-          <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid',borderWidth: '2px', padding: '10px',marginTop:'20px'}}>
-              <div style={{ fontWeight: '800' }}>{userData.fullName}</div>
-              <div style={{fontSize:'13px',fontWeight:'500'}} >Địa chỉ: {userData.specificAddress}, {userData.ward}, {userData.district}, {userData.city}</div>
-              <div style={{fontSize:'13px',fontWeight:'500'}}>Điện thoại: {userData.phone}</div>
+          <div style={{ fontWeight: '700', fontSize:'30px',color:'red'}}  >2. Địa chỉ giao hàng</div>
+          <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid',borderWidth: '2px', padding: '10px',marginTop:'20px',borderColor:'blueviolet',borderRadius:'5px'}}>
+              <div style={{ fontWeight: '800',color:'red',fontFamily: 'Roboto ' }}>{userData.fullName}</div>
+              <div style={{fontSize:'14px',fontWeight:'500'}} >Địa chỉ: {userData.specificAddress}, {userData.ward}, {userData.district}, {userData.city}</div>
+              <div style={{display:'flex'}}>
+                <div style={{fontSize:'14px',fontWeight:'500',paddingRight:'5px'}}>{`Điện thoại: `} </div>
+                <div style={{fontSize:'14px',fontWeight:'500',color:'red'}}>{userData.phone}</div>
+              </div>
               <div style={{ display: 'flex', flexDirection: 'row',marginTop:'10px' }} >
-                <Button variant="contained" color="primary" size='small' style={{marginRight:'10px'}}>Giao đến địa chỉ này</Button>
+                <Button variant="contained" color="primary" size='small' style={{marginRight:'10px'}} onClick={()=>props.history.push('/payment')}>Giao đến địa chỉ này</Button>
                 <Button variant="contained" size='small'  onClick={(hideAddressForm)=>handleOpenAddressFormClick(hideAddressForm)} >Sửa</Button>
               </div>
           </div>

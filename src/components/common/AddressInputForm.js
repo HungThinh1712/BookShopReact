@@ -23,10 +23,12 @@ const AddressInputForm = (props) => {
     const dispatch = useDispatch();
     const id = props.id;
     const classes = useStyles();
+    const [name,setName] =useState(props.name);
+    const [phone,setPhone] = useState(props.phone)
     const [city, setCity] = useState(props.city);
     const [district, setDistrict] = useState(props.district);
     const [ward, setWard] = useState(props.ward);
-    const [address, setAddress] = useState(props.address);
+    const [address, setAddress] = useState(props.specificAddress);
     const handleCityInputChange = e => {
     setCity(e.target.value);
   };
@@ -41,78 +43,57 @@ const AddressInputForm = (props) => {
   const handleAddressInputChange = e => {
     setAddress(e.target.value);
   };
+  const handleNameInputChange = e => {
+    setName(e.target.value);
+  };
+  const handlePhoneInputChange = e => {
+    setPhone(e.target.value);
+  };
 
   const handleSubmit = async e => {
-    
-
-    const userAddress = { id, city, district,ward,address };
+    const userAddress = { id,name,phone, city, district,ward,address };
     await dispatch(
         authActions.updateAddressOfCurrentUser(userAddress,props.props.history)
         
     );
+    props.onClick();
   };
     return (
-           <div  style={{display:'flex',justifyContent:'center'}}>
-            <div style={{display:'inline-block' ,marginTop:'50px',padding:'20px',borderStyle: 'solid',borderWidth: '2px'}}>
-            <table >
-                <tbody>
-                  <tr style={{marginBottom:'20px',padding:'20px'}}>
-                      <th className={classes.title}>Họ tên</th>
-                  
-                      <th><Input  defaultValue={props.name} className={classes.input}   ></Input></th>
-                  </tr>
-                </tbody>
-                <tbody><tr style={{height:'15px'}}></tr></tbody>
-                <tbody>
-                  <tr >
-                      <th>Điện thoại</th>
-                      <th><Input  defaultValue={props.phone} className={classes.input} ></Input></th>
-                  </tr>
-                </tbody>
-               <tbody><tr style={{height:'15px'}}></tr></tbody>
-                <tbody>
-                  <tr>
-                      <th>Tỉnh/Thành phố</th>
-                      <th><Input defaultValue={props.city} className={classes.input}  onChange={handleCityInputChange}></Input></th>
-                  </tr>
-                </tbody>
-                <tbody><tr style={{height:'15px'}}></tr></tbody>
-                <tbody>
-                  <tr>
-                      <th>Quận/Huyện</th>
-                      <th><Input defaultValue={props.district} className={classes.input}  onChange={handleDistrictInputChange}></Input></th>
-                  </tr>
-                </tbody>
-                <tbody><tr style={{height:'15px'}}></tr></tbody>
-                <tbody>
-                  <tr>
-                      <th>Phường/Xã</th>
-                      <th><Input defaultValue={props.ward} className={classes.input}  onChange={handleWardInputChange}></Input></th>
-                  </tr>
-                </tbody>
-                <tbody><tr style={{height:'15px'}}></tr></tbody>
-                <tbody>
-                  <tr>
-                      <th>Địa chỉ</th>
-                      <th><Input defaultValue={props.specificAddress} className={classes.input}  onChange={handleAddressInputChange}></Input></th>
-                  </tr>
-                </tbody>
-               <tbody><tr style={{height:'15px'}}></tr></tbody>
-               <tbody>
-                <tr>
-                      <th></th>
-                      <th >
-                          <Button variant="contained" size='small' onClick={() => props.onClick()}>Hủy bỏ</Button>
-                          <Button variant="contained" size='small' color='primary' onClick={handleSubmit}>Cập nhật</Button>
-                      </th>
-                      
-                  </tr>
-               </tbody>
-                
-               
-            </table>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'inline-block', marginTop: '20px', padding: '10px' }}>
+
+          <div className="input-field" style={{ width: '1000px' }}>
+            <i className="fas fa-user"></i>
+            <input type="text" value={name} onChange={handleNameInputChange} placeholder="Họ và tên" />
+          </div>
+          <div className="input-field" >
+            <i className="fas fa-phone"></i>
+            <input type="text" value={phone} onChange={handlePhoneInputChange} placeholder="Số điện thoại" />
+          </div>
+          <div className="input-field">
+            <i className="fas fa-city"></i>
+            <input value={city} onChange={handleCityInputChange} placeholder="Thành phố" />
+          </div>
+          <div className="input-field" >
+            <i className="fas fa-archway"></i>
+            <input value={district} onChange={handleDistrictInputChange} placeholder="Quận / Huyện" />
+          </div>
+          <div className="input-field" >
+            <i className="fas fa-bullseye"></i>
+            <input type="text" onChange ={handleWardInputChange} value={ward} placeholder="Xã / Phường" />
+          </div>
+          <div className="input-field" >
+            <i className="fas fa-map-marker"></i>
+            <input type="text" onChange={handleAddressInputChange} value={address} placeholder="Địa chỉ" />
+          </div>
+          <Button onClick={handleSubmit}>
+            Cập nhật
+          </Button>
+          <Button onClick={()=>props.onClick()}>
+            Hủy
+          </Button>
         </div>
-       </div>
+      </div>
     );
 };
 

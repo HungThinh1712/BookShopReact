@@ -55,8 +55,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomePage = (props) => {
-
-    
    
 
     const dispatch = useDispatch()
@@ -64,10 +62,8 @@ const HomePage = (props) => {
     const books = useSelector(state=>state.books.books)
     const isLogined = useSelector(state => state.auth ? state.auth.isAuthenticated : false);
     const currentUser = useSelector(state => state.auth.userData ? state.auth.userData : null);
-    const [loading, setLoading] = useState(false);
     useEffect(() => {   
         dispatch(getBooksRequest(indexPage));
-        setLoading(true)
     }, [indexPage])
   
     
@@ -100,11 +96,9 @@ const HomePage = (props) => {
         return (
           books.length > 0 ? <div style={{backgroundColor:'#f2f2f2'}}>
               <div >
-                <Header></Header>
-               
+                <Header></Header>        
                 <div  style = {{display:"flex"}}>
-                    <ProductTag></ProductTag>
-                   
+                    <ProductTag></ProductTag>                   
                 </div>
                 <BookNav title ="Sách tiếng việt" />
                <Paper className = {`cover_container ${classes.container}`}>

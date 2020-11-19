@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="center box">
             <h2>Address</h2>
             <div className="content">
-              <div className="place">
+              <div className="place" >
                 <span className="fas fa-map-marker-alt"></span>
                 <span className="text">1 Võ Văn Ngân, P.Linh Chiểu, Q.Thủ Đức, TP.HCM</span>
               </div>
@@ -29,17 +29,18 @@ const Footer = () => {
           <div className="right box">
             <h2>Contact us</h2>
             <div className="content">
-              <form action="#">
+             
+            </div>
+            <div >
                 <div className="phone">
                   <span className="fas fa-phone-alt"></span>
-                  <span className="text">0984931857</span>
+                  <span className="text" style={{fontSize: '0.7em',fontWeight: 500,paddingLeft:"10px"}}>0984931857</span>
                 </div>
                 <div className="email">
-                  <span className="fas fa-envelope"></span>
-                  <span className="text">thinhhuynhngochung@gmail.com</span>
+                  <span className="fas fa-envelope" ></span>
+                  <span className="text" style={{fontSize: '0.7em',fontWeight: 500,paddingLeft:"10px"}}>thinhhuynhngochung@gmail.com</span>
                 </div>
-              </form>
-            </div>
+              </div>
           </div>
         </div>
         <div className="bottom">

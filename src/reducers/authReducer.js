@@ -1,6 +1,6 @@
 // file name can be anything
 import * as Types from './../constants/ActionType'
-
+import { toastError, toastSuccess } from '../components/common/ToastHelper';
 import isEmpty from '../authentication/is-empty';
 const isAuthenticated =  localStorage.getItem('jwtToken')!= null ? true : false
 const userData = localStorage.getItem("userData") !=null ? localStorage.getItem("userData") : null
@@ -28,6 +28,12 @@ export default function (state = initialState, action) {
                 ...state,
                 userData: action.payload
             };
+        case Types.GET_ERRORS:
+                const  error  = action.payload;
+                toastError(error);
+                return {
+                    ...state,
+                };
         default:
             return state;
     }

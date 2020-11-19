@@ -1,14 +1,12 @@
 import CartItem from './../models/CartItem';
 import * as Types from './../constants/ActionType'
-
+import { toastError, toastSuccess } from '../components/common/ToastHelper';
 
 const cartItemInLocal = JSON.parse(localStorage.getItem('cart')) !=null ?  JSON.parse(localStorage.getItem('cart')).items : []
 const initialState = {
   
     items:cartItemInLocal,
 };
-
-
 
 export default (state=initialState, action) =>{
     const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
@@ -30,6 +28,7 @@ export default (state=initialState, action) =>{
             if(userId==null){
                 if(state.items[bookId] ){
                     // already have the item in the cart
+                    toastError("Đã có sản phẩm trong giỏ hàng. Cập nhật số lượng")
                     updatedOrNewCartItem= new CartItem(
                         name,
                         price,
@@ -42,6 +41,7 @@ export default (state=initialState, action) =>{
                     );
                 }else{
                     // add new item
+                    toastError("Một sản phẩm mới đã được thêm vào giỏ hàng")
                     updatedOrNewCartItem = new CartItem(name, price, coverPrice,discount, authorName, action.amount, bookId,image);
                 }
                 let st =  {
@@ -53,9 +53,12 @@ export default (state=initialState, action) =>{
             }else{
                 let flag =false
                 let st =[];
+                const checkedBookID = state.items.updatedOrNewCartItem ? state.items.updatedOrNewCartItem.bookId : null;
+               
                 for (let i = 0; i < state.items.length; i++) {
-                    if(bookId===state.items[i].bookId){
-                        console.log(state.items[i].bookId);
+                    if(bookId===state.items[i].bookId || bookId===checkedBookID){
+                       
+                        toastError("Đã có sản phẩm trong giỏ hàng. Cập nhật số lượng")
                         flag =true
 
                         updatedOrNewCartItem= new CartItem(
@@ -79,11 +82,11 @@ export default (state=initialState, action) =>{
                     }
                 }
                 if(flag===false ){
-
+                    toastError("Một sản phẩm mới đã được thêm vào giỏ hàng")
                     updatedOrNewCartItem = new CartItem(name, price, coverPrice,discount, authorName, action.amount, bookId,image);
                     st =  {
                         ...state,
-                        items: {...state.items,  updatedOrNewCartItem},
+                        items: [...state.items,  updatedOrNewCartItem],
                     };
                 }
                 return st;

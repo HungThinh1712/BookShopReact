@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Stepper from './Stepper'
 import Paper from '@material-ui/core/Paper';
+import { withRouter } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
 
     grow: {
@@ -53,11 +54,11 @@ const HeaderInPayment = (props) => {
                         Tina
                     </Typography>
                     <div style={{ flexGrow: '0.1' }}></div>
-                    <Stepper />
-                </Toolbar>
+                    <Stepper step ={props.step} />
+                </Toolbar >
             </Paper>
         </div>
     );
 };
 
-export default HeaderInPayment;
+export default withRouter(HeaderInPayment);
