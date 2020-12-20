@@ -1,6 +1,6 @@
 
 class CartItem {
-    constructor(name,price,coverPrice,discount,authorName,amount,bookId,image) {
+    constructor(name,price,coverPrice,discount,authorName,amount,bookId,imageSrc) {
         this.name = name;
         this.price = price;
         this.coverPrice = coverPrice;
@@ -8,7 +8,7 @@ class CartItem {
         this.authorName = authorName; 
         this.amount = amount;
         this.bookId = bookId;
-        this.image = image;
+        this.imageSrc = imageSrc;
         
     }
 }

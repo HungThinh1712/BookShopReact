@@ -38,7 +38,7 @@ export default function VietNameseBookNav(props) {
         return (
                 <div className = {`home-header ${classes.root}`} >
 		            <h2 >
-					<a >{props.title}</a>
+					<a>{props.title}</a>
 		            </h2>
 		        </div>
         );

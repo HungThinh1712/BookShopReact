@@ -16,6 +16,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.12.2",
     "react-logger": "^1.1.0",
     "react-material-ui-carousel": "^2.0.1",
     "react-material-ui-form-validator": "^2.1.1",

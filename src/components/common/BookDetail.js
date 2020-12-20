@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from "@material-ui/core/Grid";
@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import CartIcon from '../../image/ic-cart@2x.png'
 import { useSelector, useDispatch } from 'react-redux'
 import * as cartActions from './../../actions/cartAction'
+import comment from './CommentZone'
 const useStyles = makeStyles((theme) => ({
 
     
@@ -15,19 +16,17 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
           marginLeft:'0px',
           marginRight:'0px',
-          marginTop:'120px',
+        
         },
         [theme.breakpoints.up('lg')]: {
             marginLeft:'87px',
             marginRight:'87px',
-            marginTop:'120px',
-            height:'400px',
-            marginTop:'120px',
+            padding:'10px',
+            height:'400px',     
           },
         [theme.breakpoints.down('xs')]: {
           marginLeft:'0px',
           marginRight:'0px',
-          marginTop:'120px',
         },
       },
       cover_product_detail: {
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
       },
       card_image_detail: {
         height:'360px',
-        width:'250px',
+        width:'350px',
         display:'flex',
         alignContent:"center",
         justifyContent:'center',
@@ -108,11 +107,6 @@ const BookDetail = (props) => {
     const handleIncrease = () => {
         setAmount(amount + 1)
     };
-    const handleChange = (e) => {
-        setAmount(e.target.value)
-    };
-
-  
 
     
     const handleAddToCart = () => {        
@@ -125,26 +119,25 @@ const BookDetail = (props) => {
             }
             let arr = [];
             arr.push(objectItemToAdd)
-            console.log(arr)
-                 dispatch(cartActions.addToCartofCurrentUser(arr))
+            dispatch(cartActions.addToCartofCurrentUser(arr))
 
         }
       
     };
     const classes = useStyles();
     return (
-        <div>
-            <Paper className = {`cover_container ${classes.container}`}>
+        <div style={{backgroundColor:'#f2f2f2', paddingTop:'120px'}}>
+            <Paper className = {` ${classes.container}`}>
                     <div className={classes.cover_product_detail} >
                         <div className={classes.card_image_detail}>
-                            <img  src={props.image} alt="product " style={{maxWidth:'100%',maxHeight:'100%'}} />   
+                            <img  src={props.imageSrc} alt="product " style={{maxWidth:'100%',maxHeight:'100%'}} />   
                         </div>
                         <div className ={classes.mgleft}>
                             <Grid container style={{ marginBottom: '0.5em', height: '50px' }}>
                                 <span className={classes.card_title_detail}>{props.name}</span>
                             </Grid>
                             <div style={{ marginBottom: '0.5em'}}>
-                                <Rating size='small' name="read-only" value={props.valueraiting} readOnly />
+                                <Rating size='small' name="read-only" value={props.valueraiting} precision={0.5} readOnly />
                             </div>
                         <p style={{ marginBottom: '0.5em' }}><span
                             className={classes.card_info}>Tác giả: {props.authorName}</span></p>

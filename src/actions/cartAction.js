@@ -1,9 +1,19 @@
 import * as Types from './../constants/ActionType'
 import axios from 'axios'
+import * as CallApis from './../constants/Apis'
+import { toastMessage} from '../components/common/ToastHelper';
+import * as backdropAction from './../actions/backdropAction'
 
 export const addToCart = (item,amount) =>  {
     return {
         type: Types.ADD_TO_CART,
+        item: item,
+        amount:amount
+    }
+};
+export const updateAmountBookCurrentUser_Local = (item,amount) =>  {
+    return {
+        type: Types.UPDATE_AMOUNT_CURENTBOOK_IN_CART_LOCAL,
         item: item,
         amount:amount
     }
@@ -16,11 +26,11 @@ export const deleteFromCart = bookId => {
 };
 
 export const addToCartofCurrentUser = (shoppingCartData) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/AddToCart`)
     await axios({
         
         method: 'post',
-        url: `https://localhost:44352/api/ShoppingCarts/AddToCart`,
-        headers: {}, 
+        url: url,
         data: {
              shoppingCartData
         }
@@ -38,9 +48,10 @@ export const addToCartofCurrentUser = (shoppingCartData) => async (dispatch) => 
         
 };
 
-export const getCartByUserIdRequest = (userId) => async (dispatch) => {
+export const getCartByUserIdRequest = () => async (dispatch) => {
 
-    await axios.get(`https://localhost:44352/api/ShoppingCarts/Get?userId=${userId}`)
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/Get`)
+    await axios.get(url)
         .then(res => {
             dispatch({
                 type: Types.GET_CART_BY_USER_ID,  //this call test dispatch. to dispsatch to our reducer
@@ -54,11 +65,11 @@ export const getCartByUserIdRequest = (userId) => async (dispatch) => {
 
 }
 
-export const deleteIntemInCartofCurrentUser = (userId,bookId) => async (dispatch) => {
+export const deleteIntemInCartofCurrentUser = (bookId) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/DeleteItemInCart?bookId=${bookId}`)
     await axios({ 
         method: 'delete',
-        url: `https://localhost:44352/api/ShoppingCarts/DeleteItemInCart?userId=${userId}&bookId=${bookId}`,
-        headers: {}, 
+        url: url,
       }).then(res =>  {  
         if (res.status===200 ) {
             localStorage.removeItem('cart')
@@ -73,6 +84,91 @@ export const deleteIntemInCartofCurrentUser = (userId,bookId) => async (dispatch
         
 };
 
+export const payForCart = () => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart`)
+    await axios({ 
+        method: 'post',
+        url: url,
+      }).then(res =>  {  
+        if (res.status===200 ) {
+            dispatch(getCartByUserIdRequest())
+        } else {
+           
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
+export const clearStateCart = () => (dispatch) => {
+    dispatch( {
+        type: Types.CLEAR_CART_STATE,
+        payload: []
+    })
+        
+};
+
+export const updateBookAmount = (shoppingCartData) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/UpdateAmountCartItemEqualsToDB`)
+    await axios({
+        
+        method: 'put',
+        url: url,
+        data: {
+             shoppingCartData
+        }
+      }).then(res =>  {  
+        if (res.status===200 ) {
+            dispatch(backdropAction.setCloseBackDrop)
+            toastMessage("Cập nhật lại số lượng sách phù hợp với sách còn trong kho")
+           
+            dispatch({
+                type: Types.UPDATE_BOOK_AMOUNT,  //this call test dispatch. to dispsatch to our reducer
+                items: res.data
+            });
+        } else {
+            dispatch(backdropAction.setCloseBackDrop)
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
+export const updateAmountBookCurrentUser_Server = (bookId,amount) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/IncreaseOrDecreaseItemAmount?bookId=${bookId}&amount=${amount}`)
+    await axios({
+        
+        method: 'put',
+        url: url,
+        data: {
+             bookId
+        }
+      }).then(res =>  {  
+        if (res.status===200 ) {
+            dispatch(backdropAction.setCloseBackDrop)
+          
+            dispatch({
+                type: Types.UPDATE_AMOUNT_CURENTBOOK_IN_CART_SERVER,  //this call test dispatch. to dispsatch to our reducer
+                items: res.data
+            });
+        } else {
+            dispatch(backdropAction.setCloseBackDrop)
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
 
 
 

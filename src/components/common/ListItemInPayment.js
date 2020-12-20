@@ -1,20 +1,25 @@
 import React, {useEffect} from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button'
 import ItemInPayment from './ItemCartInPayment'
 import {useSelector,useDispatch} from "react-redux";
 import * as cartAction from './../../actions/cartAction'
+import { withRouter } from "react-router-dom";
 
 
-const ListItemIPayment = () => {
+const ListItemIPayment = (props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items ? state.cart : []);
+  const GetTotalMoney =  Object.values(cartItems.items).reduce((totalMoney, cartItem) => totalMoney + cartItem.amount * cartItem.price, 0);
+   
   const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
   useEffect(()=>{
-    if(userId !=null){
-      dispatch(cartAction.getCartByUserIdRequest(userId))
+    const fetchUser = () =>{
+      if(userId !=null){
+        dispatch(cartAction.getCartByUserIdRequest())
+      }
     }
-  },[userId])
+   fetchUser();
+  },[userId,dispatch])
   const showCartItems = Object.values(cartItems.items).map((cartItem)=>
 
     <div >
@@ -34,7 +39,7 @@ const ListItemIPayment = () => {
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '700', fontSize: '17px', padding: '10px' }}>Đơn hàng</div>
                     <div style={{ padding: '10px', marginLeft: '200px' }}>
-                        <Button variant="contained" size="small">Sửa</Button>
+                        <Button onClick={() => props.history.push("/cart")} variant="contained" size="small">Sửa</Button>
                     </div>
                 </div>
                 <div style={{backgroundColor:'blueviolet',height:'1px'}}></div> 
@@ -43,7 +48,7 @@ const ListItemIPayment = () => {
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '600', fontSize: '17px', padding: '10px' }}>Thành tiền</div>
                     <div style={{ padding: '10px', marginLeft: '200px' }}>
-                        <div style={{color:'red',fontSize:'20px',fontWeight:'500'}}>1.000.000 đ</div>
+                        <div style={{color:'red',fontSize:'20px',fontWeight:'500'}}>{GetTotalMoney.toFixed(3).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</div>
                     </div>
                 </div>
             </div>
@@ -51,4 +56,4 @@ const ListItemIPayment = () => {
     );
 };
 
-export default ListItemIPayment;
+export default withRouter(ListItemIPayment);

@@ -6,7 +6,7 @@
     <defs>
         <rect id="path-1" x="0" y="0" width="54" height="33" rx="4"></rect>
         <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="54" height="33" fill="white">
-            <use xlink:href="#path-1"></use>
+            <use xlink:path-1"></use>
         </mask>
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -15,7 +15,7 @@
                 <g>
                     <g id="Group-24">
                         <g id="ic_cash" transform="translate(933.000000, 107.000000)">
-                            <use id="Rectangle-14-Copy-4" stroke="#E4E4E4" mask="url(#mask-2)" stroke-width="2" fill="#F3F3F3" xlink:href="#path-1"></use>
+                            <use id="Rectangle-14-Copy-4" stroke="#E4E4E4" mask="url(#mask-2)" stroke-width="2" fill="#F3F3F3" xlink:path-1"></use>
                             <g id="Group-2" transform="translate(17.000000, 3.000000)">
                                 <g id="Group">
                                     <g id="#979797ff" fill="#979797">

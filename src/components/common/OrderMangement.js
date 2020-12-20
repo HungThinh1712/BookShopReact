@@ -1,0 +1,75 @@
+import React, {useEffect} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import {useSelector,useDispatch} from 'react-redux'
+import * as orderActions from './../../actions/orderAction'
+import {withRouter} from 'react-router-dom'
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    
+  },
+  header :{
+      fontWeight:900
+  },
+  row: {      
+    "&:hover": {
+      
+        backgroundColor:'#f2f2f2',
+        cursor: 'pointer'
+    },
+},
+});
+
+
+const BasicTable =(props) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(orderActions.getOrdersRequest(props.page,4));
+  },[props.page])
+
+  const rows = useSelector(state=>state.order.orders.entities ? state.order.orders.entities: [] )
+  const handelRowClick = (row) =>{
+  
+    props.history.push('/order_details', {itemsInOrder:row.items})
+  }
+  return (
+    
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead >
+          <TableRow style={{height:'80px',fontWeight:'900'}} >
+            <TableCell className={classes.header}>Mã đơn hàng</TableCell>
+            <TableCell className={classes.header} >Ngày mua</TableCell>
+            <TableCell className={classes.header} >Sản phẩm</TableCell>
+            <TableCell className={classes.header} >Tổng tiền</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow onClick={()=>handelRowClick(row)} style={{height:'80px'}} className={classes.row} key={row.name}>
+              <TableCell component="th" scope="row" style={{width:'150px'}}>
+                {row.orderId}
+              </TableCell>
+              <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
+              <TableCell style={{width:'500px'}}>{row.description}</TableCell>
+              <TableCell >{row.totalMoney} đ</TableCell>
+              
+            </TableRow>
+            
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    
+  );
+}
+export default withRouter(BasicTable)

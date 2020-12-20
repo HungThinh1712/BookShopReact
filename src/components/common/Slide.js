@@ -1,6 +1,4 @@
 import React from 'react'
-import Carousel from 'react-material-ui-carousel'
-import ProductDeal1 from './../Images/a.PNG'
 import { makeStyles } from '@material-ui/core/styles';
 
 

@@ -3,16 +3,24 @@ import CheckBox from './../common/CheckBox'
 import {makeStyles} from '@material-ui/core/styles'
 import ListItemInPayment from './ListItemInPayment'
 import Button from '@material-ui/core/Button'
+import {useDispatch} from 'react-redux';
+import * as cartActions from '../../actions/cartAction';
+import {withRouter} from 'react-router-dom'
+
 const useStyles = makeStyles((theme) => ({
     payment_method_zone: {
       display:'inline-block'
     }
   }));
 
-const PaymentMethod = () => {
+const PaymentMethod = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [checked,setChecked] =  useState(true)
-  
+    const handleClick = () => {
+        dispatch(cartActions.payForCart());
+        props.history.push('/order_success_page')
+    }
     const onChange = e => {
         setChecked(!checked)
     }
@@ -27,9 +35,9 @@ const PaymentMethod = () => {
                 <CheckBox />
             </div>
             <ListItemInPayment style={{ marginTop: '40px' }} />
-            <Button variant="contained" style={{ width: '100%', marginTop: '10px' }} color="primary">Đặt mua</Button>
+            <Button onClick={handleClick} variant="contained" style={{ width: '100%', marginTop: '10px' }} color="primary">Đặt mua</Button>
         </div>
     );
 };
 
-export default PaymentMethod;
+export default withRouter(PaymentMethod);

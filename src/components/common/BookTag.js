@@ -52,10 +52,7 @@ const BookTag =() => {
   const bookTags = useSelector(state=>state.bookTags.bookTags)
 
   useEffect(() => {
-    
       dispatch(getBookTagsRequest())
-
-
   }, [dispatch])
 
 

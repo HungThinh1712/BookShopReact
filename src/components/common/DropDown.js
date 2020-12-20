@@ -3,23 +3,31 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+
 export default function ComboBox(props) {
+
+  // const dispatch = useDispatch()
+
+  // const types = useSelector(state=>state.type.types)
+
+  // useEffect(() => {
+  //     dispatch(typeActions.getTypesRequest())
+  // }, [dispatch])
+  // const handleChange = (event, values) =>{
+  //   dispatch(bookActions.getBookByTypeIdRequest(values.id));
+  // }
+
   return (
-    <Autocomplete
-      id="combo-box-demo"
-      options={top100Films}
-      getOptionLabel={(option) => option.name}
-      style={{ width: '250px'  }}
+    <div  style={{ width: '276px',height:'5px !important'}}>
+      <Autocomplete
+      options={props.data}
+      size ="medium"
+      getOptionLabel={(option) => option.name}   
       renderInput={(params) => <TextField {...params} label={props.label} variant="outlined" />}
+      getOptionSelected={(option, value) => option.id === value.id}
+      onChange ={props.handleChange}
     />
+    </div>
   );
 }
 
-const top100Films = [
-  { name: 'Kinh dị'},
-  { name: 'Văn học hiện đại'},
-  { name: 'Sách giáo khoa'},
-  { name: 'Tiểu thuyết'},
-  { name: 'Truyện tranh'},
- 
-];

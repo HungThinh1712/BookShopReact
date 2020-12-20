@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import { Radio, Input } from 'antd';
+import React  from 'react';
+import { Radio} from 'antd';
 
 const SexCheckBox = (props) => {
   
-  const [value,setValue] = useState(props.value ==="Nam" ? 1: 2)
-  const onChange = e => {
-    setValue(e.target.value)
-    };
+
   return (
-    <Radio.Group onChange={onChange} value={value} >
+    <Radio.Group onChange={props.onChange} value={props.value} >
       <Radio  value={1}>
            {`  Nam`}
       </Radio>

@@ -6,7 +6,7 @@
     <defs>
         <rect id="path-1" x="0" y="0" width="54" height="33" rx="4"></rect>
         <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="54" height="33" fill="white">
-            <use xlink:href="#path-1"></use>
+            <use xlink:path-1"></use>
         </mask>
         <linearGradient x1="-57.5458871%" y1="50.1046875%" x2="232.407984%" y2="50.1046875%" id="linearGradient-3">
             <stop stop-color="#007940" offset="0%"></stop>
@@ -46,7 +46,7 @@
                 <g>
                     <g id="Group-24">
                         <g id="ic_jcb" transform="translate(1061.000000, 64.000000)">
-                            <use id="Rectangle-14-Copy-5" stroke="#E4E4E4" mask="url(#mask-2)" stroke-width="2" fill="#F2F2F2" xlink:href="#path-1"></use>
+                            <use id="Rectangle-14-Copy-5" stroke="#E4E4E4" mask="url(#mask-2)" stroke-width="2" fill="#F2F2F2" xlink:path-1"></use>
                             <g id="Group" transform="translate(10.000000, 4.000000)">
                                 <g id="Shape">
                                     <g transform="translate(21.928459, 0.115186)">

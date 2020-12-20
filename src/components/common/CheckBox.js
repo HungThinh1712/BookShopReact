@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox } from 'antd';
-import { Radio, Input } from 'antd';
+import { Radio} from 'antd';
 
 
 const CheckBox = (props) => {

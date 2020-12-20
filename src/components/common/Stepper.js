@@ -26,7 +26,7 @@ function getSteps() {
 
 export default function HorizontalLinearStepper(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(props.step ? props.step : 1);
+  const [activeStep] = React.useState(props.step ? props.step : 1);
   const steps = getSteps()
   return (
     <div className={classes.root}>

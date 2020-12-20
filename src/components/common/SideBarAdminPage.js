@@ -1,13 +1,14 @@
 import React from 'react';
-const SideBarAdminPage = () => {
+import {withRouter} from 'react-router-dom'
+const SideBarAdminPage = (props) => {
     return (
-        <div style={{marginTop:'108px',marginLeft:'87px'}}>
+        <div style={{marginTop:'85px'}}>
            <ul className="sidebar navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="index.html">
+                    <li className="nav-item active" onClick={()=>props.history.push('/admin')}>
+                        <div className="nav-link" >
                             <i className="fas fa-home"></i>
                             <span>Trang chủ</span>
-                        </a>
+                        </div>
                     </li>
 
                     <li className="nav-item">
@@ -35,4 +36,4 @@ const SideBarAdminPage = () => {
     );
 };
 
-export default SideBarAdminPage;
+export default withRouter(SideBarAdminPage);

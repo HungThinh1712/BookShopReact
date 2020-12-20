@@ -1,16 +1,60 @@
 import * as Types from '../constants/ActionType'
 import axios from 'axios'
-
+import * as backdropAction from './../actions/backdropAction'
+import * as CallApis from './../constants/Apis'
+import {toastMessage} from './../components/common/ToastHelper'
 export const getBooksRequest = (indexPage) => async (dispatch) => {
-
-    await axios.get(`https://localhost:44352/api/Books?index=${indexPage}`)
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books?index=${indexPage}`)
+    await axios.get(url)
         .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
             dispatch({
                 type: Types.GET_ALLBOOK,  //this call test dispatch. to dispsatch to our reducer
                 books: res.data
             });
         })
         .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
+            console.log('Error' + err);
+        }
+        );
+
+}
+
+export const getBooksByZoneVnRequest = (indexPage,zone) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books/GetBookByZone?index=${indexPage}&zoneType=${zone}`)
+    await axios.get(url)
+        .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
+
+            dispatch({
+                type: Types.GET_BOOK_BY_ZONE_VN,  //this call test dispatch. to dispsatch to our reducer
+                booksInZoneVn: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
+            console.log('Error' + err);
+        }
+        );
+
+}
+
+export const getBooksByZoneEngRequest = (indexPage,zone) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books/GetBookByZone?index=${indexPage}&zoneType=${zone}`)
+    await axios.get(url)
+        .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
+            dispatch({
+                type: Types.GET_BOOK_BY_ZONE_ENG,  //this call test dispatch. to dispsatch to our reducer
+                booksInZoneEng: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
             console.log('Error' + err);
         }
         );
@@ -18,8 +62,8 @@ export const getBooksRequest = (indexPage) => async (dispatch) => {
 }
 
 export const getBookByIdRequest = (id) => async (dispatch) => {
-    
-    await axios.get(`https://localhost:44352/api/Books/Get?id=${id}`)
+    const url = CallApis.API_URL.concat(`/Books/Get?id=${id}`)
+    await axios.get(url)
         .then(res => {
             dispatch({
                 type: Types.GET_BOOK_BY_ID,  //this call test dispatch. to dispsatch to our reducer
@@ -33,8 +77,9 @@ export const getBookByIdRequest = (id) => async (dispatch) => {
 
 }
 
-export const getBookByTypeIdRequest = (typeId) => async (dispatch) => {
-    await axios.get(`https://localhost:44352/api/Books/GetBookByTypeId?typeID=${typeId}`)
+export const getBookByTypeIdRequest = (typeId,bookId) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Books/GetBookByTypeId?typeId=${typeId}&bookId=${bookId}`)
+    await axios.get(url)
         .then(res => {
             dispatch({
                 type: Types.GET_BOOK_BY_TYPE_ID,  //this call test dispatch. to dispsatch to our reducer
@@ -47,19 +92,65 @@ export const getBookByTypeIdRequest = (typeId) => async (dispatch) => {
         );
 }
 
-export const searchBookByNameRequest = (name) => async (dispatch) => {
-    await axios.get(`https://localhost:44352/api/Books/SearchBookByName?name=${name}`)
+export const searchBookByNameRequest = (name,typeId,sortPrice,publishHouseId,authorId,page) => async (dispatch) => {
+    let url =  CallApis.API_URL.concat(`/Books/SearchBookByName?name=${name}`)
+    if(typeId !=null)
+        url = url.concat(`&typeId=${typeId}`)
+    if(sortPrice !=null)
+        url = url.concat(`&sortPrice=${sortPrice}`)
+    if(publishHouseId!=null)
+        url = url.concat(`&publishHouseId=${publishHouseId}`)
+    if(authorId!=null){
+        url = url.concat(`&authorId=${authorId}`)
+    }
+    url =url.concat(`&page=${page}`)
+    dispatch(backdropAction.setOpenBackDrop)
+    await axios.get(url)
         .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
             dispatch({
                 type: Types.SEARCH_BOOK,  //this call test dispatch. to dispsatch to our reducer
                 searchedResultBooks: res.data
             });
         })
         .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
             console.log('Error' + err);
         }
         );
 
 }
+
+
+export const addBook = (bookData) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Books/Create`)
+   
+   
+    await axios.post(url, bookData)
+        .then(res =>  {  
+            if (res.status===200 ) {
+               toastMessage("Thêm thành công")
+               dispatch({
+                type: Types.ADD_BOOK,  //this call test dispatch. to dispsatch to our reducer
+                item: res.data
+            });
+
+            }else {
+                let error = Object.values(res.data.errors)[0].toString();
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: error //sets payload to errors coming from server
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: err //sets payload to errors coming from server
+                })
+            }
+        );
+};
 
 

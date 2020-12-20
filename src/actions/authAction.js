@@ -3,12 +3,15 @@ import setAuthToken from '../authentication/setAuthToken'
 import jwt_decode from 'jwt-decode';
 import * as Types from '../constants/ActionType'
 import * as cartActions from './../actions/cartAction'
-
+import * as CallApis from './../constants/Apis'
+import * as backdropAction from './../actions/backdropAction'
+import {toastMessage} from './../components/common/ToastHelper'
 
 
 // 🔓  Login - Get user token
 export const loginUser = (userData, history,shoppingCartData) => async (dispatch) => {
-    await axios.post('https://localhost:44352/api/Auth', userData)
+    const url = CallApis.API_URL.concat(`/Auth`)
+    await axios.post(url, userData)
         .then(res =>  {  
             if (res.status===200 ) {
                 //Save to localStorage
@@ -35,10 +38,16 @@ export const loginUser = (userData, history,shoppingCartData) => async (dispatch
                 }
             } else {
                 let error;
-                if(res.data.errors!==undefined)
-                    error = "Email không hợp lê"
+               
+                if(res.data ==="Email chưa được xác nhận"){
+                  
+                    history.push( '/confirm_code_page',{email:userData.email})
+                    error = "Tài khoản của bạn cần xác thực "
+                }
+                else if(res.data="Email hoặc mật khẩu không đúng!")
+                    error = res.data;
                 else
-                    error = res.data
+                    error = Object.values(res.data.errors)[0].toString();
                 dispatch({
                     type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
                     payload: error //sets payload to errors coming from server
@@ -58,11 +67,10 @@ export const loginUser = (userData, history,shoppingCartData) => async (dispatch
 
 // 🔒 get user info
 export const setCurrentUserInfo = (userId) => async (dispatch) => {
-
-    axios.get(`https://localhost:44352/api/Users/Get?id=${userId}`)
+    const url = CallApis.API_URL.concat(`/Users/Get?id=${userId}`)
+    axios.get(url)
         .then(res => {
             if (res.status===200) {
-                
                 localStorage.setItem('userData', JSON.stringify(res.data));
                
                 dispatch( {
@@ -92,26 +100,34 @@ export const setCurrentUser = (decoded) =>  (dispatch) => {
     dispatch(setCurrentUserInfo(decoded.sub))
    
 };
-export const updateAddressOfCurrentUser = (updatedUser,history) => async (dispatch) => {
+export const updateAddressOfCurrentUser = (updatedUser,history,clickEvent,tag) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/UpdateAddress`)
     await axios({
         
         method: 'put',
-        url: `https://localhost:44352/api/Users/UpdateAddress`,
-        headers: {}, 
+        url: url,
         data: {
             updatedUser
         }
       }).then(res => {
         if (res.status===200) {
          
-            history.push('/address_shipping')
+            if(tag==="1"){
+                history.push('/address_shipping')
+                clickEvent.onClick();
+            }
+                
+            toastMessage("Cập nhật thành công")
             localStorage.setItem('userData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_USER_ADDRESS,
                 payload: res.data
             })
         } else {
-            console.log(res);
+            dispatch({
+                type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data //sets payload to errors coming from server
+            });
         }
 
     })
@@ -120,4 +136,141 @@ export const updateAddressOfCurrentUser = (updatedUser,history) => async (dispat
     })
         
 };
+export const logOut = () =>(dispatch)  => {
+
+    localStorage.clear();
+            dispatch( {
+                type: Types.LOG_OUT,
+                payload: []
+            })
+    
+};
+
+export const confirmCode = (userData,shoppingCartData,history) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Auth`)
+    console.log(userData);
+    await axios.put(url, userData).then(res =>  {  
+        if (res.status===200 ) {
+            const token = res.data;
+             
+            // Set token t  o localStorage
+            localStorage.setItem('jwtToken', token);
+            // Set token to Auth header. Apply Authorization token to header to every request
+            setAuthToken(token);
+            // the token includes user info but it is encoded
+            // to decode we use jwt-decode
+            //Decode token to get user data
+            const decoded = jwt_decode(localStorage.getItem('jwtToken')!=null ? localStorage.getItem('jwtToken') : token );
+            // Set current user
+           
+            if(decoded.admin==="False"){
+                dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))
+                dispatch(setCurrentUser(decoded));
+                history.push('/')
+            }
+            else{
+                history.push('/admin_page')
+            }
+        } 
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
+export const registerUser = (userData, history) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/Create`)
+    dispatch(backdropAction.setOpenBackDrop)
+    await axios.post(url, userData)
+        .then(res =>  {  
+            if (res.status===200 ) {
+                dispatch(backdropAction.setCloseBackDrop)
+                history.push('/confirm_code_page',{email:userData.email})
+            }else {
+                let error;    
+                dispatch(backdropAction.setCloseBackDrop)            
+                error = Object.values(res.data.errors)[0].toString();
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: error //sets payload to errors coming from server
+                });
+            }
+        })
+        .catch(err => {
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: err //sets payload to errors coming from server
+                })
+            }
+        );
+};
+
+export const updateProfileUser = (updatedUser) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/UpdateProfileUser`)
+    await axios({
+        
+        method: 'put',
+        url: url,
+        data: {
+            updatedUser
+        }
+      }).then(res => {
+        if (res.status===200) {
+            localStorage.setItem('userData', JSON.stringify(res.data));
+            dispatch( {
+                type: Types.UPDATE_PROFILE_USER,
+                payload: res.data
+            })
+        } else {
+            dispatch({
+                type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data //sets payload to errors coming from server
+            });
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+    })
+        
+};
+
+export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/UpdateProfileUserWithPassWord`)
+    await axios({
+        
+        method: 'put',
+        url: url,
+        data: {
+            updatedUser
+        }
+      }).then(res => {
+        if (res.status===200) {
+            localStorage.setItem('userData', JSON.stringify(res.data));
+            toastMessage("Cập nhật thành công")
+            dispatch( {
+                type: Types.UPDATE_PROFILE_USER,
+                payload: res.data
+            })
+        } else {
+            dispatch({
+                type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data //sets payload to errors coming from server
+            })
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+    })
+        
+};
+
+
+
+
+
+
 

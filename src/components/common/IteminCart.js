@@ -1,11 +1,10 @@
-import React, { Component, useState } from 'react';
-import ExampleImage from './../Images/m.PNG'
+import React, {  useState } from 'react';
+
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import { makeStyles } from '@material-ui/core/styles';
 import {useDispatch} from 'react-redux'
-import Divider from '@material-ui/core/Divider';
 import * as cartActions from './../../actions/cartAction'
 
 const useStyles = makeStyles((theme) => ({
@@ -59,29 +58,48 @@ const useStyles = makeStyles((theme) => ({
 
 const IteminCart = (props) => {
     const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState(props.amount);
     const dispatch = useDispatch();
     const handleDecrease = () => {
-        if (amount - 1 >= 0) {
+        if (amount - 1 > 0) {
             setAmount(amount - 1)
+        }
+        if(userId!==null){          
+            dispatch(cartActions.updateAmountBookCurrentUser_Server(props.bookId,amount-1))
+        }
+        else{
+            dispatch(cartActions.updateAmountBookCurrentUser_Local(props,amount-1))
         }
     };
     const handleIncrease = () => {
-        setAmount(amount + 1)
+        setAmount(amount + 1)    
+       
+        if(userId!==null){          
+            dispatch(cartActions.updateAmountBookCurrentUser_Server(props.bookId,amount+1))
+
+        }
+        else{
+            dispatch(cartActions.updateAmountBookCurrentUser_Local(props,amount+1))
+        }
+         
+        
+       
     };
+   
     const handleDeleteButtonClick = () =>{
         props.deleteItem();
 
         if(userId!=null){
-            dispatch(cartActions.deleteIntemInCartofCurrentUser(userId,props.bookId))
+            dispatch(cartActions.deleteIntemInCartofCurrentUser(props.bookId))
         }
     }
+    
     const classes = useStyles()
     return (
         <div style={{border:'none'}}>
             <div className={classes.item}>
                 <div style={{height:'8em',width:'7em',display:'flex',alignContent:"center",justifyContent:'center', marginBottom:'12px' }}>
-                    <img className="card_image" src={props.image} alt="product "  style={{maxWidth:'100%',maxHeight:'100%'}} />
+                    <img className="card_image" src={props.imageSrc} alt="product "  style={{maxWidth:'100%',maxHeight:'100%'}} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span className={classes.title}>{props.name}</span>
@@ -92,15 +110,15 @@ const IteminCart = (props) => {
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span style={{ marginTop: '10px', fontSize: '18px', fontWeight: '800', color: 'red'}}>{props.price}</span>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                        <span style={{ marginTop: '6px', fontSize: '16px' }}><s>{props.coverPrice}</s></span>
-                        <span style={{ marginLeft: '10px', fontSize: '12px', marginTop: '10px' }}>-{props.discount}%</span>
+                        <span style={{ marginTop: '6px', fontSize: '14px' }}><s>{props.coverPrice}</s></span>
+                        <span style={{ marginLeft: '10px', fontSize: '12px', marginTop: '10px' }}>{props.discount}%</span>
                     </div>
 
                 </div>
                 <div className={classes.btn_group}>
                     <ButtonGroup size="small" color="primary" aria-label="outlined secondary button group">
                         <Button style={{ borderColor: "blue" }} onClick={handleDecrease}>-</Button>
-                    <Button style={{ borderColor: "blue", fontWeight: 900 }} disabled  >{props.amount}</Button>
+                    <Button style={{ borderColor: "blue", fontWeight: 900 }} disabled  >{amount}</Button>
                         <Button style={{ borderColor: "blue" }} onClick={handleIncrease} >+</Button>
                     </ButtonGroup>
                 </div>

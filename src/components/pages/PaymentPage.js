@@ -4,6 +4,7 @@ import PaymentMethod from '../common/PaymentMethod'
 import {useSelector} from 'react-redux'
 import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import {withRouter} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     address_zone: {
@@ -59,9 +60,8 @@ const useStyles = makeStyles((theme) => ({
       }
   }));
 
-const PaymentPage = () => {
+const PaymentPage = (props) => {
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
-    const specificAddress = useSelector(state => state.auth.userData && state.auth.userData.specificAddress ? state.auth.userData.specificAddress : null)
     const classes = useStyles();
     return (
         <div>
@@ -74,24 +74,23 @@ const PaymentPage = () => {
                         <div  style={{ display: 'flex',justifyContent:'space-between'}} >
                             <div style={{ fontWeight: '700',fontSize:'17px', padding: '10px' }}>Địa chỉ giao hàng</div>
                             <div style={{padding:'10px',marginLeft:'120px'}}>
-                                <Button variant="contained" size="small">Sửa</Button>
+                                <Button onClick={() => props.history.push("/address_shipping")} variant="contained" size="small">Sửa</Button>
                             </div>
                         </div>
                         <div style={{backgroundColor:'blueviolet',height:'1px'}}></div>
                         <div style={{padding:'0 10px 10px 10px'}}>
-                            <div style={{ fontWeight: '900',color:'red',fontFamily: 'Roboto '}}>{userData.fullName}</div>
-                            <div style={{ fontSize: '13px', fontWeight: '500' }} >Địa chỉ: {userData.specificAddress}, {userData.ward}, {userData.district}, {userData.city}</div>
+                            <div style={{ fontWeight: '900',color:'red',fontFamily: 'Roboto'}}>{userData.fullName}</div>
+                            <div style={{ fontSize: '13px', fontWeight: '500' }} >Địa chỉ: {userData.specificAddress}, {userData.wardName}, {userData.districtName}, {userData.provinceName}</div>
                             <div style={{display:'flex'}}>
                               <div style={{ fontSize: '13px', fontWeight: '500',paddingRight:'5px' }}>Điện thoại: </div>
                               <div style={{ fontSize: '13px', fontWeight: '500',color:'red' }}>{userData.phone}</div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             </div>
     );
 };
 
-export default PaymentPage;
+export default withRouter(PaymentPage);

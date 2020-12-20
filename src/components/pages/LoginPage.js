@@ -3,7 +3,6 @@ import { useDispatch,useSelector } from "react-redux";
 import * as authActions from './../../actions/authAction'
 import { withRouter } from "react-router-dom";
 import Logo from './../Images/logo_hcmute.png'
-import { ToastContainer, toast } from 'react-toastify';
 
 const  SignIn= (props) => {
   const dispatch = useDispatch();
@@ -28,7 +27,6 @@ const  SignIn= (props) => {
   };
   return (
       <div className="signin-signup">
-        
           <form  className="sign-in-form">
             <img  style={{width:'70px',height:'80px'}} src={Logo} alt=""/>
             <h2 className="title">Đăng nhập</h2>
@@ -44,15 +42,15 @@ const  SignIn= (props) => {
             <div style={{color:'blueviolet',cursor:'pointer'}}>Quên mật khẩu</div>
             <div style={{color:'blueviolet',cursor:'pointer'}} onClick={()=>props.history.push('/register')}>Chưa có tài khoản? Đăng ký</div>
             <div className="social-media" style={{marginTop:'10px'}}>
-              <a  className="social-icon">
+              <div className="social-icon">
                 <i className="fab fa-facebook-f"></i>
-              </a>
-              <a  className="social-icon">
+              </div>
+              <div className="social-icon">
                 <i className="fab fa-google"></i>
-              </a>
+              </div>
             </div>
           </form>
-      
+         
         </div>
 
 

@@ -6,7 +6,7 @@
     <defs>
         <rect id="path-1" x="0" y="0" width="54" height="33" rx="4"></rect>
         <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="54" height="33" fill="white">
-            <use xlink:href="#path-1"></use>
+            <use xlink:path-1"></use>
         </mask>
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -15,7 +15,7 @@
                 <g>
                     <g id="Group-24">
                         <g id="ic_mastercard" transform="translate(997.000000, 64.000000)">
-                            <use id="Rectangle-14-Copy-3" stroke="#E4E4E4" mask="url(#mask-2)" stroke-width="2" fill="#F2F2F2" xlink:href="#path-1"></use>
+                            <use id="Rectangle-14-Copy-3" stroke="#E4E4E4" mask="url(#mask-2)" stroke-width="2" fill="#F2F2F2" xlink:path-1"></use>
                             <g id="Mastercard-logo" transform="translate(10.000000, 6.000000)">
                                 <g id="g3125">
                                     <g id="g3115">

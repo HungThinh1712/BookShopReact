@@ -20,6 +20,7 @@ import { withRouter } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import * as cartAction from './../../actions/cartAction'
 import SnackBar from '../common/SnackBarLoginSuccess'
+import { StarTwoTone } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
 
   grow: {
@@ -113,12 +114,7 @@ const useStyles = makeStyles((theme) => ({
 
   menuIcon: {
     
-    [theme.breakpoints.up('sm')]: {
-
-        display:'inline-block',
-        border: 'none',
-        outlineStyle:'none'
-      },
+    
       [theme.breakpoints.up('lg')]: {
         display:'none',
         marginLeft:'87px',
@@ -138,7 +134,6 @@ const  PrimarySearchAppBar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const cartAmount = useSelector(state => state.cart.items ? Object.keys(state.cart.items).length : null);
-  const [flagSearch,setFlagSearch] = React.useState(false)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -160,6 +155,7 @@ const  PrimarySearchAppBar = (props) => {
   };
 
   const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
+  const userData = useSelector(state=>state.auth.userData ? state.auth.userData.id : null)
   const [searchString,setSearchString] = useState(props.searchString ? props.searchString : "")
   const handleSearchStringChange = (e) => {
     setSearchString(e.target.value);
@@ -169,9 +165,12 @@ const  PrimarySearchAppBar = (props) => {
 
   }
   useEffect(()=>{
-    if(userId !=null){
-      dispatch(cartAction.getCartByUserIdRequest(userId))
+    const fetchUser = ()=>{
+      if(userId !=null){
+        dispatch(cartAction.getCartByUserIdRequest())
+      }
     }
+    fetchUser();
   },[userId])
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -234,9 +233,7 @@ const  PrimarySearchAppBar = (props) => {
     <div  >
       <AppBar className={classes.appBar} >
         <Toolbar className={classes.toolBar}>
-          <IconButton className ={classes.menuIcon} aria-label="show 4 new mails" color="inherit">
-              <MenuIcon />
-          </IconButton>
+          
            <img  onClick={() => props.history.push("/")}  className={classes.logo} src={Logo} alt=""/>
            <div style= {{flexGrow:'0.04'}}></div>
           <Typography  onClick={() => props.history.push("/")} className={classes.title} variant="h6" noWrap>
@@ -266,14 +263,15 @@ const  PrimarySearchAppBar = (props) => {
               </Badge>
             </IconButton>
             <div style= {{flexGrow: 0.3}}></div>
-            <IconButton    color="inherit" onClick={() => props.history.push("/user_page")}>            
-                < AccountCircle/>
-            </IconButton>
+           
             <IconButton onClick={() => props.history.push("/cart")} style={{ outline: 'none !important',boxShadow: 'none'}} color ="inherit"            
             >
               <Badge badgeContent={cartAmount} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
+            </IconButton>
+            <IconButton    color="inherit" onClick={() => props.history.push("/user_page")}>            
+                {userId || userData ?  <div style={{backgroundColor:'#8470FF',color:'white',borderRadius:'20px',fontSize:'15px',padding:'5px',borderColor:'white',borderStyle:'solid',borderWidth:'2px'}}><AccountCircle style={{marginRight:'5px'}}/>Hưng Thịnh</div>: <AccountCircle/>}
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
