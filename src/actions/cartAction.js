@@ -170,6 +170,26 @@ export const updateAmountBookCurrentUser_Server = (bookId,amount) => async (disp
         
 };
 
+export const payWithMomo = (money) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayByMomo?totalMoney=${money}`)
+    await axios({
+        
+        method: 'get',
+        url: url,
+      }).then(res =>  {  
+        if (res.status===200 ) {
+            window.open(res.data,"_self")
+        } else {
+            
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
 
 
 

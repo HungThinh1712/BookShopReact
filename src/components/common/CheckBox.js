@@ -10,17 +10,14 @@ const CheckBox = (props) => {
     padding:'10px',
     fontWeight:'600'
   };
-  const [value,setValue] = useState(1)
-  const onChange = e => {
-    setValue(e.target.value)
-    };
+  
   return (
-    <Radio.Group onChange={onChange} value={value} >
+    <Radio.Group onChange={props.onChange} value={props.value}>
       <Radio style={radioStyle}  value={1}>
            {`  Thanh toán tiền mặt khi nhận hàng`}
       </Radio>
       <Radio style={radioStyle} value={2}>
-        {` Thanh toán thông qua VNPAY`}
+        {` Thanh toán thông qua MOMO`}
       </Radio>
     </Radio.Group>
   );
