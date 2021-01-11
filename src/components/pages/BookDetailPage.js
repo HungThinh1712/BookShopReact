@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import Header from '../common/Header';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -59,11 +59,17 @@ const BookDetailPage = (props) => {
 
   const id = props.match.params.book_id
   const dispatch = useDispatch()
-  const selectedBook = useSelector(state => state.books.selectedBook)
-  const suggestedBooks = useSelector(state => state.books.suggestedBooks)
-  
+  const selectedBook = useSelector(state => state.books.selectedBook ? state.books.selectedBook : null )
+  const suggestedBooks = useSelector(state => state.books.suggestedBooks ? state.books.suggestedBooks : [])
 
+  const total  = useSelector(state=>state.comment.comments.total ? state.comment.comments.total: 0 )
 
+  const [page,setPage] =useState(1);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+  const paging = total%3===0 ? total/3 : Math.floor(total/3) + 1
   useEffect( () => {
     dispatch(bookActions.getBookByIdRequest(id))
 
@@ -73,11 +79,11 @@ const BookDetailPage = (props) => {
   useEffect(()=>{
     if(selectedBook !=null){
         dispatch(bookActions.getBookByTypeIdRequest(selectedBook.typeId,selectedBook.id));
-        dispatch(commentActions.getCommentsRequest(selectedBook.id));
+        dispatch(commentActions.getCommentsRequest(selectedBook.id,page));
         dispatch(commentActions.getRatingRequest(selectedBook.id));
       }
 
-  },[selectedBook,dispatch])
+  },[selectedBook,dispatch,page])
 
   const ratings = useSelector(state => state.comment.ratings )
 	//Calculate rating of book
@@ -85,7 +91,7 @@ const BookDetailPage = (props) => {
 	const sumAmountRate =  Object.values(ratings).reduce((total, item) => total + item.amount , 0);
   const averageRate = (sumRate/sumAmountRate).toFixed(2);
   
-  const showBooks = suggestedBooks.map((book, index) => <Card
+  const showBooks =  suggestedBooks.map((book, index) => <Card
     key={book.id}
     price={book.price}
     discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
@@ -119,9 +125,13 @@ const BookDetailPage = (props) => {
         <div className={classes.container}>
           <h4>Gợi ý dành cho bạn</h4>
         </div>
-        <Paper className={`cover_container ${classes.container}`} style={{ marginTop: '10px' }}>
+        {suggestedBooks.length >=3?<Paper className={`cover_container ${classes.container}`} style={{ marginTop: '10px' }}>
           {showBooks}
-        </Paper>
+         </Paper>:<Paper className={`cover_container ${classes.container}`} style={{ marginTop: '10px' }}>
+          {showBooks}
+          <div></div>
+          <div></div>
+         </Paper>}
         <div className={classes.container}>
           <h4> Thông tin chi tiết</h4>
         </div>
@@ -139,7 +149,7 @@ const BookDetailPage = (props) => {
         <Description  description ={selectedBook.description} />
         <div className={classes.container}>
           <h4>Khách hàng nhận xét</h4>
-          <Comment selectedBook={selectedBook} />
+          <Comment total={paging} setDefaultPage ={()=>setPage(1)} onChange={handlePageChange} page={page} selectedBook={selectedBook} />
         </div>
 
       </div> : null}

@@ -42,7 +42,20 @@ export default function (state = initialState, action) {
                 user: action.payload,
                 userData: action.payload
             };
+        case Types.UPDATE_AVATAR_USER:
+
+            return {
+                ...state,
+                userData: action.payload
+            };
+        case Types.UPDATE_PROFILE_USER_PASSWORD:
+
+            return {
+                ...state,
+                userData: action.payload
+            };
         case Types.UPDATE_PROFILE_USER:
+
             return {
                 ...state,
                 userData: action.payload

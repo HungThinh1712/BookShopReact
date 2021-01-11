@@ -12,6 +12,9 @@ import orderReducer from './orderReducer'
 import provinceReducer from './provinceReducer'
 import districtReducer from './districtReducer'
 import wardReducer from './wardReducer'
+import notificationReducer from './notificationReducer'
+import userReducer from './userReducer'
+
 
 const appReducer = combineReducers({
     bookTags:bookTagsReducer,
@@ -27,5 +30,7 @@ const appReducer = combineReducers({
     province: provinceReducer,
     district:districtReducer,
     ward:wardReducer,
+    notifications:notificationReducer,
+    users:userReducer
 });
 export default appReducer;

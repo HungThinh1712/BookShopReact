@@ -68,6 +68,7 @@ const SearchPage = (props) => {
   const [price, setPrice] = useState("asc");
   const [publishHouseId, setPublishHouseId] = useState(null);
   const [authorId, setAuthorId] = useState(null);
+  const [tagId, setTagId] = useState(null);
 
   const types = useSelector(state => state.type.types)
   const publishHouses = useSelector(state => state.publishHouse.publishHouses)
@@ -105,13 +106,16 @@ const SearchPage = (props) => {
   const handleAuthorChange = (event, values) => {
     values != null ? setAuthorId(values.id) : setAuthorId(null);
   }
+  const handleTagChange = (event, values) => {
+    values != null ? setTagId(values.id) : setTagId(null);
+  }
   const handlePriceChange = (event, values) => {
     values != null ? setPrice(Object.values(values)[0]) : setPrice("asc");
   }
 
   useEffect(() => {
-    dispatch(bookActions.searchBookByNameRequest(searchString, typeId, price, publishHouseId, authorId,page))
-  }, [searchString, typeId, price, publishHouseId, authorId,page])
+    dispatch(bookActions.searchBookByNameRequest(searchString, typeId, price, publishHouseId, authorId,tagId,page))
+  }, [searchString, typeId, price, publishHouseId, authorId,tagId,page])
 
   const showBooks = searchedBooks.map((book, index) => <Card
     key={book.id}
@@ -135,7 +139,7 @@ const SearchPage = (props) => {
           <DropDown label='Giá thành' handleChange={handlePriceChange} data={sortPrice} />
           <DropDown label='Nhà xuất bản' handleChange={handlePublishHouseChange} data={publishHouses} type="3" />
           <DropDown label='Tác giả' handleChange={handleAuthorChange} data={authors} type="4" />
-          <DropDown label='Danh mục' data={tags} type="5" />
+          <DropDown label='Danh mục'  handleChange={handleTagChange} data={tags} type="5" />
         </div>
         {searchedBooks.length >2 ? <Paper className={`cover_container_searchpage ${classes.container}`}>
           {showBooks}
@@ -147,9 +151,9 @@ const SearchPage = (props) => {
           <div></div>
           <div></div>
         </Paper>}
-        <div style={{display:'flex',alignItems:'center',padding:'20px',justifyContent:'center'}}>
+        {total > 10 ? <div style={{display:'flex',alignItems:'center',padding:'20px',justifyContent:'center'}}>
           <Pagination total={paging} onChange={handlePageChange} page={page}/>
-        </div>
+        </div>:null}
       </div>
 
 

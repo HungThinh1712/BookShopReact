@@ -84,12 +84,10 @@ export const deleteIntemInCartofCurrentUser = (bookId) => async (dispatch) => {
         
 };
 
-export const payForCart = () => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart`)
-    await axios({ 
-        method: 'post',
-        url: url,
-      }).then(res =>  {  
+export const payForCart = (paymentType) => async (dispatch) => {
+    console.log(paymentType)
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart?paymentType=${paymentType}`)
+    await axios.get(url).then(res =>  {  
         if (res.status===200 ) {
             dispatch(getCartByUserIdRequest())
         } else {

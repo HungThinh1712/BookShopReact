@@ -6,9 +6,8 @@ import Footer from '../common/Footer';
 import SexCheckBox from '../common/SexCheckBok';
 import { Checkbox } from 'antd';
 import Button from '@material-ui/core/Button'
-import {useSelector} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import * as authActions from './../../actions/authAction'
 import {toastMessage} from './../common/ToastHelper'
 const useStyles = makeStyles((theme) => ({
@@ -102,7 +101,7 @@ const ProfileUserPage = (props) => {
             <Header/>
             <div  className = {`${classes.container}`} >
                 <div className = "row">
-                    <Nav className={classes.nav} name={name} props={props}/>
+                    <Nav imgSrc={userData ? userData.imgSrc : ''} className={classes.nav} name={name} props={props}/>
                     <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>
                         <div className="profile-content">
                             <p style={{fontSize:'25px',fontWeight:500}}>Thông tin tài khoản</p>

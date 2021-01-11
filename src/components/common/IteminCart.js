@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     delete_link: {
-        marginLeft: '30px', marginTop: '18px', fontSize: '14px', 
+        marginLeft: '30px', marginTop: '18px', fontSize: '14px', cursor:'pointer',
         [theme.breakpoints.down('xs')]: {
             marginLeft: '0px'
         },

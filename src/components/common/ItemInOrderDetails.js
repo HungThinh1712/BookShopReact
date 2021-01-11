@@ -69,7 +69,7 @@ const ItemInOrderDetails = (props) => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span className={classes.title}>{props.name}</span>
-                    <span className={classes.author}>Tác giả: {props.authorName}</span>
+                   {props.authorName ?  <span className={classes.author}>Tác giả: {props.authorName}</span>:null}
         
                 </div>
                 <div className={classes.flex}></div>

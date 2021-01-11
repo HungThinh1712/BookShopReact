@@ -62,6 +62,7 @@ export const getBooksByZoneEngRequest = (indexPage,zone) => async (dispatch) => 
 }
 
 export const getBookByIdRequest = (id) => async (dispatch) => {
+    console.log("aa",id);
     const url = CallApis.API_URL.concat(`/Books/Get?id=${id}`)
     await axios.get(url)
         .then(res => {
@@ -92,7 +93,7 @@ export const getBookByTypeIdRequest = (typeId,bookId) => async (dispatch) => {
         );
 }
 
-export const searchBookByNameRequest = (name,typeId,sortPrice,publishHouseId,authorId,page) => async (dispatch) => {
+export const searchBookByNameRequest = (name,typeId,sortPrice,publishHouseId,authorId,tagId,page) => async (dispatch) => {
     let url =  CallApis.API_URL.concat(`/Books/SearchBookByName?name=${name}`)
     if(typeId !=null)
         url = url.concat(`&typeId=${typeId}`)
@@ -102,6 +103,9 @@ export const searchBookByNameRequest = (name,typeId,sortPrice,publishHouseId,aut
         url = url.concat(`&publishHouseId=${publishHouseId}`)
     if(authorId!=null){
         url = url.concat(`&authorId=${authorId}`)
+    }
+    if(tagId!=null){
+        url = url.concat(`&tagId=${tagId}`)
     }
     url =url.concat(`&page=${page}`)
     dispatch(backdropAction.setOpenBackDrop)
@@ -154,3 +158,49 @@ export const addBook = (bookData) => async (dispatch) => {
 };
 
 
+export const updateBook = (bookData) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Books/Update`)
+    await axios.put(url, bookData)
+        .then(res =>  {  
+            if (res.status===200 ) {
+               
+                toastMessage("Cập nhật thành công")           
+            
+            }else {
+                console.log(res)
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server
+                })
+            }
+        );
+};
+
+
+export const getBooksAdminRequest = (name,indexPage) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books/SearchBookByNameAdmin?name=${name}&page=${indexPage}`)
+    await axios.get(url)
+        .then(res => {
+            console.log("aaaaaaa",res.data)
+            dispatch(backdropAction.setCloseBackDrop)
+            dispatch({
+                type: Types.GET_BOOKS_ADMIN,  //this call test dispatch. to dispsatch to our reducer
+                booksAdmin: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
+            console.log('Error' + err);
+        }
+        );
+
+}

@@ -42,7 +42,7 @@ const HomePage = (props) => {
       dispatch(bookActions.getBooksByZoneVnRequest(indexPageVn,"Sách tiếng việt"));
     }
     fetchBooks();
-  }, [indexPageVn,dispatch])
+  }, [indexPageVn])
 
   useEffect(() => {
     const fetchBooks = () =>{

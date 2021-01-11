@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const Card = (props) => {
     const classes = useStyles();
+    console.log("rating",props.valueraiting)
     return(   
         <div onClick={props.onClick} className={`card_container ${classes.container} `}>
             <div style={{ display: 'flex', justifyContent: 'center' }} >
@@ -31,7 +32,7 @@ const Card = (props) => {
                 <span className="card_discount">-{props.discount}%</span></p>
             <p className="card_price"><s>{props.coverPrice}</s>đ</p>
             <div>
-                <Rating size='small' name="read-only" defaultValue={props.valueraiting} precision={0.5} readOnly />
+                <Rating size='small'  defaultValue={0} value={props.valueraiting} precision={0.5} readOnly />
             </div>
         </div>
     );

@@ -1,10 +1,12 @@
 import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
-export const getCommentsRequest =  (bookId) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Comments?bookId=${bookId}`)
+import * as bookActions from './../actions/booksAction'
+export const getCommentsRequest =  (bookId,page) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Comments?bookId=${bookId}&page=${page}`)
     await axios.get(url)
         .then(res => {
+           
             dispatch({
                 type: Types.GET_COMMENTS,  //this call test dispatch. to dispsatch to our reducer
                 comments: res.data
@@ -61,5 +63,50 @@ export const addComment = (comment) => async (dispatch) => {
                 })
             }
         );
+};
+
+
+export const updateComment = (comment) => async (dispatch) => {
+
+    const url = CallApis.API_URL.concat(`/Comments`)
+    await axios.put(url, comment).then(res =>  {  
+        if (res.status===200 ) {
+
+           
+            dispatch({
+                type: Types.UPDATE_COMMENT,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data
+            });
+        } else {
+           
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
+
+export const deleteComment = (id,bookId,page) => async (dispatch) => {
+
+    const url = CallApis.API_URL.concat(`/Comments?id=${id}&bookId=${bookId}`)
+    await axios.delete(url).then(res =>  {  
+        if (res.status===200 ) {
+     
+            dispatch({
+                type: Types.DELETE_COMMENT,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data
+            });
+        } else {
+           
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
 };
 

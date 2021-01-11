@@ -14,10 +14,10 @@ const useStyles = makeStyles((theme) => ({
 export default function PaginationControlled(props) {
   const classes = useStyles();
   
-
+  const page = props.tag===true ? 1 : props.page
   return (
     <div className={classes.root}>
-      <Pagination count={props.total} page={props.page} onChange={props.onChange} />
+      <Pagination count={props.total} page={page} onChange={props.onChange} />
     </div>
   );
 }

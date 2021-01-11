@@ -95,12 +95,12 @@ const ShoppingCartPage = (props) => {
   )
   const GetTotalMoney =  Object.values(cartItems.items).reduce((totalMoney, cartItem) => totalMoney + cartItem.amount * cartItem.price, 0);
   const handleClick = () => {
-    if (userData) {
+    if (userData!==null) {
       props.history.push('/address_shipping')
      
     }
     else {
-      props.history.push('/login')
+      props.history.push('/user_page')
       toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!")
     }
   }

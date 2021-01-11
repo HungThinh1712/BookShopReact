@@ -189,7 +189,7 @@ const Book = (props) => {
         <div>
             <div id="wrapper">
                 <Dialog open={open} onClick={handleButtonAddClick} onClose={handleClose} tag={tag} onChange={handleChangeName}></Dialog>
-                <Header />
+                <Header notShow="notShow" />
                 <SideBarAdminPage />
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
                     <div className="container-fluid">

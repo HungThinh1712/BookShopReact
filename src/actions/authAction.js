@@ -27,14 +27,14 @@ export const loginUser = (userData, history,shoppingCartData) => async (dispatch
                 //Decode token to get user data
                 const decoded = jwt_decode(localStorage.getItem('jwtToken')!=null ? localStorage.getItem('jwtToken') : token );
                 // Set current user
-               
+                dispatch(setCurrentUser(decoded));
                 if(decoded.admin==="False"){
                     dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))
-                    dispatch(setCurrentUser(decoded));
+                  
                     history.push('/')
                 }
                 else{
-                    history.push('/admin_page')
+                    history.push('/admin')
                 }
             } else {
                 let error;
@@ -148,7 +148,6 @@ export const logOut = () =>(dispatch)  => {
 
 export const confirmCode = (userData,shoppingCartData,history) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Auth`)
-    console.log(userData);
     await axios.put(url, userData).then(res =>  {  
         if (res.status===200 ) {
             const token = res.data;
@@ -169,9 +168,16 @@ export const confirmCode = (userData,shoppingCartData,history) => async (dispatc
                 history.push('/')
             }
             else{
-                history.push('/admin_page')
+                dispatch(setCurrentUser(decoded));
+                history.push('/admin')
             }
         } 
+        else{
+            dispatch({
+                type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data //sets payload to errors coming from server
+            });
+        }
     })
     .catch(err => {
            
@@ -218,6 +224,7 @@ export const updateProfileUser = (updatedUser) => async (dispatch) => {
         }
       }).then(res => {
         if (res.status===200) {
+            console.log(res.data);
             localStorage.setItem('userData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_PROFILE_USER,
@@ -250,8 +257,9 @@ export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) =
         if (res.status===200) {
             localStorage.setItem('userData', JSON.stringify(res.data));
             toastMessage("Cập nhật thành công")
+            
             dispatch( {
-                type: Types.UPDATE_PROFILE_USER,
+                type: Types.UPDATE_PROFILE_USER_PASSWORD,
                 payload: res.data
             })
         } else {
@@ -267,6 +275,177 @@ export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) =
     })
         
 };
+
+export const sendCodeResetPassWord = (email,changeFlag) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/SendCodeResetPassWord?email=${email}`)
+    dispatch(backdropAction.setOpenBackDrop)
+    await axios.get(url)
+        .then(res =>  {  
+            if (res.status===200 ) {
+                dispatch(backdropAction.setCloseBackDrop)
+                toastMessage(res.data)
+                changeFlag(true);
+            }else {
+                changeFlag(false);
+                dispatch(backdropAction.setCloseBackDrop)            
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: res.data //sets payload to errors coming from server
+                });
+            }
+        })
+        .catch(err => {
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: err //sets payload to errors coming from server
+                })
+            }
+        );
+};
+
+export const confirmCodeReset = (userData,history,handleClickOpen) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/ConfirmCodeResetPassWord`)
+    await axios.put(url, userData).then(res =>  {  
+        if (res.status===200 ) {
+            handleClickOpen();
+                   
+        } 
+        else{
+            toastMessage("Mã xác nhận không đúng");   
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
+
+export const updateAvatarUser = (userData) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/UpdateAvatarUser`)
+    await axios.put(url, userData)
+        .then(res =>  {  
+            if (res.status===200 ) {
+               
+                localStorage.setItem('userData', JSON.stringify(res.data));
+                toastMessage("Cập nhật thành công")
+                dispatch( {
+                    type: Types.UPDATE_AVATAR_USER,
+                    payload: res.data
+            })     
+            
+            }else {
+                console.log(res)
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server
+                })
+            }
+        );
+};
+
+export const changePassword = (userData,onClose) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/ChangePassword`)
+    await axios.put(url, userData).then(res =>  {  
+        if (res.status===200 ) {
+            onClose();
+           
+                   
+        } 
+        else{
+            toastMessage("Mã xác nhận không đúng");   
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+
+
+export const sendCodeActive = (email) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/ResendConfirmCode?email=${email}`)
+    dispatch(backdropAction.setOpenBackDrop)
+    await axios.get(url)
+        .then(res =>  {  
+            if (res.status===200 ) {
+                dispatch(backdropAction.setCloseBackDrop)
+                toastMessage(res.data)
+
+            }else {
+                dispatch(backdropAction.setCloseBackDrop)            
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: res.data //sets payload to errors coming from server
+                });
+            }
+        })
+        .catch(err => {
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: err //sets payload to errors coming from server
+                })
+            }
+        );
+};
+
+
+export const loginUserFacebook = (email,fullName,shoppingCartData,history) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Users/CreateUserFacebook?email=${email}&fullName=${fullName}`)
+    await axios.get(url)
+        .then(res =>  {  
+            if (res.status===200 ) {
+                //Save to localStorage
+               
+                const token = res.data;
+             
+                // Set token t  o localStorage
+                localStorage.setItem('jwtToken', token);
+                // Set token to Auth header. Apply Authorization token to header to every request
+                setAuthToken(token);
+                // the token includes user info but it is encoded
+                // to decode we use jwt-decode
+                //Decode token to get user data
+                const decoded = jwt_decode(localStorage.getItem('jwtToken')!=null ? localStorage.getItem('jwtToken') : token );
+                // Set current user
+                dispatch(setCurrentUser(decoded));
+                if(decoded.admin==="False"){
+                    dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))              
+                    history.push('/')
+                }
+            } else {
+                let error;
+               
+                if(res.data="Email hoặc mật khẩu không đúng!")
+                    error = res.data;
+                else
+                    error = Object.values(res.data.errors)[0].toString();
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: error //sets payload to errors coming from server
+                });
+            }
+        })
+        .catch(err => {
+                dispatch({
+                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                    payload: err //sets payload to errors coming from server
+                })
+            }
+        );
+};
+
+
 
 
 

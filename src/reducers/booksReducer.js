@@ -5,7 +5,8 @@ const initialState = {
     booksInZoneEng: [],
     selectedBook: null,
     suggestedBooks: [],
-    searchedResultBooks: []
+    searchedResultBooks: [],
+    booksAdmin: []
 };
 
 export default function (state = initialState, action) {
@@ -55,6 +56,13 @@ export default function (state = initialState, action) {
                 ...state,
                 searchedResultBooks: action.searchedResultBooks
             }
+            case Types.GET_BOOKS_ADMIN:
+
+                return {
+                    ...state,
+                    booksAdmin: action.booksAdmin,
+    
+                };
         default: return state;
     }
 }

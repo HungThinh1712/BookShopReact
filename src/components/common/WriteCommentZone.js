@@ -3,6 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 import {useSelector,useDispatch} from 'react-redux'
 import * as commentActions from './../../actions/commentAction'
+import {toastMessage} from './ToastHelper';
 const useStyles = makeStyles((theme) => ({
 
     
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       },
       
 }));
-const WriteCommentZone = () => {
+const WriteCommentZone = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const userId = useSelector(state=>state.auth.userData ? state.auth.userData.id : null)
@@ -33,8 +34,27 @@ const WriteCommentZone = () => {
     };
   
     const handleSubmit = async e => {   
-        const commentData = {userId,bookId,rate,content,title};
-        await dispatch(commentActions.addComment(commentData))
+        if(userId){
+          const page = props.page
+          const commentData = {userId,bookId,rate,content,title,page};
+          if(rate===0)
+            toastMessage("Vui lòng chọn đánh giá")
+          else if(content==="")
+            toastMessage("Vui lòng nhập bình luận");
+
+          else{
+            await dispatch(commentActions.addComment(commentData))
+          setRate(0);
+          setTitle("");
+          setContent("");
+          }
+          }
+        else{
+          toastMessage("Đăng nhập để tiếp tục");
+          setRate(0);
+          setTitle("");
+          setContent("");
+        }
       
     };
     return (
@@ -43,12 +63,12 @@ const WriteCommentZone = () => {
                 <div >
 					<h6>Viết đánh giá của bạn</h6>
 					<div className="stars" >
-						<Rating onChange={handleRatingChange} size="large"/>
+						<Rating value={rate} onChange={handleRatingChange} size="large"/>
 					</div>
-          <div><input onChange={handleTitleChange} style={{marginBottom:'10px',padding:'5px'}} placeholder='Nhập tiêu đề bình luận'/></div>
+          <div><input value={title} onChange={handleTitleChange} style={{marginBottom:'10px',padding:'5px'}} placeholder='Nhập tiêu đề bình luận'/></div>
 				</div>
 				<div className="input-your-rating" >
-					<textarea onChange={handleContentChange} rows="3" cols="53" name="comment"  style={{fontSize: '16px',padding:'5px'}}></textarea>
+					<textarea value={content} onChange={handleContentChange} rows="3" cols="53" name="comment"  style={{fontSize: '16px',padding:'5px'}}></textarea>
 				</div>
                 </div>
 				<button onClick={handleSubmit} className="btn-send">Gửi đánh giá</button>

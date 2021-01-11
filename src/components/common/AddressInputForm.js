@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as provinceAction from '../../actions/provinceAction'
 import * as districtAction from '../../actions/districtAction'
 import * as wardAction from '../../actions/wardAction'
+import { toastMessage } from './ToastHelper';
 
 
 const AddressInputForm = (props) => {
@@ -44,11 +45,15 @@ const AddressInputForm = (props) => {
   };
 
   const handleSubmit = async e => {
-    const userAddress = { id, name, phone, provinceId, districtId, wardId, address };
+    if(phone==="" || name===""){
+      toastMessage("Vui lòng nhập đầy đủ thông tin")
+    }else{
+      const userAddress = { id, name, phone, provinceId, districtId, wardId, address };
     await dispatch(
       authActions.updateAddressOfCurrentUser(userAddress, props.props.history, props, props.tag)
 
     );
+    }
 
   };
   const provinces = useSelector(state => state.province.provinces)

@@ -4,7 +4,8 @@ import Header from '../common/Header'
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../common/Footer';
 import ItemInOrder from '../common/ItemInOrderDetails';
-import Divider from '@material-ui/core/Divider'
+import Divider from '@material-ui/core/Divider';
+import {useSelector} from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderDetailPage = (props) => {
     const classes = useStyles();
     const itemsInOrder =props.history.location.state.itemsInOrder
+    const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     const showItemsInOrder = itemsInOrder.map((item) =>
 
     <div >
@@ -65,7 +67,7 @@ const OrderDetailPage = (props) => {
           <Header />
           <div className={`${classes.container}`} >
             <div className="row">
-              <Nav className={classes.nav} name="Huỳnh Ngọc Hưng Thịnh" />
+            <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
                 <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Chi tiết đơn hàng</p>
                 {showItemsInOrder}

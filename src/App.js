@@ -23,6 +23,14 @@ import LstBookAdmin from './components/pages/Admin/lstBook'
 import OrderDetailPage from './components/pages/OrderDetailPage'
 import UpdateAddressPage from './components/pages/UpdateAddressPage';
 import OrderManagementPageAdmin from './components/pages/Admin/OrderManagementPageAdmin'
+import ConfirmMomoPage from './components/pages/ConfirmMomoPage'
+import ForgetPasswordPage from './components/pages/ForgetPasswordPage'
+import PageNotFound from './components/pages/PageNotFound'
+import DetailBookAdmin from './components/pages/Admin/detailBook'
+import UpdateBookAdmin from './components/pages/Admin/updateBook'
+import CustomerAdmin from './components/pages/Admin/CustomerManageAdmin'
+import AdminRoute from './privaterouter/adminRoute'
+import UserRoute from './privaterouter/userRoute'
 
 
 function App() {
@@ -31,27 +39,38 @@ function App() {
     <Router>
      <ToastContainer />
      <BackDrop/>
-      <Switch>
-            <ScrollToTop>
+     <ScrollToTop>
+      <Switch>              
+         
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/admin" component={LstBookAdmin} />
-            <Route path="/order_history" component={OrderManageMentPage} />
-            <Route path="/update_address_page" component={UpdateAddressPage} />
-            <Route path="/admin/add_book_page" component={AddBooksAdmin} />
-            <Route path="/admin/ordermanagement_page" component={OrderManagementPageAdmin} />
+            <AdminRoute exact path="/admin/books" component={LstBookAdmin} />
+            <UserRoute path="/order_history" component={OrderManageMentPage} />
+            <UserRoute path="/update_address_page" component={UpdateAddressPage} />
+            <AdminRoute path="/admin/add_book_page" component={AddBooksAdmin} />
+            <AdminRoute path="/admin/details/:id" component={DetailBookAdmin} />
+            <AdminRoute path="/admin/update_book" component={UpdateBookAdmin} />
+            <AdminRoute path="/admin/ordermanagement_page" component={OrderManagementPageAdmin} />
+            <AdminRoute path="/admin/customer_page" component={CustomerAdmin} />
             <Route path="/user_page" component={UserPage} />
-            <Route path="/order_details" component={OrderDetailPage} />
+            <UserRoute path="/order_details" component={OrderDetailPage} />
             <Route path="/confirm_code_page" component={ConfirmCodePage} />
-            <Route path="/order_success_page" component={OrderSuccessPage} />
-            <Route path="/admin_page" component={AdminPage} />
-            <Route path="/payment" component={PaymentPage} />
-            <Route  path="/register" component={Regiser} />
+            <UserRoute path="/order_success_page" component={OrderSuccessPage} />
+            <Route path="/admin" component={AdminPage} />
+            <UserRoute path="/payment" component={PaymentPage} />
+            <Route path="/register" component={Regiser} />
             <Route path="/search/:searchString" component={SearchPage}/>
-            <Route path="/details/:book_id" component={BookDetailPage}></Route>
+            <Route path="/details/:book_id" component={BookDetailPage}/>
             <Route path="/cart" component={ShoppingCartPage}></Route>
-            <Route path="/address_shipping" component={AddressPage}></Route>
-            </ScrollToTop>
+            <UserRoute path="/address_shipping" component={AddressPage}/>
+            <UserRoute path="/confirm_momopay" component={ConfirmMomoPage}/>
+            <Route path="/forget_password" component={ForgetPasswordPage}></Route>
+            <Route   component={PageNotFound}></Route>
+          
+       
+  
+           
         </Switch>
+        </ScrollToTop>
     </Router>
     </div>
   );

@@ -20,6 +20,9 @@ const ConfirmCodePage = (props) => {
         authActions.confirmCode(userData,cartItemData,props.history)
     );
   };
+  const handleResent =()=>{
+    dispatch(authActions.sendCodeActive(email))
+  }
     return (
         <div className="confirm-code" >
         <form  className="sign-in-form">
@@ -33,7 +36,7 @@ const ConfirmCodePage = (props) => {
             <input type="text" onChange={handleCodeInputChange}  placeholder="Mã xác nhận" />
           </div>
           <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmit} >Xác nhận</div>
-          <div style={{color:'blueviolet',cursor:'pointer'}}>Gửi lại mã xác nhận</div>      
+          <div onClick={handleResent} style={{color:'blueviolet',cursor:'pointer'}}>Gửi lại mã xác nhận</div>      
         </form>    
       </div>
     );

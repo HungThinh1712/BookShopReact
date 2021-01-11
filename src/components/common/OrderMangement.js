@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import {useSelector,useDispatch} from 'react-redux'
 import * as orderActions from './../../actions/orderAction'
 import {withRouter} from 'react-router-dom'
+import * as CallApis from '../../constants/Apis'
+import { HubConnectionBuilder } from '@microsoft/signalr';
 
 const useStyles = makeStyles({
   table: {
@@ -41,6 +43,44 @@ const BasicTable =(props) => {
   
     props.history.push('/order_details', {itemsInOrder:row.items})
   }
+
+  const [ connection, setConnection ] = useState(null);
+   
+
+  useEffect(() => {
+      const url = CallApis.API_URL.concat(`/hubs/notification`)
+      const newConnection = new HubConnectionBuilder()
+          .withUrl(url)
+          .withAutomaticReconnect()
+          .build();
+
+      setConnection(newConnection);
+  }, []);
+
+  useEffect(() => {
+      if (connection) {
+          connection.start()
+              .then(result => {
+                  console.log('Connected!');
+  
+                  connection.on('ReceiveMessage', message => {
+                      if(message!==null ){
+                        dispatch(orderActions.getOrdersRequest(props.page,4));
+                      }
+                  });
+              })
+              .catch(e => console.log('Connection failed: ', e));
+      }
+  }, [connection]);
+  const showStatus = (status) => {
+    if(status==="Đang chờ xác nhận"){
+      console.log(status)
+      return <div style={{color:'green'}}>{status}</div>
+    }
+    else{
+      return <div style={{color:'blue'}}>{status}</div>
+    }
+  }
   return (
     
     <TableContainer component={Paper}>
@@ -51,6 +91,7 @@ const BasicTable =(props) => {
             <TableCell className={classes.header} >Ngày mua</TableCell>
             <TableCell className={classes.header} >Sản phẩm</TableCell>
             <TableCell className={classes.header} >Tổng tiền</TableCell>
+            <TableCell className={classes.header} >Trạng thái</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -60,8 +101,9 @@ const BasicTable =(props) => {
                 {row.orderId}
               </TableCell>
               <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
-              <TableCell style={{width:'500px'}}>{row.description}</TableCell>
+              <TableCell style={{width:'300px'}}>{row.description}</TableCell>
               <TableCell >{row.totalMoney} đ</TableCell>
+              <TableCell >{showStatus(row.status)}</TableCell>
               
             </TableRow>
             
