@@ -146,12 +146,14 @@ const BasicTable = () => {
   //Dialog
 
   const [open, setOpen] = React.useState(false);
-    const handleClickOpen = (value) => {
-		setOpen(true);
-	  };
-    const handleClose = () => {
-      setOpen(false);
+  const handleClickOpen = (value) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
 	};
+
   const [items,setItems] = useState([])
   const handelRowClick = (row) =>{
     setItems(row.items);
@@ -160,7 +162,7 @@ const BasicTable = () => {
   return (
 
     <TableContainer component={Paper}>
-      <Dialog  open={open} onClose={handleClose}  items={items} ></Dialog>
+      <Dialog open={open} onClose={handleClose}  items={items} ></Dialog>
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow style={{ height: '80px', fontWeight: '900' }} >
@@ -184,7 +186,6 @@ const BasicTable = () => {
               <TableCell >{row.totalMoney} đ</TableCell>
               <TableCell onClick={(e) => {sendMessage(row.userId, row.id, row.orderId);
               e.stopPropagation()}} >{showStatus(row.status)}</TableCell>
-
             </TableRow>
 
           ))}

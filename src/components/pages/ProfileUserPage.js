@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
           marginTop:'80px'
         },
       },
-     
-     
-     
 }));
 const ProfileUserPage = (props) => {
     const classes = useStyles();
@@ -91,7 +88,6 @@ const ProfileUserPage = (props) => {
   };
   const handleConfirmPassWordInputChange = (e) => {
     setConfirmPassWord(e.target.value);
-
   };
 
  
