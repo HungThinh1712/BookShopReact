@@ -3,6 +3,9 @@ const initialState = {
     books: [],
     booksInZoneVn: [],
     booksInZoneEng: [],
+    booksInMonthTag: [],
+    booksInWeekTag: [],
+    booksInYearTag: [],
     selectedBook: null,
     suggestedBooks: [],
     searchedResultBooks: [],
@@ -13,25 +16,34 @@ export default function (state = initialState, action) {
     switch (action.type) {
 
         case Types.GET_ALLBOOK:
-
             return {
                 ...state,
                 books: action.books,
-
             };
         case Types.GET_BOOK_BY_ZONE_VN:
-            console.log("đ m",action.booksInZoneVn)
             return {
                 ...state,
                 booksInZoneVn: action.booksInZoneVn,
-
             };
         case Types.GET_BOOK_BY_ZONE_ENG:
-
             return {
                 ...state,
                 booksInZoneEng: action.booksInZoneEng,
-
+            };
+        case Types.GET_BOOK_BY_MONTH_TAG:
+            return {
+                ...state,
+                booksInMonthTag: action.booksInMonthTag,
+            };
+        case Types.GET_BOOK_BY_WEEK_TAG:
+            return {
+                ...state,
+                booksInWeekTag: action.booksInWeekTag,
+            };
+        case Types.GET_BOOK_BY_YEAR_TAG:
+            return {
+                ...state,
+                booksInYearTag: action.booksInYearTag,
             };
         case Types.ADD_BOOK:
             const addedBook = action.item;
@@ -39,7 +51,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 books: [...state.books, addedBook]
-
             };
         case Types.GET_BOOK_BY_ID:
             return {

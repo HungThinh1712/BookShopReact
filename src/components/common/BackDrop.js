@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleBackdrop() {
 
   const classes = useStyles();
-  const openBackDrop = useSelector(state=>state.backdrop.open ?  state.backdrop.open : false)
+  const openBackDrop = useSelector(state=>state.backdrop.open ? state.backdrop.open : false)
   
 
   return (

@@ -17,5 +17,3 @@ export const getWardsRequest =  (id) => async (dispatch) => {
         );
     
 };
-
-

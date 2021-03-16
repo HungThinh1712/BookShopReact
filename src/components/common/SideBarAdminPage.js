@@ -26,6 +26,26 @@ const SideBarAdminPage = (props) => {
                             <i className="fas fa-users"></i>
                             <span>Quản lý khách hàng</span></a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={()=>props.history.push('/admin/usermanagement_page')}>
+                            <i className="fas fa-user-circle"></i>
+                            <span>Quản lý tài khoản</span></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={()=>props.history.push('/admin/authormanagement_page')}>
+                            <i className="fas fa-users"></i>
+                            <span>Quản lý tác giả</span></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={()=>props.history.push('/admin/typemanagement_page')}>
+                            <i className="fas fa-book-open"></i>
+                            <span>Quản lý loại sách</span></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={()=>props.history.push('/admin/pulishinghousemanagement_page')}>
+                            <i className="fas fa-laptop-house"></i>
+                            <span>Quản lý nhà xuất bản</span></a>
+                    </li>
                 </ul> 
         </div>
     );

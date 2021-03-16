@@ -16,7 +16,22 @@ export const getAuthorRequest =  () => async (dispatch) => {
                 console.log('Error' + err);
             }
         );
-    
+};
+
+export const getAllAuthorRequest =  (page,name) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Authors/Admin/GetAllAuthor?name=${name}&${page}`)
+    await axios.get(url)
+        .then(res => {
+            console.log(res.data)
+            dispatch({
+                type: Types.GET_AUTHORS,  //this call test dispatch. to dispsatch to our reducer
+                authors: res.data
+            });
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
 };
 
 

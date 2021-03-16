@@ -19,10 +19,9 @@ export const getPublishHousesRequest =  () => async (dispatch) => {
         );
     
 };
+
 export const addPublishHouse = (publishHouse) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/PublishingHouses/Create`)
-   
-   
     await axios.post(url, publishHouse)
         .then(res =>  {  
             if (res.status===200 ) {
@@ -50,5 +49,48 @@ export const addPublishHouse = (publishHouse) => async (dispatch) => {
         );
 };
 
+export const updatePublishHouse = (updatedPublishingHouse) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/PublishingHouses/Update`)
+    await axios({
+        method: 'put',
+        url: url,
+        data: {
+            updatedPublishingHouse
+        }
+      }).then(res => {
+        if (res.status===200) {
+            console.log(res.data);
+            localStorage.setItem('publishHouseData', JSON.stringify(res.data));
+            dispatch( {
+                type: Types.UPDATE_PUBLISH_HOUSE,
+                payload: res.data
+            })
+        } else {
+            dispatch({
+                type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data //sets payload to errors coming from server
+            });
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+    })        
+};
 
 
+export const getAllPublishingHouseRequest =  (page,name) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/PublishingHouses/Admin/GetAllPublishingHouse?name=${name}&${page}`)
+    await axios.get(url)
+        .then(res => {
+            console.log(res.data)
+            dispatch({
+                type: Types.GET_PUBLISHHOUSES,  //this call test dispatch. to dispsatch to our reducer
+                publishHouses: res.data
+            });
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
+};

@@ -8,7 +8,6 @@ import Header from '../../common/Header'
 import Footer from '../../common/Footer'
 import * as bookActions from '../../../actions/booksAction'
 import Dialog from '../../common/Dialog'
-import * as bookTagActions from './../../../actions/bookTagsAction'
 import {useDispactch} from 'react-redux';
 import { toastMessage} from './../../common/ToastHelper';
 
@@ -20,12 +19,10 @@ const UpdateBook = (props) => {
     console.log(bookData);
     useEffect(() => {
         dispatch(typeActions.getTypesRequest());
-        dispatch(bookTagActions.getBookTagsRequest())
         dispatch(publishHouseActions.getPublishHousesRequest())
         dispatch(authorActions.getAuthorRequest())
     }, [dispatch])
     const types = useSelector(state => state.type.types)
-    const tags = useSelector(state => state.bookTags.bookTags)
     const authors = useSelector(state => state.author.authors)
     const publishHouses = useSelector(state => state.publishHouse.publishHouses)
     //Get Data types, tags,authors,publishhouse,
@@ -33,10 +30,6 @@ const UpdateBook = (props) => {
         key={index}
         value={type.id}
     >{type.name}</option>)
-    const showTags = tags.map((tag, index) => <option
-        key={index}
-        value={tag.id}
-    >{tag.name}</option>)
     const showAuthors = authors.map((author, index) => <option
         key={index}
         value={author.id}
@@ -79,7 +72,7 @@ const UpdateBook = (props) => {
     const [pageAmount, setPageAmount] = useState(bookData.pageAmount)
     const [size, setSize] = useState(bookData.size)
     const [coverType, setCoverType] = useState(bookData.cover_Type)
-    const [tagId, setTagId] = useState(bookData.tagId)
+    const [tag, setbookTag] = useState(bookData.tag)
     const [description, setDescription] = useState(bookData.description)
     const [imageSrc, setImageSrc] = useState(bookData.imageSrc)
     const [imageFile, setImageFile] = useState(null)
@@ -123,7 +116,7 @@ const UpdateBook = (props) => {
         setDescription(e.target.value);
     };
     const handleTagInputChange = e => {
-        setTagId(e.target.value);
+        setbookTag(e.target.value);
     };
     const handleZoneInputChange = e => {
         setZoneType(e.target.value);
@@ -145,7 +138,7 @@ const UpdateBook = (props) => {
         formData.append("pageAmount", pageAmount)
         formData.append("size", size)
         formData.append("coverType", coverType)
-        formData.append("tagId", tagId)
+        formData.append("tag", tag)
         formData.append("description", description)
         formData.append("imageFile", imageFile)
 
@@ -168,19 +161,15 @@ const UpdateBook = (props) => {
     };
     const handleButtonAddClick = ()=>{
        if(name!==''){
-            if(tag==="Thêm thẻ"){
-                dispatch(bookTagActions.addBookTag({name:name}))
-            }
-            else if(tag==="Thêm nhà xuất bản"){
+            if(tagType==="Thêm nhà xuất bản"){
                 dispatch(publishHouseActions.addPublishHouse({name:name}))
             }
-            else if(tag==="Thêm loại sách"){
+            else if(tagType==="Thêm loại sách"){
                 dispatch(typeActions.addType({name:name}))
             }
             else{
                 dispatch(authorActions.addAuthor({name:name}))
             }
-                
             setOpen(false);
             setName('');
        }else{
@@ -188,11 +177,11 @@ const UpdateBook = (props) => {
        }
        
     }
-    const [tag,setTag] =useState("");
+    const [tagType,setTag] =useState("");
     return (
         <div>
             <div id="wrapper">
-                <Dialog open={open} onClick={handleButtonAddClick} onClose={handleClose} tag={tag} onChange={handleChangeName}></Dialog>
+                <Dialog open={open} onClick={handleButtonAddClick} onClose={handleClose} tagType={tagType} onChange={handleChangeName}></Dialog>
                 <Header />
                 <SideBarAdminPage />
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
@@ -213,15 +202,15 @@ const UpdateBook = (props) => {
                                         <div className="row">
                                             
                                             <div className="form-group mb-3 col-xs-12 col-sm-6">
-                                                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                                    <label for="tag">Thẻ</label>
-                                                    <div style={{flexGrow:'1'}}></div>
-                                                    <i onClick={()=>handleClickOpen("Thêm thẻ")}  style={{ display: 'flex', marginLeft: '5px', marginTop: '4px', color: 'blue' }} className="fas fa-plus-circle"></i>
-                                                </div>
-                                                <select value={tagId} onChange={handleTagInputChange} className="custom-select tm-select-accounts" id="tag">
-                                                    {showTags}
-                                                </select>
-
+                                                <label for="name">Loại thẻ</label>
+                                              
+                                                    <select value={tag} onChange={handleTagInputChange} className="custom-select tm-select-accounts" id="tagType">
+                                                        <option >Chọn loại thẻ</option>
+                                                        <option value="Sách bán chạy trong tuần" >Sách bán chạy trong tuần</option>
+                                                        <option value="Sách bán chạy trong tháng" >Sách bán chạy trong tháng</option>
+                                                        <option value="Sách bán chạy trong năm" >Sách bán chạy trong năm</option>
+                                                    </select>
+                                                  
                                             </div>
                                             <div className="form-group mb-3 col-xs-12 col-sm-6">
                                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -239,7 +228,7 @@ const UpdateBook = (props) => {
                                         <div className="row">
                                             <div className="form-group mb-3 col-xs-12 col-sm-6">
                                             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                                    <label for="tag">Loại sách</label>
+                                                    <label for="tagType">Loại sách</label>
                                                     <div style={{flexGrow:'1'}}></div>
                                                     <i onClick={()=>handleClickOpen("Thêm loại sách")} style={{ display: 'flex', marginLeft: '5px', marginTop: '4px', color: 'blue' }} className="fas fa-plus-circle"></i>
                                                 </div>
@@ -252,7 +241,7 @@ const UpdateBook = (props) => {
                                             </div>
                                             <div className="form-group mb-3 col-xs-12 col-sm-6">
                                             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                                    <label for="tag">Tác giả</label>
+                                                    <label for="tagType">Tác giả</label>
                                                     <div style={{flexGrow:'1'}}></div>
                                                     <i onClick={()=>handleClickOpen("Thêm tác giả")} style={{ display: 'flex', marginLeft: '5px', marginTop: '4px', color: 'blue' }} className="fas fa-plus-circle"></i>
                                                 </div>
@@ -302,7 +291,7 @@ const UpdateBook = (props) => {
                                             <div className="form-group mb-3 col-xs-12 col-sm-6">
                                                 <label for="name">Khu vực</label>
                                               
-                                                    <select value={zoneType} onChange={handleZoneInputChange} className="custom-select tm-select-accounts" id="tag">
+                                                    <select value={zoneType} onChange={handleZoneInputChange} className="custom-select tm-select-accounts" id="tagType">
                                                         <option >Chọn khu vực</option>
                                                         <option value="Sách tiếng việt" >Sách tiếng việt</option>
                                                         <option value="Sách tiếng anh" >Sách tiếng anh</option>

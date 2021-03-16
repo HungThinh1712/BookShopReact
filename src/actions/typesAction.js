@@ -15,13 +15,26 @@ export const getTypesRequest =  () => async (dispatch) => {
                 console.log('Error' + err);
             }
         );
-    
+};
+
+export const getAllTypeRequest =  (page,name) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Types/Admin/GetAllType?name=${name}&${page}`)
+    await axios.get(url)
+        .then(res => {
+            console.log(res.data)
+            dispatch({
+                type: Types.GET_TYPES,  //this call test dispatch. to dispsatch to our reducer
+                types: res.data
+            });
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
 };
 
 export const addType= (type) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Types/Create`)
-   
-   
     await axios.post(url, type)
         .then(res =>  {  
             if (res.status===200 ) {
@@ -48,7 +61,3 @@ export const addType= (type) => async (dispatch) => {
             }
         );
 };
-
-
-
-

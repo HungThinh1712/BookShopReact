@@ -58,9 +58,7 @@ const BookTag =() => {
 
   const showBookTag = bookTags.map((bookTag, index) => <MenuItem   
             key={bookTag.id}
-            >{bookTag.name}</MenuItem>)
-
-  
+            >{bookTag.name}</MenuItem>)  
 
   return (
     

@@ -10,8 +10,6 @@ import * as bookActions from '../../actions/booksAction'
 import Footer from '../common/Footer'
 
 const useStyles = makeStyles((theme) => ({
-
-
   container: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: '0px',
@@ -26,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
       marginRight: '0px',
     },
   },
-
 }));
 
 const HomePage = (props) => {
@@ -35,8 +32,14 @@ const HomePage = (props) => {
   const dispatch = useDispatch()
   const [indexPageVn, setIndexPageVn] = useState(0)
   const [indexPageEng, setIndexPageEng] = useState(0)
+  const [indexPageWeek, setIndexPageWeek] = useState(0)
+  const [indexPageMonth, setIndexPageMonth] = useState(0)
+  const [indexPageYear, setIndexPageYear] = useState(0)
   const booksVnese = useSelector(state => state.books.booksInZoneVn)
   const booksEng = useSelector(state => state.books.booksInZoneEng)
+  const booksWeek = useSelector(state => state.books.booksInWeekTag)
+  const booksMonth = useSelector(state => state.books.booksInMonthTag)
+  const booksYear = useSelector(state => state.books.booksInYearTag)
   useEffect(() => {
     const fetchBooks = () =>{
       dispatch(bookActions.getBooksByZoneVnRequest(indexPageVn,"Sách tiếng việt"));
@@ -51,17 +54,81 @@ const HomePage = (props) => {
     fetchBooks();
   }, [indexPageEng,dispatch])
 
+  useEffect(() => {
+    const fetchBooks = () =>{
+      dispatch(bookActions.getBooksByWeekTagRequest(indexPageWeek,"Sách bán chạy trong tuần"));
+    }
+    fetchBooks();
+  }, [indexPageWeek])
+
+  useEffect(() => {
+    const fetchBooks = () =>{
+      dispatch(bookActions.getBooksByMonthTagRequest(indexPageMonth,"Sách bán chạy trong tháng"));
+    }
+    fetchBooks();
+  }, [indexPageMonth])
+
+  useEffect(() => {
+    const fetchBooks = () =>{
+      dispatch(bookActions.getBooksByYearTagRequest(indexPageYear,"Sách bán chạy trong năm"));
+    }
+    fetchBooks();
+  }, [indexPageYear])
 
   const loadMoreVnese = () => {
     setIndexPageVn(indexPageVn + 1)
-
   }
+
   const loadMoreEng = () => {
     setIndexPageEng(indexPageEng + 1)
-
   }
 
-  
+  const loadMoreWeek = () => {
+    setIndexPageWeek(indexPageWeek + 1)
+  }
+
+  const loadMoreMonth = () => {
+    setIndexPageMonth(indexPageMonth + 1)
+  }
+
+  const loadMoreYear = () => {
+    setIndexPageYear(indexPageYear + 1)
+  }
+
+  console.log(booksWeek)
+
+  const showBooksMonth = booksMonth.map((book, index) => <Card
+    key={book.id}
+    price={book.price}
+    discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
+    coverPrice={book.coverPrice}
+    title={book.bookName}
+    imageSrc={book.imageSrc}
+    valueraiting={book.rating}
+    onClick={() => props.history.push(`/details/${book.id}`)}
+  ></Card>)
+
+  const showBooksWeek = booksWeek.map((book, index) => <Card
+    key={book.id}
+    price={book.price}
+    discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
+    coverPrice={book.coverPrice}
+    title={book.bookName}
+    imageSrc={book.imageSrc}
+    valueraiting={book.rating}
+    onClick={() => props.history.push(`/details/${book.id}`)}
+  ></Card>)
+
+  const showBooksYear = booksYear.map((book, index) => <Card
+    key={book.id}
+    price={book.price}
+    discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
+    coverPrice={book.coverPrice}
+    title={book.bookName}
+    imageSrc={book.imageSrc}
+    valueraiting={book.rating}
+    onClick={() => props.history.push(`/details/${book.id}`)}
+  ></Card>)
 
   const showBooksVnese = booksVnese.map((book, index) => <Card
     key={book.id}
@@ -84,7 +151,6 @@ const HomePage = (props) => {
     valueraiting={book.rating}
     onClick={() => props.history.push(`/details/${book.id}`)}
   ></Card>)
-
 
   const classes = useStyles();
   return (
@@ -131,6 +197,69 @@ const HomePage = (props) => {
                   size="medium"
                   style={{ fontSize: '0.7em', padding: '0.5em', paddingLeft: '4em', paddingRight: '4em', marginBottom: '1.7em', fontFamily: 'Arial' }}
                   onClick={loadMoreEng}
+                >
+                  Xem thêm
+                    </Button>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '20px', height: '50px', zIndex: 2 }}></div>
+            <BookNav title="Sách bán chạy trong tuần" />
+            <div style={{ display: 'grid', backgroundColor: 'white' }} className={classes.container} >
+
+              <div className={`cover_container `}>
+                {showBooksWeek}
+
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '25px' }} >
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="medium"
+                  style={{ fontSize: '0.7em', padding: '0.5em', paddingLeft: '4em', paddingRight: '4em', marginBottom: '1.7em', fontFamily: 'Arial' }}
+                  onClick={loadMoreWeek}
+                >
+                  Xem thêm
+                    </Button>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '20px', height: '50px', zIndex: 2 }}></div>
+            <BookNav title="Sách bán chạy trong tháng" />
+            <div style={{ display: 'grid', backgroundColor: 'white' }} className={classes.container} >
+
+              <div className={`cover_container `}>
+                {showBooksMonth}
+
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '25px' }} >
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="medium"
+                  style={{ fontSize: '0.7em', padding: '0.5em', paddingLeft: '4em', paddingRight: '4em', marginBottom: '1.7em', fontFamily: 'Arial' }}
+                  onClick={loadMoreMonth}
+                >
+                  Xem thêm
+                    </Button>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '20px', height: '50px', zIndex: 2 }}></div>
+            <BookNav title="Sách bán chạy trong năm" />
+            <div style={{ display: 'grid', backgroundColor: 'white' }} className={classes.container} >
+
+              <div className={`cover_container `}>
+                {showBooksYear}
+
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '25px' }} >
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="medium"
+                  style={{ fontSize: '0.7em', padding: '0.5em', paddingLeft: '4em', paddingRight: '4em', marginBottom: '1.7em', fontFamily: 'Arial' }}
+                  onClick={loadMoreYear}
                 >
                   Xem thêm
                     </Button>

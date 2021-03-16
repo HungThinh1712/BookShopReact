@@ -58,7 +58,60 @@ export const getBooksByZoneEngRequest = (indexPage,zone) => async (dispatch) => 
             console.log('Error' + err);
         }
         );
+}
 
+export const getBooksByMonthTagRequest = (indexPage,tag) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books/GetBookByTag?index=${indexPage}&tag=${tag}`)
+    await axios.get(url)
+        .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
+            dispatch({
+                type: Types.GET_BOOK_BY_MONTH_TAG,  //this call test dispatch. to dispsatch to our reducer
+                booksInMonthTag: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
+            console.log('Error' + err);
+        }
+        );
+}
+
+export const getBooksByWeekTagRequest = (indexPage,tag) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books/GetBookByTag?index=${indexPage}&tag=${tag}`)
+    await axios.get(url)
+        .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
+            dispatch({
+                type: Types.GET_BOOK_BY_WEEK_TAG,  //this call test dispatch. to dispsatch to our reducer
+                booksInWeekTag: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
+            console.log('Error' + err);
+        }
+        );
+}
+
+export const getBooksByYearTagRequest = (indexPage,tag) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop)
+    const url = CallApis.API_URL.concat(`/Books/GetBookByTag?index=${indexPage}&tag=${tag}`)
+    await axios.get(url)
+        .then(res => {
+            dispatch(backdropAction.setCloseBackDrop)
+            dispatch({
+                type: Types.GET_BOOK_BY_YEAR_TAG,  //this call test dispatch. to dispsatch to our reducer
+                booksInYearTag: res.data
+            });
+        })
+        .catch(err => {
+            dispatch(backdropAction.setCloseBackDrop)
+            console.log('Error' + err);
+        }
+        );
 }
 
 export const getBookByIdRequest = (id) => async (dispatch) => {

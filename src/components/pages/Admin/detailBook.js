@@ -13,8 +13,6 @@ import {useDispactch} from 'react-redux';
 import { toastMessage} from './../../common/ToastHelper';
 
 const Book = (props) => {
-
-
     const dispatch = useDispatch();
     const selectedBook = useSelector(state => state.books.selectedBook ? state.books.selectedBook : null)
     const id = props.match.params.id
@@ -29,18 +27,9 @@ const Book = (props) => {
         dispatch(authorActions.getAuthorRequest())
     }, [dispatch])
     const types = useSelector(state => state.type.types)
-    const tags = useSelector(state => state.bookTags.bookTags)
     const authors = useSelector(state => state.author.authors)
     const publishHouses = useSelector(state => state.publishHouse.publishHouses)
     //Get Data types, tags,authors,publishhouse,
-    const showTypes = types.map((type, index) => <option
-        key={index}
-        value={type.id}
-    >{type.name}</option>)
-    const showTags = tags.map((tag, index) => <option
-        key={index}
-        value={tag.id}
-    >{tag.name}</option>)
     const showAuthors = authors.map((author, index) => <option
         key={index}
         value={author.id}
@@ -49,12 +38,11 @@ const Book = (props) => {
         key={index}
         value={publishHouse.id}
     >{publishHouse.name}</option>)
+    const showTypes = types.map((type, index) => <option
+        key={index}
+        value={type.id}
+    >{type.name}</option>)
 
-
-
-
-   
- 
     return (
         <div>
             {selectedBook ? <div id="wrapper">
@@ -78,16 +66,15 @@ const Book = (props) => {
                                      </div>
                                      <div className="row">
                                          
-                                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                                             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                                 <label for="tag">Thẻ</label>
-                                                 <div style={{flexGrow:'1'}}></div>
+                                        <div className="form-group mb-3 col-xs-12 col-sm-6">
+                                             <label  for="tag">Thẻ</label>
+                                           
+                                                 <select disabled defaultValue={selectedBook.tags}  className="custom-select tm-select-accounts" id="tag">
+                                                     <option value="Sách tiếng việt" >Sách bán chạy trong tuần</option>
+                                                     <option value="Sách tiếng anh" >Sách bán chạy trong tháng</option>
+                                                     <option value="Sách tiếng anh" >Sách bán chạy trong năm</option>
+                                                 </select>
                                                
-                                             </div>
-                                             <select disabled defaultValue={selectedBook.tagId}  className="custom-select tm-select-accounts" id="tag">
-                                                 {showTags}
-                                             </select>
-
                                          </div>
                                          <div className="form-group mb-3 col-xs-12 col-sm-6">
                                              <div style={{ display: 'flex', flexDirection: 'row' }}>
