@@ -61,3 +61,31 @@ export const addType= (type) => async (dispatch) => {
             }
         );
 };
+
+export const updateType = (updatedType) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Types/Update`)
+    await axios({
+        method: 'put',
+        url: url,
+        data: {
+            updatedType
+        }
+      }).then(res => {
+        if (res.status===200) {
+            console.log(res.data);
+            dispatch( {
+                type: Types.UPDATE_TYPE,
+                payload: res.data
+            })
+        } else {
+            dispatch({
+                type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
+                payload: res.data //sets payload to errors coming from server
+            });
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+    })        
+};

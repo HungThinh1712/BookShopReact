@@ -10,9 +10,7 @@ import {withRouter} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as authActions from './../../actions/authAction'
 import {toastMessage} from './../common/ToastHelper'
-const useStyles = makeStyles((theme) => ({
-
-    
+const useStyles = makeStyles((theme) => ({    
     container: {
         [theme.breakpoints.up('sm')]: {
           marginLeft:'0px',
@@ -139,10 +137,9 @@ const ProfileUserPage = (props) => {
                                 </div>
                             </div> : null
                             }
-                            <div  className="sex">
+                            <div className="sex">
                                 <Button onClick={handleButtonClick} variant="contained" color="primary" size='small'>Cập nhật</Button>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

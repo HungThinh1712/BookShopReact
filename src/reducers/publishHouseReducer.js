@@ -1,10 +1,7 @@
-import { updatePublishHouse } from '../actions/publishHouseAction';
 import * as Types from '../constants/ActionType'
-const publishHouseData = localStorage.getItem("publishHouseData") != null ? localStorage.getItem("publishHouseData") : null
 
 const initialState = {
     publishHouses: [],
-    publishHouseData: JSON.parse(publishHouseData)
 };
 
 export default function (state = initialState, action) {
@@ -23,10 +20,11 @@ export default function (state = initialState, action) {
                 publishHouses: [...state.publishHouses, addedPublishouse]
 
             };
-        case Types.UPDATE_PROFILE_USER:
+        case Types.UPDATE_PUBLISH_HOUSE:
+            const updatedPublishouse = action.item;
             return {
                 ...state,
-                publishHouseData: action.payload
+                publishHouses: [...state.publishHouses, updatedPublishouse]
             };
         default:
             return state;

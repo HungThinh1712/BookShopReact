@@ -49,18 +49,17 @@ export const addPublishHouse = (publishHouse) => async (dispatch) => {
         );
 };
 
-export const updatePublishHouse = (updatedPublishingHouse) => async (dispatch) => {
+export const updatePublishHouse = (updatedPublishHouse) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/PublishingHouses/Update`)
     await axios({
         method: 'put',
         url: url,
         data: {
-            updatedPublishingHouse
+            updatedPublishHouse
         }
       }).then(res => {
         if (res.status===200) {
             console.log(res.data);
-            localStorage.setItem('publishHouseData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_PUBLISH_HOUSE,
                 payload: res.data

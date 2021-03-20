@@ -21,6 +21,12 @@ export default function (state = initialState, action) {
                 authors: [...state.authors, addedAuthor]
 
             };
+        case Types.UPDATE_AUTHOR:
+            const updatedAuthor = action.item;
+            return {
+                ...state,
+                authors: [...state.authors, updatedAuthor]
+            };
         default: return state;
     }
 }
