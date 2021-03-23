@@ -96,8 +96,6 @@ const BasicTable = () => {
     if (connection) {
       connection.start()
         .then(result => {
-          console.log('Connected!');
-
           connection.on('ReceiveMessage', message => {
             if(message!=null){
               dispatch(orderActions.getAllOrdersRequest(page, 10,0));
@@ -107,6 +105,7 @@ const BasicTable = () => {
         .catch(e => console.log('Connection failed: ', e));
     }
   }, [connection]);
+  
   const sendMessage = async (userId, id, orderId) => {
 
     const chatMessage = {
@@ -155,10 +154,12 @@ const BasicTable = () => {
 	};
 
   const [items,setItems] = useState([])
+
   const handelRowClick = (row) =>{
     setItems(row.items);
     handleClickOpen();
   }
+
   return (
 
     <TableContainer component={Paper}>

@@ -59,12 +59,12 @@ const UserPageNav = (props) => {
     return (
         <div className="col-xs-5 col-sm-4 col-md-3" >
             <div className="profile-sidebar">
-            <div className="profile-userpic"> 
-            <img src={imageSrc ? imageSrc : props.imageSrc} onClick={handleUpLoadClick} className="img-responsive" alt="Thông tin cá nhân"/> 
-            <div style={{display:'none'}} className="custom-file mt-3 mb-3" >
-                                                    <input id="fileInput" accept="image/*" type="file" style={{ display: 'none' }} ref={hiddenFileInput} onChange={showPreview} />
-                                                </div>              
-            </div>  
+                <div className="profile-userpic"> 
+                <img src={imageSrc ? imageSrc : props.imageSrc} onClick={handleUpLoadClick} className="img-responsive" alt="Thông tin cá nhân"/> 
+                <div style={{display:'none'}} className="custom-file mt-3 mb-3" >
+                                                        <input id="fileInput" accept="image/*" type="file" style={{ display: 'none' }} ref={hiddenFileInput} onChange={showPreview} />
+                                                    </div>              
+                </div>  
                 <div className="profile-usertitle">
                     <div className="profile-usertitle-name">{props.name}</div>
                 </div>

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme)=>({
   },
   row: {      
     "&:hover": {
-      
+
         backgroundColor:'#f2f2f2',
         cursor: 'pointer'
     },
@@ -54,7 +54,6 @@ const BasicTable =(props) => {
   
   };
 
-  
   
   const total  = useSelector(state=>state.users.users.total ? state.users.users.total: 0 )
   const paging = total%10===0 ? total/10: Math.floor(total/10) + 1
@@ -94,19 +93,14 @@ const BasicTable =(props) => {
               <TableCell >{row.birthDay}</TableCell>
               <TableCell >{row.address}</TableCell>    
               <TableCell  >{row.sumOrder} đơn</TableCell>
-              
             </TableRow>
-            
           ))}
         </TableBody>
       </Table>
-
             {total > 10 ? <div className={classes.pagination} style={{marginTop:'10px'}}>
               <Pagination total={paging} onChange={handlePageChange} page={page}/>
             </div>:null}
-   
     </TableContainer>
-    
   );
 }
 export default withRouter(BasicTable)

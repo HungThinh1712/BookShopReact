@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SideBarAdminPage from '../../common/SideBarAdminPage'
 import { useSelector, useDispatch } from 'react-redux'
 import * as typeActions from '../../../actions/typesAction'
+import * as Types from '../../../constants/ActionType'
 import * as publishHouseActions from '../../../actions/publishHouseAction'
 import * as authorActions from '../../../actions/authorAction'
 import Header from '../../common/Header'
@@ -14,6 +15,9 @@ import { toastMessage} from './../../common/ToastHelper';
 const Book = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch({
+            type: Types.RESET_TYPE,
+        });
         dispatch(typeActions.getTypesRequest());
         dispatch(publishHouseActions.getPublishHousesRequest())
         dispatch(authorActions.getAuthorRequest())
@@ -21,7 +25,7 @@ const Book = (props) => {
     const types = useSelector(state => state.type.types)
     const authors = useSelector(state => state.author.authors)
     const publishHouses = useSelector(state => state.publishHouse.publishHouses)
-    //Get Data types, tags,authors,publishhouse,
+    //Get Data types,authors,publishhouse,
     const showTypes = types.map((type, index) => <option
         key={index}
         value={type.id}
@@ -40,6 +44,7 @@ const Book = (props) => {
     const handleUpLoadClick = event => {
         hiddenFileInput.current.click();
     };
+
     //Show review Image
     const showPreview = e => {
         if (e.target.files && e.target.files[0]) {
@@ -211,7 +216,6 @@ const Book = (props) => {
                                                     <i onClick={()=>handleClickOpen("Thêm nhà xuất bản")} style={{ display: 'flex', marginTop: '4px', color: 'blue' }} className="fas fa-plus-circle"></i>
                                                 </div>
                                                 <select onChange={handlePublishHouseInputChange} className="custom-select tm-select-accounts" id="category">
-                                                   
                                                     <option selected>Chọn nhà xuất bản</option>
                                                     {showPublishHouses}
                                                 </select>
@@ -314,20 +318,12 @@ const Book = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
-
             </div>
             <div style={{ paddingTop: '180px' }}><Footer /></div>
         </div>
