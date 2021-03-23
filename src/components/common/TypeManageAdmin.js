@@ -75,7 +75,17 @@ const BasicTable = (props) => {
     toastMessage("Cập nhật thành công")
   }
 
-  const [rows, setRows] = React.useState(useSelector(state => state.type.types.entities ? state.type.types.entities : []));
+  const [rows, setRows] = React.useState([]);
+
+  const tempRedux = useSelector((state) =>
+    state.type.types.entities
+      ? state.type.types.entities
+      : []
+  );
+
+  useEffect(() => {
+    if (tempRedux) setRows(tempRedux);
+  }, [tempRedux]);
 
   const onToggleEditMode = (key) => {
     setRows((state) => {
@@ -104,17 +114,17 @@ const BasicTable = (props) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="caption table">
-        <TableHead>
-          <TableRow>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead >
+          <TableRow style={{height:'80px',fontWeight:'900'}} >
             <TableCell align="left" />
-            <TableCell align="left">Loại sách</TableCell>
-            <TableCell align="left">Ngày tạo</TableCell>
+            <TableCell className={classes.header}>Tên loại sách</TableCell>
+            <TableCell className={classes.header} >Ngày tạo</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
+          {rows.map((row,index) => (
+            <TableRow style={{height:'80px'}} className={classes.row} key={index}>
               <TableCell className={classes.selectTableCell}>
                   <>
                     <IconButton
@@ -128,10 +138,11 @@ const BasicTable = (props) => {
               <CustomTableCell {...{ row, col: "name", onChange, disabled: false}} />
               <CustomTableCell {...{ row, col: "createAt", onChange, disabled: true}} />
             </TableRow>
+            
           ))}
         </TableBody>
       </Table>
-        {total > 10 ? <div className={classes.pagination} style={{marginTop:'10px'}}>
+            {total > 10 ? <div className={classes.pagination} style={{marginTop:'10px'}}>
               <Pagination total={paging} onChange={handlePageChange} page={page}/>
             </div>:null}
     </TableContainer>

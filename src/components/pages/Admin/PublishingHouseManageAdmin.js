@@ -65,7 +65,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
         setOpen(true);
     };
     const handleChangeName = (e) =>{
-        setName(e.target.value)
+        setName(e.target.value) 
     }
     const handleClose = () => {
         setOpen(false);
@@ -113,7 +113,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <PublishingHouseManageAdmin searchString ={searchString} />
+                                            <PublishingHouseManageAdmin searchString={searchString} />
                                         </div>
                                     </div>
                                 </div>
@@ -121,8 +121,8 @@ const PublishingHouseManagementPageAdmin = (props) => {
                         </div>
                     </div>
                 </div>
+                <div style={{ paddingTop: '180px' }}><Footer /></div>
             </div>
-            <div style={{ paddingTop: '180px' }}><Footer /></div>
         </div>
     );
 };

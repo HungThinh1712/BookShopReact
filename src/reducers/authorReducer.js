@@ -1,8 +1,6 @@
 import * as Types from '../constants/ActionType'
 const initialState = {
     authors: [],
-
-
 };
 
 export default function (state = initialState, action) {
@@ -16,10 +14,11 @@ export default function (state = initialState, action) {
             };
         case Types.ADD_AUTHOR:
             const addedAuthor = action.item;
+            const temp = { ...state.publishHouses };
+            temp.entities.unshift(addedAuthor);
             return {
                 ...state,
-                authors: [...state.authors, addedAuthor]
-
+                authors: temp,
             };
         case Types.UPDATE_AUTHOR:
             const updatedAuthor = action.item;
@@ -27,6 +26,10 @@ export default function (state = initialState, action) {
                 ...state,
                 authors: [...state.authors, updatedAuthor]
             };
+        case Types.RESET_AUTHOR:
+            return {
+                authors: [],
+            }
         default: return state;
     }
 }

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as bookActions from '../../../actions/booksAction';
 import { withRouter } from 'react-router-dom';
 import Pagination from '../../common/Pagination'
+import * as Types from '../../../constants/ActionType';
 
 import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
@@ -68,7 +69,8 @@ const LstBook = (props) => {
     }, [name,page])
 
     const handleItemClick = (id) => {
-        props.history.push(`/admin/details/${id}`)
+        props.history.
+        push(`/admin/details/${id}`)
     }
 
     const total = useSelector(state => state.books.booksAdmin.total ? state.books.booksAdmin.total : 0)
@@ -96,7 +98,6 @@ const LstBook = (props) => {
 
                 <Header notShow="notShow" />
                 <SideBarAdminPage />
-
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
 
                     <div className="container-fluid">
@@ -109,7 +110,7 @@ const LstBook = (props) => {
                                             <div className="col-sm-8"><h2>DANH SÁCH SÁCH</h2></div>
                                             <div className="col-sm-4">
                                                 <div >
-                                                    <button onClick={() => props.history.push('/admin/add_book_page')} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> Thêm sách</button>
+                                                    <button onClick = {() => {props.history.push('/admin/add_book_page'); dispatch({type: Types.RESET_TYPE}); dispatch({type: Types.RESET_AUTHOR}); dispatch({type: Types.RESET_PUBLISHOUSE});}} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> Thêm sách</button>
                                                 </div>
                                             </div>
                                         </div>

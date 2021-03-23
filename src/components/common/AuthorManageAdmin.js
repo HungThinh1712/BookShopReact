@@ -75,7 +75,17 @@ const BasicTable = (props) => {
     toastMessage("Cập nhật thành công")
   }
 
-  const [rows, setRows] = React.useState(useSelector(state => state.author.authors.entities ? state.author.authors.entities : []));
+  const [rows, setRows] = React.useState([]);
+
+  const tempRedux = useSelector((state) =>
+    state.author.authors.entities
+      ? state.author.authors.entities
+      : []
+  );
+
+  useEffect(() => {
+    if (tempRedux) setRows(tempRedux);
+  }, [tempRedux]);
 
   const onToggleEditMode = (key) => {
     setRows((state) => {
