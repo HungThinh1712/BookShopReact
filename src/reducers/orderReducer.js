@@ -1,8 +1,6 @@
 import * as Types from '../constants/ActionType'
 const initialState = {
     orders: [],
-    
-  
 };
 
 export default function  (state = initialState,action) {

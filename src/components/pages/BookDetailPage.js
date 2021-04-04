@@ -7,6 +7,7 @@ import Card from '../common/Card'
 import { useSelector, useDispatch } from 'react-redux'
 import * as bookActions from '../../actions/booksAction'
 import * as commentActions from '../../actions/commentAction'
+
 import TableInfo from './../common/TableInfo'
 import Description from './../common/Description'
 import Comment from '../common/CommentZone'
@@ -153,7 +154,7 @@ const BookDetailPage = (props) => {
         </div>
 
       </div> : null}
-      <div style={{ paddingTop: '180px', backgroundColor: '#f2f2f2' }}><Footer /></div> }
+      <div style={{ paddingTop: '180px', backgroundColor: '#f2f2f2' }}><Footer /></div>
     </div>
 
   );

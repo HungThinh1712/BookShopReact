@@ -1,25 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 import {useSelector,useDispatch} from 'react-redux'
 import * as commentActions from './../../actions/commentAction'
 import {toastMessage} from './ToastHelper';
-const useStyles = makeStyles((theme) => ({
+import * as orderActions from './../../actions/orderAction'
 
-    
+const useStyles = makeStyles((theme) => ({
     container: {
         [theme.breakpoints.down('md')]: {
           display:'none'
         },
-        
       },
-      
 }));
+
 const WriteCommentZone = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const userId = useSelector(state=>state.auth.userData ? state.auth.userData.id : null)
     const bookId = useSelector(state => state.books.selectedBook ? state.books.selectedBook.id : null )
+    const arrays = [];
+
+    const i = 0;
+
+    useEffect(()=>{
+      dispatch(orderActions.getOrdersRequest(props.page,4));
+    },[props.page])
+
+    for ( const ele of (useSelector(state => state.order.orders.entities ? state.order.orders.entities : []))){
+      for  (let i = 0; i < 10;i++) {
+        arrays.push(ele.items[0].bookId);
+      }
+    } 
+    console.log(arrays);
+
+    const checkBook = (bookId) => {
+      if (arrays.find(item => item == bookId)) {
+        return 1;
+      } else return 0;
+    }
+
     const [rate,setRate] = useState(0);
     const [title,setTitle] = useState('');
     const [content,setContent] = useState('');
@@ -57,7 +77,16 @@ const WriteCommentZone = (props) => {
         }
       
     };
-    return (
+
+    if (checkBook(bookId) == 0)
+    {
+      return (
+        <div></div>
+      )
+    }
+    else
+    {
+      return (
         <div style={{marginLeft:'50px',marginTop:'50px'}}>
 				<div className={classes.container}>
                 <div >
@@ -74,6 +103,7 @@ const WriteCommentZone = (props) => {
 				<button onClick={handleSubmit} className="btn-send">Gửi đánh giá</button>
 			</div>
     );
+    }   
 };
 
 export default WriteCommentZone;

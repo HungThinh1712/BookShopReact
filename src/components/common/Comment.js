@@ -38,9 +38,7 @@ const Comment = (props) => {
 						</div>:null}
 					</div>
 				</div>
-
 	);
 };
-
 
 export default Comment;

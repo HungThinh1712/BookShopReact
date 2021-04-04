@@ -49,7 +49,6 @@ export default function FormDialog(props) {
                 <DialogTitle id="form-dialog-title">Chỉnh sửa đánh giá</DialogTitle>
                 <DialogContent>
                     <div >
-
                         <div className="stars" >
                             <Rating onChange={handleRatingChange} size="large" value={rate} />
                         </div>

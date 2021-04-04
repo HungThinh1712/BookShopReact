@@ -2,6 +2,7 @@ import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 import { toastMessage } from '../components/common/ToastHelper';
+import { Book } from '@material-ui/icons';
 
 export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}`)
@@ -17,7 +18,6 @@ export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
                 console.log('Error' + err);
             }
         );
-    
 };
 
 export const getAllOrdersRequest =  (page,pageSize,value) => async (dispatch) => {
