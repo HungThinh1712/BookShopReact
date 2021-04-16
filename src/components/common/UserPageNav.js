@@ -17,6 +17,10 @@ const UserPageNav = (props) => {
 
         props.history.push('/order_history')
     }
+    const handleCommentHistoryClick = () => {
+
+        props.history.push('/comment_history')
+    }
     const handleUserPageClick = () => {
 
         props.history.push('/user_page')
@@ -78,7 +82,7 @@ const UserPageNav = (props) => {
                         <a onClick={handleUserPageClick} className="nav-link " ><i className="fas fa-user"></i> Thông tin tài khoản</a>
                         <a onClick={handleOrderHistoryClick} className="nav-link" ><i className="fas fa-shopping-cart" ></i> Quản lý đơn hàng</a>
                         <a onClick={handleUpdateAddressClick} className="nav-link" ><i className="fas fa-tag"></i> Địa chỉ đã gán</a>
-                      
+                        <a onClick={handleCommentHistoryClick} className="nav-link" ><i className="fas fa-star-half-alt"></i> Nhận xét của tôi</a> 
                     </div>
                 </div>
             </div>

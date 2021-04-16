@@ -28,6 +28,7 @@ import DetailBookAdmin from './components/pages/Admin/detailBook'
 import UpdateBookAdmin from './components/pages/Admin/updateBook'
 import CustomerAdmin from './components/pages/Admin/CustomerManageAdmin'
 import OrderManageMentPage from './components/pages/OrderManageMentPage';
+import CommentManageMentPage from './components/pages/CommentManageMentPage';
 import OrderManagementPageAdmin from './components/pages/Admin/OrderManagementPageAdmin'
 import UserManagementPageAdmin from './components/pages/Admin/UserManageAdmin'
 import AuthorManagementPageAdmin from './components/pages/Admin/AuthorManageAdmin'
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <AdminRoute exact path="/admin/books" component={LstBookAdmin} />
             <UserRoute path="/order_history" component={OrderManageMentPage} />
+            <UserRoute path="/comment_history" component={CommentManageMentPage} />
             <UserRoute path="/update_address_page" component={UpdateAddressPage} />
             <AdminRoute path="/admin/add_book_page" component={AddBooksAdmin} />
             <AdminRoute path="/admin/details/:id" component={DetailBookAdmin} />
