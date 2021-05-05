@@ -1,6 +1,5 @@
 import React, {  useEffect, useState } from 'react';
 import Header from '../common/Header';
-import BookTag from '../common/BookTag'
 import { makeStyles } from '@material-ui/core/styles';
 import BookNav from '../common/BookNav';
 import Card from '../common/Card';
@@ -8,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from 'react-redux'
 import * as bookActions from '../../actions/booksAction'
 import Footer from '../common/Footer'
+import FlashSaleNav from '../common/FlashSaleNav'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,7 +45,7 @@ const HomePage = (props) => {
       dispatch(bookActions.getBooksByZoneVnRequest(indexPageVn,"Sách tiếng việt"));
     }
     fetchBooks();
-  }, [indexPageVn])
+  }, [dispatch,indexPageVn])
 
   useEffect(() => {
     const fetchBooks = () =>{
@@ -59,21 +59,21 @@ const HomePage = (props) => {
       dispatch(bookActions.getBooksByWeekTagRequest(indexPageWeek,"Sách bán chạy trong tuần"));
     }
     fetchBooks();
-  }, [indexPageWeek])
+  }, [dispatch,indexPageWeek])
 
   useEffect(() => {
     const fetchBooks = () =>{
       dispatch(bookActions.getBooksByMonthTagRequest(indexPageMonth,"Sách bán chạy trong tháng"));
     }
     fetchBooks();
-  }, [indexPageMonth])
+  }, [dispatch,indexPageMonth])
 
   useEffect(() => {
     const fetchBooks = () =>{
       dispatch(bookActions.getBooksByYearTagRequest(indexPageYear,"Sách bán chạy trong năm"));
     }
     fetchBooks();
-  }, [indexPageYear])
+  }, [dispatch,indexPageYear])
 
   const loadMoreVnese = () => {
     setIndexPageVn(indexPageVn + 1)
@@ -95,7 +95,6 @@ const HomePage = (props) => {
     setIndexPageYear(indexPageYear + 1)
   }
 
-  console.log(booksWeek)
 
   const showBooksMonth = booksMonth.map((book, index) => <Card
     key={book.id}
@@ -204,7 +203,7 @@ const HomePage = (props) => {
             </div>
 
             <div style={{ marginTop: '20px', height: '50px', zIndex: 2 }}></div>
-            <BookNav title="Sách bán chạy trong tuần" />
+            <FlashSaleNav  />
             <div style={{ display: 'grid', backgroundColor: 'white' }} className={classes.container} >
 
               <div className={`cover_container `}>

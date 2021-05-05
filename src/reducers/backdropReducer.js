@@ -4,7 +4,7 @@ const initialState = {
     open:false
 };
 
-export default function (state = initialState, action) {
+export default function backdropReducer(state = initialState, action) {
     switch (action.type) {
         case Types.OPEN_BACKDROP:
             return{

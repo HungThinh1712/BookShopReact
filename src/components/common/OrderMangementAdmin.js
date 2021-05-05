@@ -71,7 +71,7 @@ const BasicTable = () => {
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1
   useEffect(() => {
     dispatch(orderActions.getAllOrdersRequest(page, 10,0));
-  }, [page])
+  }, [dispatch,page])
 
 
   const rows = useSelector(state => state.order.orders.entities ? state.order.orders.entities : [])
@@ -104,7 +104,7 @@ const BasicTable = () => {
         })
         .catch(e => console.log('Connection failed: ', e));
     }
-  }, [connection]);
+  }, [dispatch,connection,page]);
   
   const sendMessage = async (userId, id, orderId) => {
 

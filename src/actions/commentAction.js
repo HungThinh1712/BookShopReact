@@ -16,8 +16,24 @@ export const getCommentsRequest =  (bookId,page) => async (dispatch) => {
                 console.log('Error' + err);
             }
         );
-    
 };
+
+export const getCommentsUserRequest =  (userId) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Comments/GetCommentsByUserId?userId=${userId}`)
+    await axios.get(url)
+        .then(res => {
+           
+            dispatch({
+                type: Types.GET_COMMENTS,  //this call test dispatch. to dispsatch to our reducer
+                comments: res.data
+            });
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
+};
+
 
 export const getRatingRequest=  (bookId) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Comments/GetRatings?bookId=${bookId}`)
@@ -107,6 +123,5 @@ export const deleteComment = (id,bookId,page) => async (dispatch) => {
            
         }
     );
-        
 };
 

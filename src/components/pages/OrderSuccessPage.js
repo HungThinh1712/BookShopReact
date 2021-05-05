@@ -15,7 +15,7 @@ const OrderSuccessPage = (props) => {
             dispatch(cartActions.payForCart(paymentType));
             sendMessage()
         }
-    },dispatch,errorCode)
+    },[dispatch,errorCode])
     
     const [ connection, setConnection ] = useState(null);
    
@@ -46,7 +46,7 @@ const OrderSuccessPage = (props) => {
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
-    }, [connection]);
+    }, []);
     
       const sendMessage = async () => {
        

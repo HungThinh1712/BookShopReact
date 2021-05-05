@@ -14,7 +14,7 @@ export default function FormDialog(props) {
     <div>
       
       <Dialog open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{props.tag}</DialogTitle>
+        <DialogTitle id="form-dialog-title">{props.tagType}</DialogTitle>
         <DialogContent>
           
           <TextField

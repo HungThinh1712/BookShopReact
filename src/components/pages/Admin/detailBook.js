@@ -24,7 +24,7 @@ const Book = (props) => {
         dispatch(typeActions.getTypesRequest());
         dispatch(bookTagActions.getBookTagsRequest())
         dispatch(publishHouseActions.getPublishHousesRequest())
-        dispatch(authorActions.getAuthorRequest())
+        dispatch(authorActions.getAuthorsRequest("",1,9999))
     }, [dispatch])
     const types = useSelector(state => state.type.types)
     const authors = useSelector(state => state.author.authors)

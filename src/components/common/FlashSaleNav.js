@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function VietNameseBookNav(props) {
+export default function FlashSaleNav(props) {
 	const classes = useStyles();
         return (
                 <div className = {`home-header ${classes.root}`} >
 		            <h2 >
-					<a >{props.title}</a>
+					<a >Flash sale</a>
 		            </h2>
 		        </div>
         );

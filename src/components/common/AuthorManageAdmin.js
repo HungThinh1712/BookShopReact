@@ -1,151 +1,115 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Input from "@material-ui/core/Input";
-import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
-import IconButton from "@material-ui/core/IconButton";
-import { useSelector, useDispatch } from 'react-redux'
-import * as authorActions from '../../actions/authorAction'
-import { withRouter } from 'react-router-dom'
-import { toastMessage } from './../common/ToastHelper'
-import Pagination from '../common/Pagination'
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { useSelector, useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
+import Pagination from "../common/Pagination";
+import * as authorActions from "../../actions/authorAction";
+import Dialog from "../common/DialogInfoAuthor";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    overflowX: "auto"
-  },
+const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650
+    minWidth: 650,
   },
-  selectTableCell: {
-    width: 60
+  header: {
+    fontWeight: 900,
   },
-  tableCell: {
-    width: 250,
-    height: 40
+  row: {
+    "&:hover": {
+      backgroundColor: "#f2f2f2",
+      cursor: "pointer",
+    },
+    pagination: {
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: "auto",
+        marginRight: "120px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        marginLeft: "auto",
+        marginRight: "120px",
+      },
+      [theme.breakpoints.down("xs")]: {
+        marginLeft: "auto",
+        marginRight: "0",
+      },
+    },
   },
-  input: {
-    width: 250,
-    height: 40
-  }
 }));
-
-const CustomTableCell = ({ row, col, onChange, disabled }) => {
-  const classes = useStyles();
-  return (
-    <TableCell align="left" className={classes.tableCell}>
-        <Input
-          value={row[col]}
-          name={col}
-          className={classes.input}
-          onChange={(e) => onChange(e, row)}
-          disabled={disabled}
-        />
-    </TableCell>
-  );
-};
 
 const BasicTable = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-
   const handlePageChange = (event, value) => {
     setPage(value);
   };
 
-  const total = useSelector(state => state.author.authors.total ? state.author.authors.total : 0)
-  const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1
-
-  useEffect(() => {
-    dispatch(authorActions.getAllAuthorRequest(page, props.searchString, 10));
-  }, [page, props.searchString])
-
-  const handleChangeName = async (id, name) => {
-    const authorData = { id, name };
-    await dispatch(authorActions.updateAuthor(authorData))
-    toastMessage("Cập nhật thành công")
-  }
-
-  const [rows, setRows] = React.useState([]);
-
-  const tempRedux = useSelector((state) =>
-    state.author.authors.entities
-      ? state.author.authors.entities
-      : []
+  const total = useSelector((state) =>
+    state.author.authors.total ? state.author.authors.total : 0
   );
-
+  const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
-    if (tempRedux) setRows(tempRedux);
-  }, [tempRedux]);
+    dispatch(authorActions.getAuthorsRequest(props.searchString, page, 10));
+  }, [dispatch, page, props.searchString]);
 
-  const onToggleEditMode = (key) => {
-    setRows((state) => {
-      return rows.map((row) => {
-        if (row.id === key) {
-          return {...row};
-        }
-        return row;
-      });
-    });
+  const rows = useSelector((state) =>
+    state.author.authors.entities ? state.author.authors.entities : []
+  );
+  const [open, setOpen] = React.useState(false);
+  const [item, setItem] = React.useState([]);
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const onChange =
-   (e, row) => {
-    const value = e.target.value;
-    const name = e.target.name;
-    const { id } = row;
-    const newRows = rows.map((row) => {
-      if (row.id === id) {
-        return { ...row, [name]: value };
-      }
-      return row;
-    });
-    setRows(newRows);
+  const handelRowClick = (row) => {
+    setOpen(true);
+    setItem(row);
   };
-
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="caption table">
+      <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell align="left" />
-            <TableCell align="left">Tên tác giả</TableCell>
-            <TableCell align="left">Ngày tạo</TableCell>
+          <TableRow style={{ height: "80px", fontWeight: "900" }}>
+            <TableCell className={classes.header}>Tên tác giả</TableCell>
+            <TableCell className={classes.header}>Ngày sinh</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className={classes.selectTableCell}>
-                  <>
-                    <IconButton
-                      aria-label="done"
-                      onClick={() => {onToggleEditMode(row.id); handleChangeName(row.id, row.name)}}
-                    >
-                    <DoneIcon />
-                    </IconButton>
-                  </>
+          {rows.map((row, index) => (
+            <TableRow
+              style={{ height: "80px" }}
+              className={classes.row}
+              key={index}
+              onClick={() => handelRowClick(row)}
+            >
+              <TableCell component="th" scope="row" style={{ width: "150px" }}>
+                {row.name}
               </TableCell>
-              <CustomTableCell {...{ row, col: "name", onChange, disabled: false}} />
-              <CustomTableCell {...{ row, col: "createAt", onChange, disabled: true}} />
+              <TableCell style={{ width: "150px" }}>{row.birthDay}</TableCell>
             </TableRow>
           ))}
         </TableBody>
+        <Dialog
+          authorData={item}
+          open={open}
+          page={page}
+          onClose={handleClose}
+          tag="Thông tin chi tiết"
+        ></Dialog>
       </Table>
-        {total > 10 ? <div className={classes.pagination} style={{marginTop:'10px'}}>
-              <Pagination total={paging} onChange={handlePageChange} page={page}/>
-            </div>:null}
+      {total > 10 ? (
+        <div className={classes.pagination} style={{ marginTop: "10px" }}>
+          <Pagination total={paging} onChange={handlePageChange} page={page} />
+        </div>
+      ) : null}
     </TableContainer>
   );
-}
-
-export default withRouter(BasicTable)
+};
+export default withRouter(BasicTable);

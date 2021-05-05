@@ -10,7 +10,7 @@ const initialState = {
     userData: JSON.parse(userData)
 };
 
-export default function (state = initialState, action) {
+export default function authReducer (state = initialState, action) {
     switch (action.type) {
         case Types.SET_CURRENT_USER:
             return {

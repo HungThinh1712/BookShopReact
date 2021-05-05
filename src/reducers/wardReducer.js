@@ -1,19 +1,16 @@
-import * as Types from '../constants/ActionType'
+import * as Types from "../constants/ActionType";
 const initialState = {
-   wards: [],
-    
-  
+  wards: [],
 };
 
-export default function  (state = initialState,action) {
-    switch(action.type){
-        
-        case Types.GET_WARDS:
-            return {
-                ...state,
-               wards: action.wards,
-               
-            };
-        default: return state;
-    }
+export default function wardReducer(state = initialState, action) {
+  switch (action.type) {
+    case Types.GET_WARDS:
+      return {
+        ...state,
+        wards: action.wards,
+      };
+    default:
+      return state;
+  }
 }

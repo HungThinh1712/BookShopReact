@@ -5,7 +5,7 @@ const initialState = {
   publishHouses: [],
 };
 
-export default function (state = initialState, action) {
+export default function publishHouseReducer(state = initialState, action) {
   switch (action.type) {
     case Types.GET_PUBLISHHOUSES:
       return {

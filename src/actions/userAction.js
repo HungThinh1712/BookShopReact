@@ -1,7 +1,6 @@
 import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
-import { toastMessage} from '../components/common/ToastHelper';
 export const getUsersRequest =  (page,name) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/Admin/GetUser?name=${name}&${page}`)
     await axios.get(url)
