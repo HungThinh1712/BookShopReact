@@ -52,8 +52,12 @@ const TypeManagementPageAdmin = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
+  const [flagButtonAdd, setFlagButtonAdd] = useState(false);
+  const [flagSearchString, setFlagSearchString] = useState(false);
+
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
+    setFlagSearchString(true);
   };
 
   const [open, setOpen] = React.useState(false);
@@ -70,6 +74,9 @@ const TypeManagementPageAdmin = (props) => {
 
   const handleButtonAddClick = () => {
     dispatch(typesActions.addType({ name: name }));
+    setFlagButtonAdd(true);
+    setOpen(false);
+    setName("");
   };
 
   return (
@@ -80,9 +87,7 @@ const TypeManagementPageAdmin = (props) => {
           onClick={handleButtonAddClick}
           onClose={handleClose}
           onChange={handleChangeName}
-        >
-           
-        </Dialog> 
+        ></Dialog>
         <Header notShow="notShow" />
         <SideBarAdminPage />
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
@@ -93,7 +98,6 @@ const TypeManagementPageAdmin = (props) => {
                   <div className="table-title">
                     <div className="row">
                       <div className="col-sm-8">
-                         
                         <h2> Quản lý loại sách </h2>
                       </div>
                       <div className="col-sm-4">
@@ -103,13 +107,12 @@ const TypeManagementPageAdmin = (props) => {
                             type="button"
                             className="btn btn-info add-new"
                           >
-                             
                             <i className="fa fa-plus"> </i> Thêm loại sách
                           </button>
-                        </div> 
-                      </div> 
-                    </div> 
-                  </div> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="container">
                     <div className="row">
                       <div className={classes.search}>
@@ -120,26 +123,31 @@ const TypeManagementPageAdmin = (props) => {
                           classes={{
                             root: classes.inputRoot,
                           }}
-                        /> 
+                        />
                         <IconButton>
                           <SearchIcon />
-                        </IconButton> 
-                      </div> 
-                    </div> 
+                        </IconButton>
+                      </div>
+                    </div>
                     <div className="row">
-                      <TypeManageAdmin searchString={searchString} /> 
-                    </div> 
-                  </div> 
-                </div> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-      </div> 
+                      <TypeManageAdmin
+                        flagButtonAdd={flagButtonAdd}
+                        setFlagButtonAdd={setFlagButtonAdd}
+                        flagSearchString={flagSearchString}
+                        setFlagSearchString={setFlagSearchString}
+                        searchString={searchString}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div style={{ paddingTop: "180px" }}>
-         
-        <Footer /> 
-      </div> 
+        <Footer />
+      </div>
     </div>
   );
 };

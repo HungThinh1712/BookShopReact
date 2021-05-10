@@ -3,7 +3,7 @@ const initialState = {
     orders: [],
 };
 
-export default function  (state = initialState,action) {
+export default function  orderReducer(state = initialState,action) {
     switch(action.type){
         
         case Types.GET_ORDERS:

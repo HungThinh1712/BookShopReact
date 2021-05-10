@@ -65,7 +65,7 @@ const LstBook = (props) => {
 
     useEffect(() => {
         dispatch(bookActions.getBooksAdminRequest(name, page));
-    }, [name,page])
+    }, [dispatch,name,page])
 
     const handleItemClick = (id) => {
         props.history.
@@ -109,7 +109,7 @@ const LstBook = (props) => {
                                             <div className="col-sm-8"><h2>DANH SÁCH SÁCH</h2></div>
                                             <div className="col-sm-4">
                                                 <div >
-                                                    <button onClick = {() => {props.history.push('/admin/add_book_page'); dispatch({type: Types.RESET_TYPE}); dispatch({type: Types.RESET_AUTHOR}); dispatch({type: Types.RESET_PUBLISHOUSE});}} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> Thêm sách</button>
+                                                    <button onClick = {() => props.history.push('/admin/add_book_page')} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> Thêm sách</button>
                                                 </div>
                                             </div>
                                         </div>

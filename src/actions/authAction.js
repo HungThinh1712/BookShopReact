@@ -44,7 +44,7 @@ export const loginUser = (userData, history,shoppingCartData) => async (dispatch
                     history.push( '/confirm_code_page',{email:userData.email})
                     error = "Tài khoản của bạn cần xác thực "
                 }
-                else if(res.data="Email hoặc mật khẩu không đúng!")
+                else if(res.data==="Email hoặc mật khẩu không đúng!")
                     error = res.data;
                 else
                     error = Object.values(res.data.errors)[0].toString();
