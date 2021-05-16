@@ -3,6 +3,8 @@ import Header from "../common/Header";
 import { makeStyles } from "@material-ui/core/styles";
 import BookNav from "../common/BookNav";
 import Card from "../common/Card";
+import SaleCard from '../common/SaleCard';
+import MessengerChat from '../common/MessengerCustomerChat';
 import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import * as bookActions from "../../actions/booksAction";
@@ -187,10 +189,21 @@ const HomePage = (props) => {
     ></Card>
   ));
 
+  const showSaleProduct = booksEng.map((book, index) => <SaleCard
+    key={book.id}
+    price={book.price}
+    discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
+    coverPrice={book.coverPrice}
+    title={book.bookName}
+    imageSrc={book.imageSrc}
+    onClick={() => props.history.push(`/details/${book.id}`)}
+  ></SaleCard>)
+
   const classes = useStyles();
   return (
-    <div style={{ backgroundColor: "#f2f2f2" }}>
-      <div>
+    <div style={{ backgroundColor: '#f2f2f2' }}>
+      <div >
+        <MessengerChat/>
         <Header></Header>
         {booksEng.length > 0 ? (
           <div>
