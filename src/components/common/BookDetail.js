@@ -149,7 +149,12 @@ const BookDetail = (props) => {
             </p>
 
             <p style={{ marginBottom: "0.5em" }}>
-              <span className={classes.card_price}>{props.price} đ</span>
+              <span className={classes.card_price}>
+                {props.price
+                  .toString()
+                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                đ
+              </span>
             </p>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
@@ -158,7 +163,11 @@ const BookDetail = (props) => {
             </p>
             <p style={{ marginBottom: "1em" }}>
               <span className={classes.card_info}>
-                Giá thị trường: {props.coverPrice} đ
+                Giá thị trường:{" "}
+                {props.coverPrice
+                  .toString()
+                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                đ
               </span>
             </p>
             <div style={{ display: "flex", marginBottom: "0.5em" }}>

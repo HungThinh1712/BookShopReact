@@ -16,12 +16,16 @@ const UpdateBook = (props) => {
     ? props.history.location.state.bookData
     : [];
   useEffect(() => {
-    dispatch(typeActions.getTypesRequest());
+    dispatch(typeActions.getTypesRequest("", 1, 9999));
     dispatch(publishHouseActions.getPublishHousesRequest());
-    dispatch(authorActions.getAuthorsRequest(1, "", 9999));
+    dispatch(authorActions.getAuthorsRequest("", 1, 9999));
   }, [dispatch]);
-  const types = useSelector((state) => state.type.types);
-  const authors = useSelector((state) => state.author.authors);
+  const types = useSelector((state) =>
+    state.type.types.entities ? state.type.types.entities : []
+  );
+  const authors = useSelector((state) =>
+    state.author.authors.entities ? state.author.authors.entities : []
+  );
   const publishHouses = useSelector(
     (state) => state.publishHouse.publishHouses
   );

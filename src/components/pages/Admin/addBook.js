@@ -135,14 +135,8 @@ const Book = (props) => {
     formData.append("authorId", authorId);
     formData.append("publishDate", publishDate);
     formData.append("amount", amount);
-    formData.append(
-      "price",
-      price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
-    );
-    formData.append(
-      "coverPrice",
-      coverPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
-    );
+    formData.append("price", price);
+    formData.append("coverPrice", coverPrice);
     formData.append("pageAmount", pageAmount);
     formData.append("size", size);
     formData.append("coverType", coverType);

@@ -28,9 +28,9 @@ const Card = (props) => {
                 <span className="card_title">{props.title}</span>
             </Grid>
             <p style={{ marginBottom: 0 }}><span
-                style={{ fontWeight: '900', color: 'red', fontSize: '20px', fontFamily: 'Roboto' }}>{props.price}</span>
+                style={{ fontWeight: '900', color: 'red', fontSize: '20px', fontFamily: 'Roboto' }}>{props.price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</span>
                 <span className="card_discount">-{props.discount}%</span></p>
-            <p className="card_price"><s>{props.coverPrice}</s>đ</p>
+            <p className="card_price"><s>{props.coverPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</s>đ</p>
             <div>
                 <Rating size='small'  defaultValue={0} value={props.valueraiting} precision={0.5} readOnly />
             </div>
