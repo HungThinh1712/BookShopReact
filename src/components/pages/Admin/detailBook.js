@@ -8,6 +8,7 @@ import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
 import * as bookTagActions from "./../../../actions/bookTagsAction";
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const Book = (props) => {
   const dispatch = useDispatch();
@@ -57,6 +58,9 @@ const Book = (props) => {
           <SideBarAdminPage />
           <div id="content-wrapper" style={{ marginTop: "100px" }}>
             <div className="container-fluid">
+            <BreadCrumb 
+              breadcrumb="Chi tiết cuốn sách" link_root="/admin">
+            </BreadCrumb>
               <div className="card-body">
                 <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                   <div className="row">

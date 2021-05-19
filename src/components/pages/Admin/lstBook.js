@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -97,11 +98,13 @@ const LstBook = (props) => {
 
                 <Header notShow="notShow" />
                 <SideBarAdminPage />
-                <div id="content-wrapper" style={{ marginTop: '100px' }}>
-
+                <div id="content-wrapper" style={{ marginTop: '100px' }}> 
                     <div className="container-fluid">
-                        <div className="card mb-3">
+                    <BreadCrumb
+                        breadcrumb="Quản lý sách" link_root="/admin" link="/admin/books">
 
+                    </BreadCrumb>
+                        <div className="card mb-3">
                             <div className="card-body">
                                 <div className="table-wrapper">
                                     <div className="table-title">

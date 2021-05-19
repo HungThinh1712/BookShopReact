@@ -11,6 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import AuthorManageAdmin from "../../common/AuthorManageAdmin";
 import Dialog from "../../common/DialogAddAuthor";
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -86,6 +87,9 @@ const AuthorManagementPageAdmin = (props) => {
         <SideBarAdminPage />
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
+          <BreadCrumb 
+            breadcrumb="Quản lý tác giả" link_root="/admin" link="/admin/ordermanagement_page">
+          </BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">
                 <div className="table-wrapper">

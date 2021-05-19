@@ -6,6 +6,8 @@ import Footer from '../common/Footer';
 import OrderManageMent from '../common/OrderMangement'
 import Pagination from '../common/Pagination'
 import {useSelector} from 'react-redux'
+import BreadCrumb from "../common/Breadcrumbs";
+
 const useStyles = makeStyles((theme) => ({
 
 
@@ -58,11 +60,17 @@ const OrderManageMentPage = (props) => {
     <div>
       <div>
         <Header />
+        <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
+          <BreadCrumb
+            breadcrumb="Đơn hàng của tôi" link_root="/" link="/order_history">
+          </BreadCrumb>
+        </div>
         <div className={`${classes.container}`} >
           <div className="row">
+            
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
             <div className="col-xs-7 col-sm-8 " >
-              <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Đơn hàng của tôi</p>
+              <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "7px" }}>Đơn hàng của tôi</p>
               <OrderManageMent page ={page} />
             </div>
             {total > 4 ? <div className={classes.pagination} style={{marginTop:'10px'}}>

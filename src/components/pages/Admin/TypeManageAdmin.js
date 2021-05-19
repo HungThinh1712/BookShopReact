@@ -11,6 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import TypeManageAdmin from "../../common/TypeManageAdmin";
 import Dialog from "../../common/Dialog";
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -92,6 +93,9 @@ const TypeManagementPageAdmin = (props) => {
         <SideBarAdminPage />
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
+          <BreadCrumb 
+            breadcrumb="Quản lý loại sách" link_root="/admin" link="/admin/typemanagement_page">
+          </BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">
                 <div className="table-wrapper">

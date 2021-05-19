@@ -11,6 +11,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import * as authActions from './../../actions/authAction'
 import {toastMessage} from './../common/ToastHelper'
 import MessengerChat from '../common/MessengerCustomerChat';
+import BreadCrumb from "../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({    
     container: {
@@ -96,7 +97,12 @@ const ProfileUserPage = (props) => {
             <div>
             <MessengerChat/>
             <Header/>
-            <div  className = {`${classes.container}`} >
+            <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
+              <BreadCrumb
+                breadcrumb="Thông tin tài khoản" link_root="/" link="/user_page">
+              </BreadCrumb>
+            </div>
+            <div className = {`${classes.container}`} >
                 <div className = "row">
                     <Nav imgSrc={userData ? userData.imgSrc : ''} className={classes.nav} name={name} props={props}/>
                     <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>

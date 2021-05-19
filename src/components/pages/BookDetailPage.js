@@ -7,13 +7,11 @@ import Card from '../common/Card'
 import { useSelector, useDispatch } from 'react-redux'
 import * as bookActions from '../../actions/booksAction'
 import * as commentActions from '../../actions/commentAction'
-
 import TableInfo from './../common/TableInfo'
 import Description from './../common/Description'
 import Comment from '../common/CommentZone'
 import Footer from '../common/Footer'
-
-
+import BreadCrumb from "../common/Breadcrumbs"
 
 const useStyles = makeStyles((theme) => ({
 
@@ -110,6 +108,11 @@ const BookDetailPage = (props) => {
     <div style={{ backgroundColor: '#f2f2f2' }} >
       <Header></Header>
       {selectedBook != null ? <div >
+        <div style={{ marginTop: "90px", marginLeft: "100px", marginBottom:"-100px"}}>
+        <BreadCrumb
+          breadcrumb={selectedBook.bookName} link_root="/" link={"/details/" + selectedBook.id}>
+        </BreadCrumb>
+        </div>
         <BookDetail
           bookId={selectedBook.id}
           price={selectedBook.price}
