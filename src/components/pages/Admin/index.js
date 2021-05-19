@@ -4,6 +4,7 @@ import SideBarAdminPage from '../../common/SideBarAdminPage'
 import Header from '../../common/Header'
 import Footer from '../../common/Footer'
 import {withRouter} from 'react-router-dom'
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const index = (props) => {
     return (
@@ -81,6 +82,7 @@ const index = (props) => {
 
                 <div id="content-wrapper"  style={{with:'100%',marginTop:'93px'}}>
                     <div className="container-fluid">
+                    <BreadCrumb breadcrumb="" link_root="/admin"></BreadCrumb>
                         <a style={{cursor:'pointer'}} onClick={()=>props.history.push('/admin/books')}  className="card-link" >
                             <div >
                                 <div className="card text-white bg-primary o-hidden h-100">
