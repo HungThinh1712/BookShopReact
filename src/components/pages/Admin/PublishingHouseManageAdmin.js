@@ -71,14 +71,17 @@ const PublishingHouseManagementPageAdmin = (props) => {
         setOpen(false);
     };
 
-    const handleButtonAddClick = () =>{
-        dispatch(publishHouseActions.addPublishHouse({name:name}))
+    const handleButtonAddClick = async () =>{
+        await dispatch(publishHouseActions.addPublishHouse({name:name}))
+        setOpen(false);
+        await dispatch(publishHouseActions.getPublishHousesRequest("",1,10))
+
     }
     
     return (
         <div>
             <div id="wrapper">
-                <Dialog open={open} onClick={handleButtonAddClick} onClose={handleClose} onChange={handleChangeName}></Dialog>
+                <Dialog open={open} onClick={handleButtonAddClick} tagType="Thêm nhà xuất bản" onClose={handleClose} onChange={handleChangeName}></Dialog>
                 <Header notShow="notShow" />
                 <SideBarAdminPage />
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>

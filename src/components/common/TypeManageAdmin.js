@@ -7,57 +7,44 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Input from "@material-ui/core/Input";
-import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
-import IconButton from "@material-ui/core/IconButton";
 import { useSelector, useDispatch } from "react-redux";
-import * as typeActions from "../../actions/typesAction";
 import { withRouter } from "react-router-dom";
-import { toastMessage } from "./../common/ToastHelper";
 import Pagination from "../common/Pagination";
+import * as typeActions from "../../actions/typesAction";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    overflowX: "auto",
-  },
   table: {
     minWidth: 650,
   },
-  selectTableCell: {
-    width: 60,
+  header: {
+    fontWeight: 900,
   },
-  tableCell: {
-    width: 250,
-    height: 40,
-  },
-  input: {
-    width: 250,
-    height: 40,
+  row: {
+    "&:hover": {
+      backgroundColor: "#f2f2f2",
+      cursor: "pointer",
+    },
+    pagination: {
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: "auto",
+        marginRight: "120px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        marginLeft: "auto",
+        marginRight: "120px",
+      },
+      [theme.breakpoints.down("xs")]: {
+        marginLeft: "auto",
+        marginRight: "0",
+      },
+    },
   },
 }));
-
-const CustomTableCell = ({ row, col, onChange, disabled }) => {
-  const classes = useStyles();
-  return (
-    <TableCell align="left" className={classes.tableCell}>
-      <Input
-        value={row[col]}
-        name={col}
-        className={classes.input}
-        onChange={(e) => onChange(e, row)}
-        disabled={disabled}
-      />
-    </TableCell>
-  );
-};
 
 const BasicTable = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -65,72 +52,33 @@ const BasicTable = (props) => {
   const total = useSelector((state) =>
     state.type.types.total ? state.type.types.total : 0
   );
-  const paging = total % 8 === 0 ? total / 8 : Math.floor(total / 8) + 1;
-
+  const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
-    if (props.flagButtonAdd) {
-      setPage(1);
-      props.setFlagButtonAdd(false);
-    } else {
-      dispatch(typeActions.getTypesRequest(props.searchString, page, 8));
-    }
-  }, [page, dispatch, props.flagButtonAdd, props.searchString]);
+    dispatch(typeActions.getTypesRequest(props.searchString, page, 10));
+  }, [dispatch, page, props.searchString]);
 
-  useEffect(() => {
-    if (props.flagSearchString) {
-      setPage(1);
-      dispatch(typeActions.getTypesRequest(props.searchString, page, 8));
-      props.setFlagSearchString(false);
-    }
-  }, [props.flagSearchString, dispatch, page]);
-
-  const handleChangeName = async (id, name) => {
-    const typeData = { id, name };
-    await dispatch(typeActions.updateType(typeData));
-    toastMessage("Cập nhật thành công");
-  };
-
-  const [rows, setRows] = React.useState([]);
-
-  const types = useSelector((state) =>
+  const rows = useSelector((state) =>
     state.type.types.entities ? state.type.types.entities : []
   );
+  const [open, setOpen] = React.useState(false);
+  const [item, setItem] = React.useState([]);
 
-  useEffect(() => {
-    if (types) setRows(types);
-  }, [types]);
-
-  const onToggleEditMode = (key) => {
-    setRows((state) => {
-      return rows.map((row) => {
-        if (row.id === key) {
-          return { ...row };
-        }
-        return row;
-      });
-    });
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const onChange = (e, row) => {
-    const value = e.target.value;
-    const name = e.target.name;
-    const { id } = row;
-    const newRows = rows.map((row) => {
-      if (row.id === id) {
-        return { ...row, [name]: value };
-      }
-      return row;
-    });
-    setRows(newRows);
+  const handelRowClick = (row) => {
+    setOpen(true);
+    setItem(row);
   };
-
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell align="left" />
-            <TableCell className={classes.header}>Tên loại sách</TableCell>
+            <TableCell className={classes.header}>Thể loại</TableCell>
+            <TableCell className={classes.header}>Ngày tạo</TableCell>
+            <TableCell className={classes.header}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -139,23 +87,14 @@ const BasicTable = (props) => {
               style={{ height: "80px" }}
               className={classes.row}
               key={index}
+              onClick={() => handelRowClick(row)}
             >
-              <TableCell className={classes.selectTableCell}>
-                <>
-                  <IconButton
-                    aria-label="done"
-                    onClick={() => {
-                      onToggleEditMode(row.id);
-                      handleChangeName(row.id, row.name);
-                    }}
-                  >
-                    <DoneIcon />
-                  </IconButton>
-                </>
+              <TableCell component="th" scope="row" style={{ width: "300px" }}>
+                {row.name}
               </TableCell>
-              <CustomTableCell
-                {...{ row, col: "name", onChange, disabled: false }}
-              />
+              <TableCell style={{ width: "300px" }}>{row.createAt}</TableCell>
+              <TableCell style={{ width: "300px" }}> <i style={{display:'flex', justifyContent:'flex-end',color:'red'}} class="fa fa-trash" aria-hidden="true"></i></TableCell>
+             
             </TableRow>
           ))}
         </TableBody>
@@ -168,5 +107,4 @@ const BasicTable = (props) => {
     </TableContainer>
   );
 };
-
 export default withRouter(BasicTable);

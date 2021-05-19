@@ -13,7 +13,7 @@ const Book = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(typeActions.getTypesRequest("", 1, 9999));
-    dispatch(publishHouseActions.getPublishHousesRequest());
+    dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
     dispatch(authorActions.getAuthorsRequest("", 1, 9999));
   }, [dispatch]);
   const types = useSelector((state) =>
@@ -23,7 +23,7 @@ const Book = (props) => {
     state.author.authors.entities ? state.author.authors.entities : []
   );
   const publishHouses = useSelector(
-    (state) => state.publishHouse.publishHouses
+    (state) => state.publishHouse.publishHouses.entities ? state.publishHouse.publishHouses.entities : []
   );
   //Get Data types,authors,publishhouse,
   const showTypes = types.map((type, index) => (

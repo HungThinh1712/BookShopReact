@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as typesActions from "../../../actions/typesAction";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,12 +52,9 @@ const TypeManagementPageAdmin = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
-  const [flagButtonAdd, setFlagButtonAdd] = useState(false);
-  const [flagSearchString, setFlagSearchString] = useState(false);
 
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
-    setFlagSearchString(true);
   };
 
   const [open, setOpen] = React.useState(false);
@@ -72,11 +69,10 @@ const TypeManagementPageAdmin = (props) => {
     setOpen(false);
   };
 
-  const handleButtonAddClick = () => {
-    dispatch(typesActions.addType({ name: name }));
-    setFlagButtonAdd(true);
+  const handleButtonAddClick = async () => {
+    await dispatch(typesActions.addType({ name: name }));
     setOpen(false);
-    setName("");
+    await dispatch(typesActions.getTypesRequest("", 1, 10));
   };
 
   return (
@@ -84,6 +80,7 @@ const TypeManagementPageAdmin = (props) => {
       <div id="wrapper">
         <Dialog
           open={open}
+          tagType="Thêm thể loại"
           onClick={handleButtonAddClick}
           onClose={handleClose}
           onChange={handleChangeName}
@@ -130,13 +127,7 @@ const TypeManagementPageAdmin = (props) => {
                       </div>
                     </div>
                     <div className="row">
-                      <TypeManageAdmin
-                        flagButtonAdd={flagButtonAdd}
-                        setFlagButtonAdd={setFlagButtonAdd}
-                        flagSearchString={flagSearchString}
-                        setFlagSearchString={setFlagSearchString}
-                        searchString={searchString}
-                      />
+                      <TypeManageAdmin searchString={searchString} />
                     </div>
                   </div>
                 </div>
