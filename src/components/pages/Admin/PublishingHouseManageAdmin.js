@@ -12,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import PublishingHouseManageAdmin from '../../common/PublishingHouseManageAdmin';
 import Dialog from '../../common/Dialog'
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -86,6 +87,9 @@ const PublishingHouseManagementPageAdmin = (props) => {
                 <SideBarAdminPage />
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
                     <div className="container-fluid">
+                    <BreadCrumb 
+                        breadcrumb="Quản lý NXB" link_root="/admin" link="/admin/pulishinghousemanagement_page">
+                    </BreadCrumb>
                         <div className="card mb-3">
                             <div className="card-body">
                                 <div className="table-wrapper">

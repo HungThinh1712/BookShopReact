@@ -8,6 +8,8 @@ import {useSelector} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import AddressInputForm from '../common/AddressInputForm'
+import BreadCrumb from "../common/Breadcrumbs";
+
 const useStyles = makeStyles((theme) => ({
 
     
@@ -40,6 +42,11 @@ const UpdateAddressPage = (props) => {
         <div>
             <div>
             <Header/>
+            <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
+              <BreadCrumb
+                breadcrumb="Địa chỉ đã gán" link_root="/" link="/update_address_page">
+              </BreadCrumb>
+            </div>
             <div  className = {`${classes.container}`} >
                 <div className = "row">
                     <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName}  props={props}/>

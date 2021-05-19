@@ -7,6 +7,7 @@ import CommentDialog from '../common/CommentDialog';
 import * as commentActions from './../../actions/commentAction'
 import Divider from '@material-ui/core/Divider';
 import {useSelector, useDispatch} from 'react-redux';
+import BreadCrumb from "../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -70,6 +71,11 @@ const CommentPage = (props) => {
         <div>
         <div>
           <Header />
+          <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
+              <BreadCrumb
+                breadcrumb="Nhận xét của tôi" link_root="/" link="/comment_history">
+              </BreadCrumb>
+            </div>
           <div className={`${classes.container}`} >
             <div className="row">
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />

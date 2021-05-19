@@ -12,6 +12,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import UserManageAdmin from '../../common/UserManageAdmin';
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -70,6 +71,9 @@ const UserManagementPageAdmin = (props) => {
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
 
                     <div className="container-fluid">
+                    <BreadCrumb 
+                        breadcrumb="Quản lý tài khoản" link_root="/admin" link="/admin/usermanagement_page">
+                    </BreadCrumb>
                         <div className="card mb-3">
 
                             <div className="card-body">

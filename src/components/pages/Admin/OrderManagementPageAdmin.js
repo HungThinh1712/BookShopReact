@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import OrderManagementAdmin from './../../common/OrderMangementAdmin'
 import { Radio} from 'antd';
 import * as orderActions from '../../../actions/orderAction'
+import BreadCrumb from "../../common/Breadcrumbs";
 
 
 
@@ -55,6 +56,9 @@ const OrderManagementPageAdmin = (props) => {
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
 
                     <div className="container-fluid">
+                    <BreadCrumb 
+                        breadcrumb="Quản lý đơn hàng" link_root="/admin" link="/admin/ordermanagement_page">
+                    </BreadCrumb>
                         <div className="card mb-3">
 
                             <div className="card-body">

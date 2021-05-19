@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as bookActions from "../../actions/booksAction";
 import Footer from "../common/Footer";
 import FlashSaleNav from "../common/FlashSaleNav";
+import BreadCrumb from "../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -205,177 +206,182 @@ const HomePage = (props) => {
       <div >
         <MessengerChat/>
         <Header></Header>
-        {booksEng.length > 0 ? (
-          <div>
-            <div style={{ display: "flex", paddingTop: "108px" }}>
-              {/* <BookTag></BookTag> */}
-            </div>
-            <BookNav title="Sách tiếng việt" style={{ marginTop: "200px" }} />
-            <div
-              style={{ display: "grid", backgroundColor: "white" }}
-              className={classes.container}
-            >
-              <div className={`cover_container `}>{showBooksVnese}</div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  style={{
-                    fontSize: "0.7em",
-                    padding: "0.5em",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                    fontFamily: "Arial",
-                  }}
-                  onClick={loadMoreVnese}
-                >
-                  Xem thêm
-                </Button>
-              </div>
-            </div>
-
-            <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-            <BookNav title="Sách tiếng anh" />
-            <div
-              style={{ display: "grid", backgroundColor: "white" }}
-              className={classes.container}
-            >
-              <div className={`cover_container `}>{showBooksEng}</div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  style={{
-                    fontSize: "0.7em",
-                    padding: "0.5em",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                    fontFamily: "Arial",
-                  }}
-                  onClick={loadMoreEng}
-                >
-                  Xem thêm
-                </Button>
-              </div>
-            </div>
-
-            <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-            <FlashSaleNav />
-            <div
-              style={{ display: "grid", backgroundColor: "white" }}
-              className={classes.container}
-            >
-              <div className={`cover_container `}>{showBooksWeek}</div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  style={{
-                    fontSize: "0.7em",
-                    padding: "0.5em",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                    fontFamily: "Arial",
-                  }}
-                  onClick={loadMoreWeek}
-                >
-                  Xem thêm
-                </Button>
-              </div>
-            </div>
-
-            <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-            <BookNav title="Sách bán chạy trong tháng" />
-            <div
-              style={{ display: "grid", backgroundColor: "white" }}
-              className={classes.container}
-            >
-              <div className={`cover_container `}>{showBooksMonth}</div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  style={{
-                    fontSize: "0.7em",
-                    padding: "0.5em",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                    fontFamily: "Arial",
-                  }}
-                  onClick={loadMoreMonth}
-                >
-                  Xem thêm
-                </Button>
-              </div>
-            </div>
-
-            <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-            <BookNav title="Sách bán chạy trong năm" />
-            <div
-              style={{ display: "grid", backgroundColor: "white" }}
-              className={classes.container}
-            >
-              <div className={`cover_container `}>{showBooksYear}</div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  style={{
-                    fontSize: "0.7em",
-                    padding: "0.5em",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                    fontFamily: "Arial",
-                  }}
-                  onClick={loadMoreYear}
-                >
-                  Xem thêm
-                </Button>
-              </div>
-            </div>
+          <div style={{ marginTop: "80px", marginLeft: "100px", marginBottom:"-100px"}}>
+            <BreadCrumb
+              breadcrumb="" link_root="/" link="/">
+            </BreadCrumb>
           </div>
-        ) : null}
-      </div>
+            {booksEng.length > 0 ? (
+              <div>
+                <div style={{ display: "flex", paddingTop: "108px" }}>
+                  {/* <BookTag></BookTag> */}
+                </div>
+                <BookNav title="Sách tiếng việt" style={{ marginTop: "200px" }} />
+                <div
+                  style={{ display: "grid", backgroundColor: "white" }}
+                  className={classes.container}
+                >
+                  <div className={`cover_container `}>{showBooksVnese}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="medium"
+                      style={{
+                        fontSize: "0.7em",
+                        padding: "0.5em",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                        fontFamily: "Arial",
+                      }}
+                      onClick={loadMoreVnese}
+                    >
+                      Xem thêm
+                    </Button>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
+                <BookNav title="Sách tiếng anh" />
+                <div
+                  style={{ display: "grid", backgroundColor: "white" }}
+                  className={classes.container}
+                >
+                  <div className={`cover_container `}>{showBooksEng}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="medium"
+                      style={{
+                        fontSize: "0.7em",
+                        padding: "0.5em",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                        fontFamily: "Arial",
+                      }}
+                      onClick={loadMoreEng}
+                    >
+                      Xem thêm
+                    </Button>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
+                <FlashSaleNav />
+                <div
+                  style={{ display: "grid", backgroundColor: "white" }}
+                  className={classes.container}
+                >
+                  <div className={`cover_container `}>{showBooksWeek}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="medium"
+                      style={{
+                        fontSize: "0.7em",
+                        padding: "0.5em",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                        fontFamily: "Arial",
+                      }}
+                      onClick={loadMoreWeek}
+                    >
+                      Xem thêm
+                    </Button>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
+                <BookNav title="Sách bán chạy trong tháng" />
+                <div
+                  style={{ display: "grid", backgroundColor: "white" }}
+                  className={classes.container}
+                >
+                  <div className={`cover_container `}>{showBooksMonth}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="medium"
+                      style={{
+                        fontSize: "0.7em",
+                        padding: "0.5em",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                        fontFamily: "Arial",
+                      }}
+                      onClick={loadMoreMonth}
+                    >
+                      Xem thêm
+                    </Button>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
+                <BookNav title="Sách bán chạy trong năm" />
+                <div
+                  style={{ display: "grid", backgroundColor: "white" }}
+                  className={classes.container}
+                >
+                  <div className={`cover_container `}>{showBooksYear}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="medium"
+                      style={{
+                        fontSize: "0.7em",
+                        padding: "0.5em",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                        fontFamily: "Arial",
+                      }}
+                      onClick={loadMoreYear}
+                    >
+                      Xem thêm
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
       {booksEng.length > 0 ? (
         <div style={{ paddingTop: "180px", backgroundColor: "#f2f2f2" }}>
           <Footer />

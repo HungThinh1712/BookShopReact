@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
+import BreadCrumb from "../../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -60,6 +61,9 @@ const OrderManagementPageAdmin = (props) => {
 
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
+          <BreadCrumb 
+            breadcrumb="Quản lý khách hàng" link_root="/admin" link="/admin/customer_page">
+          </BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">
                 <div className="table-wrapper">
