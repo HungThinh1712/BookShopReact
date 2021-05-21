@@ -28,7 +28,7 @@ const HomeAdmin = (props) => {
       <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="info" stats icon>
-            <div style={{cursor:'pointer'}} onClick={()=>props.history.push('/admin/books')}>
+            <div style={{cursor:'pointer'}} onClick={()=>props.history.push('/admin')}>
                 <CardIcon color="info">
                     <HomeIcon />
                 </CardIcon>
