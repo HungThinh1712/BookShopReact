@@ -1,20 +1,22 @@
-import * as Types from '../constants/ActionType'
+import * as Types from "../constants/ActionType";
 const initialState = {
-    notifications: [],
-
-
+  notifications: [],
 };
 
 export default function notificationReducer(state = initialState, action) {
-    switch (action.type) {
+  switch (action.type) {
+    case Types.GET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: action.notifications,
+      };
+    case Types.LOG_OUT:
+      return {
+        ...state,
+        notifications: [],
+      };
 
-        case Types.GET_NOTIFICATIONS:
-            return {
-                ...state,
-                notifications: action.notifications,
-
-            };
-        
-        default: return state;
-    }
+    default:
+      return state;
+  }
 }

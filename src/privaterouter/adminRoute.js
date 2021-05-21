@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Route, Redirect} from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { toastMessage } from "./../components/common/ToastHelper";
 
 const ProtectedRoute = ({component:Component,...rest}) => {
 
@@ -13,7 +14,8 @@ const ProtectedRoute = ({component:Component,...rest}) => {
                 if(isAuthenticated && userData.isAdmin===true){
                     return <Component {...props}/>
                 }else{
-                    return <Redirect to='/abcxyz'/>
+                    toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!");
+                    return <Redirect to='/user_page'/>
                 }
             }
         }>
