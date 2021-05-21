@@ -57,7 +57,7 @@ const OrderManagementPageAdmin = (props) => {
 
                     <div className="container-fluid">
                     <BreadCrumb 
-                        breadcrumb="Quản lý đơn hàng" link_root="/admin" link="/admin/ordermanagement_page">
+                        breadcrumb="Quản lý đơn hàng" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
                     </BreadCrumb>
                         <div className="card mb-3">
 

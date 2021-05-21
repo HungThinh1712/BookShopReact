@@ -88,7 +88,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
                     <div className="container-fluid">
                     <BreadCrumb 
-                        breadcrumb="Quản lý NXB" link_root="/admin" link="/admin/pulishinghousemanagement_page">
+                        breadcrumb="Quản lý NXB" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/pulishinghousemanagement_page")}>
                     </BreadCrumb>
                         <div className="card mb-3">
                             <div className="card-body">

@@ -88,7 +88,7 @@ const AuthorManagementPageAdmin = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
           <BreadCrumb 
-            breadcrumb="Quản lý tác giả" link_root="/admin" link="/admin/ordermanagement_page">
+            breadcrumb="Quản lý tác giả" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
           </BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">

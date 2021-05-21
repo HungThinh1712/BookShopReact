@@ -44,7 +44,7 @@ const UpdateAddressPage = (props) => {
             <Header/>
             <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Địa chỉ đã gán" link_root="/" link="/update_address_page">
+                breadcrumb="Địa chỉ đã gán" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/update_address_page")}>
               </BreadCrumb>
             </div>
             <div  className = {`${classes.container}`} >

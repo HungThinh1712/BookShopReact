@@ -208,7 +208,7 @@ const HomePage = (props) => {
         <Header></Header>
           <div style={{ marginTop: "80px", marginLeft: "100px", marginBottom:"-100px"}}>
             <BreadCrumb
-              breadcrumb="" link_root="/" link="/">
+              breadcrumb="" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/")}>
             </BreadCrumb>
           </div>
             {booksEng.length > 0 ? (

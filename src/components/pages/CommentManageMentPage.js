@@ -73,7 +73,7 @@ const CommentPage = (props) => {
           <Header />
           <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Nhận xét của tôi" link_root="/" link="/comment_history">
+                breadcrumb="Nhận xét của tôi" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/comment_history")}>
               </BreadCrumb>
             </div>
           <div className={`${classes.container}`} >

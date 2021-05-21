@@ -110,7 +110,7 @@ const BookDetailPage = (props) => {
       {selectedBook != null ? <div >
         <div style={{ marginTop: "90px", marginLeft: "100px", marginBottom:"-100px"}}>
         <BreadCrumb
-          breadcrumb={selectedBook.bookName} link_root="/" link={"/details/" + selectedBook.id}>
+          breadcrumb={selectedBook.bookName} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/details/" + selectedBook.id)}>
         </BreadCrumb>
         </div>
         <BookDetail

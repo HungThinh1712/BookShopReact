@@ -62,7 +62,7 @@ const OrderManageMentPage = (props) => {
         <Header />
         <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
           <BreadCrumb
-            breadcrumb="Đơn hàng của tôi" link_root="/" link="/order_history">
+            breadcrumb="Đơn hàng của tôi" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/order_history")}>
           </BreadCrumb>
         </div>
         <div className={`${classes.container}`} >

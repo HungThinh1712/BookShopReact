@@ -7,10 +7,10 @@ const Breadcrumb = (props) => {
     return(   
         <div>
             <Breadcrumbs aria-label="breadcrumb">
-                <Link color="primary" href={props.link_root} onClick={props.onClick}>
+                <Link style={{cursor:'pointer'}} color="primary" onClick={props.onClick}>
                     Trang chủ
                 </Link>
-                <Link color="inherit" href={props.link}>
+                <Link style={{cursor:'pointer'}} color="inherit" onClick={props.onClick2}>
                     {props.breadcrumb}
                 </Link>
             </Breadcrumbs>

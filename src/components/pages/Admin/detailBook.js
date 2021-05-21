@@ -59,7 +59,7 @@ const Book = (props) => {
           <div id="content-wrapper" style={{ marginTop: "100px" }}>
             <div className="container-fluid">
             <BreadCrumb 
-              breadcrumb="Chi tiết cuốn sách" link_root="/admin">
+              breadcrumb="Chi tiết cuốn sách" onClick={()=>props.history.push("/admin")}>
             </BreadCrumb>
               <div className="card-body">
                 <div className="tm-bg-primary-dark tm-block tm-block-h-auto">

@@ -16,10 +16,11 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import styles from "../../styles/dashboardStyle";
+import {withRouter} from 'react-router-dom'
 
 const useStyles = makeStyles(styles);
 
-function HomeAdmin() {
+const HomeAdmin = (props) => {
   const classes = useStyles();
   return (
     <div>
@@ -27,11 +28,11 @@ function HomeAdmin() {
       <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="info" stats icon>
-            <a href="/admin">
+            <div style={{cursor:'pointer'}} onClick={()=>props.history.push('/admin/books')}>
                 <CardIcon color="info">
                     <HomeIcon />
                 </CardIcon>
-            </a>
+            </div>
               <p className={classes.cardCategory}>TRANG CHỦ</p>
               <h3 className={classes.cardTitle}>HOME</h3>
             </CardHeader>
@@ -44,11 +45,11 @@ function HomeAdmin() {
         <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="warning" stats icon>
-                <a href="/admin/books">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/books")}>
                 <CardIcon color="warning">
                     <ImportContactsIcon />
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h3 className={classes.cardTitle}>
                 SÁCH
@@ -63,11 +64,11 @@ function HomeAdmin() {
         <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="success" stats icon>
-                <a href="/admin/customer_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/customer_page")}>
                 <CardIcon color="success">
                     <PeopleIcon />
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h4 className={classes.cardTitle}>KHÁCH HÀNG</h4>
             </CardHeader>
@@ -83,11 +84,11 @@ function HomeAdmin() {
       <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="rose" stats icon>
-                <a href="/admin/usermanagement_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/usermanagement_page")}>
                 <CardIcon color="rose">
                     <AccountCircleIcon />
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h3 className={classes.cardTitle}>TÀI KHOẢN</h3>
             </CardHeader>
@@ -100,11 +101,11 @@ function HomeAdmin() {
         <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="danger" stats icon>
-                <a href="/admin/typemanagement_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/typemanagement_page")}>
                 <CardIcon color="danger">
                     <MenuBookIcon />
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h3 className={classes.cardTitle}>
                 LOẠI SÁCH
@@ -119,11 +120,11 @@ function HomeAdmin() {
         <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="success" stats icon>
-                <a href="/admin/ordermanagement_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/ordermanagement_page")}>
                 <CardIcon color="success">
                     <ShoppingCartIcon />
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h3 className={classes.cardTitle}>ĐƠN HÀNG</h3>
             </CardHeader>
@@ -139,11 +140,11 @@ function HomeAdmin() {
       <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="danger" stats icon>
-                <a href="/admin/pulishinghousemanagement_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/pulishinghousemanagement_page")}>
                 <CardIcon color="danger">
                     <HomeWorkIcon/>
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h3 className={classes.cardTitle}>NXB</h3>
             </CardHeader>
@@ -156,11 +157,11 @@ function HomeAdmin() {
         <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="info" stats icon>
-                <a href="/admin/authormanagement_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/authormanagement_page")}>
                 <CardIcon color="info">
                     <AccountBoxIcon/>
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>QUẢN LÝ</p>
               <h3 className={classes.cardTitle}>TÁC GIẢ</h3>
             </CardHeader>
@@ -173,11 +174,11 @@ function HomeAdmin() {
         <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="primary" stats icon>
-                <a href="/admin/report_page">
+                <div style={{cursor:'pointer'}} onClick={()=>props.history.push("/admin/report_page")}>
                 <CardIcon color="primary">
                     <EqualizerIcon/>
                 </CardIcon>
-                </a>
+                </div>
               <p className={classes.cardCategory}>THỐNG KÊ</p>
               <h3 className={classes.cardTitle}>CHI TIẾT</h3>
             </CardHeader>
@@ -192,4 +193,4 @@ function HomeAdmin() {
   );
 }
 
-export default HomeAdmin;
+export default withRouter(HomeAdmin);

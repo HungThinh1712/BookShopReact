@@ -101,7 +101,7 @@ const LstBook = (props) => {
                 <div id="content-wrapper" style={{ marginTop: '100px' }}> 
                     <div className="container-fluid">
                     <BreadCrumb
-                        breadcrumb="Quản lý sách" link_root="/admin" link="/admin/books">
+                        breadcrumb="Quản lý sách" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/books")}>
 
                     </BreadCrumb>
                         <div className="card mb-3">

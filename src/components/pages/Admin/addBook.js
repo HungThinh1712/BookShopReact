@@ -9,6 +9,8 @@ import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
+import {withRouter} from 'react-router-dom'
+
 
 const Book = (props) => {
   const dispatch = useDispatch();
@@ -191,7 +193,7 @@ const Book = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
           <BreadCrumb 
-            breadcrumb="Thêm sách" link_root="/admin" link="/admin/add_book_page">
+            breadcrumb="Thêm sách" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/add_book_page")}>
           </BreadCrumb>
             <div className="card-body">
               <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
@@ -465,4 +467,4 @@ const Book = (props) => {
   );
 };
 
-export default Book;
+export default withRouter(Book);

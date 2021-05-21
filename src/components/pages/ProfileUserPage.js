@@ -99,7 +99,7 @@ const ProfileUserPage = (props) => {
             <Header/>
             <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Thông tin tài khoản" link_root="/" link="/user_page">
+                breadcrumb="Thông tin tài khoản" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/user_page")}>
               </BreadCrumb>
             </div>
             <div className = {`${classes.container}`} >
