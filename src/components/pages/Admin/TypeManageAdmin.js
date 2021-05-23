@@ -13,6 +13,7 @@ import TypeManageAdmin from "../../common/TypeManageAdmin";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
 
+
 const useStyles = makeStyles((theme) => ({
   search: {
     padding: "2px 4px",
@@ -53,7 +54,7 @@ const TypeManagementPageAdmin = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
-
+  const [page, setPage] = useState(1);
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
   };
@@ -74,6 +75,7 @@ const TypeManagementPageAdmin = (props) => {
     await dispatch(typesActions.addType({ name: name }));
     setOpen(false);
     await dispatch(typesActions.getTypesRequest("", 1, 10));
+    setPage(1);
   };
 
   return (
@@ -131,7 +133,7 @@ const TypeManagementPageAdmin = (props) => {
                       </div>
                     </div>
                     <div className="row">
-                      <TypeManageAdmin searchString={searchString} />
+                      <TypeManageAdmin page={page} setPage={setPage} searchString={searchString} />
                     </div>
                   </div>
                 </div>

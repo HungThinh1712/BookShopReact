@@ -51,31 +51,32 @@ export const addPublishHouse = (publishHouse) => async (dispatch) => {
 
 export const updatePublishHouse = (updatedPublishHouse) => async (dispatch) => {
   const url = CallApis.API_URL.concat(`/PublishingHouses/Update`);
-  await axios({
-    method: "put",
-    url: url,
-    data: {
-      updatedPublishHouse,
-    },
-  })
+  await axios
+    .put(url, updatedPublishHouse)
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.data);
+        toastMessage("Cập nhật thành công");
         dispatch({
-          type: Types.UPDATE_PUBLISH_HOUSE,
+          type: Types.UPDATE_PUBLISH_HOUSE, //this call test dispatch. to dispsatch to our reducer
           payload: res.data,
         });
       } else {
+        let error = Object.values(res.data.errors)[0].toString();
         dispatch({
           type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
-          payload: res.data, //sets payload to errors coming from server
+          payload: error, //sets payload to errors coming from server
         });
       }
     })
     .catch((err) => {
       console.log(err);
+      dispatch({
+        type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+        payload: err, //sets payload to errors coming from server
+      });
     });
 };
+
 
 export const getAllPublishingHouseRequest =
   (page, name) => async (dispatch) => {

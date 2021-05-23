@@ -1,7 +1,7 @@
 import * as Types from "../constants/ActionType";
 const initialState = {
-  authors: [],
-  author: null
+  authors: {},
+  author: null,
 };
 
 export default function authorReducer(state = initialState, action) {
@@ -12,10 +12,22 @@ export default function authorReducer(state = initialState, action) {
         authors: action.authors,
       };
     case Types.GET_AUTHOR:
-      return{
+      return {
         ...state,
-        author: action.author
+        author: action.author,
+      };
+    case Types.UPDATE_AUTHOR:
+      var tempAuthors = { ...state.authors };
+      for (let i = 0; i < tempAuthors.entities.length; i++) {
+        if (tempAuthors.entities[i].id === action.author.id) {
+          tempAuthors.entities[i] = action.author;
+          break;
+        }
       }
+      return {
+        ...state,
+        authors: tempAuthors,
+      };
 
     default:
       return state;

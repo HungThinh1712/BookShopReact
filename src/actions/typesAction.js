@@ -2,6 +2,7 @@ import * as Types from "../constants/ActionType";
 import axios from "axios";
 import * as CallApis from "./../constants/Apis";
 import { toastMessage } from "../components/common/ToastHelper";
+import { ConsoleLogger } from "@microsoft/signalr/dist/esm/Utils";
 export const getTypesRequest = (name, page, pageSize) => async (dispatch) => {
   const url = CallApis.API_URL.concat(
     `/Types/GetAll?name=${name}&page=${page}&pageSize=${pageSize}`
@@ -46,31 +47,31 @@ export const addType = (type) => async (dispatch) => {
       });
     });
 };
-
-export const updateType = (updatedType) => async (dispatch) => {
+export const updateType = (type) => async (dispatch) => {
   const url = CallApis.API_URL.concat(`/Types/Update`);
-  await axios({
-    method: "put",
-    url: url,
-    data: {
-      updatedType,
-    },
-  })
+  console.log(type);
+  await axios
+    .put(url, type)
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.data);
+        toastMessage("Cập nhật thành công");
         dispatch({
-          type: Types.UPDATE_TYPE,
+          type: Types.UPDATE_TYPE, //this call test dispatch. to dispsatch to our reducer
           payload: res.data,
         });
       } else {
+        let error = Object.values(res.data.errors)[0].toString();
         dispatch({
           type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
-          payload: res.data, //sets payload to errors coming from server
+          payload: error, //sets payload to errors coming from server
         });
       }
     })
     .catch((err) => {
       console.log(err);
+      dispatch({
+        type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+        payload: err, //sets payload to errors coming from server
+      });
     });
 };

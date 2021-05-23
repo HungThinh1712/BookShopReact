@@ -75,7 +75,7 @@ export default function FormDialog(props) {
       formData.append("description", description);
       formData.append("imageFile", imageFile);
       await dispatch(authorActions.updateAuthor(formData));
-      await dispatch(authorActions.getAuthorRequest(id));
+      props.onClose();
     } else {
       toastMessage("Vui lòng nhập đầy đủ thông tin");
     }

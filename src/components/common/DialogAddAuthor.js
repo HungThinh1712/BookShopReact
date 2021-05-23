@@ -16,7 +16,6 @@ export default function FormDialog(props) {
   const [birthday, setBirthday] = useState("");
   const [description, setDescription] = useState("");
   const hiddenFileInput = React.useRef(null);
-
   const handleUpLoadClick = (event) => {
     hiddenFileInput.current.click();
   };
@@ -60,6 +59,7 @@ export default function FormDialog(props) {
       await dispatch(authorActions.addAuthor(formData));
       props.onClose();
       await dispatch(authorActions.getAuthorsRequest("", 1, 10));
+      props.setPage(1);
       setName("");
       setBirthday("");
       setDescription("");

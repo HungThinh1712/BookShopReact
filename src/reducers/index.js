@@ -14,6 +14,7 @@ import districtReducer from './districtReducer'
 import wardReducer from './wardReducer'
 import notificationReducer from './notificationReducer'
 import userReducer from './userReducer'
+import statisticReducer from './statisticReducer'
 
 
 const appReducer = combineReducers({
@@ -31,6 +32,7 @@ const appReducer = combineReducers({
     district:districtReducer,
     ward:wardReducer,
     notifications:notificationReducer,
-    users:userReducer
+    users:userReducer,
+    statistics:statisticReducer
 });
 export default appReducer;
