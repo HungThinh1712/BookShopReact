@@ -17,6 +17,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import styles from "../../styles/dashboardStyle";
 import {withRouter} from 'react-router-dom'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(styles);
 

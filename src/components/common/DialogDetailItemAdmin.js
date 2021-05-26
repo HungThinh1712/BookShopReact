@@ -5,6 +5,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import ItemInOrder from './ItemInOrderDetails'
 import Divider from '@material-ui/core/Divider';
+import {useTranslation} from 'react-i18next'
+
 
 export default function FormDialog(props) {
 

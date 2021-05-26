@@ -7,6 +7,7 @@ import OrderManageMent from '../common/OrderMangement'
 import Pagination from '../common/Pagination'
 import {useSelector} from 'react-redux'
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 const OrderManageMentPage = (props) => {
+  const { t } =  useTranslation();
   const classes = useStyles();
   const total  = useSelector(state=>state.order.orders.total ? state.order.orders.total: 0 )
   const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);

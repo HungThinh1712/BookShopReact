@@ -14,6 +14,8 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import Pagination from '../common/Pagination'
 import * as CallApis from '../../constants/Apis'
 import Dialog from '../common/DialogDetailItemAdmin'
+import {useTranslation} from 'react-i18next'
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,

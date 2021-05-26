@@ -11,6 +11,7 @@ import * as bookActions from "../../actions/booksAction";
 import Footer from "../common/Footer";
 import FlashSaleNav from "../common/FlashSaleNav";
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomePage = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const [indexPageVn, setIndexPageVn] = useState(0);
   const [indexPageEng, setIndexPageEng] = useState(0);
@@ -207,16 +209,16 @@ const HomePage = (props) => {
         <MessengerChat/>
         <Header></Header>
           <div style={{ marginTop: "80px", marginLeft: "100px", marginBottom:"-100px"}}>
-            <BreadCrumb
+            {/* <BreadCrumb
               breadcrumb="" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/")}>
-            </BreadCrumb>
+            </BreadCrumb> */}
           </div>
             {booksEng.length > 0 ? (
               <div>
                 <div style={{ display: "flex", paddingTop: "108px" }}>
                   {/* <BookTag></BookTag> */}
                 </div>
-                <BookNav title="Sách tiếng việt" style={{ marginTop: "200px" }} />
+                <BookNav title={t('Customer_Home.2')} style={{ marginTop: "200px" }} />
                 <div
                   style={{ display: "grid", backgroundColor: "white" }}
                   className={classes.container}
@@ -243,13 +245,13 @@ const HomePage = (props) => {
                       }}
                       onClick={loadMoreVnese}
                     >
-                      Xem thêm
+                      {t('Customer_Home.7')}
                     </Button>
                   </div>
                 </div>
 
                 <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-                <BookNav title="Sách tiếng anh" />
+                <BookNav title={t('Customer_Home.3')} />
                 <div
                   style={{ display: "grid", backgroundColor: "white" }}
                   className={classes.container}
@@ -276,7 +278,7 @@ const HomePage = (props) => {
                       }}
                       onClick={loadMoreEng}
                     >
-                      Xem thêm
+                      {t('Customer_Home.7')}
                     </Button>
                   </div>
                 </div>
@@ -309,13 +311,13 @@ const HomePage = (props) => {
                       }}
                       onClick={loadMoreWeek}
                     >
-                      Xem thêm
+                      {t('Customer_Home.7')}
                     </Button>
                   </div>
                 </div>
 
                 <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-                <BookNav title="Sách bán chạy trong tháng" />
+                <BookNav title={t('Customer_Home.5')} />
                 <div
                   style={{ display: "grid", backgroundColor: "white" }}
                   className={classes.container}
@@ -342,13 +344,13 @@ const HomePage = (props) => {
                       }}
                       onClick={loadMoreMonth}
                     >
-                      Xem thêm
+                      {t('Customer_Home.7')}
                     </Button>
                   </div>
                 </div>
 
                 <div style={{ marginTop: "20px", height: "50px", zIndex: 2 }}></div>
-                <BookNav title="Sách bán chạy trong năm" />
+                <BookNav title={t('Customer_Home.6')} />
                 <div
                   style={{ display: "grid", backgroundColor: "white" }}
                   className={classes.container}
@@ -375,7 +377,7 @@ const HomePage = (props) => {
                       }}
                       onClick={loadMoreYear}
                     >
-                      Xem thêm
+                      {t('Customer_Home.7')}
                     </Button>
                   </div>
                 </div>

@@ -6,6 +6,7 @@ import Footer from '../common/Footer';
 import ItemInOrder from '../common/ItemInOrderDetails';
 import Divider from '@material-ui/core/Divider';
 import {useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const OrderDetailPage = (props) => {
+  const { t } =  useTranslation();
     const classes = useStyles();
     const itemsInOrder =props.history.location.state.itemsInOrder
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);

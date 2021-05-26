@@ -4,7 +4,9 @@ import SexCheckBox from './../common/SexCheckBok'
 import {useDispatch} from 'react-redux'
 import { toastMessage } from '../common/ToastHelper'
 import * as authActions from '../../actions/authAction'
+import {useTranslation} from 'react-i18next'
 const RegisterPage = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

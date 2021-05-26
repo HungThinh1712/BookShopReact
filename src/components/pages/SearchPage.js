@@ -11,6 +11,7 @@ import * as publishHouseActions from "../../actions/publishHouseAction";
 import * as authorActions from "../../actions/authorAction";
 import * as bookTagActions from "../../actions/bookTagsAction";
 import Footer from "../common/Footer";
+import {useTranslation} from 'react-i18next'
 import Pagination from "../common/Pagination";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchPage = (props) => {
+  const { t } =  useTranslation();
   const classes = useStyles();
   const searchString = props.match.params.searchString;
   const dispatch = useDispatch();

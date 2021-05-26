@@ -12,6 +12,7 @@ import Description from './../common/Description'
 import Comment from '../common/CommentZone'
 import Footer from '../common/Footer'
 import BreadCrumb from "../common/Breadcrumbs"
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const BookDetailPage = (props) => {
 
 
-
+  const { t } =  useTranslation();
   const id = props.match.params.book_id
   const dispatch = useDispatch()
   const selectedBook = useSelector(state => state.books.selectedBook ? state.books.selectedBook : null )

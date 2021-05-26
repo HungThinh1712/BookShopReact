@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Dialog from './DialogComment'
 import {useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next'
 
 
 const Comment = (props) => {

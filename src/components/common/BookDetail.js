@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import CartIcon from "../../image/ic-cart@2x.png";
 import { useSelector, useDispatch } from "react-redux";
 import * as cartActions from "./../../actions/cartAction";
+import {useTranslation} from 'react-i18next'
+
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up("sm")]: {

@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import * as authorActions from "../../actions/authorAction";
 import { toastMessage } from "./ToastHelper";
+import {useTranslation} from 'react-i18next'
+
 
 export default function FormDialog(props) {
   const dispatch = useDispatch();

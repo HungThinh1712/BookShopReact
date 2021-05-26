@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as typeActions from "../../actions/typesAction";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   table: {

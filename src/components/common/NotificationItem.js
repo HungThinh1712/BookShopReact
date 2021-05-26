@@ -1,12 +1,9 @@
-
 import React, { useState } from 'react';
+import {useTranslation} from 'react-i18next'
 
 const NotificationItem = (props) => {
-
-
-
+    const { t} =  useTranslation();
     return (
-
         <div onClick={(e) => {
             e.stopPropagation();
             props.onClick();
@@ -18,7 +15,7 @@ const NotificationItem = (props) => {
                     <p onClick={(e) => {
             e.stopPropagation();
             props.onDelete();
-        }} style={{ color: 'blueviolet', textDecoration: 'underline' }}>Xóa</p>
+        }} style={{ color: 'blueviolet', textDecoration: 'underline' }}>{t('Customer_MyInform.2')}</p>
                 </div>
                 <div style={{ display: 'flex', flexDirection: "row" }}>
                     {props.status===0 ? <p style={{color:'blue'}}>{props.timeAgo}</p>: <p>{props.timeAgo}</p>}

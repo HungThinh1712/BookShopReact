@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import {withRouter} from 'react-router-dom'
 import BreadCrumb from "../common/Breadcrumbs";
-
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
     address_zone: {
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 const PaymentPage = (props) => {
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     const classes = useStyles();
+    const { t } =  useTranslation();
     return (
         <div>
             <HeaderInPayment step={2} />

@@ -1,5 +1,6 @@
 import React  from 'react';
 import { Radio} from 'antd';
+import {useTranslation} from 'react-i18next'
 
 const SexCheckBox = (props) => {
   

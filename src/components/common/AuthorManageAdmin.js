@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as authorActions from "../../actions/authorAction";
 import Dialog from "../common/DialogInfoAuthor";
+import {useTranslation} from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   table: {

@@ -9,6 +9,7 @@ import { useDispatch, } from 'react-redux';
 import * as authAction from './../../actions/authAction'
 import { toastMessage } from './ToastHelper';
 import { withRouter } from "react-router-dom";
+import {useTranslation} from 'react-i18next'
 
 const FormDialog =(props) => {
 

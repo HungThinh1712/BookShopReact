@@ -1,8 +1,10 @@
 import React , {useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux'
 import * as authActions from '../../actions/authAction'
+import {useTranslation} from 'react-i18next'
 
 const ResetPasswordPage = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const email = props.history.location.state.email;
   const [code, setCode] = useState("");

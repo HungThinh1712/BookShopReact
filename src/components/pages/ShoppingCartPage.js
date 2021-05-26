@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { toastMessage } from "../common/ToastHelper";
 import Footer from "../common/Footer";
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -72,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingCartPage = (props) => {
+  const { t } =  useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) =>

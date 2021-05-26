@@ -12,6 +12,7 @@ import * as orderActions from './../../actions/orderAction'
 import {withRouter} from 'react-router-dom'
 import * as CallApis from '../../constants/Apis'
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles({
   table: {

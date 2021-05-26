@@ -8,6 +8,7 @@ import * as commentActions from './../../actions/commentAction'
 import Divider from '@material-ui/core/Divider';
 import {useSelector, useDispatch} from 'react-redux';
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const CommentPage = (props) => {
+  const { t } =  useTranslation();
     const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
     const classes = useStyles();
     const dispatch = useDispatch();

@@ -5,7 +5,10 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import * as CallApis from '../../constants/Apis'
 import * as notificationActions from './../../actions/notificationAction'
 import * as cartActions from './../../actions/cartAction'
+import {useTranslation} from 'react-i18next'
+
 const OrderSuccessPage = (props) => {
+    const { t } =  useTranslation();
     const dispatch = useDispatch();
     const errorCode = queryString.parse(props.history.location.search).errorCode
     

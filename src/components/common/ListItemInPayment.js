@@ -4,6 +4,7 @@ import ItemInPayment from './ItemCartInPayment'
 import {useSelector,useDispatch} from "react-redux";
 import * as cartAction from './../../actions/cartAction'
 import { withRouter } from "react-router-dom";
+import {useTranslation} from 'react-i18next'
 
 
 const ListItemIPayment = (props) => {

@@ -6,6 +6,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import { makeStyles } from '@material-ui/core/styles';
 import {useDispatch} from 'react-redux'
 import * as cartActions from './../../actions/cartAction'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 

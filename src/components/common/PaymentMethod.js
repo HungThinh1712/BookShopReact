@@ -10,6 +10,8 @@ import NotificationItem from '../common/NotificationItem'
 import * as notificationActions from '../../actions/notificationAction'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import * as CallApis from '../../constants/Apis'
+import {useTranslation} from 'react-i18next'
+
 const useStyles = makeStyles((theme) => ({
     payment_method_zone: {
       display:'inline-block'
