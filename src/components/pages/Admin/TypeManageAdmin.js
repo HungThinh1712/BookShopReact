@@ -12,8 +12,8 @@ import IconButton from "@material-ui/core/IconButton";
 import TypeManageAdmin from "../../common/TypeManageAdmin";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
-
-
+import { Popconfirm, message, Button } from "antd";
+import "antd/dist/antd.css";
 const useStyles = makeStyles((theme) => ({
   search: {
     padding: "2px 4px",
@@ -54,6 +54,9 @@ const TypeManagementPageAdmin = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
+  const confirm = () => {
+    message.info("Clicked on Yes.");
+  };
   const [page, setPage] = useState(1);
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
@@ -92,9 +95,11 @@ const TypeManagementPageAdmin = (props) => {
         <SideBarAdminPage />
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
-          <BreadCrumb 
-            breadcrumb="Quản lý loại sách" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/typemanagement_page")}>
-          </BreadCrumb>
+            <BreadCrumb
+              breadcrumb="Quản lý loại sách"
+              onClick={() => props.history.push("/admin")}
+              onClick2={() => props.history.push("/admin/typemanagement_page")}
+            ></BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">
                 <div className="table-wrapper">
@@ -105,6 +110,25 @@ const TypeManagementPageAdmin = (props) => {
                       </div>
                       <div className="col-sm-4">
                         <div>
+                          <Popconfirm
+                            placement="topRight"
+                            title="Bạn có chắc muốn xóa không?"
+                            onConfirm={confirm}
+                            okText="Yes"
+                            cancelText="No"
+                          >
+                            <Button
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                color: "red",
+                              }}
+                              aria-hidden="true"
+                            >
+                              abc
+                            </Button>
+                          </Popconfirm>
+
                           <button
                             onClick={handleClickOpen}
                             type="button"
@@ -133,7 +157,11 @@ const TypeManagementPageAdmin = (props) => {
                       </div>
                     </div>
                     <div className="row">
-                      <TypeManageAdmin page={page} setPage={setPage} searchString={searchString} />
+                      <TypeManageAdmin
+                        page={page}
+                        setPage={setPage}
+                        searchString={searchString}
+                      />
                     </div>
                   </div>
                 </div>

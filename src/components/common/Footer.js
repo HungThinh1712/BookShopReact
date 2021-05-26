@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <div>
-      <footer>
+      <div className="div_footer">
         <div  className="main-content">
           <div className="left box">
             <h2>About us</h2>
@@ -49,7 +49,7 @@ const Footer = () => {
             <span className="far fa-copyright"></span><span> 2020 All rights reserved.</span>
           </center>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };

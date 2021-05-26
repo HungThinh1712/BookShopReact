@@ -74,7 +74,7 @@ const VerticalBar = () => {
           <div style={{ marginTop: "120px", marginLeft: "10px" }}>
             <BreadCrumb breadcrumb="Thống kê doanh thu theo năm"></BreadCrumb>
           </div>
-          <div style={{ width: "1200px" }}>
+          <div style={{ width: "1100px" }}>
             <div
               style={{
                 display: "flex",

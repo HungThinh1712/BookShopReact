@@ -40,6 +40,15 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  deleteIcon: {
+    "&:hover": {
+      backgroundColor: "white",
+      cursor: "pointer",
+    },
+    display: "inline-block",
+    height: "20px",
+  },
+
 }));
 
 const BasicTable = (props) => {
@@ -67,7 +76,10 @@ const BasicTable = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleDelete= async (id) =>{
+    await dispatch(typeActions.deleteType(id));
+    await dispatch(typeActions.getTypesRequest("", 1, 10))
+  }
   const handelRowClick = (row) => {
     setOpen(true);
     setItem(row);
@@ -102,8 +114,12 @@ const BasicTable = (props) => {
                     justifyContent: "flex-end",
                     color: "red",
                   }}
-                  className="fa fa-trash"
+                  className="fa fa-trash "
                   aria-hidden="true"
+                  onClick={(e) => {
+                     handleDelete(row.id);
+                    e.stopPropagation();
+                  }}
                 ></i>
               </TableCell>
             </TableRow>

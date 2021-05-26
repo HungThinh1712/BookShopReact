@@ -132,30 +132,7 @@ const AddressInputForm = (props) => {
             onChange={handlePhoneInputChange}
             placeholder="Số điện thoại"
           />
-        </div>
-        <PlacesAutocomplete
-          value={addressGoogle}
-          onChange={setAddressGoogle}
-          onSelect={handleSelect}
-        >
-          {({
-            getInputProps,
-            suggestions,
-            getSuggestionItemProps,
-            loading,
-          }) => (
-            <div>
-              <input {...getInputProps({ placeholder: "Nhập địa chỉ" })} />
-              <div>
-                {loading ? <div>...loading</div> : null}
-
-                {suggestions.map((suggestion) => {
-                  return <div>{suggestion.description}</div>;
-                })}
-              </div>
-            </div>
-          )}
-        </PlacesAutocomplete>
+        </div>       
         <div className="input-field">
           <i className="fas fa-city"></i>
           {/* <input value={city} onChange={handleCityInputChange} placeholder="Thành phố" /> */}
