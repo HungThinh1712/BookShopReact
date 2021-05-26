@@ -3,8 +3,8 @@ import axios from "axios";
 import * as CallApis from "./../constants/Apis";
 import { toastMessage } from "../components/common/ToastHelper";
 
-export const getStatisticByMonths = () => async (dispatch) => {
-  const url = CallApis.API_URL.concat(`/Orders/StatisticByMonth`);
+export const getStatisticByMonths = (year) => async (dispatch) => {
+  const url = CallApis.API_URL.concat(`/Orders/StatisticByMonth?year=${year}`);
   await axios
     .get(url)
     .then((res) => {
