@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as bookActions from '../../../actions/booksAction';
 import { withRouter } from 'react-router-dom';
 import CustormerManage from './../../common/CustormerManage'
-
 import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import UserManageAdmin from '../../common/UserManageAdmin';
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 
 const useStyles = makeStyles((theme) => ({
 
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserManagementPageAdmin = (props) => {
-
+    const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
     const [searchString,setSearchString] = useState(''); 
@@ -64,32 +64,26 @@ const UserManagementPageAdmin = (props) => {
     return (
         <div>
             <div id="wrapper">
-
                 <Header notShow="notShow" />
                 <SideBarAdminPage />
-
                 <div id="content-wrapper" style={{ marginTop: '100px' }}>
-
                     <div className="container-fluid">
                     <BreadCrumb 
-                        breadcrumb="Quản lý tài khoản" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/usermanagement_page")}>
+                        breadcrumb={t('Admin_Home_BreadCrumbs.5')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/usermanagement_page")}>
                     </BreadCrumb>
                         <div className="card mb-3">
-
                             <div className="card-body">
                                 <div className="table-wrapper">
                                     <div className="table-title">
                                         <div className="row">
-                                            <div className="col-sm-8"><h2>Quản lý tài khoản</h2></div>
+                                            <div className="col-sm-8"><h2>{t('Admin_Home_BreadCrumbs.5')}</h2></div>
                                         </div>
-
                                     </div>
                                     <div className="container">
                                         <div className="row">
                                             <div className={classes.search}>
-
                                                 <InputBase
-                                                    placeholder="Tìm kiếm user..."
+                                                    placeholder={t('Admin_Other.14')}
                                                     value={searchString}
                                                     onChange={handleInputChange}
                                                     classes={{

@@ -155,29 +155,29 @@ const SearchPage = (props) => {
       <div>
         <div className={classes.drop_down}>
           <DropDown
-            label="Thể loại"
+            label={t('Customer_Search.1')}
             handleChange={handleTypeChange}
             data={types}
           />
           <DropDown
-            label="Giá thành"
+            label={t('Customer_Search.2')}
             handleChange={handlePriceChange}
             data={sortPrice}
           />
           <DropDown
-            label="Nhà xuất bản"
+            label={t('Customer_Search.3')}
             handleChange={handlePublishHouseChange}
             data={publishHouses}
             type="3"
           />
           <DropDown
-            label="Tác giả"
+            label={t('Customer_Search.4')}
             handleChange={handleAuthorChange}
             data={authors}
             type="4"
           />
           <DropDown
-            label="Danh mục"
+            label={t('Customer_Search.5')}
             handleChange={handleTagChange}
             data={tags}
             type="5"

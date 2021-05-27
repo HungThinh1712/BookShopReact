@@ -71,7 +71,7 @@ const OrderDetailPage = (props) => {
             <div className="row">
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
-                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Chi tiết đơn hàng</p>
+                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Admin_Other.4')}</p>
                 {showItemsInOrder}
               </div>              
             </div>

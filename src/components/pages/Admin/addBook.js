@@ -10,9 +10,10 @@ import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
 import {withRouter} from 'react-router-dom'
-
+import {useTranslation} from "react-i18next"
 
 const Book = (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(typeActions.getTypesRequest("", 1, 9999));
@@ -193,19 +194,19 @@ const Book = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
           <BreadCrumb 
-            breadcrumb="Thêm sách" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/add_book_page")}>
+            breadcrumb={t('Admin_Book.2')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/add_book_page")}>
           </BreadCrumb>
             <div className="card-body">
               <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div className="row">
                   <div className="col-12">
-                    <h4 className="tm-block-title d-inline-block">THÊM SÁCH</h4>
+                    <h4 className="tm-block-title d-inline-block">{t('Admin_Book.2')}</h4>
                   </div>
                 </div>
                 <div className="row tm-edit-product-row">
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <div className="form-group mb-3">
-                      <label for="name">Tên sách</label>
+                      <label for="name">{t('Admin_Book.6')}</label>
                       <input
                         id="name"
                         onChange={handleNameInputChange}
@@ -217,28 +218,28 @@ const Book = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="name">Loại thẻ</label>
+                        <label for="name">{t('Admin_Book.7')}</label>
 
                         <select
                           onChange={handleTagInputChange}
                           className="custom-select tm-select-accounts"
                           id="tagType"
                         >
-                          <option defaultValue>Chọn loại thẻ</option>
+                          <option defaultValue>{t('Admin_Book.21')}</option>
                           <option value="Sách bán chạy trong tuần">
-                            Sách bán chạy trong tuần
+                            {t('Customer_Home.15')}
                           </option>
                           <option value="Sách bán chạy trong tháng">
-                            Sách bán chạy trong tháng
+                            {t('Customer_Home.5')}
                           </option>
                           <option value="Sách bán chạy trong năm">
-                            Sách bán chạy trong năm
+                            {t('Customer_Home.6')}
                           </option>
                         </select>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="publishing_house">Nhà xuất bản</label>
+                          <label for="publishing_house">{t('Admin_Book.9')}</label>
                           <div style={{ flexGrow: "1" }}></div>
                           <i
                             onClick={() => handleClickOpen("Thêm nhà xuất bản")}
@@ -255,7 +256,7 @@ const Book = (props) => {
                           className="custom-select tm-select-accounts"
                           id="category"
                         >
-                          <option selected>Chọn nhà xuất bản</option>
+                          <option selected>{t('Admin_Book.22')}</option>
                           {showPublishHouses}
                         </select>
                       </div>
@@ -264,7 +265,7 @@ const Book = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="tagType">Loại sách</label>
+                          <label for="tagType">{t('Admin_Book.10')}</label>
                           <div style={{ flexGrow: "1" }}></div>
                           <i
                             onClick={() => handleClickOpen("Thêm loại sách")}
@@ -283,14 +284,14 @@ const Book = (props) => {
                             className="custom-select tm-select-accounts"
                             id="category"
                           >
-                            <option defaultValue>Chọn loại sách</option>
+                            <option defaultValue>{t('Admin_Book.23')}</option>
                             {showTypes}
                           </select>
                         </div>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="tagType">Tác giả</label>
+                          <label for="tagType">{t('Admin_Book.11')}</label>
                           <div style={{ flexGrow: "1" }}></div>
                           <i
                             onClick={() => handleClickOpen("Thêm tác giả")}
@@ -309,7 +310,7 @@ const Book = (props) => {
                             className="custom-select tm-select-accounts"
                             id="category"
                           >
-                            <option selected>Chọn tác giả</option>
+                            <option selected>{t('Admin_Book.24')}</option>
                             {showAuthors}
                           </select>
                         </div>
@@ -317,7 +318,7 @@ const Book = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="publish_date">Ngày xuất bản</label>
+                        <label for="publish_date">{t('Admin_Book.12')}</label>
                         <input
                           onChange={handlePublishDateInputChange}
                           id="publish_date"
@@ -328,7 +329,7 @@ const Book = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="amount">Số lượng</label>
+                        <label for="amount">{t('Admin_Book.13')}</label>
                         <input
                           onChange={handleAmountInputChange}
                           id="amount"
@@ -341,7 +342,7 @@ const Book = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="price">Giá</label>
+                        <label for="price">{t('Admin_Book.14')}</label>
                         <input
                           onChange={handlePriceInputChange}
                           name="price"
@@ -351,7 +352,7 @@ const Book = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="price">Giá bìa</label>
+                        <label for="price">{t('Admin_Book.15')}</label>
                         <input
                           id="price"
                           onChange={handleCoverPriceInputChange}
@@ -364,7 +365,7 @@ const Book = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="page_amount">Số trang</label>
+                        <label for="page_amount">{t('Admin_Book.16')}</label>
                         <input
                           id="page_amount"
                           onChange={handlePageAmountInputChange}
@@ -375,7 +376,7 @@ const Book = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="size">Kích thước</label>
+                        <label for="size">{t('Admin_Book.27')}</label>
                         <input
                           onChange={handleSizeInputChange}
                           name="size"
@@ -387,7 +388,7 @@ const Book = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="cover_type">Loại bìa</label>
+                        <label for="cover_type">{t('Admin_Book.18')}</label>
                         <input
                           id="size"
                           onChange={handleCoverTypeChange}
@@ -398,23 +399,23 @@ const Book = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="name">Khu vực</label>
+                        <label for="name">{t('Admin_Book.17')}</label>
 
                         <select
                           onChange={handleZoneInputChange}
                           className="custom-select tm-select-accounts"
                           id="tagType"
                         >
-                          <option defaultValue>Chọn khu vực</option>
+                          <option defaultValue>{t('Admin_Book.26')}</option>
                           <option value="Sách tiếng việt">
-                            Sách tiếng việt
+                            {t('Customer_Home.2')}
                           </option>
-                          <option value="Sách tiếng anh">Sách tiếng anh</option>
+                          <option value="Sách tiếng anh">{t('Customer_Home.3')}</option>
                         </select>
                       </div>
                     </div>
                     <div className="form-group mb-3">
-                      <label for="description">Mô tả</label>
+                      <label for="description">{t('Admin_Book.19')}</label>
                       <textarea
                         onChange={handleDescriptionInputChange}
                         className="form-control validate"
@@ -427,7 +428,7 @@ const Book = (props) => {
                       className="btn btn-info form-group mb-3"
                       style={{ width: "100%" }}
                     >
-                      Thêm sản phẩm
+                      {t('Admin_Book.2')}
                     </button>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">

@@ -6,6 +6,7 @@ import {useTranslation} from 'react-i18next'
 
 
 const Comment = (props) => {
+	const { t } = useTranslation();
 	const [open, setOpen] = React.useState(false);
     const handleClickOpen = (value) => {
 		setOpen(true);
@@ -34,8 +35,8 @@ const Comment = (props) => {
 						<div className="review-block-title">{props.title}</div>
 						<div className="review-block-description">{props.content}</div>
 						{userId===props.userId ?<div style={{display:'flex',flexDirection:'row',marginTop:'-30px'}}>
-							<div onClick={()=>handleClickOpen(0)}  style={{fontSize:'12px',color:'blue',cursor:'pointer'}} >Chỉnh sửa</div>
-							<div onClick={()=>handleClickOpen(1)} style={{fontSize:'12px',color:'blue',marginLeft:'15px',cursor:'pointer'}} >Xóa</div>
+							<div onClick={()=>handleClickOpen(0)}  style={{fontSize:'12px',color:'blue',cursor:'pointer'}} >{t('Customer_Detail.23')}</div>
+							<div onClick={()=>handleClickOpen(1)} style={{fontSize:'12px',color:'blue',marginLeft:'15px',cursor:'pointer'}} >{t('Customer_Detail.24')}</div>
 						</div>:null}
 					</div>
 				</div>

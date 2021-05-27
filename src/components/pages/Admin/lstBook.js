@@ -8,12 +8,12 @@ import * as bookActions from '../../../actions/booksAction';
 import { withRouter } from 'react-router-dom';
 import Pagination from '../../common/Pagination'
 import * as Types from '../../../constants/ActionType';
-
 import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 
 const useStyles = makeStyles((theme) => ({
 
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 const LstBook = (props) => {
-
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const classes = useStyles();
   
@@ -95,24 +95,22 @@ const LstBook = (props) => {
     return (
         <div>
             <div id="wrapper">
-
                 <Header notShow="notShow" />
                 <SideBarAdminPage />
                 <div id="content-wrapper" style={{ marginTop: '100px' }}> 
                     <div className="container-fluid">
                     <BreadCrumb
-                        breadcrumb="Quản lý sách" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/books")}>
-
+                        breadcrumb={t('Admin_Home_BreadCrumbs.4')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/books")}>
                     </BreadCrumb>
                         <div className="card mb-3">
                             <div className="card-body">
                                 <div className="table-wrapper">
                                     <div className="table-title">
                                         <div className="row">
-                                            <div className="col-sm-8"><h2>DANH SÁCH SÁCH</h2></div>
+                                            <div className="col-sm-8"><h2>{t('Admin_Book.1')}</h2></div>
                                             <div className="col-sm-4">
                                                 <div >
-                                                    <button onClick = {() => props.history.push('/admin/add_book_page')} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> Thêm sách</button>
+                                                    <button onClick = {() => props.history.push('/admin/add_book_page')} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> {t('Admin_Book.2')}</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,7 +120,7 @@ const LstBook = (props) => {
                                             <div className={classes.search}>
 
                                                 <InputBase
-                                                    placeholder="Tìm kiếm sản phẩm..."
+                                                    placeholder={t('Admin_Other.14')}
                                                     value={name}
                                                     onChange={handleInputChange}
                                                     classes={{

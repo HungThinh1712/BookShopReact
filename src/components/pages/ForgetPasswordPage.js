@@ -4,8 +4,10 @@ import * as authActions from './../../actions/authAction'
 import { withRouter } from "react-router-dom";
 import Logo from './../Images/logo_hcmute.png'
 import Dialog from './../common/DialogResetPassWord'
+import {useTranslation} from "react-i18next"
 
 const  ForgetPasswordPage= (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
     const handleClickOpen = (value) => {
@@ -45,20 +47,20 @@ const  ForgetPasswordPage= (props) => {
         <Dialog email={email} open={open}  onClose={handleClose}  ></Dialog>
           <form  className="sign-in-form">
             <img  style={{width:'70px',height:'80px'}} src={Logo} alt=""/>
-            <h2 className="title">Quên mật khẩu?</h2>
+            <h2 className="title">{t('Customer_Management.41')}</h2>
             <div className="input-field-login">
               <i className="fas fa-envelope"></i>
-              <input type="text" onChange={handleEmailInputChange} placeholder="Nhập email đăng ký tài khoản" />
+              <input type="text" onChange={handleEmailInputChange} placeholder={t('Customer_Management.38')} />
             </div>
             {
               flag===true? <div className="input-field-login">
               <i className="fas fa-check"></i>
-              <input type="text" onChange={handleCodeInputChange}  placeholder="Mã xác nhận" />
+              <input type="text" onChange={handleCodeInputChange}  placeholder={t('Customer_Management.39')} />
             </div>:null
             }
-            {flag===false ? <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmitSend} >Gửi</div>:
-            <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmitConfirm} >Xác nhận</div>}
-            <div style={{color:'blueviolet',cursor:'pointer'}} onClick={()=>props.history.push('/user_page')}>Quay lại đăng nhập</div>          
+            {flag===false ? <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmitSend} >{t('Customer_Management.39')}</div>:
+            <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmitConfirm} >{t('Customer_Management.36')}</div>}
+            <div style={{color:'blueviolet',cursor:'pointer'}} onClick={()=>props.history.push('/user_page')}>{t('Customer_Management.40')}</div>          
           </form>
          
         </div>

@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PublishingHouseManageAdmin from "../../common/PublishingHouseManageAdmin";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PublishingHouseManagementPageAdmin = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
@@ -90,7 +92,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
             <BreadCrumb
-              breadcrumb="Quản lý NXB"
+              breadcrumb={t('Admin_Home_BreadCrumbs.7')}
               onClick={() => props.history.push("/admin")}
               onClick2={() =>
                 props.history.push("/admin/pulishinghousemanagement_page")
@@ -102,7 +104,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                   <div className="table-title">
                     <div className="row">
                       <div className="col-sm-8">
-                        <h2>Quản lý nhà xuất bản</h2>
+                        <h2>{t('Admin_Home_BreadCrumbs.7')}</h2>
                       </div>
                       <div className="col-sm-4">
                         <div>
@@ -111,7 +113,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                             type="button"
                             className="btn btn-info add-new"
                           >
-                            <i className="fa fa-plus"></i> Thêm NXB
+                            <i className="fa fa-plus"></i> {t('Admin_Other.31')}
                           </button>
                         </div>
                       </div>
@@ -121,7 +123,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                     <div className="row">
                       <div className={classes.search}>
                         <InputBase
-                          placeholder="Tìm kiếm nhà xuất bản..."
+                          placeholder={t('Admin_Other.14')}
                           value={searchString}
                           onChange={handleInputChange}
                           classes={{

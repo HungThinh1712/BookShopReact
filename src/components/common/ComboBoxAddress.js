@@ -39,5 +39,4 @@ const top100Films = [
   { name: 'Sách giáo khoa'},
   { name: 'Tiểu thuyết'},
   { name: 'Truyện tranh'},
- 
 ];

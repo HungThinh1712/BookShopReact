@@ -80,8 +80,9 @@ const OrderSuccessPage = (props) => {
                     <div className="card">
                         <div className="card-body cart">
                             <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
-                                <h3><strong>Đơn hàng của bạn đã được ghi nhận</strong></h3>
-                                <h4>Cảm ơn quý đọc giả đã tin tưởng sử dụng dịch vụ của chúng tôi</h4> <button  className="btn btn-primary cart-btn-transform m-3" onClick={() => props.history.push('/')}>Tiếp tục mua sắm</button>
+                                <h3><strong>{t('Customer_Shopping_Payment.16')}</strong></h3>
+                                <h4>{t('Customer_Shopping_Payment.17')}</h4>
+                                <button  className="btn btn-primary cart-btn-transform m-3" onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</button>
                             </div>
                         </div>
                     </div>
@@ -89,8 +90,8 @@ const OrderSuccessPage = (props) => {
                     <div className="card">
                         <div className="card-body cart">
                             <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
-                                <h3><strong>Thanh toán không thành công</strong></h3>
-                                <button  className="btn btn-primary cart-btn-transform m-3" onClick={() => props.history.push('/')}>Tiếp tục mua sắm</button>
+                                <h3><strong>{t('Customer_Shopping_Payment.25')}</strong></h3>
+                                <button  className="btn btn-primary cart-btn-transform m-3" onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</button>
                             </div>
                         </div>
                     </div>

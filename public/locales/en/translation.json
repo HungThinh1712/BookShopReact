@@ -20,7 +20,8 @@
         "11": "About us",
         "12": "Address",
         "13": "Contact us",
-        "14": "Tina is an online book-selling company established in October 2020 with 2 main shareholders, Le Hong Dao and Hung Thinh, with an investment of nearly $ 1 billion."
+        "14": "Tina is an online book-selling company established in October 2020 with 2 main shareholders, Le Hong Dao and Hung Thinh, with an investment of nearly $ 1 billion.",
+        "15": "Sách bán chạy trong tuần"
     },
     "Customer_MyInform": {
         "1": "My inform",
@@ -60,7 +61,20 @@
         "28": "Old password",
         "29": "New password",
         "30": "Confirm password",
-        "31": "Save image"
+        "31": "Save image",
+        "32": "Select Province/City",
+        "33": "Select District",
+        "34": "Select Ward",
+        "35": "Confirm email",
+        "36": "Confirm",
+        "37": "Resend confirmation code",
+        "38": "Enter your email to register for an accountn",
+        "39": "confirmation code",
+        "40": "Return login",
+        "41": "Forget password?",
+        "42": "Password",
+        "43": "Sign up",
+        "44": "Already have an account? Log in"
     },
     "Customer_Search": {
         "1": "Type",
@@ -95,7 +109,10 @@
         "21": "Enter review title",
         "22": "Send your review",
         "23": "Update", 
-        "24": "Delete"
+        "24": "Delete",
+        "25": "Update review",
+        "26": "Are you sure you want to delete this comment?",
+        "27": "Edit"
     },
     "Customer_Shopping_Payment": {
         "1": "Author",
@@ -116,7 +133,12 @@
         "17": "Thank you readers for trusting to use our service",
         "18": "Continue shopping",
         "19": "You have no products in your shopping cart",
-        "20": "Please add product to cart"
+        "20": "Please add product to cart",
+        "21": "You have not updated your Shipping Address yet",
+        "22": "Update Shipping Address",
+        "23": "Order",
+        "24": "You are trying to access a website that does not exist",
+        "25": "Payment failed"
     },
     "Admin_Home_BreadCrumbs": {
         "1": "Home",
@@ -127,14 +149,16 @@
         "6": "Type management",
         "7": "Publishing house management",
         "9": "Author management",
-        "10": "STATISTICS",
+        "10": "Statisliscs",
         "11": "BOOK",
         "12": "CUSTOMER",
         "13": "ACCOUNT",
         "14": "BOOK TYPE",
         "15": "PUBLISHING HOUSE",
         "16": "AUTHOR",
-        "17": "DETAILED"
+        "17": "DETAILED",
+        "18": "ORDER",
+        "19": "Order Management"
     },
     "Admin_Book": {
         "1": "List of books",
@@ -160,7 +184,8 @@
         "22": "Select publishing house",
         "23": "Select type",
         "24": "Select author",
-        "26": "Select region"
+        "26": "Select region",
+        "27": "Size"
     },
     "Admin_Other": {
         "1": "All order",
@@ -170,13 +195,13 @@
         "5": "Order ID",
         "6": "Purchase date",
         "7": "Product",
+        "8": "Status",
         "9": "Customer name",
         "10": "Total money",
         "11": "Manipulation",
         "12": "Order confirmation",
         "13": "Exit",
-
-        "14": "Search",
+        "14": "Search...",
         "15": "Phone number",
         "16": "Date of birth",
         "17": "Address",
@@ -192,6 +217,10 @@
         "28": "Type",
         "29": "Cancel",
         "30": "Update",
-        "31": "Add publishing house"
+        "31": "Add publishing house",
+        "32": "Create at",
+        "33": "Add",
+        "34": "Imprint",
+        "35": "Are you sure you want to delete?"
     }
 }

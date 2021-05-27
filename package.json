@@ -24,6 +24,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-chartjs-2": "^3.0.3",
+    "react-country-flag": "^2.3.0",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",

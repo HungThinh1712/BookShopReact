@@ -63,29 +63,29 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const PaymentPage = (props) => {
+    const { t } = useTranslation();
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     const classes = useStyles();
-    const { t } =  useTranslation();
     return (
         <div>
             <HeaderInPayment step={2} />
-            <div className={classes.title}  >3. Thanh toán và đặt hàng</div>
+            <div className={classes.title}  >3. {t('Customer_Shopping_Payment.11')}</div>
             <div className={classes.wraper}>
                 <PaymentMethod />
                 <div className={classes.address_zone}>
                     <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid', borderWidth: '2px',borderColor:'blueviolet',borderRadius:'5px' }}>
                         <div  style={{ display: 'flex',justifyContent:'space-between'}} >
-                            <div style={{ fontWeight: '700',fontSize:'17px', padding: '10px' }}>Địa chỉ giao hàng</div>
+                            <div style={{ fontWeight: '700',fontSize:'17px', padding: '10px' }}>{t('Customer_Shopping_Payment.6')}</div>
                             <div style={{padding:'10px',marginLeft:'120px'}}>
-                                <Button onClick={() => props.history.push("/address_shipping")} variant="contained" size="small">Sửa</Button>
+                                <Button onClick={() => props.history.push("/address_shipping")} variant="contained" size="small">{t('Customer_Shopping_Payment.10')}</Button>
                             </div>
                         </div>
                         <div style={{backgroundColor:'blueviolet',height:'1px'}}></div>
                         <div style={{padding:'0 10px 10px 10px'}}>
                             <div style={{ fontWeight: '900',color:'red',fontFamily: 'Roboto'}}>{userData.fullName}</div>
-                            <div style={{ fontSize: '13px', fontWeight: '500' }} >Địa chỉ: {userData.specificAddress}, {userData.wardName}, {userData.districtName}, {userData.provinceName}</div>
+                            <div style={{ fontSize: '13px', fontWeight: '500' }} >{t('Customer_Shopping_Payment.6')}: {userData.specificAddress}, {userData.wardName}, {userData.districtName}, {userData.provinceName}</div>
                             <div style={{display:'flex'}}>
-                              <div style={{ fontSize: '13px', fontWeight: '500',paddingRight:'5px' }}>Điện thoại: </div>
+                              <div style={{ fontSize: '13px', fontWeight: '500',paddingRight:'5px' }}>{t('Customer_Shopping_Payment.7')}: </div>
                               <div style={{ fontSize: '13px', fontWeight: '500',color:'red' }}>{userData.phone}</div>
                             </div>
                         </div>

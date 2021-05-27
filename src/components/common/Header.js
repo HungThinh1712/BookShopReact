@@ -28,6 +28,7 @@ import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import {useTranslation} from 'react-i18next'
 import { Button } from "@material-ui/core";
+import ReactCountryFlag from "react-country-flag";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -523,8 +524,8 @@ const PrimarySearchAppBar = (props) => {
               <MoreIcon />
             </IconButton>
           </div>
-          <Button style={{fontSize: '12px', fontWeight: 'bold', textDecorationLine: 'underline'}} onClick={() => handleClick_ChangeLang('vi')}>{t('Customer_Home.9')}</Button>
-          <Button style={{fontSize: '12px', fontWeight: 'bold', textDecorationLine: 'underline'}} onClick={() => handleClick_ChangeLang('en')}>{t('Customer_Home.10')}</Button>
+          <ReactCountryFlag onClick={() => handleClick_ChangeLang('vi')} style={{fontSize: '2em', cursor: 'pointer'}} countryCode="VN" svg/>  
+          <ReactCountryFlag onClick={() => handleClick_ChangeLang('en')} style={{fontSize: '2em', cursor: 'pointer', marginLeft: '10px'}} countryCode="GB" svg/> 
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

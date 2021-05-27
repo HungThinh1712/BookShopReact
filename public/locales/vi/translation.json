@@ -20,7 +20,8 @@
         "11": "Về chúng tôi",
         "12": "Địa chỉ",
         "13": "Liên hệ với chúng tôi",
-        "14": "Tina là một công ty bán sách trực tuyến được thành lập vào 10/2020 với 2 cổ đông chính là Lê Hồng Đạo và Hưng Thịnh với số vốn đầu tư lên tới gần 1 tỷ $."
+        "14": "Tina là một công ty bán sách trực tuyến được thành lập vào 10/2020 với 2 cổ đông chính là Lê Hồng Đạo và Hưng Thịnh với số vốn đầu tư lên tới gần 1 tỷ $.",
+        "15": "Sách bán chạy trong tuần"
     },
     "Customer_MyInform": {
         "1": "Thông báo của tôi",
@@ -60,7 +61,20 @@
         "28": "Mật khẩu cũ",
         "29": "Mật khẩu mới",
         "30": "Xác nhận lại mật khẩu",
-        "31": "Lưu ảnh"
+        "31": "Lưu ảnh",
+        "32": "Chọn tỉnh/Thành phố",
+        "33": "Chọn Quận/Huyện",
+        "34": "Chọn xã/Phường",
+        "35": "Xác nhận Email",
+        "36": "Xác nhận",
+        "37": "Gửi lại mã xác nhận",
+        "38": "Nhập email đăng ký tài khoản",
+        "39": "Mã xác nhận",
+        "40": "Quay lại đăng nhập",
+        "41": "Quên mật khẩu?",
+        "42": "Mật khẩu",
+        "43": "Đăng ký",
+        "44": "Đã có tài khoản? Đăng nhập"
     },
     "Customer_Search": {
         "1": "Loại sách",
@@ -95,7 +109,10 @@
         "21": "Nhập tiêu đề",
         "22": "Gửi nhận xét",
         "23": "Cập nhật", 
-        "24": "Xóa"
+        "24": "Xóa",
+        "25": "Chỉnh sửa đánh giá",
+        "26": "Bạn có chắc muốn xóa comment này này?",
+        "27": "Chỉnh sửa"
     },
     "Customer_Shopping_Payment": {
         "1": "Tác giả",
@@ -116,7 +133,12 @@
         "17": "Cảm ơn quý đọc giả đã tin tưởng sử dụng dịch vụ của chúng tôi",
         "18": "Tiếp tục mua sắm",
         "19": "Bạn chưa có sản phẩm trong giỏ hàng",
-        "20": "Thêm một vài sản phẩm vào giỏ hàng để bé thỏ nhà mình có tiền mua váy"
+        "20": "Thêm một vài sản phẩm vào giỏ hàng để bé thỏ nhà mình có tiền mua váy",
+        "21": "Hiện tại bạn chưa cập nhật Địa chỉ giao hàng",
+        "22": "Cập nhật Địa chỉ giao hàng",
+        "23": "Đơn hàng",
+        "24": "Bạn đang cố truy cập vào một trang web không tồn tại",
+        "25": "Thanh toán không thành công"
     },
     "Admin_Home_BreadCrumbs": {
         "1": "Trang chủ",
@@ -134,7 +156,9 @@
         "14": "LOẠI SÁCH",
         "15": "NXB",
         "16": "TÁC GIẢ",
-        "17": "CHI TIẾT"
+        "17": "CHI TIẾT",
+        "18": "ĐƠN HÀNG",
+        "19": "Quản lý đơn hàng"
     },
     "Admin_Book": {
         "1": "Danh sách sách",
@@ -160,7 +184,8 @@
         "22": "Chọn nhà xuất bản",
         "23": "Chọn loại sách",
         "24": "Chọn tác  giả",
-        "26": "Chọn khu vực"
+        "26": "Chọn khu vực",
+        "27": "Kích thước"
     },
     "Admin_Other": {
         "1": "Tất cả",
@@ -170,13 +195,13 @@
         "5": "Mã đơn hàng",
         "6": "Ngày mua",
         "7": "Sản phẩm",
+        "8": "Trạng thái",
         "9": "Tên khách hàng",
         "10": "Tổng tiền",
         "11": "Thao tác",
         "12": "Xác nhận đơn hàng",
         "13": "Thoát",
-
-        "14": "Tìm kiếm",
+        "14": "Tìm kiếm...",
         "15": "Số điện thoại",
         "16": "Ngày sinh",
         "17": "Địa chỉ",
@@ -193,6 +218,9 @@
         "29": "Hủy",
         "30": "Cập nhật",
         "31": "Thêm nhà xuất bản",
-        "32": "Ngày tạo"
+        "32": "Ngày tạo",
+        "33": "Thêm",
+        "34": "Tên NXB",
+        "35": "Bạn có chắc muốn xóa không?"
     }
 }

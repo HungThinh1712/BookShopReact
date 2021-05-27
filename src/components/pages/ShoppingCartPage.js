@@ -136,7 +136,7 @@ const ShoppingCartPage = (props) => {
                   flexDirection: "row",
                 }}
               >
-                <h6>Tạm tính: </h6>
+                <h6>{t('Customer_Shopping_Payment.3')}: </h6>
                 <div style={{ flexGrow: "1" }} />
                 <h6>
                   {GetTotalMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
@@ -151,7 +151,7 @@ const ShoppingCartPage = (props) => {
                   flexDirection: "row",
                 }}
               >
-                <h6>Thành tiền: </h6>
+                <h6>{t('Customer_Shopping_Payment.4')}: </h6>
                 <div style={{ flexGrow: "1" }} />
                 <h6>
                   {GetTotalMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
@@ -165,7 +165,7 @@ const ShoppingCartPage = (props) => {
               color="primary"
               onClick={handleClick}
             >
-              Tiến hành đặt hàng
+              {t('Customer_Shopping_Payment.5')}
             </Button>
           </div>
         </div>
@@ -184,17 +184,16 @@ const ShoppingCartPage = (props) => {
                       className="img-fluid mb-4 mr-3"
                     />
                     <h3>
-                      <strong>Bạn chưa có sản phẩm trong giỏ hàng</strong>
+                      <strong>{t('Customer_Shopping_Payment.19')}</strong>
                     </h3>
                     <h4>
-                      Thêm một vài sản phẩm vào giỏ hàng để bé thỏ nhà mình có
-                      tiền mua váy
+                      {t('Customer_Shopping_Payment.20')}
                     </h4>{" "}
                     <button
                       className="btn btn-primary cart-btn-transform m-3"
                       onClick={() => props.history.push("/")}
                     >
-                      Tiếp tục mua sắm
+                      {t('Customer_Shopping_Payment.18')}
                     </button>
                   </div>
                 </div>

@@ -5,12 +5,12 @@ import SideBarAdminPage from "../../common/SideBarAdminPage";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import CustormerManage from "./../../common/CustormerManage";
-
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OrderManagementPageAdmin = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
@@ -62,7 +63,7 @@ const OrderManagementPageAdmin = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
           <BreadCrumb 
-            breadcrumb="Quản lý khách hàng" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/customer_page")}>
+            breadcrumb={t('Admin_Home_BreadCrumbs.3')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/customer_page")}>
           </BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">
@@ -70,7 +71,7 @@ const OrderManagementPageAdmin = (props) => {
                   <div className="table-title">
                     <div className="row">
                       <div className="col-sm-8">
-                        <h2>Quản lý khách hàng</h2>
+                        <h2>{t('Admin_Home_BreadCrumbs.3')}</h2>
                       </div>
                     </div>
                   </div>
@@ -78,7 +79,7 @@ const OrderManagementPageAdmin = (props) => {
                     <div className="row">
                       <div className={classes.search}>
                         <InputBase
-                          placeholder="Tìm kiếm khách hàng..."
+                          placeholder={t('Admin_Other.14')}
                           value={searchString}
                           onChange={handleInputChange}
                           classes={{

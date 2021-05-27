@@ -75,14 +75,14 @@ const CommentPage = (props) => {
           <Header />
           <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Nhận xét của tôi" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/comment_history")}>
+                breadcrumb={t('Customer_BreadCrumbs.5')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/comment_history")}>
               </BreadCrumb>
             </div>
           <div className={`${classes.container}`} >
             <div className="row">
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
-                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Nhận xét của tôi</p>
+                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Customer_BreadCrumbs.5')}</p>
                 {showComments}
               </div>              
             </div>

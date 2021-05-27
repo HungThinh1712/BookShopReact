@@ -15,6 +15,7 @@ import {
 } from "react-places-autocomplete";
 
 const AddressInputForm = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const id = props.id;
   const [name, setName] = useState(props.name);
@@ -122,7 +123,7 @@ const AddressInputForm = (props) => {
             type="text"
             value={name}
             onChange={handleNameInputChange}
-            placeholder="Họ và tên"
+            placeholder={t('Customer_Management.25')}
           />
         </div>
         <div className="input-field">
@@ -131,7 +132,7 @@ const AddressInputForm = (props) => {
             type="text"
             value={phone}
             onChange={handlePhoneInputChange}
-            placeholder="Số điện thoại"
+            placeholder={t('Customer_Management.26')}
           />
         </div>       
         <div className="input-field">
@@ -142,7 +143,7 @@ const AddressInputForm = (props) => {
             className="cbbox !important"
             onChange={handleProvinceInputChange}
           >
-            <option value="0">Chọn Tỉnh/Thành Phố</option>
+            <option value="0">{t('Customer_Management.32')}</option>
             {showProvinces}
           </select>
         </div>
@@ -153,7 +154,7 @@ const AddressInputForm = (props) => {
             className="cbbox !important"
             onChange={handleDistrictInputChange}
           >
-            <option value="0">Chọn Quận/Huyện</option>
+            <option value="0">{t('Customer_Management.33')}</option>
             {showDistricts}
           </select>
         </div>
@@ -164,7 +165,7 @@ const AddressInputForm = (props) => {
             className="cbbox !important"
             onChange={handleWardInputChange}
           >
-            <option value="0">Chọn Phường/Xã</option>
+            <option value="0">{t('Customer_Management.34')}</option>
             {showWards}
           </select>
         </div>
@@ -174,7 +175,7 @@ const AddressInputForm = (props) => {
             type="text"
             onChange={handleAddressInputChange}
             value={address}
-            placeholder="Địa chỉ"
+            placeholder={t('Customer_Management.18')}
           />
         </div>
 
@@ -185,7 +186,7 @@ const AddressInputForm = (props) => {
             color="primary"
             onClick={handleSubmit}
           >
-            Cập nhật
+            {t('Customer_Management.7')}
           </Button>
         ) : (
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -195,14 +196,14 @@ const AddressInputForm = (props) => {
               color="primary"
               onClick={handleSubmit}
             >
-              Cập nhật
+              {t('Customer_Management.7')}
             </Button>
             <Button
               style={{ width: "100%" }}
               variant="contained"
               onClick={() => props.onClick()}
             >
-              Hủy
+              {t('Admin_Other.29')}
             </Button>
           </div>
         )}

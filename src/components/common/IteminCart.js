@@ -6,6 +6,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import * as cartActions from "./../../actions/cartAction";
+import {useTranslation} from "react-i18next"
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -65,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IteminCart = (props) => {
+  const { t } = useTranslation();
   const userId = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData")).id
     : null;
@@ -129,12 +131,12 @@ const IteminCart = (props) => {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span className={classes.title}>{props.name}</span>
-          <span className={classes.author}>Tác giả: {props.authorName}</span>
+          <span className={classes.author}>{t('Admin_Book.11')}: {props.authorName}</span>
           <Link
             className={classes.delete_link}
             onClick={handleDeleteButtonClick}
           >
-            Xóa
+            {t('Customer_Shopping_Payment.2')}
           </Link>
         </div>
         <div className={classes.flex}></div>

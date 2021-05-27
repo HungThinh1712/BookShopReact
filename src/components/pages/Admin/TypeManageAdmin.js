@@ -14,6 +14,8 @@ import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
 import { Popconfirm, message, Button } from "antd";
 import "antd/dist/antd.css";
+import {useTranslation} from "react-i18next"
+
 const useStyles = makeStyles((theme) => ({
   search: {
     padding: "2px 4px",
@@ -51,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TypeManagementPageAdmin = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
@@ -86,7 +89,7 @@ const TypeManagementPageAdmin = (props) => {
       <div id="wrapper">
         <Dialog
           open={open}
-          tagType="Thêm thể loại"
+          tagType="Thêm loại sách"
           onClick={handleButtonAddClick}
           onClose={handleClose}
           onChange={handleChangeName}
@@ -96,7 +99,7 @@ const TypeManagementPageAdmin = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
             <BreadCrumb
-              breadcrumb="Quản lý loại sách"
+              breadcrumb={t('Admin_Home_BreadCrumbs.6')}
               onClick={() => props.history.push("/admin")}
               onClick2={() => props.history.push("/admin/typemanagement_page")}
             ></BreadCrumb>
@@ -106,13 +109,13 @@ const TypeManagementPageAdmin = (props) => {
                   <div className="table-title">
                     <div className="row">
                       <div className="col-sm-8">
-                        <h2> Quản lý loại sách </h2>
+                        <h2> {t('Admin_Home_BreadCrumbs.6')} </h2>
                       </div>
                       <div className="col-sm-4">
                         <div>
                           <Popconfirm
                             placement="topRight"
-                            title="Bạn có chắc muốn xóa không?"
+                            title={t('Admin_Other.35')}
                             onConfirm={confirm}
                             okText="Yes"
                             cancelText="No"
@@ -125,7 +128,6 @@ const TypeManagementPageAdmin = (props) => {
                               }}
                               aria-hidden="true"
                             >
-                              abc
                             </Button>
                           </Popconfirm>
 
@@ -134,7 +136,7 @@ const TypeManagementPageAdmin = (props) => {
                             type="button"
                             className="btn btn-info add-new"
                           >
-                            <i className="fa fa-plus"> </i> Thêm loại sách
+                            <i className="fa fa-plus"> </i> {t('Admin_Other.27')}
                           </button>
                         </div>
                       </div>
@@ -144,7 +146,7 @@ const TypeManagementPageAdmin = (props) => {
                     <div className="row">
                       <div className={classes.search}>
                         <InputBase
-                          placeholder="Tìm kiếm loại sách..."
+                          placeholder={t('Admin_Other.14')}
                           value={searchString}
                           onChange={handleInputChange}
                           classes={{

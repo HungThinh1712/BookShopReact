@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BasicTable = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const handlePageChange = (event, value) => {
@@ -77,8 +78,8 @@ const BasicTable = (props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header}>Tên tác giả</TableCell>
-            <TableCell className={classes.header}>Ngày sinh</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.23')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.16')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

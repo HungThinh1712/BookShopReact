@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WriteCommentZone = (props) => {
+  const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
     const userId = useSelector(state=>state.auth.userData ? state.auth.userData.id : null)
@@ -91,17 +92,17 @@ const WriteCommentZone = (props) => {
         <div style={{marginLeft:'50px',marginTop:'50px'}}>
 				<div className={classes.container}>
                 <div >
-					<h6>Viết đánh giá của bạn</h6>
+					<h6>{t('Customer_Detail.20')}</h6>
 					<div className="stars" >
 						<Rating value={rate} onChange={handleRatingChange} size="large"/>
 					</div>
-          <div><input value={title} onChange={handleTitleChange} style={{marginBottom:'10px',padding:'5px'}} placeholder='Nhập tiêu đề bình luận'/></div>
+          <div><input value={title} onChange={handleTitleChange} style={{marginBottom:'10px',padding:'5px'}} placeholder={t('Customer_Detail.21')}/></div>
 				</div>
 				<div className="input-your-rating" >
 					<textarea value={content} onChange={handleContentChange} rows="3" cols="53" name="comment"  style={{fontSize: '16px',padding:'5px'}}></textarea>
 				</div>
                 </div>
-				<button onClick={handleSubmit} className="btn-send">Gửi đánh giá</button>
+				<button onClick={handleSubmit} className="btn-send">{t('Customer_Detail.22')}</button>
 			</div>
     );
     }   

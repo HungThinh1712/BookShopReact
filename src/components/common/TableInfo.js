@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
-
-    
       table_info: {
         marginLeft:'87px',width:'25%',backgroundColor:'#8470FF',
         [theme.breakpoints.down('sm')]: {
@@ -25,35 +23,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TableInfo = (props) => {
+    const { t } = useTranslation();
     const classes = useStyles();
     return (
             <div className={classes.table_info}>
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
-                    <h6 style={{color:'white'}}>Nhà xuất bản </h6>
+                    <h6 style={{color:'white'}}>{t('Admin_Book.9')} </h6>
                     <div style={{ flexGrow: '1' }} />
                     <h6 style={{color:'white'}}>{props.publishingHouseName}</h6>
                 </div>
                 <Divider />
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
-                    <h6 style={{color:'white'}}>Kích thước</h6>
+                    <h6 style={{color:'white'}}>{t('Admin_Book.27')}</h6>
                     <div style={{ flexGrow: '1' }} />
                         <h6 style={{color:'white'}}>{props.size}</h6>
                 </div>
                 <Divider />
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
-                    <h6 style={{color:'white'}}>Số trang</h6>
+                    <h6 style={{color:'white'}}>{t('Admin_Book.16')}</h6>
                     <div style={{ flexGrow: '1' }} />
                     <h6 style={{color:'white'}}>{props.pageAmount}</h6>
                 </div>
                 <Divider />
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
-                    <h6 style={{color:'white'}}>Loại bìa</h6>
+                    <h6 style={{color:'white'}}>{t('Admin_Book.18')}</h6>
                     <div style={{ flexGrow: '1' }} />
                     <h6 style={{color:'white'}}>{props.coverType}</h6>
                 </div>
                 <Divider />
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'row' }}>
-                    <h6 style={{color:'white'}}>Ngày xuất bản</h6>
+                    <h6 style={{color:'white'}}>{t('Admin_Book.12')}</h6>
                     <div style={{ flexGrow: '1' }} />
                     <h6 style={{color:'white'}}>{props.publishDate}</h6>
                 </div>
