@@ -110,25 +110,6 @@ const TypeManagementPageAdmin = (props) => {
                       </div>
                       <div className="col-sm-4">
                         <div>
-                          <Popconfirm
-                            placement="topRight"
-                            title="Bạn có chắc muốn xóa không?"
-                            onConfirm={confirm}
-                            okText="Yes"
-                            cancelText="No"
-                          >
-                            <Button
-                              style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                color: "red",
-                              }}
-                              aria-hidden="true"
-                            >
-                              abc
-                            </Button>
-                          </Popconfirm>
-
                           <button
                             onClick={handleClickOpen}
                             type="button"

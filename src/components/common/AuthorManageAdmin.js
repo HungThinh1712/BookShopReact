@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as authorActions from "../../actions/authorAction";
 import Dialog from "../common/DialogInfoAuthor";
+import { Popconfirm } from "antd";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontWeight: 900,
+    borderBottom:"none"
   },
   row: {
     "&:hover": {
@@ -62,7 +64,10 @@ const BasicTable = (props) => {
   );
   const [open, setOpen] = React.useState(false);
   const [item, setItem] = React.useState([]);
-
+  const handleDelete = async (id) => {
+    await dispatch(authorActions.deleteAuthor(id));
+    await dispatch(authorActions.getAuthorsRequest("", 1, 10));
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -88,10 +93,38 @@ const BasicTable = (props) => {
               key={index}
               onClick={() => handelRowClick(row)}
             >
-              <TableCell component="th" scope="row" style={{ width: "150px" }}>
+              <TableCell component="th" scope="row" style={{ width: "500px",borderBottom:"none" }}>
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: "150px" }}>{row.birthDay}</TableCell>
+              <TableCell style={{ width: "300px",borderBottom:"none" }}>{row.birthDay}</TableCell>
+              <div
+                style={{ display: "flex", justifyContent: "flex-end", marginTop:'35px', marginRight:'30px' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                {" "}
+                <Popconfirm
+                  placement="topRight"
+                  title={"Bạn có chắc muốn xóa thể loại này không?"}
+                  onConfirm={() => handleDelete(row.id)}
+                  okText="Có"
+                  cancelText="Không"
+                >
+                  <i
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      color: "red",
+                    }}
+                    className="fa fa-trash "
+                    aria-hidden="true"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  ></i>
+                </Popconfirm>
+              </div>
             </TableRow>
           ))}
         </TableBody>

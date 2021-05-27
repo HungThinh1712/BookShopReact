@@ -88,3 +88,27 @@ export const updateAuthor = (updatedAuthor) => async (dispatch) => {
       console.log(err);
     });
 };
+
+export const deleteAuthor = (id) => async (dispatch) => {
+  const url = CallApis.API_URL.concat(`/Authors/Delete?id=${id}`);
+  await axios
+    .delete(url)
+    .then((res) => {
+      if (res.status === 200) {
+        toastMessage("Xóa thành công");
+      } else {
+        let error = Object.values(res.data.errors)[0].toString();
+        dispatch({
+          type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+          payload: error, //sets payload to errors coming from server
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+        payload: err, //sets payload to errors coming from server
+      });
+    });
+};

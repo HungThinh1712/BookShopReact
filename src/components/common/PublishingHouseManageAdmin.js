@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as publishHouseActions from "../../actions/publishHouseAction";
 import Dialog from "../common/DialogAdmin";
+import { Popconfirm } from "antd";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontWeight: 900,
+    borderBottom:"none"
   },
   row: {
     "&:hover": {
@@ -57,7 +59,11 @@ const BasicTable = (props) => {
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
     dispatch(
-      publishHouseActions.getPublishHousesRequest(props.searchString, props.page, 10)
+      publishHouseActions.getPublishHousesRequest(
+        props.searchString,
+        props.page,
+        10
+      )
     );
   }, [dispatch, props.page, props.searchString]);
 
@@ -72,7 +78,10 @@ const BasicTable = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleDelete = async (id) => {
+    await dispatch(publishHouseActions.deletePublishHouse(id));
+    await dispatch(publishHouseActions.getPublishHousesRequest("", 1, 10));
+  };
   const handelRowClick = (row) => {
     setOpen(true);
     setItem(row);
@@ -81,7 +90,7 @@ const BasicTable = (props) => {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow style={{ height: "80px", fontWeight: "900" }}>
+          <TableRow style={{ height: "80px", fontWeight: "900", }}>
             <TableCell className={classes.header}>Tên NXB</TableCell>
             <TableCell className={classes.header}>Ngày tạo</TableCell>
           </TableRow>
@@ -92,12 +101,40 @@ const BasicTable = (props) => {
               style={{ height: "80px" }}
               className={classes.row}
               key={index}
-              onClick={() => handelRowClick(row)}
+              onDoubleClick={() => handelRowClick(row)}
             >
-              <TableCell component="th" scope="row" style={{ width: "150px" }}>
+              <TableCell component="th" scope="row" style={{ width: "500px",borderBottom:"none" }}>
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: "150px" }}>{row.createAt}</TableCell>
+              <TableCell style={{ width: "300px",borderBottom:"none" }}>{row.createAt}</TableCell>
+              <div
+                style={{ display: "flex", justifyContent: "flex-end", marginTop:'35px', marginRight:'30px' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                {" "}
+                <Popconfirm
+                  placement="topRight"
+                  title={"Bạn có chắc muốn xóa thể loại này không?"}
+                  onConfirm={() => handleDelete(row.id)}
+                  okText="Có"
+                  cancelText="Không"
+                >
+                  <i
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      color: "red",
+                    }}
+                    className="fa fa-trash "
+                    aria-hidden="true"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  ></i>
+                </Popconfirm>
+              </div>
             </TableRow>
           ))}
         </TableBody>
@@ -110,7 +147,11 @@ const BasicTable = (props) => {
       </Table>
       {total > 10 ? (
         <div className={classes.pagination} style={{ marginTop: "10px" }}>
-          <Pagination total={paging} onChange={handlePageChange} page={props.page} />
+          <Pagination
+            total={paging}
+            onChange={handlePageChange}
+            page={props.page}
+          />
         </div>
       ) : null}
     </TableContainer>
