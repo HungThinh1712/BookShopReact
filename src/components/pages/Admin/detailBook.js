@@ -7,10 +7,19 @@ import * as authorActions from "../../../actions/authorAction";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
-import * as bookTagActions from "./../../../actions/bookTagsAction";
 import BreadCrumb from "../../common/Breadcrumbs";
+<<<<<<< HEAD
 import {useTranslation} from "react-i18next"
 
+=======
+import { Input, InputNumber } from "antd";
+import { Select } from "antd";
+import { DatePicker } from "antd";
+import { Button } from "antd";
+import moment from "moment";
+const { Option } = Select;
+const { TextArea } = Input;
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
 const Book = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -23,7 +32,7 @@ const Book = (props) => {
   }, [dispatch, id]);
   useEffect(() => {
     dispatch(typeActions.getTypesRequest("", 1, 9999));
-    dispatch(publishHouseActions.getPublishHousesRequest());
+    dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
     dispatch(authorActions.getAuthorsRequest("", 1, 9999));
   }, [dispatch]);
   const types = useSelector((state) =>
@@ -32,25 +41,29 @@ const Book = (props) => {
   const authors = useSelector((state) =>
     state.author.authors.entities ? state.author.authors.entities : []
   );
-  const publishHouses = useSelector(
-    (state) => state.publishHouse.publishHouses.entities ?  state.publishHouse.publishHouses.entities  :[]
+  const publishHouses = useSelector((state) =>
+    state.publishHouse.publishHouses.entities
+      ? state.publishHouse.publishHouses.entities
+      : []
   );
   //Get Data types,authors,publishhouse,
   const showTypes = types.map((type, index) => (
-    <option key={index} value={type.id}>
+    <Option key={index} value={type.id}>
       {type.name}
-    </option>
+    </Option>
   ));
   const showAuthors = authors.map((author, index) => (
-    <option key={index} value={author.id}>
+    <Option key={index} value={author.id}>
       {author.name}
-    </option>
+    </Option>
   ));
   const showPublishHouses = publishHouses.map((publishHouse, index) => (
-    <option key={index} value={publishHouse.id}>
+    <Option key={index} value={publishHouse.id}>
       {publishHouse.name}
-    </option>
+    </Option>
   ));
+
+  const dateFormat = "YYYY-MM-DD";
 
   return (
     <div>
@@ -60,9 +73,16 @@ const Book = (props) => {
           <SideBarAdminPage />
           <div id="content-wrapper" style={{ marginTop: "100px" }}>
             <div className="container-fluid">
+<<<<<<< HEAD
             <BreadCrumb 
               breadcrumb={t('Admin_Book.5')} onClick={()=>props.history.push("/admin")}>
             </BreadCrumb>
+=======
+              <BreadCrumb
+                breadcrumb="Chi tiết cuốn sách"
+                onClick={() => props.history.push("/admin")}
+              ></BreadCrumb>
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
               <div className="card-body">
                 <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                   <div className="row">
@@ -75,6 +95,7 @@ const Book = (props) => {
                   <div className="row tm-edit-product-row">
                     <div className="col-xl-6 col-lg-6 col-md-12">
                       <div className="form-group mb-3">
+<<<<<<< HEAD
                         <label for="name">{t('Admin_Book.6')}</label>
                         <input
                           disabled
@@ -85,17 +106,21 @@ const Book = (props) => {
                           className="form-control validate"
                           required
                         />
+=======
+                        <label for="name">Tên sách</label>
+                        <Input disabled value={selectedBook.bookName} />
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label for="tag">{t('Admin_Book.7')}</label>
 
-                          <select
+                          <Select
+                            defaultValue={selectedBook.tag}
                             disabled
-                            defaultValue={selectedBook.tags}
-                            className="custom-select tm-select-accounts"
-                            id="tag"
+                            style={{ width: "100%" }}
                           >
+<<<<<<< HEAD
                             <option value="Sách bán chạy trong tuần">
                               {t('Customer_Home.12')}
                             </option>
@@ -106,6 +131,18 @@ const Book = (props) => {
                               {t('Customer_Home.6')}
                             </option>
                           </select>
+=======
+                            <Option value="Sách bán chạy trong tuần">
+                              Sách bán chạy trong tuần
+                            </Option>
+                            <Option value="Sách bán chạy trong tháng">
+                              Sách bán chạy trong tháng
+                            </Option>
+                            <Option value="Sách bán chạy trong năm">
+                              Sách bán chạy trong năm
+                            </Option>
+                          </Select>
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <div
@@ -114,14 +151,12 @@ const Book = (props) => {
                             <label for="publishing_house">{t('Admin_Book.9')}</label>
                             <div style={{ flexGrow: "1" }}></div>
                           </div>
-                          <select
-                            disabled
+                          <Select
                             defaultValue={selectedBook.publishingHouseId}
-                            className="custom-select tm-select-accounts"
-                            id="category"
+                            style={{ width: "100%" }}
                           >
                             {showPublishHouses}
-                          </select>
+                          </Select>
                         </div>
                       </div>
 
@@ -136,14 +171,13 @@ const Book = (props) => {
                           <div
                             style={{ display: "flex", flexDirection: "row" }}
                           >
-                            <select
+                            <Select
                               disabled
                               defaultValue={selectedBook.typeId}
-                              className="custom-select tm-select-accounts"
-                              id="category"
+                              style={{ width: "100%" }}
                             >
                               {showTypes}
-                            </select>
+                            </Select>
                           </div>
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
@@ -156,74 +190,89 @@ const Book = (props) => {
                           <div
                             style={{ display: "flex", flexDirection: "row" }}
                           >
-                            <select
+                            <Select
                               disabled
                               defaultValue={selectedBook.authorId}
-                              className="custom-select tm-select-accounts"
-                              id="category"
+                              style={{ width: "100%" }}
                             >
                               {showAuthors}
-                            </select>
+                            </Select>
                           </div>
                         </div>
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label for="publish_date">{t('Admin_Book.12')}</label>
                           <input
+=======
+                          <label for="publish_date">Ngày xuất bản</label>
+                          <DatePicker
+                            format={dateFormat}
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             disabled
-                            value={selectedBook.publishDate}
-                            id="publish_date"
-                            name="publish_date"
-                            type="date"
-                            className="form-control validate"
-                            data-large-mode="true"
+                            style={{ width: "100%" }}
+                            value={moment(selectedBook.publishDate)}
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label>{t('Admin_Book.13')}</label>
                           <input
+=======
+                          <label>Số lượng</label>
+                          <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             disabled
                             value={selectedBook.amount}
-                            type="number"
-                            className="form-control validate"
-                            required
+                            style={{ width: "100%" }}
                           />
                         </div>
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label>{t('Admin_Book.14')}</label>
                           <input
+=======
+                          <label>Giá</label>
+                          <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             disabled
                             value={selectedBook.price}
-                            type="text"
-                            className="form-control validate"
-                            required
+                            style={{ width: "100%" }}
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label>{t('Admin_Book.15')}</label>
                           <input
+=======
+                          <label>Giá bìa</label>
+                          <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             disabled
                             value={selectedBook.coverPrice}
-                            type="text"
-                            className="form-control validate"
-                            required
+                            style={{ width: "100%" }}
                           />
                         </div>
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label>{t('Admin_Book.16')}</label>
                           <input
+=======
+                          <label>Số trang</label>
+                          <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             disabled
                             value={selectedBook.pageAmount}
-                            className="form-control validate"
-                            data-large-mode="true"
+                            style={{ width: "100%" }}
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label>{t('Admin_Book.27')}</label>
                           <input
                             disabled
@@ -232,12 +281,21 @@ const Book = (props) => {
                             className="form-control validate"
                             required
                           />
+=======
+                          <label>Kích thước</label>
+                          <Input disabled value={selectedBook.size} />
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                         </div>
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                           <label>{t('Admin_Book.18')}</label>
                           <input
+=======
+                          <label>Loại bìa</label>
+                          <Input
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             disabled
                             value={selectedBook.cover_Type}
                             name="size"
@@ -249,12 +307,12 @@ const Book = (props) => {
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label for="name">{t('Admin_Book.17')}</label>
 
-                          <select
+                          <Select
                             disabled
                             defaultValue={selectedBook.zoneType}
-                            className="custom-select tm-select-accounts"
-                            id="tag"
+                            style={{ width: "100%" }}
                           >
+<<<<<<< HEAD
                             <option value="Sách tiếng việt">
                               {t('Customer_Home.2')}
                             </option>
@@ -267,14 +325,27 @@ const Book = (props) => {
                       <div className="form-group mb-3">
                         <label for="description">{t('Admin_Book.19')}</label>
                         <textarea
+=======
+                            <Option value="Sách tiếng việt">
+                              Sách tiếng việt
+                            </Option>
+                            <Option value="Sách tiếng anh">
+                              Sách tiếng anh
+                            </Option>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="form-group mb-3">
+                        <label for="description">Mô tả</label>
+                        <TextArea
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           disabled
                           value={selectedBook.description}
-                          className="form-control validate"
                           rows="3"
                           required
-                        ></textarea>
+                        ></TextArea>
                       </div>
-                      <button
+                      <Button size="large" type="primary"
                         onClick={() =>
                           props.history.push("/admin/update_book", {
                             bookData: selectedBook,
@@ -283,8 +354,13 @@ const Book = (props) => {
                         className="btn btn-info form-group mb-3"
                         style={{ width: "100%" }}
                       >
+<<<<<<< HEAD
                         {t('Admin_Book.20')}
                       </button>
+=======
+                        Cập nhật sản phẩm
+                      </Button>
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                       <div className="row">

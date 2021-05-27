@@ -8,11 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {useSelector,useDispatch} from 'react-redux'
-import * as orderActions from '../../actions/orderAction'
 import {withRouter} from 'react-router-dom'
-import { HubConnectionBuilder } from '@microsoft/signalr';
 import Pagination from '../common/Pagination'
-import * as CallApis from '../../constants/Apis'
 import * as userActions from '../../actions/userAction'
 import {useTranslation} from 'react-i18next'
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,13 +13,14 @@ import Pagination from "../common/Pagination";
 import * as typeActions from "../../actions/typesAction";
 import {useTranslation} from 'react-i18next'
 import Dialog from "../common/DialogAdmin";
-
+import { Popconfirm } from "antd";
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
   header: {
     fontWeight: 900,
+    borderBottom:"none"
   },
   row: {
     "&:hover": {
@@ -43,13 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     "&:hover": {
-      backgroundColor: "white",
       cursor: "pointer",
+      color:'red'
     },
-    display: "inline-block",
-    height: "20px",
+   
   },
-
 }));
 
 const BasicTable = (props) => {
@@ -78,10 +77,10 @@ const BasicTable = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleDelete= async (id) =>{
+  const handleDelete = async (id) => {
     await dispatch(typeActions.deleteType(id));
-    await dispatch(typeActions.getTypesRequest("", 1, 10))
-  }
+    await dispatch(typeActions.getTypesRequest("", 1, 10));
+  };
   const handelRowClick = (row) => {
     setOpen(true);
     setItem(row);
@@ -102,28 +101,38 @@ const BasicTable = (props) => {
               style={{ height: "80px" }}
               className={classes.row}
               key={index}
-              onClick={() => handelRowClick(row)}
+              onDoubleClick={() => handelRowClick(row)}
             >
-              <TableCell component="th" scope="row" style={{ width: "300px" }}>
+              <TableCell component="th" scope="row" style={{ width: "500px",borderBottom:"none" }}>
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: "300px" }}>{row.createAt}</TableCell>
-              <TableCell style={{ width: "300px" }}>
+              <TableCell style={{ width: "300px",borderBottom:"none" }}>{row.createAt}</TableCell>
+              <div
+                
+                style={{ display:'inline-block',marginTop:'25px', marginLeft:'300px',padding:'5px' }}
+                className={classes.deleteIcon}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 {" "}
-                <i
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    color: "red",
-                  }}
-                  className="fa fa-trash "
-                  aria-hidden="true"
-                  onClick={(e) => {
-                     handleDelete(row.id);
-                    e.stopPropagation();
-                  }}
-                ></i>
-              </TableCell>
+                <Popconfirm
+                  placement="topRight"
+                  title={"Bạn có chắc muốn xóa thể loại này không?"}
+                  onConfirm={() => handleDelete(row.id)}
+                  okText="Có"
+                  cancelText="Không"
+                >
+                  <i
+                   
+                    className="fa fa-trash "
+                    aria-hidden="true"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  ></i>
+                </Popconfirm>
+              </div>
             </TableRow>
           ))}
         </TableBody>

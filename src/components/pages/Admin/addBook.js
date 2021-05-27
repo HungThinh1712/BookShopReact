@@ -9,8 +9,18 @@ import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
+<<<<<<< HEAD
 import {withRouter} from 'react-router-dom'
 import {useTranslation} from "react-i18next"
+=======
+import { withRouter } from "react-router-dom";
+import { Input, InputNumber } from "antd";
+import { Select } from "antd";
+import { DatePicker } from "antd";
+import { Button } from "antd";
+const { Option } = Select;
+const { TextArea } = Input;
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
 
 const Book = (props) => {
   const { t } = useTranslation();
@@ -26,24 +36,26 @@ const Book = (props) => {
   const authors = useSelector((state) =>
     state.author.authors.entities ? state.author.authors.entities : []
   );
-  const publishHouses = useSelector(
-    (state) => state.publishHouse.publishHouses.entities ? state.publishHouse.publishHouses.entities : []
+  const publishHouses = useSelector((state) =>
+    state.publishHouse.publishHouses.entities
+      ? state.publishHouse.publishHouses.entities
+      : []
   );
   //Get Data types,authors,publishhouse,
   const showTypes = types.map((type, index) => (
-    <option key={index} value={type.id}>
+    <Option key={index} value={type.id}>
       {type.name}
-    </option>
+    </Option>
   ));
   const showAuthors = authors.map((author, index) => (
-    <option key={index} value={author.id}>
+    <Option key={index} value={author.id}>
       {author.name}
-    </option>
+    </Option>
   ));
   const showPublishHouses = publishHouses.map((publishHouse, index) => (
-    <option key={index} value={publishHouse.id}>
+    <Option key={index} value={publishHouse.id}>
       {publishHouse.name}
-    </option>
+    </Option>
   ));
 
   const hiddenFileInput = React.useRef(null);
@@ -90,28 +102,28 @@ const Book = (props) => {
     setBookName(e.target.value);
   };
   const handleTypeInputChange = (e) => {
-    setTypeId(e.target.value);
+    setTypeId(e);
   };
   const handleAuthorInputChange = (e) => {
-    setAuthorId(e.target.value);
+    setAuthorId(e);
   };
   const handlePublishDateInputChange = (e) => {
-    setPublishDate(e.target.value);
+    setPublishDate(e.toISOString());
   };
   const handleAmountInputChange = (e) => {
-    setAmount(e.target.value);
+    setAmount(e);
   };
   const handlePublishHouseInputChange = (e) => {
-    setPublishHouseId(e.target.value);
+    setPublishHouseId(e);
   };
   const handlePriceInputChange = (e) => {
-    setPrice(e.target.value);
+    setPrice(e);
   };
   const handleCoverPriceInputChange = (e) => {
-    setCoverPrice(e.target.value);
+    setCoverPrice(e);
   };
   const handlePageAmountInputChange = (e) => {
-    setPageAmount(e.target.value);
+    setPageAmount(e);
   };
   const handleSizeInputChange = (e) => {
     setSize(e.target.value);
@@ -123,10 +135,10 @@ const Book = (props) => {
     setDescription(e.target.value);
   };
   const handleTagInputChange = (e) => {
-    setbookTag(e.target.value);
+    setbookTag(e);
   };
   const handleZoneInputChange = (e) => {
-    setZoneType(e.target.value);
+    setZoneType(e);
   };
 
   //Add book
@@ -193,9 +205,17 @@ const Book = (props) => {
         <SideBarAdminPage />
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
+<<<<<<< HEAD
           <BreadCrumb 
             breadcrumb={t('Admin_Book.2')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/add_book_page")}>
           </BreadCrumb>
+=======
+            <BreadCrumb
+              breadcrumb="Thêm sách"
+              onClick={() => props.history.push("/admin")}
+              onClick2={() => props.history.push("/admin/add_book_page")}
+            ></BreadCrumb>
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
             <div className="card-body">
               <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div className="row">
@@ -206,8 +226,13 @@ const Book = (props) => {
                 <div className="row tm-edit-product-row">
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <div className="form-group mb-3">
+<<<<<<< HEAD
                       <label for="name">{t('Admin_Book.6')}</label>
                       <input
+=======
+                      <label for="name">Tên sách</label>
+                      <Input
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                         id="name"
                         onChange={handleNameInputChange}
                         name="name"
@@ -220,11 +245,11 @@ const Book = (props) => {
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="name">{t('Admin_Book.7')}</label>
 
-                        <select
+                        <Select
                           onChange={handleTagInputChange}
-                          className="custom-select tm-select-accounts"
-                          id="tagType"
+                          style={{ width: "100%" }}
                         >
+<<<<<<< HEAD
                           <option defaultValue>{t('Admin_Book.21')}</option>
                           <option value="Sách bán chạy trong tuần">
                             {t('Customer_Home.15')}
@@ -236,6 +261,18 @@ const Book = (props) => {
                             {t('Customer_Home.6')}
                           </option>
                         </select>
+=======
+                          <Option value="Sách bán chạy trong tuần">
+                            Sách bán chạy trong tuần
+                          </Option>
+                          <Option value="Sách bán chạy trong tháng">
+                            Sách bán chạy trong tháng
+                          </Option>
+                          <Option value="Sách bán chạy trong năm">
+                            Sách bán chạy trong năm
+                          </Option>
+                        </Select>
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -251,14 +288,17 @@ const Book = (props) => {
                             className="fas fa-plus-circle"
                           ></i>
                         </div>
-                        <select
+                        <Select
                           onChange={handlePublishHouseInputChange}
-                          className="custom-select tm-select-accounts"
+                          style={{ width: "100%" }}
                           id="category"
                         >
+<<<<<<< HEAD
                           <option selected>{t('Admin_Book.22')}</option>
+=======
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           {showPublishHouses}
-                        </select>
+                        </Select>
                       </div>
                     </div>
 
@@ -279,14 +319,16 @@ const Book = (props) => {
                           ></i>
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <select
+                          <Select
                             onChange={handleTypeInputChange}
-                            className="custom-select tm-select-accounts"
-                            id="category"
+                            style={{ width: "100%" }}
                           >
+<<<<<<< HEAD
                             <option defaultValue>{t('Admin_Book.23')}</option>
+=======
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             {showTypes}
-                          </select>
+                          </Select>
                         </div>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
@@ -305,79 +347,95 @@ const Book = (props) => {
                           ></i>
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <select
+                          <Select
                             onChange={handleAuthorInputChange}
-                            className="custom-select tm-select-accounts"
-                            id="category"
+                            style={{ width: "100%" }}
                           >
+<<<<<<< HEAD
                             <option selected>{t('Admin_Book.24')}</option>
+=======
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                             {showAuthors}
-                          </select>
+                          </Select>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                         <label for="publish_date">{t('Admin_Book.12')}</label>
                         <input
+=======
+                        <label for="publish_date">Ngày xuất bản</label>
+                        <DatePicker
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           onChange={handlePublishDateInputChange}
-                          id="publish_date"
-                          name="publish_date"
-                          type="date"
-                          className="form-control validate"
-                          data-large-mode="true"
+                          style={{ width: "100%" }}
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                         <label for="amount">{t('Admin_Book.13')}</label>
                         <input
+=======
+                        <label for="amount">Số lượng</label>
+                        <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           onChange={handleAmountInputChange}
-                          id="amount"
-                          name="amount"
+                          style={{ width: "100%" }}
                           type="number"
-                          className="form-control validate"
-                          required
                         />
                       </div>
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                         <label for="price">{t('Admin_Book.14')}</label>
                         <input
+=======
+                        <label for="price">Giá</label>
+                        <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           onChange={handlePriceInputChange}
-                          name="price"
-                          type="text"
-                          className="form-control validate"
-                          required
+                          style={{ width: "100%" }}
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                         <label for="price">{t('Admin_Book.15')}</label>
                         <input
                           id="price"
+=======
+                        <label for="price">Giá bìa</label>
+                        <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           onChange={handleCoverPriceInputChange}
-                          name="price"
-                          type="text"
-                          className="form-control validate"
-                          required
+                          style={{ width: "100%" }}
                         />
                       </div>
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                         <label for="page_amount">{t('Admin_Book.16')}</label>
                         <input
                           id="page_amount"
+=======
+                        <label for="page_amount">Số trang</label>
+                        <InputNumber
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           onChange={handlePageAmountInputChange}
-                          name="page_amount"
-                          type="number"
-                          className="form-control validate"
-                          data-large-mode="true"
+                          style={{ width: "100%" }}
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
+<<<<<<< HEAD
                         <label for="size">{t('Admin_Book.27')}</label>
                         <input
+=======
+                        <label for="size">Kích thước</label>
+                        <Input
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           onChange={handleSizeInputChange}
                           name="size"
                           type="text"
@@ -401,11 +459,11 @@ const Book = (props) => {
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="name">{t('Admin_Book.17')}</label>
 
-                        <select
+                        <Select
                           onChange={handleZoneInputChange}
-                          className="custom-select tm-select-accounts"
-                          id="tagType"
+                          style={{ width: "100%" }}
                         >
+<<<<<<< HEAD
                           <option defaultValue>{t('Admin_Book.26')}</option>
                           <option value="Sách tiếng việt">
                             {t('Customer_Home.2')}
@@ -417,19 +475,35 @@ const Book = (props) => {
                     <div className="form-group mb-3">
                       <label for="description">{t('Admin_Book.19')}</label>
                       <textarea
-                        onChange={handleDescriptionInputChange}
-                        className="form-control validate"
-                        rows="3"
-                        required
-                      ></textarea>
+=======
+                          <Option value="Sách tiếng việt">
+                            Sách tiếng việt
+                          </Option>
+                          <Option value="Sách tiếng anh">Sách tiếng anh</Option>
+                        </Select>
+                      </div>
                     </div>
-                    <button
+                    <div className="form-group mb-3">
+                      <label for="description">Mô tả</label>
+                      <TextArea
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
+                        onChange={handleDescriptionInputChange}
+                        rows="3"
+                      ></TextArea>
+                    </div>
+                    <Button
+                      type="primary"
+                      size="large"
                       onClick={handleSubmit}
-                      className="btn btn-info form-group mb-3"
                       style={{ width: "100%" }}
                     >
+<<<<<<< HEAD
                       {t('Admin_Book.2')}
                     </button>
+=======
+                      Thêm sản phẩm
+                    </Button>
+>>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                     <div className="row">

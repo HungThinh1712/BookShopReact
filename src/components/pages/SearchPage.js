@@ -71,12 +71,22 @@ const SearchPage = (props) => {
   const [authorId, setAuthorId] = useState(null);
   const [tagId, setTagId] = useState(null);
 
-  const types = useSelector((state) => state.type.types);
-  const publishHouses = useSelector(
-    (state) => state.publishHouse.publishHouses
+  const types = useSelector((state) =>
+    state.type.types.entities ? state.type.types.entities : []
   );
-  const authors = useSelector((state) => state.author.authors);
-  const tags = useSelector((state) => state.bookTags.bookTags);
+  const authors = useSelector((state) =>
+    state.author.authors.entities ? state.author.authors.entities : []
+  );
+  const publishHouses = useSelector((state) =>
+    state.publishHouse.publishHouses.entities
+      ? state.publishHouse.publishHouses.entities
+      : []
+  );
+  const tags = [
+    { id: "Sách bàn chạy trong tuần", name: "Sách bàn chạy trong tuần" },
+    { id: "Sách bàn chạy trong tháng", name: "Sách bàn chạy trong tháng" },
+    { id: "Sách bàn chạy trong năm", name: "Sách bàn chạy trong năm" },
+  ];
   const total = useSelector((state) =>
     state.books.searchedResultBooks.total
       ? state.books.searchedResultBooks.total
@@ -96,9 +106,9 @@ const SearchPage = (props) => {
   }, [page]);
 
   useEffect(() => {
-    dispatch(typeActions.getTypesRequest());
+    dispatch(typeActions.getTypesRequest("", 1, 9999));
     dispatch(bookTagActions.getBookTagsRequest());
-    dispatch(publishHouseActions.getPublishHousesRequest());
+    dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
     dispatch(authorActions.getAuthorsRequest("", 1, 9999));
   }, [dispatch]);
 
@@ -130,7 +140,7 @@ const SearchPage = (props) => {
         page
       )
     );
-  }, [searchString, typeId, price, publishHouseId, authorId, tagId, page]);
+  }, [searchString, typeId, price, publishHouseId, authorId, page]);
 
   const showBooks = searchedBooks.map((book, index) => (
     <Card

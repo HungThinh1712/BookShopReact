@@ -13,6 +13,7 @@ import Pagination from "../common/Pagination";
 import * as publishHouseActions from "../../actions/publishHouseAction";
 import {useTranslation} from 'react-i18next'
 import Dialog from "../common/DialogAdmin";
+import { Popconfirm } from "antd";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontWeight: 900,
+    borderBottom: "none",
   },
   row: {
     "&:hover": {
@@ -41,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  deleteIcon: {
+    "&:hover": {
+      cursor: "pointer",
+      color: "red",
+    },
+  },
 }));
 
 const BasicTable = (props) => {
@@ -59,7 +67,11 @@ const BasicTable = (props) => {
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
     dispatch(
-      publishHouseActions.getPublishHousesRequest(props.searchString, props.page, 10)
+      publishHouseActions.getPublishHousesRequest(
+        props.searchString,
+        props.page,
+        10
+      )
     );
   }, [dispatch, props.page, props.searchString]);
 
@@ -74,7 +86,10 @@ const BasicTable = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleDelete = async (id) => {
+    await dispatch(publishHouseActions.deletePublishHouse(id));
+    await dispatch(publishHouseActions.getPublishHousesRequest("", 1, 10));
+  };
   const handelRowClick = (row) => {
     setOpen(true);
     setItem(row);
@@ -94,12 +109,47 @@ const BasicTable = (props) => {
               style={{ height: "80px" }}
               className={classes.row}
               key={index}
-              onClick={() => handelRowClick(row)}
+              onDoubleClick={() => handelRowClick(row)}
             >
-              <TableCell component="th" scope="row" style={{ width: "150px" }}>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ width: "500px", borderBottom: "none" }}
+              >
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: "150px" }}>{row.createAt}</TableCell>
+              <TableCell style={{ width: "300px", borderBottom: "none" }}>
+                {row.createAt}
+              </TableCell>
+              <div
+                style={{
+                  display: "inline-block",
+                  marginTop: "25px",
+                  marginLeft: "300px",
+                  padding: "5px",
+                }}
+                className={classes.deleteIcon}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                {" "}
+                <Popconfirm
+                  placement="topRight"
+                  title={"Bạn có chắc muốn xóa thể loại này không?"}
+                  onConfirm={() => handleDelete(row.id)}
+                  okText="Có"
+                  cancelText="Không"
+                >
+                  <i
+                    className="fa fa-trash "
+                    aria-hidden="true"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  ></i>
+                </Popconfirm>
+              </div>
             </TableRow>
           ))}
         </TableBody>
@@ -112,7 +162,11 @@ const BasicTable = (props) => {
       </Table>
       {total > 10 ? (
         <div className={classes.pagination} style={{ marginTop: "10px" }}>
-          <Pagination total={paging} onChange={handlePageChange} page={props.page} />
+          <Pagination
+            total={paging}
+            onChange={handlePageChange}
+            page={props.page}
+          />
         </div>
       ) : null}
     </TableContainer>
