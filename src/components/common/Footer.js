@@ -5,7 +5,7 @@ const Footer = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <footer>
+      <div className="div_footer">
         <div  className="main-content">
           <div className="left box">
             <h2>{t('Customer_Home.11')}</h2>
@@ -51,7 +51,7 @@ const Footer = () => {
             <span className="far fa-copyright"></span><span> 2020 All rights reserved.</span>
           </center>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };

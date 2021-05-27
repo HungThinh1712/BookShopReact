@@ -322,14 +322,12 @@ html {
   }
   
   /* FOOTER */
-  footer{
-    margin: 0;
-    padding: 0;
+  .div_footer{
+   
     color: #f8f4f4;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     position: absolute;
-    bottom: 0px;
     width: 100%;
     background: rgb(139, 119, 228);
   }
@@ -858,6 +856,13 @@ body-userpage {
   background-color: white;
   cursor: pointer;
 }
+
+.profile-usermenu .nav div:hover {
+  background-color: white;
+  cursor: pointer;
+  color: #00b7f1;
+}
+
 .profile-usermenu {  
   margin-top: 30px;
 }   

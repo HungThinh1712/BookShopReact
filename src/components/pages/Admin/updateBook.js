@@ -16,20 +16,20 @@ const UpdateBook = (props) => {
   const bookData = props.history.location.state.bookData
     ? props.history.location.state.bookData
     : [];
-  useEffect(() => {
-    dispatch(typeActions.getTypesRequest("", 1, 9999));
-    dispatch(publishHouseActions.getPublishHousesRequest());
-    dispatch(authorActions.getAuthorsRequest("", 1, 9999));
-  }, [dispatch]);
-  const types = useSelector((state) =>
-    state.type.types.entities ? state.type.types.entities : []
-  );
-  const authors = useSelector((state) =>
-    state.author.authors.entities ? state.author.authors.entities : []
-  );
-  const publishHouses = useSelector(
-    (state) => state.publishHouse.publishHouses
-  );
+    useEffect(() => {
+      dispatch(typeActions.getTypesRequest("", 1, 9999));
+      dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
+      dispatch(authorActions.getAuthorsRequest("", 1, 9999));
+    }, [dispatch]);
+    const types = useSelector((state) =>
+      state.type.types.entities ? state.type.types.entities : []
+    );
+    const authors = useSelector((state) =>
+      state.author.authors.entities ? state.author.authors.entities : []
+    );
+    const publishHouses = useSelector(
+      (state) => state.publishHouse.publishHouses.entities ? state.publishHouse.publishHouses.entities : []
+    );
   //Get Data types, tags,authors,publishhouse,
   const showTypes = types.map((type, index) => (
     <option key={index} value={type.id}>

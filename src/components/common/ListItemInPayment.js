@@ -49,7 +49,7 @@ const ListItemIPayment = (props) => {
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '600', fontSize: '17px', padding: '10px' }}>Thành tiền</div>
                     <div style={{ padding: '10px', marginLeft: '200px' }}>
-                        <div style={{color:'red',fontSize:'20px',fontWeight:'500'}}>{GetTotalMoney.toFixed(3).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</div>
+                        <div style={{color:'red',fontSize:'20px',fontWeight:'500'}}>{GetTotalMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</div>
                     </div>
                 </div>
             </div>

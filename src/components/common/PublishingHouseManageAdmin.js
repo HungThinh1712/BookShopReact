@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as publishHouseActions from "../../actions/publishHouseAction";
 import {useTranslation} from 'react-i18next'
+import Dialog from "../common/DialogAdmin";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -45,9 +46,8 @@ const useStyles = makeStyles((theme) => ({
 const BasicTable = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
   const handlePageChange = (event, value) => {
-    setPage(value);
+    props.setPage(value);
   };
 
   const total = useSelector((state) =>
@@ -58,9 +58,9 @@ const BasicTable = (props) => {
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
     dispatch(
-      publishHouseActions.getPublishHousesRequest(props.searchString, page, 10)
+      publishHouseActions.getPublishHousesRequest(props.searchString, props.page, 10)
     );
-  }, [dispatch, page, props.searchString]);
+  }, [dispatch, props.page, props.searchString]);
 
   const rows = useSelector((state) =>
     state.publishHouse.publishHouses.entities
@@ -102,10 +102,16 @@ const BasicTable = (props) => {
             </TableRow>
           ))}
         </TableBody>
+        <Dialog
+          publishHouseData={item}
+          open={open}
+          onClose={handleClose}
+          tag="Cập nhật nhà xuất bản"
+        ></Dialog>
       </Table>
       {total > 10 ? (
         <div className={classes.pagination} style={{ marginTop: "10px" }}>
-          <Pagination total={paging} onChange={handlePageChange} page={page} />
+          <Pagination total={paging} onChange={handlePageChange} page={props.page} />
         </div>
       ) : null}
     </TableContainer>

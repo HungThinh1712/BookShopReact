@@ -49,39 +49,29 @@ const useStyles = makeStyles((theme) => ({
 
 const AuthorManagementPageAdmin = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
+  const [page,setPage] = useState(1);
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
   };
 
   const [open, setOpen] = React.useState(false);
-  const [name, setName] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
-  };
-  const handleChangeName = (e) => {
-    setName(e.target.value);
   };
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleButtonAddClick = () => {
-    dispatch(authorActions.addAuthor({ name: name }));
-    setOpen(false);
-    setName("");
-  };
 
   return (
     <div>
       <div id="wrapper">
         <Dialog
           open={open}
-          onClick={handleButtonAddClick}
           onClose={handleClose}
-          onChange={handleChangeName}
           tag="Thêm tác giả"
+          setPage={setPage}
         ></Dialog>
         <Header notShow="notShow" />
         <SideBarAdminPage />
@@ -128,7 +118,7 @@ const AuthorManagementPageAdmin = (props) => {
                       </div>
                     </div>
                     <div className="row">
-                      <AuthorManageAdmin searchString={searchString} />
+                      <AuthorManageAdmin page={page} setPage={setPage} searchString={searchString} />
                     </div>
                   </div>
                 </div>

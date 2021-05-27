@@ -9,6 +9,7 @@ import Rating from '@material-ui/lab/Rating';
 import TextArea from 'antd/lib/input/TextArea';
 import { useDispatch, } from 'react-redux';
 import * as commentActions from './../../actions/commentAction'
+import {useTranslation} from 'react-i18next'
 
 export default function FormDialog(props) {
 

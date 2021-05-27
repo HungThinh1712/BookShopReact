@@ -66,9 +66,6 @@ const Comment = (props) => {
 				</div>
 				</div>
 				
-				
-				
-				
 			</div>
 
 		</div>			

@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as typeActions from "../../actions/typesAction";
 import {useTranslation} from 'react-i18next'
+import Dialog from "../common/DialogAdmin";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -40,14 +41,23 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  deleteIcon: {
+    "&:hover": {
+      backgroundColor: "white",
+      cursor: "pointer",
+    },
+    display: "inline-block",
+    height: "20px",
+  },
+
 }));
 
 const BasicTable = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
+
   const handlePageChange = (event, value) => {
-    setPage(value);
+    props.setPage(value);
   };
 
   const total = useSelector((state) =>
@@ -55,8 +65,8 @@ const BasicTable = (props) => {
   );
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
-    dispatch(typeActions.getTypesRequest(props.searchString, page, 10));
-  }, [dispatch, page, props.searchString]);
+    dispatch(typeActions.getTypesRequest(props.searchString, props.page, 10));
+  }, [dispatch, props.page, props.searchString]);
 
   const rows = useSelector((state) =>
     state.type.types.entities ? state.type.types.entities : []
@@ -67,7 +77,10 @@ const BasicTable = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleDelete= async (id) =>{
+    await dispatch(typeActions.deleteType(id));
+    await dispatch(typeActions.getTypesRequest("", 1, 10))
+  }
   const handelRowClick = (row) => {
     setOpen(true);
     setItem(row);
@@ -94,15 +107,39 @@ const BasicTable = (props) => {
                 {row.name}
               </TableCell>
               <TableCell style={{ width: "300px" }}>{row.createAt}</TableCell>
-              <TableCell style={{ width: "300px" }}> <i style={{display:'flex', justifyContent:'flex-end',color:'red'}} class="fa fa-trash" aria-hidden="true"></i></TableCell>
-             
+              <TableCell style={{ width: "300px" }}>
+                {" "}
+                <i
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    color: "red",
+                  }}
+                  className="fa fa-trash "
+                  aria-hidden="true"
+                  onClick={(e) => {
+                     handleDelete(row.id);
+                    e.stopPropagation();
+                  }}
+                ></i>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
+        <Dialog
+          typeData={item}
+          open={open}
+          onClose={handleClose}
+          tag="Cập nhật thể loại"
+        ></Dialog>
       </Table>
       {total > 10 ? (
         <div className={classes.pagination} style={{ marginTop: "10px" }}>
-          <Pagination total={paging} onChange={handlePageChange} page={page} />
+          <Pagination
+            total={paging}
+            onChange={handlePageChange}
+            page={props.page}
+          />
         </div>
       ) : null}
     </TableContainer>

@@ -75,7 +75,7 @@ export const updateAuthor = (updatedAuthor) => async (dispatch) => {
         toastMessage("Cập nhật thành công");
         dispatch({
           type: Types.UPDATE_AUTHOR,
-          payload: res.data,
+          author: res.data,
         });
       } else {
         dispatch({

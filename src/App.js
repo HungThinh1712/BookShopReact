@@ -8,7 +8,6 @@ import BookDetailPage from "./components/pages/BookDetailPage";
 import ShoppingCartPage from "./components/pages/ShoppingCartPage";
 import "./resources/styles.css";
 import "./resources/adminStyle.css";
-import "./resources/chart.css";
 import AdminPage from "./components/pages/Admin/index";
 import AddressPage from "./components/pages/AddressPage";
 import UserPage from "./components/pages/UserPage";
