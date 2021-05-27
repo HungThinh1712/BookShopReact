@@ -12,11 +12,9 @@ import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as authorActions from "../../actions/authorAction";
 import Dialog from "../common/DialogInfoAuthor";
-<<<<<<< HEAD
 import {useTranslation} from 'react-i18next';
-=======
 import { Popconfirm } from "antd";
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
+
 
 const useStyles = makeStyles((theme) => ({
   table: {

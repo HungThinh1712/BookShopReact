@@ -113,27 +113,6 @@ const TypeManagementPageAdmin = (props) => {
                       </div>
                       <div className="col-sm-4">
                         <div>
-<<<<<<< HEAD
-                          <Popconfirm
-                            placement="topRight"
-                            title={t('Admin_Other.35')}
-                            onConfirm={confirm}
-                            okText="Yes"
-                            cancelText="No"
-                          >
-                            <Button
-                              style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                color: "red",
-                              }}
-                              aria-hidden="true"
-                            >
-                            </Button>
-                          </Popconfirm>
-
-=======
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           <button
                             onClick={handleClickOpen}
                             type="button"

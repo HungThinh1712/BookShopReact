@@ -10,16 +10,13 @@ import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
 import BreadCrumb from "../../common/Breadcrumbs";
-<<<<<<< HEAD
 import {useTranslation} from "react-i18next"
-=======
 import { Input, InputNumber } from "antd";
 import { Select } from "antd";
 import { DatePicker } from "antd";
 import { Button } from "antd";
 const { Option } = Select;
 const { TextArea } = Input;
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
 
 const UpdateBook = (props) => {
   const { t } = useTranslation();
@@ -228,13 +225,8 @@ const UpdateBook = (props) => {
                 <div className="row tm-edit-product-row">
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <div className="form-group mb-3">
-<<<<<<< HEAD
                       <label for="name">{t('Admin_Book.6')}</label>
-                      <input
-=======
-                      <label for="name">Tên sách</label>
                       <Input
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                         value={bookName}
                         onChange={handleNameInputChange}
                       />
@@ -248,30 +240,16 @@ const UpdateBook = (props) => {
                           onChange={handleTagInputChange}
                           style={{ width: "100%" }}
                         >
-<<<<<<< HEAD
-                          <option>{t('Admin_Book.21')}</option>
-                          <option value="Sách bán chạy trong tuần">
-                            {t('Customer_Home.12')}
-                          </option>
-                          <option value="Sách bán chạy trong tháng">
-                            {t('Customer_Home.5')}
-                          </option>
-                          <option value="Sách bán chạy trong năm">
-                            {t('Customer_Home.6')}
-                          </option>
-                        </select>
-=======
                           <Option value="Sách bán chạy trong tuần">
-                            Sách bán chạy trong tuần
+                            {t('Customer_Home.12')}
                           </Option>
                           <Option value="Sách bán chạy trong tháng">
-                            Sách bán chạy trong tháng
+                            {t('Customer_Home.12')}
                           </Option>
                           <Option value="Sách bán chạy trong năm">
-                            Sách bán chạy trong năm
+                            {t('Customer_Home.12')}
                           </Option>
                         </Select>
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -363,13 +341,8 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-<<<<<<< HEAD
                         <label for="amount">{t('Admin_Book.13')}</label>
-                        <input
-=======
-                        <label for="amount">Số lượng</label>
                         <InputNumber
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           value={amount}
                           onChange={handleAmountInputChange}
                           style={{ width: "100%" }}
@@ -378,26 +351,16 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-<<<<<<< HEAD
                         <label for="price">{t('Admin_Book.14')}</label>
-                        <input
-=======
-                        <label for="price">Giá</label>
                         <InputNumber
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           value={price}
                           onChange={handlePriceInputChange}
                           style={{ width: "100%" }}
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-<<<<<<< HEAD
                         <label for="price">{t('Admin_Book.15')}</label>
-                        <input
-=======
-                        <label for="price">Giá bìa</label>
                         <InputNumber
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           value={coverPrice}
                           id="price"
                           onChange={handleCoverPriceInputChange}
@@ -407,13 +370,8 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-<<<<<<< HEAD
                         <label for="page_amount">{t('Admin_Book.16')}</label>
-                        <input
-=======
-                        <label for="page_amount">Số trang</label>
                         <InputNumber
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           value={pageAmount}
                           id="page_amount"
                           onChange={handlePageAmountInputChange}
@@ -421,13 +379,8 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-<<<<<<< HEAD
                         <label for="size">{t('Admin_Book.27')}</label>
-                        <input
-=======
-                        <label for="size">Kích thước</label>
                         <Input
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           value={size}
                           onChange={handleSizeInputChange}
                           name="size"
@@ -439,13 +392,8 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-<<<<<<< HEAD
                         <label for="cover_type">{t('Admin_Book.18')}</label>
-                        <input
-=======
-                        <label for="cover_type">Loại bìa</label>
                         <Input
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                           value={coverType}
                           id="size"
                           onChange={handleCoverTypeChange}
@@ -464,30 +412,16 @@ const UpdateBook = (props) => {
                           id="tagType"
                           style={{ width: "100%" }}
                         >
-<<<<<<< HEAD
-                          <option>{t('Admin_Book.26')}</option>
-                          <option value="Sách tiếng việt">
-                            {t('Customer_Home.2')}
-                          </option>
-                          <option value="Sách tiếng anh">{t('Customer_Home.3')}</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group mb-3">
-                      <label for="description">{t('Admin_Book.19')}</label>
-                      <textarea
-=======
                           <Option value="Sách tiếng việt">
-                            Sách tiếng việt
+                            {t('Customer_Home.2')}
                           </Option>
-                          <Option value="Sách tiếng anh">Sách tiếng anh</Option>
+                          <Option value="Sách tiếng anh">{t('Customer_Home.3')}</Option>
                         </Select>
                       </div>
                     </div>
                     <div className="form-group mb-3">
                       <label for="description">Mô tả</label>
                       <TextArea
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                         value={description}
                         onChange={handleDescriptionInputChange}
                         className="form-control validate"
@@ -502,13 +436,8 @@ const UpdateBook = (props) => {
                       className="btn btn-info form-group mb-3"
                       style={{ width: "100%" }}
                     >
-<<<<<<< HEAD
                       {t('Admin_Book.20')}
-                    </button>
-=======
-                      Cập nhật sản phẩm
                     </Button>
->>>>>>> 55799344cc86019d0c9595b6ec3bb19cf94cc524
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                     <div className="row">
