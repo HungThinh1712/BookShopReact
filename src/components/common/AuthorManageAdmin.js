@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontWeight: 900,
-    borderBottom:"none"
+    borderBottom: "none",
   },
   row: {
     "&:hover": {
@@ -42,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  deleteIcon: {
+    "&:hover": {
+      cursor: "pointer",
+      color: "red",
+    },
+  },
 }));
 
 const BasicTable = (props) => {
@@ -56,7 +62,9 @@ const BasicTable = (props) => {
   );
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
-    dispatch(authorActions.getAuthorsRequest(props.searchString, props.page, 10));
+    dispatch(
+      authorActions.getAuthorsRequest(props.searchString, props.page, 10)
+    );
   }, [dispatch, props.page, props.searchString]);
 
   const rows = useSelector((state) =>
@@ -93,12 +101,24 @@ const BasicTable = (props) => {
               key={index}
               onClick={() => handelRowClick(row)}
             >
-              <TableCell component="th" scope="row" style={{ width: "500px",borderBottom:"none" }}>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ width: "500px", borderBottom: "none" }}
+              >
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: "300px",borderBottom:"none" }}>{row.birthDay}</TableCell>
+              <TableCell style={{ width: "300px", borderBottom: "none" }}>
+                {row.birthDay}
+              </TableCell>
               <div
-                style={{ display: "flex", justifyContent: "flex-end", marginTop:'35px', marginRight:'30px' }}
+                style={{
+                  display: "inline-block",
+                  marginTop: "25px",
+                  marginLeft: "300px",
+                  padding: "5px",
+                }}
+                className={classes.deleteIcon}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -112,11 +132,6 @@ const BasicTable = (props) => {
                   cancelText="Không"
                 >
                   <i
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      color: "red",
-                    }}
                     className="fa fa-trash "
                     aria-hidden="true"
                     onClick={(e) => {
@@ -137,7 +152,11 @@ const BasicTable = (props) => {
       </Table>
       {total > 10 ? (
         <div className={classes.pagination} style={{ marginTop: "10px" }}>
-          <Pagination total={paging} onChange={handlePageChange} page={props.page} />
+          <Pagination
+            total={paging}
+            onChange={handlePageChange}
+            page={props.page}
+          />
         </div>
       ) : null}
     </TableContainer>

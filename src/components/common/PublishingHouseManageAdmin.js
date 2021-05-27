@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontWeight: 900,
-    borderBottom:"none"
+    borderBottom: "none",
   },
   row: {
     "&:hover": {
@@ -40,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: "auto",
         marginRight: "0",
       },
+    },
+  },
+  deleteIcon: {
+    "&:hover": {
+      cursor: "pointer",
+      color: "red",
     },
   },
 }));
@@ -90,7 +96,7 @@ const BasicTable = (props) => {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow style={{ height: "80px", fontWeight: "900", }}>
+          <TableRow style={{ height: "80px", fontWeight: "900" }}>
             <TableCell className={classes.header}>Tên NXB</TableCell>
             <TableCell className={classes.header}>Ngày tạo</TableCell>
           </TableRow>
@@ -103,12 +109,24 @@ const BasicTable = (props) => {
               key={index}
               onDoubleClick={() => handelRowClick(row)}
             >
-              <TableCell component="th" scope="row" style={{ width: "500px",borderBottom:"none" }}>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ width: "500px", borderBottom: "none" }}
+              >
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: "300px",borderBottom:"none" }}>{row.createAt}</TableCell>
+              <TableCell style={{ width: "300px", borderBottom: "none" }}>
+                {row.createAt}
+              </TableCell>
               <div
-                style={{ display: "flex", justifyContent: "flex-end", marginTop:'35px', marginRight:'30px' }}
+                style={{
+                  display: "inline-block",
+                  marginTop: "25px",
+                  marginLeft: "300px",
+                  padding: "5px",
+                }}
+                className={classes.deleteIcon}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -122,11 +140,6 @@ const BasicTable = (props) => {
                   cancelText="Không"
                 >
                   <i
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      color: "red",
-                    }}
                     className="fa fa-trash "
                     aria-hidden="true"
                     onClick={(e) => {

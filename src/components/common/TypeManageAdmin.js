@@ -43,11 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     "&:hover": {
-      backgroundColor: "white",
       cursor: "pointer",
+      color:'red'
     },
-    display: "inline-block",
-    height: "20px",
+   
   },
 }));
 
@@ -107,7 +106,9 @@ const BasicTable = (props) => {
               </TableCell>
               <TableCell style={{ width: "300px",borderBottom:"none" }}>{row.createAt}</TableCell>
               <div
-                style={{ display: "flex", justifyContent: "flex-end", marginTop:'35px', marginRight:'30px' }}
+                
+                style={{ display:'inline-block',marginTop:'25px', marginLeft:'300px',padding:'5px' }}
+                className={classes.deleteIcon}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -121,11 +122,7 @@ const BasicTable = (props) => {
                   cancelText="Không"
                 >
                   <i
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      color: "red",
-                    }}
+                   
                     className="fa fa-trash "
                     aria-hidden="true"
                     onClick={(e) => {

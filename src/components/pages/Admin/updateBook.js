@@ -10,41 +10,49 @@ import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
 import BreadCrumb from "../../common/Breadcrumbs";
+import { Input, InputNumber } from "antd";
+import { Select } from "antd";
+import { DatePicker } from "antd";
+import { Button } from "antd";
+const { Option } = Select;
+const { TextArea } = Input;
 
 const UpdateBook = (props) => {
   const dispatch = useDispatch();
   const bookData = props.history.location.state.bookData
     ? props.history.location.state.bookData
     : [];
-    useEffect(() => {
-      dispatch(typeActions.getTypesRequest("", 1, 9999));
-      dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
-      dispatch(authorActions.getAuthorsRequest("", 1, 9999));
-    }, [dispatch]);
-    const types = useSelector((state) =>
-      state.type.types.entities ? state.type.types.entities : []
-    );
-    const authors = useSelector((state) =>
-      state.author.authors.entities ? state.author.authors.entities : []
-    );
-    const publishHouses = useSelector(
-      (state) => state.publishHouse.publishHouses.entities ? state.publishHouse.publishHouses.entities : []
-    );
+  useEffect(() => {
+    dispatch(typeActions.getTypesRequest("", 1, 9999));
+    dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
+    dispatch(authorActions.getAuthorsRequest("", 1, 9999));
+  }, [dispatch]);
+  const types = useSelector((state) =>
+    state.type.types.entities ? state.type.types.entities : []
+  );
+  const authors = useSelector((state) =>
+    state.author.authors.entities ? state.author.authors.entities : []
+  );
+  const publishHouses = useSelector((state) =>
+    state.publishHouse.publishHouses.entities
+      ? state.publishHouse.publishHouses.entities
+      : []
+  );
   //Get Data types, tags,authors,publishhouse,
   const showTypes = types.map((type, index) => (
-    <option key={index} value={type.id}>
+    <Option key={index} value={type.id}>
       {type.name}
-    </option>
+    </Option>
   ));
   const showAuthors = authors.map((author, index) => (
-    <option key={index} value={author.id}>
+    <Option key={index} value={author.id}>
       {author.name}
-    </option>
+    </Option>
   ));
   const showPublishHouses = publishHouses.map((publishHouse, index) => (
-    <option key={index} value={publishHouse.id}>
+    <Option key={index} value={publishHouse.id}>
       {publishHouse.name}
-    </option>
+    </Option>
   ));
 
   const hiddenFileInput = React.useRef(null);
@@ -92,28 +100,28 @@ const UpdateBook = (props) => {
     setBookName(e.target.value);
   };
   const handleTypeInputChange = (e) => {
-    setTypeId(e.target.value);
+    setTypeId(e);
   };
   const handleAuthorInputChange = (e) => {
-    setAuthorId(e.target.value);
+    setAuthorId(e);
   };
   const handlePublishDateInputChange = (e) => {
-    setPublishDate(e.target.value);
+    setPublishDate(e.toISOString());
   };
   const handleAmountInputChange = (e) => {
-    setAmount(e.target.value);
+    setAmount(e);
   };
   const handlePublishHouseInputChange = (e) => {
-    setPublishHouseId(e.target.value);
+    setPublishHouseId(e);
   };
   const handlePriceInputChange = (e) => {
-    setPrice(e.target.value);
+    setPrice(e);
   };
   const handleCoverPriceInputChange = (e) => {
-    setCoverPrice(e.target.value);
+    setCoverPrice(e);
   };
   const handlePageAmountInputChange = (e) => {
-    setPageAmount(e.target.value);
+    setPageAmount(e);
   };
   const handleSizeInputChange = (e) => {
     setSize(e.target.value);
@@ -125,10 +133,10 @@ const UpdateBook = (props) => {
     setDescription(e.target.value);
   };
   const handleTagInputChange = (e) => {
-    setbookTag(e.target.value);
+    setbookTag(e);
   };
   const handleZoneInputChange = (e) => {
-    setZoneType(e.target.value);
+    setZoneType(e);
   };
 
   //Add book
@@ -216,36 +224,30 @@ const UpdateBook = (props) => {
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <div className="form-group mb-3">
                       <label for="name">Tên sách</label>
-                      <input
+                      <Input
                         value={bookName}
                         onChange={handleNameInputChange}
-                        name="name"
-                        type="text"
-                        className="form-control validate"
-                        required
                       />
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="name">Loại thẻ</label>
 
-                        <select
+                        <Select
                           value={tag}
                           onChange={handleTagInputChange}
-                          className="custom-select tm-select-accounts"
-                          id="tagType"
+                          style={{ width: "100%" }}
                         >
-                          <option>Chọn loại thẻ</option>
-                          <option value="Sách bán chạy trong tuần">
+                          <Option value="Sách bán chạy trong tuần">
                             Sách bán chạy trong tuần
-                          </option>
-                          <option value="Sách bán chạy trong tháng">
+                          </Option>
+                          <Option value="Sách bán chạy trong tháng">
                             Sách bán chạy trong tháng
-                          </option>
-                          <option value="Sách bán chạy trong năm">
+                          </Option>
+                          <Option value="Sách bán chạy trong năm">
                             Sách bán chạy trong năm
-                          </option>
-                        </select>
+                          </Option>
+                        </Select>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -261,14 +263,13 @@ const UpdateBook = (props) => {
                             className="fas fa-plus-circle"
                           ></i>
                         </div>
-                        <select
+                        <Select
                           value={publishHouseId}
                           onChange={handlePublishHouseInputChange}
-                          className="custom-select tm-select-accounts"
-                          id="category"
+                          style={{ width: "100%" }}
                         >
                           {showPublishHouses}
-                        </select>
+                        </Select>
                       </div>
                     </div>
 
@@ -289,14 +290,13 @@ const UpdateBook = (props) => {
                           ></i>
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <select
+                          <Select
                             value={typeId}
                             onChange={handleTypeInputChange}
-                            className="custom-select tm-select-accounts"
-                            id="category"
+                            style={{ width: "100%" }}
                           >
                             {showTypes}
-                          </select>
+                          </Select>
                         </div>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
@@ -315,14 +315,13 @@ const UpdateBook = (props) => {
                           ></i>
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <select
+                          <Select
                             value={authorId}
                             onChange={handleAuthorInputChange}
-                            className="custom-select tm-select-accounts"
-                            id="category"
+                            style={{ width: "100%" }}
                           >
                             {showAuthors}
-                          </select>
+                          </Select>
                         </div>
                       </div>
                     </div>
@@ -341,58 +340,45 @@ const UpdateBook = (props) => {
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="amount">Số lượng</label>
-                        <input
+                        <InputNumber
                           value={amount}
                           onChange={handleAmountInputChange}
-                          id="amount"
-                          name="amount"
-                          type="number"
-                          className="form-control validate"
-                          required
+                          style={{ width: "100%" }}
                         />
                       </div>
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="price">Giá</label>
-                        <input
+                        <InputNumber
                           value={price}
                           onChange={handlePriceInputChange}
-                          name="price"
-                          type="text"
-                          className="form-control validate"
-                          required
+                          style={{ width: "100%" }}
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="price">Giá bìa</label>
-                        <input
+                        <InputNumber
                           value={coverPrice}
                           id="price"
                           onChange={handleCoverPriceInputChange}
-                          name="price"
-                          type="text"
-                          className="form-control validate"
-                          required
+                          style={{ width: "100%" }}
                         />
                       </div>
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="page_amount">Số trang</label>
-                        <input
+                        <InputNumber
                           value={pageAmount}
                           id="page_amount"
                           onChange={handlePageAmountInputChange}
-                          name="page_amount"
-                          type="number"
-                          className="form-control validate"
-                          data-large-mode="true"
+                          style={{ width: "100%" }}
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="size">Kích thước</label>
-                        <input
+                        <Input
                           value={size}
                           onChange={handleSizeInputChange}
                           name="size"
@@ -405,7 +391,7 @@ const UpdateBook = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="cover_type">Loại bìa</label>
-                        <input
+                        <Input
                           value={coverType}
                           id="size"
                           onChange={handleCoverTypeChange}
@@ -418,37 +404,38 @@ const UpdateBook = (props) => {
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="name">Khu vực</label>
 
-                        <select
+                        <Select
                           value={zoneType}
                           onChange={handleZoneInputChange}
-                          className="custom-select tm-select-accounts"
                           id="tagType"
+                          style={{ width: "100%" }}
                         >
-                          <option>Chọn khu vực</option>
-                          <option value="Sách tiếng việt">
+                          <Option value="Sách tiếng việt">
                             Sách tiếng việt
-                          </option>
-                          <option value="Sách tiếng anh">Sách tiếng anh</option>
-                        </select>
+                          </Option>
+                          <Option value="Sách tiếng anh">Sách tiếng anh</Option>
+                        </Select>
                       </div>
                     </div>
                     <div className="form-group mb-3">
                       <label for="description">Mô tả</label>
-                      <textarea
+                      <TextArea
                         value={description}
                         onChange={handleDescriptionInputChange}
                         className="form-control validate"
                         rows="3"
                         required
-                      ></textarea>
+                      ></TextArea>
                     </div>
-                    <button
+                    <Button
+                      size="large"
+                      type="primary"
                       onClick={handleSubmit}
                       className="btn btn-info form-group mb-3"
                       style={{ width: "100%" }}
                     >
                       Cập nhật sản phẩm
-                    </button>
+                    </Button>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                     <div className="row">
