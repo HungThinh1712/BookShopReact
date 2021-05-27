@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PaymentMethod = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) =>
@@ -119,7 +120,7 @@ const PaymentMethod = (props) => {
       >
         <div style={{ display: "flex" }}>
           <div style={{ fontWeight: "700", fontSize: "17px", padding: "10px" }}>
-            Phương thức thanh toán
+            {t('Customer_Shopping_Payment.12')}
           </div>
         </div>
         <div style={{ backgroundColor: "blueviolet", height: "1px" }}></div>
@@ -135,7 +136,7 @@ const PaymentMethod = (props) => {
         style={{ width: "100%", marginTop: "10px" }}
         color="primary"
       >
-        Đặt mua
+        {t('Customer_Shopping_Payment.15')}
       </Button>
     </div>
   );

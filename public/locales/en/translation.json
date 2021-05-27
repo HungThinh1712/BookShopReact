@@ -74,7 +74,8 @@
         "41": "Forget password?",
         "42": "Password",
         "43": "Sign up",
-        "44": "Already have an account? Log in"
+        "44": "Already have an account? Log in",
+        "45": "Log in"
     },
     "Customer_Search": {
         "1": "Type",
