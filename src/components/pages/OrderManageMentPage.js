@@ -7,6 +7,7 @@ import OrderManageMent from '../common/OrderMangement'
 import Pagination from '../common/Pagination'
 import {useSelector} from 'react-redux'
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 const OrderManageMentPage = (props) => {
+  const { t } =  useTranslation();
   const classes = useStyles();
   const total  = useSelector(state=>state.order.orders.total ? state.order.orders.total: 0 )
   const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
@@ -62,7 +64,7 @@ const OrderManageMentPage = (props) => {
         <Header />
         <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
           <BreadCrumb
-            breadcrumb="Đơn hàng của tôi" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/order_history")}>
+            breadcrumb={t('Customer_BreadCrumbs.3')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/order_history")}>
           </BreadCrumb>
         </div>
         <div className={`${classes.container}`} >
@@ -70,7 +72,7 @@ const OrderManageMentPage = (props) => {
             
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
             <div className="col-xs-7 col-sm-8 " >
-              <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "7px" }}>Đơn hàng của tôi</p>
+              <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "7px" }}>{t('Customer_BreadCrumbs.3')}</p>
               <OrderManageMent page ={page} />
             </div>
             {total > 4 ? <div className={classes.pagination} style={{marginTop:'10px'}}>

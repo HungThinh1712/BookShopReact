@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { withRouter } from "react-router-dom";
+import {useTranslation} from 'react-i18next';
 
 const UserPageNav = (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleLogoutClick = () => {
     dispatch(authActions.logOut());
@@ -60,7 +62,7 @@ const UserPageNav = (props) => {
             src={imageSrc ? imageSrc : props.imageSrc}
             onClick={handleUpLoadClick}
             className="img-responsive"
-            alt="Thông tin cá nhân"
+            alt={t('Customer_Management.1')}
           />
           <div style={{ display: "none" }} className="custom-file mt-3 mb-3">
             <input
@@ -83,7 +85,7 @@ const UserPageNav = (props) => {
               type="button"
               className="btn btn-success btn-sm"
             >
-              Lưu ảnh
+              {t('Customer_Management.31')}
             </button>
           ) : (
             <button
@@ -91,11 +93,11 @@ const UserPageNav = (props) => {
               type="button"
               className="btn btn-success btn-sm"
             >
-              Trang chủ
+              {t('Customer_Management.2')}
             </button>
           )}
           <button className="btn btn-danger btn-sm" onClick={handleLogoutClick}>
-            Đăng xuất
+          {t('Customer_Management.3')}
           </button>
         </div>
         <div className="profile-usermenu">
@@ -104,16 +106,16 @@ const UserPageNav = (props) => {
             aria-orientation="vertical"
           >
             <a onClick={handleUserPageClick} className="nav-link ">
-              <i className="fas fa-user"></i> Thông tin tài khoản
+              <i className="fas fa-user"></i> {t('Customer_Management.1')}
             </a>
             <a onClick={handleOrderHistoryClick} className="nav-link">
-              <i className="fas fa-shopping-cart"></i> Quản lý đơn hàng
+              <i className="fas fa-shopping-cart"></i> {t('Customer_Management.8')}
             </a>
             <a onClick={handleUpdateAddressClick} className="nav-link">
-              <i className="fas fa-tag"></i> Địa chỉ đã gán
+              <i className="fas fa-tag"></i> {t('Customer_Management.15')}
             </a>
             <a onClick={handleCommentHistoryClick} className="nav-link">
-              <i className="fas fa-star-half-alt"></i> Nhận xét của tôi
+              <i className="fas fa-star-half-alt"></i> {t('Customer_Management.19')}
             </a>
           </div>
         </div>

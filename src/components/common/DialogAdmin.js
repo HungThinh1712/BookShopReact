@@ -8,8 +8,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import * as typeActions from "../../actions/typesAction";
 import * as publishouseActions from "../../actions/publishHouseAction"
 import { useDispatch } from "react-redux";
+import {useTranslation} from "react-i18next"
 
 export default function FormDialog(props) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   useEffect(() => {
@@ -60,10 +62,10 @@ export default function FormDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onClose} color="primary">
-            Hủy
+            {t('Admin_Other.29')}
           </Button>
           <Button onClick={handleSubmit} color="primary">
-            Cập nhật
+            {t('Admin_Other.30')}
           </Button>
         </DialogActions>
       </Dialog>

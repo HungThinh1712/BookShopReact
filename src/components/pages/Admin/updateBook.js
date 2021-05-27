@@ -10,6 +10,7 @@ import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 import { Input, InputNumber } from "antd";
 import { Select } from "antd";
 import { DatePicker } from "antd";
@@ -18,6 +19,7 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 const UpdateBook = (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const bookData = props.history.location.state.bookData
     ? props.history.location.state.bookData
@@ -216,14 +218,14 @@ const UpdateBook = (props) => {
                 <div className="row">
                   <div className="col-12">
                     <h4 className="tm-block-title d-inline-block">
-                      Cập nhật sản phẩm
+                      {t('Admin_Book.20')}
                     </h4>
                   </div>
                 </div>
                 <div className="row tm-edit-product-row">
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <div className="form-group mb-3">
-                      <label for="name">Tên sách</label>
+                      <label for="name">{t('Admin_Book.6')}</label>
                       <Input
                         value={bookName}
                         onChange={handleNameInputChange}
@@ -231,7 +233,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="name">Loại thẻ</label>
+                        <label for="name">{t('Admin_Book.7')}</label>
 
                         <Select
                           value={tag}
@@ -239,19 +241,19 @@ const UpdateBook = (props) => {
                           style={{ width: "100%" }}
                         >
                           <Option value="Sách bán chạy trong tuần">
-                            Sách bán chạy trong tuần
+                            {t('Customer_Home.12')}
                           </Option>
                           <Option value="Sách bán chạy trong tháng">
-                            Sách bán chạy trong tháng
+                            {t('Customer_Home.12')}
                           </Option>
                           <Option value="Sách bán chạy trong năm">
-                            Sách bán chạy trong năm
+                            {t('Customer_Home.12')}
                           </Option>
                         </Select>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="publishing_house">Nhà xuất bản</label>
+                          <label for="publishing_house">{t('Admin_Book.9')}</label>
                           <div style={{ flexGrow: "1" }}></div>
                           <i
                             onClick={() => handleClickOpen("Thêm nhà xuất bản")}
@@ -276,7 +278,7 @@ const UpdateBook = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="tagType">Loại sách</label>
+                          <label for="tagType">{t('Admin_Book.10')}</label>
                           <div style={{ flexGrow: "1" }}></div>
                           <i
                             onClick={() => handleClickOpen("Thêm loại sách")}
@@ -301,7 +303,7 @@ const UpdateBook = (props) => {
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="tagType">Tác giả</label>
+                          <label for="tagType">{t('Admin_Book.11')}</label>
                           <div style={{ flexGrow: "1" }}></div>
                           <i
                             onClick={() => handleClickOpen("Thêm tác giả")}
@@ -327,7 +329,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="publish_date">Ngày xuất bản</label>
+                        <label for="publish_date">{t('Admin_Book.12')}</label>
                         <input
                           value={publishDate}
                           onChange={handlePublishDateInputChange}
@@ -339,7 +341,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="amount">Số lượng</label>
+                        <label for="amount">{t('Admin_Book.13')}</label>
                         <InputNumber
                           value={amount}
                           onChange={handleAmountInputChange}
@@ -349,7 +351,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="price">Giá</label>
+                        <label for="price">{t('Admin_Book.14')}</label>
                         <InputNumber
                           value={price}
                           onChange={handlePriceInputChange}
@@ -357,7 +359,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="price">Giá bìa</label>
+                        <label for="price">{t('Admin_Book.15')}</label>
                         <InputNumber
                           value={coverPrice}
                           id="price"
@@ -368,7 +370,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="page_amount">Số trang</label>
+                        <label for="page_amount">{t('Admin_Book.16')}</label>
                         <InputNumber
                           value={pageAmount}
                           id="page_amount"
@@ -377,7 +379,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="size">Kích thước</label>
+                        <label for="size">{t('Admin_Book.27')}</label>
                         <Input
                           value={size}
                           onChange={handleSizeInputChange}
@@ -390,7 +392,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="cover_type">Loại bìa</label>
+                        <label for="cover_type">{t('Admin_Book.18')}</label>
                         <Input
                           value={coverType}
                           id="size"
@@ -402,7 +404,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="name">Khu vực</label>
+                        <label for="name">{t('Admin_Book.17')}</label>
 
                         <Select
                           value={zoneType}
@@ -411,9 +413,9 @@ const UpdateBook = (props) => {
                           style={{ width: "100%" }}
                         >
                           <Option value="Sách tiếng việt">
-                            Sách tiếng việt
+                            {t('Customer_Home.2')}
                           </Option>
-                          <Option value="Sách tiếng anh">Sách tiếng anh</Option>
+                          <Option value="Sách tiếng anh">{t('Customer_Home.3')}</Option>
                         </Select>
                       </div>
                     </div>
@@ -434,7 +436,7 @@ const UpdateBook = (props) => {
                       className="btn btn-info form-group mb-3"
                       style={{ width: "100%" }}
                     >
-                      Cập nhật sản phẩm
+                      {t('Admin_Book.20')}
                     </Button>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">

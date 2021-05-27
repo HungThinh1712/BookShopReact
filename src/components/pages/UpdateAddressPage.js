@@ -8,6 +8,7 @@ import {withRouter} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import AddressInputForm from '../common/AddressInputForm'
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
      
 }));
 const UpdateAddressPage = (props) => {
+    const { t } =  useTranslation();
     const classes = useStyles();
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     const id = userData ? userData.id : null;
@@ -41,7 +43,7 @@ const UpdateAddressPage = (props) => {
             <Header/>
             <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Địa chỉ đã gán" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/update_address_page")}>
+                breadcrumb={t('Customer_Management.15')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/update_address_page")}>
               </BreadCrumb>
             </div>
             <div  className = {`${classes.container}`} >
@@ -49,7 +51,7 @@ const UpdateAddressPage = (props) => {
                     <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName}  props={props}/>
                     <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>
                         <div className="profile-content">
-                            <p style={{fontSize:'25px',fontWeight:500}}>Địa chỉ giao hàng</p>
+                            <p style={{fontSize:'25px',fontWeight:500}}>{t('Customer_Management.16')}</p>
                             <AddressInputForm
                              name = {fullName ? userData.fullName: fullName }
                              phone = {fullName ? userData.phone: ''}

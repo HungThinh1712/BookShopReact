@@ -17,10 +17,12 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import styles from "../../styles/dashboardStyle";
 import {withRouter} from 'react-router-dom'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles(styles);
 
 const HomeAdmin = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   return (
     <div>
@@ -33,7 +35,7 @@ const HomeAdmin = (props) => {
                     <HomeIcon />
                 </CardIcon>
             </div>
-              <p className={classes.cardCategory}>TRANG CHỦ</p>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.1')}</p>
               <h3 className={classes.cardTitle}>HOME</h3>
             </CardHeader>
             <CardFooter stats>
@@ -50,9 +52,9 @@ const HomeAdmin = (props) => {
                     <ImportContactsIcon />
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
               <h3 className={classes.cardTitle}>
-                SÁCH
+              {t('Admin_Home_BreadCrumbs.11')}
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -69,8 +71,8 @@ const HomeAdmin = (props) => {
                     <PeopleIcon />
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
-              <h4 className={classes.cardTitle}>KHÁCH HÀNG</h4>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
+              <h4 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.12')}</h4>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -89,8 +91,8 @@ const HomeAdmin = (props) => {
                     <AccountCircleIcon />
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
-              <h3 className={classes.cardTitle}>TÀI KHOẢN</h3>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
+              <h3 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.13')}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -106,9 +108,9 @@ const HomeAdmin = (props) => {
                     <MenuBookIcon />
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
               <h3 className={classes.cardTitle}>
-                LOẠI SÁCH
+              {t('Admin_Home_BreadCrumbs.14')}
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -125,8 +127,8 @@ const HomeAdmin = (props) => {
                     <ShoppingCartIcon />
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
-              <h3 className={classes.cardTitle}>ĐƠN HÀNG</h3>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
+              <h3 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.18')}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -145,8 +147,8 @@ const HomeAdmin = (props) => {
                     <HomeWorkIcon/>
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
-              <h3 className={classes.cardTitle}>NXB</h3>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
+              <h6 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.15')}</h6>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -162,8 +164,8 @@ const HomeAdmin = (props) => {
                     <AccountBoxIcon/>
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>QUẢN LÝ</p>
-              <h3 className={classes.cardTitle}>TÁC GIẢ</h3>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
+              <h3 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.16')}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -179,8 +181,8 @@ const HomeAdmin = (props) => {
                     <EqualizerIcon/>
                 </CardIcon>
                 </div>
-              <p className={classes.cardCategory}>THỐNG KÊ</p>
-              <h3 className={classes.cardTitle}>CHI TIẾT</h3>
+              <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.10')}</p>
+              <h3 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.17')}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

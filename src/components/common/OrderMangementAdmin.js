@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { useSelector, useDispatch } from "react-redux";
-import * as orderActions from "../../actions/orderAction";
-import { withRouter } from "react-router-dom";
-import { HubConnectionBuilder } from "@microsoft/signalr";
-import Pagination from "../common/Pagination";
-import * as CallApis from "../../constants/Apis";
-import Dialog from "../common/DialogDetailItemAdmin";
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { useSelector, useDispatch } from 'react-redux'
+import * as orderActions from '../../actions/orderAction'
+import { withRouter } from 'react-router-dom'
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import Pagination from '../common/Pagination'
+import * as CallApis from '../../constants/Apis'
+import Dialog from '../common/DialogDetailItemAdmin'
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BasicTable = () => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -167,12 +169,12 @@ const BasicTable = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header}>Mã đơn hàng</TableCell>
-            <TableCell className={classes.header}>Ngày mua</TableCell>
-            <TableCell className={classes.header}>Sản phẩm</TableCell>
-            <TableCell className={classes.header}>Tên khách hàng</TableCell>
-            <TableCell className={classes.header}>Tổng tiền</TableCell>
-            <TableCell className={classes.header}>Thao tác</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.9')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.11')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

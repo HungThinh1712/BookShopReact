@@ -4,7 +4,9 @@ import SexCheckBox from './../common/SexCheckBok'
 import {useDispatch} from 'react-redux'
 import { toastMessage } from '../common/ToastHelper'
 import * as authActions from '../../actions/authAction'
+import {useTranslation} from 'react-i18next'
 const RegisterPage = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,7 +59,7 @@ const RegisterPage = (props) => {
         <h2 className="title">Đăng ký</h2>
         <div className="input-field">
           <i className="fas fa-user"></i>
-          <input type="text" onChange={handleNameInputChange} placeholder="Họ và tên" />
+          <input type="text" onChange={handleNameInputChange} placeholder={t('Customer_Management.25')} />
         </div>
         <div className="input-field">
           <i className="fas fa-envelope"></i>
@@ -65,23 +67,23 @@ const RegisterPage = (props) => {
         </div>
         <div className="input-field">
           <i className="fas fa-lock"></i>
-          <input type="password" onChange={handlePasswordInputChange} placeholder="Mật khẩu" />
+          <input type="password" onChange={handlePasswordInputChange} placeholder={t('Customer_Management.42')} />
         </div>
         <div className="input-field">
           <i className="fas fa-lock"></i>
-          <input type="password" onChange ={handleConfirmPasswordInputChange} placeholder="Xác nhận lại mật khẩu" />
+          <input type="password" onChange ={handleConfirmPasswordInputChange} placeholder={t('Customer_Management.30')} />
         </div>
         <div className="input-field">
           <i className="fas fa-phone-alt"></i>
-          <input type="text" onChange={handlePhoneInputChange} placeholder="Số điện thoại" />
+          <input type="text" onChange={handlePhoneInputChange} placeholder={t('Customer_Management.26')} />
         </div>
         <div className="input-field">
           <i className="fas fa-envelope"></i>
-          <input type="date" onChange ={handleBirthDayInputChange} placeholder="Ngày sinh" />
+          <input type="date" onChange ={handleBirthDayInputChange} placeholder={t('Customer_Management.27')} />
         </div>
         <SexCheckBox value={sex} onChange={handleSexInputChange} />
-        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }} onClick ={handleSubmit} className="btn_register solid" >Đăng ký</div>
-        <div style={{ color: 'blueviolet', cursor: 'pointer' }} onClick={() => props.history.push('/user_page')}>Đã có tài khoản? Đăng nhập</div>
+        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }} onClick ={handleSubmit} className="btn_register solid" >{t('Customer_Management.43')}</div>
+        <div style={{ color: 'blueviolet', cursor: 'pointer' }} onClick={() => props.history.push('/user_page')}>{t('Customer_Management.44')}</div>
 
       </form>
 

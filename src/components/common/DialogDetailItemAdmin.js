@@ -5,10 +5,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import ItemInOrder from './ItemInOrderDetails'
 import Divider from '@material-ui/core/Divider';
+import {useTranslation} from 'react-i18next'
+
 
 export default function FormDialog(props) {
-
-    
+    const { t } = useTranslation();
     const itemsInOrder =props.items;
     const showItemsInOrder = itemsInOrder.map((item) =>
 
@@ -32,14 +33,14 @@ export default function FormDialog(props) {
             <Dialog fullWidth={true}  open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
                 <DialogContent style={{with:'100%'}} >
                     <div  >
-                    <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Chi tiết đơn hàng</p>
+                    <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Admin_Other.4')}</p>
                     {showItemsInOrder}
                 </div>  
 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.onClose} color="primary">
-                        Thoát
+                    {t('Admin_Other.13')} 
                     </Button>
                     
                 </DialogActions>

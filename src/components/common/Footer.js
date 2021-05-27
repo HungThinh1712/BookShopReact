@@ -1,19 +1,21 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next'
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <div className="div_footer">
         <div  className="main-content">
           <div className="left box">
-            <h2>About us</h2>
+            <h2>{t('Customer_Home.11')}</h2>
             <div className="content">
-              <p>Tina là một công ty bán sách trực tuyến được thành lập vào 10/2020 với 2 cổ đông chính là Lê Hồng Đạo và Hưng Thịnh với số vốn đầu tư lên tới gần 1 tỷ $.</p>
+              <p>{t('Customer_Home.14')}</p>
             </div>
           </div>
 
           <div className="center box">
-            <h2>Address</h2>
+            <h2>{t('Customer_Home.12')}</h2>
             <div className="content">
               <div className="place" >
                 <span className="fas fa-map-marker-alt"></span>
@@ -27,7 +29,7 @@ const Footer = () => {
           </div>
 
           <div className="right box">
-            <h2>Contact us</h2>
+            <h2>{t('Customer_Home.13')}</h2>
             <div className="content">
              
             </div>

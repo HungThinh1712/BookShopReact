@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import CartIcon from "../../image/ic-cart@2x.png";
 import { useSelector, useDispatch } from "react-redux";
 import * as cartActions from "./../../actions/cartAction";
+import {useTranslation} from 'react-i18next'
+
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up("sm")]: {
@@ -85,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BookDetail = (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLogined = useSelector((state) =>
     state.auth ? state.auth.isAuthenticated : false
@@ -139,12 +142,12 @@ const BookDetail = (props) => {
             </div>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
-                Tác giả: {props.authorName}
+              {t('Customer_Detail.1')}: {props.authorName}
               </span>
             </p>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
-                Thể loại: {props.bookTypeName}
+              {t('Customer_Detail.2')}: {props.bookTypeName}
               </span>
             </p>
 
@@ -158,12 +161,12 @@ const BookDetail = (props) => {
             </p>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
-                Tiết kiệm: {props.discount}%
+              {t('Customer_Detail.3')}: {props.discount}%
               </span>
             </p>
             <p style={{ marginBottom: "1em" }}>
               <span className={classes.card_info}>
-                Giá thị trường:{" "}
+              {t('Customer_Detail.4')}:{" "}
                 {props.coverPrice
                   .toString()
                   .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
@@ -172,7 +175,7 @@ const BookDetail = (props) => {
             </p>
             <div style={{ display: "flex", marginBottom: "0.5em" }}>
               <p style={{ marginBottom: "0.5em" }}>
-                <span className={classes.card_info}>Số lượng</span>
+                <span className={classes.card_info}>{t('Customer_Detail.6')}</span>
               </p>
               <div style={{ marginBottom: "0.5em", marginLeft: "10px" }}>
                 <ButtonGroup
@@ -219,7 +222,7 @@ const BookDetail = (props) => {
                   }}
                   alt={"a cart icon"}
                 />
-                Thêm vào giỏ
+                {t('Customer_Detail.7')}
               </Button>
             </div>
           </div>

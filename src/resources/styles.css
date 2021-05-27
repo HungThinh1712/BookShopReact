@@ -833,6 +833,14 @@ body-userpage {
   background-color: white;
   cursor: pointer;
 }
+
+.profile-usermenu .nav div:hover {
+  background-color: white;
+  cursor: pointer;
+  color: #00b7f1;
+}
+
+
 .profile-usermenu {
   margin-top: 30px;
 }

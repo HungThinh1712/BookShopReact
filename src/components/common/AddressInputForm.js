@@ -12,6 +12,7 @@ import { UserOutlined, PhoneOutlined, BankOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 const AddressInputForm = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const id = props.id;
   const [name, setName] = useState(props.name);
@@ -164,7 +165,7 @@ const AddressInputForm = (props) => {
             style={{ width: "350px", marginBottom: "15px" }}
             value={phone}
             onChange={handlePhoneInputChange}
-            placeholder="Số điện thoại"
+            placeholder={t('Customer_Management.26')}
           />
         </div>
         <div

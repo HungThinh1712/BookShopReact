@@ -8,6 +8,7 @@ import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 import { Input, InputNumber } from "antd";
 import { Select } from "antd";
 import { DatePicker } from "antd";
@@ -15,7 +16,9 @@ import { Button } from "antd";
 import moment from "moment";
 const { Option } = Select;
 const { TextArea } = Input;
+
 const Book = (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const selectedBook = useSelector((state) =>
     state.books.selectedBook ? state.books.selectedBook : null
@@ -68,7 +71,7 @@ const Book = (props) => {
           <div id="content-wrapper" style={{ marginTop: "100px" }}>
             <div className="container-fluid">
               <BreadCrumb
-                breadcrumb="Chi tiết cuốn sách"
+                breadcrumb={t('Admin_Book.5')}
                 onClick={() => props.history.push("/admin")}
               ></BreadCrumb>
               <div className="card-body">
@@ -76,19 +79,20 @@ const Book = (props) => {
                   <div className="row">
                     <div className="col-12">
                       <h4 className="tm-block-title d-inline-block">
-                        Chi tiết sách
+                      {t('Admin_Book.5')}
                       </h4>
                     </div>
                   </div>
                   <div className="row tm-edit-product-row">
                     <div className="col-xl-6 col-lg-6 col-md-12">
                       <div className="form-group mb-3">
-                        <label for="name">Tên sách</label>
+
+                        <label for="name">{t('Admin_Book.6')}</label>
                         <Input disabled value={selectedBook.bookName} />
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label for="tag">Thẻ</label>
+                          <label for="tag">{t('Admin_Book.7')}</label>
 
                           <Select
                             defaultValue={selectedBook.tag}
@@ -96,13 +100,13 @@ const Book = (props) => {
                             style={{ width: "100%" }}
                           >
                             <Option value="Sách bán chạy trong tuần">
-                              Sách bán chạy trong tuần
+                            {t('Customer_Home.12')}
                             </Option>
                             <Option value="Sách bán chạy trong tháng">
-                              Sách bán chạy trong tháng
+                            {t('Customer_Home.5')}
                             </Option>
                             <Option value="Sách bán chạy trong năm">
-                              Sách bán chạy trong năm
+                            {t('Customer_Home.6')}
                             </Option>
                           </Select>
                         </div>
@@ -110,7 +114,7 @@ const Book = (props) => {
                           <div
                             style={{ display: "flex", flexDirection: "row" }}
                           >
-                            <label for="publishing_house">Nhà xuất bản</label>
+                            <label for="publishing_house">{t('Admin_Book.9')}</label>
                             <div style={{ flexGrow: "1" }}></div>
                           </div>
                           <Select
@@ -127,7 +131,7 @@ const Book = (props) => {
                           <div
                             style={{ display: "flex", flexDirection: "row" }}
                           >
-                            <label for="tag">Loại sách</label>
+                            <label for="tag">{t('Admin_Book.10')}</label>
                             <div style={{ flexGrow: "1" }}></div>
                           </div>
                           <div
@@ -146,7 +150,7 @@ const Book = (props) => {
                           <div
                             style={{ display: "flex", flexDirection: "row" }}
                           >
-                            <label for="tag">Tác giả</label>
+                            <label for="tag">{t('Admin_Book.11')}</label>
                             <div style={{ flexGrow: "1" }}></div>
                           </div>
                           <div
@@ -164,7 +168,7 @@ const Book = (props) => {
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label for="publish_date">Ngày xuất bản</label>
+                          <label for="publish_date">{t('Admin_Book.12')}</label>
                           <DatePicker
                             format={dateFormat}
                             disabled
@@ -173,7 +177,7 @@ const Book = (props) => {
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label>Số lượng</label>
+                          <label>{t('Admin_Book.13')}</label>
                           <InputNumber
                             disabled
                             value={selectedBook.amount}
@@ -183,7 +187,7 @@ const Book = (props) => {
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label>Giá</label>
+                          <label>{t('Admin_Book.14')}</label>
                           <InputNumber
                             disabled
                             value={selectedBook.price}
@@ -191,7 +195,7 @@ const Book = (props) => {
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label>Giá bìa</label>
+                          <label>{t('Admin_Book.15')}</label>
                           <InputNumber
                             disabled
                             value={selectedBook.coverPrice}
@@ -201,7 +205,7 @@ const Book = (props) => {
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label>Số trang</label>
+                          <label>{t('Admin_Book.16')}</label>
                           <InputNumber
                             disabled
                             value={selectedBook.pageAmount}
@@ -209,13 +213,13 @@ const Book = (props) => {
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label>Kích thước</label>
+                          <label>{t('Admin_Book.27')}</label>
                           <Input disabled value={selectedBook.size} />
                         </div>
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label>Loại bìa</label>
+                          <label>{t('Admin_Book.18')}</label>
                           <Input
                             disabled
                             value={selectedBook.cover_Type}
@@ -226,7 +230,7 @@ const Book = (props) => {
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
-                          <label for="name">Khu vực</label>
+                          <label for="name">{t('Admin_Book.17')}</label>
 
                           <Select
                             disabled
@@ -234,10 +238,10 @@ const Book = (props) => {
                             style={{ width: "100%" }}
                           >
                             <Option value="Sách tiếng việt">
-                              Sách tiếng việt
+                              {t('Customer_Home.2')}
                             </Option>
                             <Option value="Sách tiếng anh">
-                              Sách tiếng anh
+                              {t('Customer_Home.3')}
                             </Option>
                           </Select>
                         </div>
@@ -260,7 +264,7 @@ const Book = (props) => {
                         className="btn btn-info form-group mb-3"
                         style={{ width: "100%" }}
                       >
-                        Cập nhật sản phẩm
+                        {t('Admin_Book.20')}
                       </Button>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">

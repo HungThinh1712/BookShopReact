@@ -2,6 +2,7 @@ import React, {  useState } from 'react';
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import { makeStyles } from '@material-ui/core/styles';
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CommentDialogs = (props) => {
+    const { t } = useTranslation();
     const classes = useStyles()
     return (
         <div style={{border:'none'}}>
@@ -56,15 +58,15 @@ const CommentDialogs = (props) => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span className={classes.title}>{props.name}</span>
-                   {props.bookName ?  <span className={classes.name}>Sản phẩm: {props.bookName}</span>:null}
+                   {props.bookName ?  <span className={classes.name}>{t('Customer_Management.12')}: {props.bookName}</span>:null}
         
                 </div>
                 <div className={classes.flex}></div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ marginTop: '10px', fontSize: '12px', fontWeight: '500', color: 'red'}}>Ngày đánh giá: {props.createAt}</span>
-                    <span style={{ marginTop: '10px', fontSize: '15px', fontWeight: '500', color: 'black'}}>Tiêu đề: {props.title}</span>
-                    <span style={{ marginTop: '10px', fontSize: '13px', fontWeight: '300', color: 'black'}}>Nội dung nhận xét: {props.content}</span>
-                    <span style={{ marginTop: '10px', fontSize: '12px', fontWeight: '300', color: 'black'}}>Đánh giá: {props.rate} sao</span>
+                    <span style={{ marginTop: '10px', fontSize: '12px', fontWeight: '500', color: 'red'}}>{t('Customer_Management.22')}: {props.createAt}</span>
+                    <span style={{ marginTop: '10px', fontSize: '15px', fontWeight: '500', color: 'black'}}>{t('Customer_Management.20')}: {props.title}</span>
+                    <span style={{ marginTop: '10px', fontSize: '13px', fontWeight: '300', color: 'black'}}>{t('Customer_Management.23')}: {props.content}</span>
+                    <span style={{ marginTop: '10px', fontSize: '12px', fontWeight: '300', color: 'black'}}>{t('Customer_Management.21')}: {props.rate} {t('Customer_Management.24')}</span>
                 </div>
             </div>
         </div>

@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
-import CheckBox from "./../common/CheckBox";
-import { makeStyles } from "@material-ui/core/styles";
-import ListItemInPayment from "./ListItemInPayment";
-import Button from "@material-ui/core/Button";
-import { useDispatch, useSelector } from "react-redux";
-import * as cartActions from "../../actions/cartAction";
-import { withRouter, Redirect } from "react-router-dom";
-import NotificationItem from "../common/NotificationItem";
-import * as notificationActions from "../../actions/notificationAction";
-import { HubConnectionBuilder } from "@microsoft/signalr";
-import * as CallApis from "../../constants/Apis";
+import React, {useState,useEffect} from 'react';
+import CheckBox from './../common/CheckBox'
+import {makeStyles} from '@material-ui/core/styles'
+import ListItemInPayment from './ListItemInPayment'
+import Button from '@material-ui/core/Button'
+import {useDispatch,useSelector} from 'react-redux';
+import * as cartActions from '../../actions/cartAction';
+import {withRouter, Redirect} from 'react-router-dom'
+import NotificationItem from '../common/NotificationItem'
+import * as notificationActions from '../../actions/notificationAction'
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import * as CallApis from '../../constants/Apis'
+import {useTranslation} from 'react-i18next'
+
 const useStyles = makeStyles((theme) => ({
   payment_method_zone: {
     display: "inline-block",

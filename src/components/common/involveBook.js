@@ -13,6 +13,8 @@ import { withRouter } from 'react-router-dom'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import Pagination from '../common/Pagination'
 import * as CallApis from '../../constants/Apis'
+import {useTranslation} from 'react-i18next'
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const BasicTable = () => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -135,7 +138,7 @@ const BasicTable = () => {
 
   const showStatus = (status) => {
     if (status === "Đang chờ xác nhận") {
-      return <div className={classes.confirm} style={{ textDecoration: 'underline', color: 'blue' }}><p>Xác nhận đơn hàng</p></div>
+      return <div className={classes.confirm} style={{ textDecoration: 'underline', color: 'blue' }}><p>{t('Admin_Other.12')}</p></div>
     }
     else {
       return <div style={{ color: 'green' }}>{status}</div>
@@ -148,8 +151,8 @@ const BasicTable = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow style={{ height: '80px', fontWeight: '900' }} >
-            <TableCell className={classes.header}>Tên tác giả</TableCell>
-            <TableCell className={classes.header} >Hành động</TableCell>      
+            <TableCell className={classes.header}>{t('Admin_Other.23')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.11')}</TableCell>      
           </TableRow>
         </TableHead>
         <TableBody>

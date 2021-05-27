@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AuthorManageAdmin from "../../common/AuthorManageAdmin";
 import Dialog from "../../common/DialogAddAuthor";
 import BreadCrumb from "../../common/Breadcrumbs";
+import {useTranslation} from "react-i18next"
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuthorManagementPageAdmin = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const [searchString, setSearchString] = useState("");
   const [page,setPage] = useState(1);
@@ -78,7 +80,7 @@ const AuthorManagementPageAdmin = (props) => {
         <div id="content-wrapper" style={{ marginTop: "100px" }}>
           <div className="container-fluid">
           <BreadCrumb 
-            breadcrumb="Quản lý tác giả" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
+            breadcrumb={t('Admin_Home_BreadCrumbs.9')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
           </BreadCrumb>
             <div className="card mb-3">
               <div className="card-body">
@@ -86,7 +88,7 @@ const AuthorManagementPageAdmin = (props) => {
                   <div className="table-title">
                     <div className="row">
                       <div className="col-sm-8">
-                        <h2>Quản lý tác giả</h2>
+                        <h2>{t('Admin_Home_BreadCrumbs.9')}</h2>
                       </div>
                       <div className="col-sm-4">
                         <div>
@@ -95,7 +97,7 @@ const AuthorManagementPageAdmin = (props) => {
                             type="button"
                             className="btn btn-info add-new"
                           >
-                            <i className="fa fa-plus"></i> Thêm tác giả
+                            <i className="fa fa-plus"></i> {t('Admin_Other.22')}
                           </button>
                         </div>
                       </div>
@@ -105,7 +107,7 @@ const AuthorManagementPageAdmin = (props) => {
                     <div className="row">
                       <div className={classes.search}>
                         <InputBase
-                          placeholder="Tìm kiếm tác giả..."
+                          placeholder={t('Admin_Other.14')}
                           value={searchString}
                           onChange={handleInputChange}
                           classes={{

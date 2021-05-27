@@ -12,6 +12,7 @@ import * as orderActions from './../../actions/orderAction'
 import {withRouter} from 'react-router-dom'
 import * as CallApis from '../../constants/Apis'
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles({
   table: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles({
 
 
 const BasicTable =(props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -86,11 +88,11 @@ const BasicTable =(props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow style={{height:'80px',fontWeight:'900'}} >
-            <TableCell className={classes.header}>Mã đơn hàng</TableCell>
-            <TableCell className={classes.header} >Ngày mua</TableCell>
-            <TableCell className={classes.header} >Sản phẩm</TableCell>
-            <TableCell className={classes.header} >Tổng tiền</TableCell>
-            <TableCell className={classes.header} >Trạng thái</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.8')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

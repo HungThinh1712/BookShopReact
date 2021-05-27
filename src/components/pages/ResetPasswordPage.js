@@ -1,8 +1,10 @@
 import React , {useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux'
 import * as authActions from '../../actions/authAction'
+import {useTranslation} from 'react-i18next'
 
 const ResetPasswordPage = (props) => {
+  const { t } =  useTranslation();
   const dispatch = useDispatch();
   const email = props.history.location.state.email;
   const [code, setCode] = useState("");
@@ -23,17 +25,17 @@ const ResetPasswordPage = (props) => {
     return (
         <div className="confirm-code" >
         <form  className="sign-in-form">
-          <h2 className="title">Xác nhận Email</h2>
+          <h2 className="title">{t('Customer_Management.35')}</h2>
           <div className="input-field-login">
             <i className="fas fa-envelope"></i>
             <input type="text"  placeholder="Email" value={email} readOnly ></input>
           </div>
           <div className="input-field-login">
             <i className="fas fa-check"></i>
-            <input type="text" onChange={handleCodeInputChange}  placeholder="Mã xác nhận" />
+            <input type="text" onChange={handleCodeInputChange}  placeholder={t('Customer_Management.39')} />
           </div>
-          <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmit} >Xác nhận</div>
-          <div style={{color:'blueviolet',cursor:'pointer'}}>Gửi lại mã xác nhận</div>      
+          <div style={{alignItems:'center',display:'flex',justifyContent:'center'}} className="btn-loginpage solid" onClick={handleSubmit} >{t('Customer_Management.36')}</div>
+          <div style={{color:'blueviolet',cursor:'pointer'}}>{t('Customer_Management.37')}</div>      
         </form>    
       </div>
     );

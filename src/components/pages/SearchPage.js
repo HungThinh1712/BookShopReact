@@ -11,6 +11,7 @@ import * as publishHouseActions from "../../actions/publishHouseAction";
 import * as authorActions from "../../actions/authorAction";
 import * as bookTagActions from "../../actions/bookTagsAction";
 import Footer from "../common/Footer";
+import {useTranslation} from 'react-i18next'
 import Pagination from "../common/Pagination";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchPage = (props) => {
+  const { t } =  useTranslation();
   const classes = useStyles();
   const searchString = props.match.params.searchString;
   const dispatch = useDispatch();
@@ -163,29 +165,29 @@ const SearchPage = (props) => {
       <div>
         <div className={classes.drop_down}>
           <DropDown
-            label="Thể loại"
+            label={t('Customer_Search.1')}
             handleChange={handleTypeChange}
             data={types}
           />
           <DropDown
-            label="Giá thành"
+            label={t('Customer_Search.2')}
             handleChange={handlePriceChange}
             data={sortPrice}
           />
           <DropDown
-            label="Nhà xuất bản"
+            label={t('Customer_Search.3')}
             handleChange={handlePublishHouseChange}
             data={publishHouses}
             type="3"
           />
           <DropDown
-            label="Tác giả"
+            label={t('Customer_Search.4')}
             handleChange={handleAuthorChange}
             data={authors}
             type="4"
           />
           <DropDown
-            label="Danh mục"
+            label={t('Customer_Search.5')}
             handleChange={handleTagChange}
             data={tags}
             type="5"

@@ -9,9 +9,10 @@ import { useDispatch, } from 'react-redux';
 import * as authAction from './../../actions/authAction'
 import { toastMessage } from './ToastHelper';
 import { withRouter } from "react-router-dom";
+import {useTranslation} from 'react-i18next'
 
 const FormDialog =(props) => {
-
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassWord] = useState('')
@@ -37,31 +38,29 @@ const FormDialog =(props) => {
             toastMessage("Cập nhật thành công");
            
         }
-
     }
 
-   
     return (
         <div>
              <Dialog style={{background:'blue'}} open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Thay đổi mật khẩu</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('Customer_Management.6')}</DialogTitle>
                 <DialogContent>
                     <div className="input-field-login">
                     <i className="fas fa-lock"></i>
-                    <input value={password} onChange={handlePasswordChange}  type="password"  placeholder="Mật khẩu mới" />
+                    <input value={password} onChange={handlePasswordChange}  type="password"  placeholder={t('Customer_Management.29')} />
                     </div>
                     <div className="input-field-login">
                     <i className="fas fa-lock"></i>
-                    <input value={confirmPassword} onChange={handleConfirmPasswordChange} type="password"  placeholder="Xác nhận lại mật khẩu" />
+                    <input value={confirmPassword} onChange={handleConfirmPasswordChange} type="password"  placeholder={t('Customer_Management.30')} />
                     </div>
 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.onClose} color="primary">
-                        Hủy
+                    {t('Admin_Other.29')}
                     </Button>
                     <Button onClick={handleSubmit}  color="primary">
-                        Cập nhật
+                    {t('Admin_Other.30')}
                     </Button>
                 </DialogActions>
             </Dialog> 

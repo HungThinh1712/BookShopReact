@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {useTranslation} from 'react-i18next'
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ItemInOrderDetails = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   return (
     <div style={{ border: "none" }}>
@@ -89,7 +90,7 @@ const ItemInOrderDetails = (props) => {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span className={classes.title}>{props.name}</span>
           {props.authorName ? (
-            <span className={classes.author}>Tác giả: {props.authorName}</span>
+            <span className={classes.author}>{t('Admin_Book.11')}: {props.authorName}</span>
           ) : null}
         </div>
         <div className={classes.flex}></div>

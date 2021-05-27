@@ -12,6 +12,7 @@ import * as authActions from './../../actions/authAction'
 import {toastMessage} from './../common/ToastHelper'
 import MessengerChat from '../common/MessengerCustomerChat';
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({    
     container: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 const ProfileUserPage = (props) => {
+    const { t } =  useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
     const [checked,setChecked] = useState(false);
@@ -99,7 +101,7 @@ const ProfileUserPage = (props) => {
             <Header/>
             <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Thông tin tài khoản" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/user_page")}>
+                breadcrumb={t('Customer_Management.1')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/user_page")}>
               </BreadCrumb>
             </div>
             <div className = {`${classes.container}`} >
@@ -107,10 +109,10 @@ const ProfileUserPage = (props) => {
                     <Nav imgSrc={userData ? userData.imgSrc : ''} className={classes.nav} name={name} props={props}/>
                     <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>
                         <div className="profile-content">
-                            <p style={{fontSize:'25px',fontWeight:500}}>Thông tin tài khoản</p>
+                            <p style={{fontSize:'25px',fontWeight:500}}>{t('Customer_Management.1')}</p>
                             <div className="input-field-userpage">
                                 <i className="fas fa-user"></i>
-                                <input value={name} onChange={handleNameInputChange} type="text" placeholder="Họ và tên" />
+                                <input value={name} onChange={handleNameInputChange} type="text" placeholder={t('Customer_Management.25')} />
                             </div>
                             <div className="sex">
                                <SexCheckBox value={sex} onChange={handleSexInputChange}/>
@@ -122,32 +124,32 @@ const ProfileUserPage = (props) => {
                          
                             <div  className="input-field-userpage">
                                 <i className="fas fa-phone"></i>
-                                <input value={phone} onChange={handlePhoneInputChange} type="text" placeholder="Số điện thoại" />
+                                <input value={phone} onChange={handlePhoneInputChange} type="text" placeholder={t('Customer_Management.26')} />
                             </div>
                             <div  className="input-field-userpage">
                                 <i className="fas fa-calendar-alt"></i>
-                                <input value={birthday} onChange={handleBirthdayInputChange} type="date" placeholder="Ngày sinh" />
+                                <input value={birthday} onChange={handleBirthdayInputChange} type="date" placeholder={t('Customer_Management.27')} />
                             </div>
                             <div  className="sex">
-                                <Checkbox checked={checked} onChange={onChangeChecked}><span style={{paddingLeft:'8px'}}>Thay đổi mật khẩu</span></Checkbox>
+                                <Checkbox checked={checked} onChange={onChangeChecked}><span style={{paddingLeft:'8px'}}>{t('Customer_Management.6')}</span></Checkbox>
                             </div>
                             {checked ? <div>
                                 <div className="input-field-userpage">
                                     <i className="fas fa-lock"></i>
-                                    <input type="password" onChange={handleOldPassWordInputChange} placeholder="Mật khẩu cũ" />
+                                    <input type="password" onChange={handleOldPassWordInputChange} placeholder={t('Customer_Management.28')} />
                                 </div>
                                 <div className="input-field-userpage">
                                     <i className="fas fa-lock"></i>
-                                    <input type="password" onChange={handleNewPassWordInputChange} placeholder="Mật khẩu mới" />
+                                    <input type="password" onChange={handleNewPassWordInputChange} placeholder={t('Customer_Management.29')} />
                                 </div>
                                 <div className="input-field-userpage">
                                     <i className="fas fa-lock"></i>
-                                    <input type="password" onChange={handleConfirmPassWordInputChange} placeholder="Xác nhận lại mật khẩu" />
+                                    <input type="password" onChange={handleConfirmPassWordInputChange} placeholder={t('Customer_Management.30')} />
                                 </div>
                             </div> : null
                             }
                             <div className="sex">
-                                <Button onClick={handleButtonClick} variant="contained" color="primary" size='small'>Cập nhật</Button>
+                                <Button onClick={handleButtonClick} variant="contained" color="primary" size='small'>{t('Customer_Management.7')}</Button>
                             </div>
                         </div>
                     </div>

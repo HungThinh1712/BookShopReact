@@ -6,6 +6,7 @@ import Footer from '../common/Footer';
 import ItemInOrder from '../common/ItemInOrderDetails';
 import Divider from '@material-ui/core/Divider';
 import {useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const OrderDetailPage = (props) => {
+  const { t } =  useTranslation();
     const classes = useStyles();
     const itemsInOrder =props.history.location.state.itemsInOrder
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
@@ -69,7 +71,7 @@ const OrderDetailPage = (props) => {
             <div className="row">
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
-                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Chi tiết đơn hàng</p>
+                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Admin_Other.4')}</p>
                 {showItemsInOrder}
               </div>              
             </div>

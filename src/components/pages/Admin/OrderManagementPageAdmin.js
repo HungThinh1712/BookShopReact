@@ -9,10 +9,10 @@ import OrderManagementAdmin from './../../common/OrderMangementAdmin'
 import { Radio} from 'antd';
 import * as orderActions from '../../../actions/orderAction'
 import BreadCrumb from "../../common/Breadcrumbs";
-
-
+import {useTranslation} from "react-i18next"
 
 const CheckBox = () => {
+    const { t } = useTranslation();
    const dispatch = useDispatch();
    
   const radioStyle = {
@@ -31,22 +31,21 @@ const CheckBox = () => {
   return (
     <Radio.Group style={{flexDirection:'row',display:'flex'}} onChange={handleChange} value={value}>
         <Radio style={radioStyle}  value={0}>
-           {`  Tất cả`}
-      </Radio>
-      <Radio style={radioStyle}  value={1}>
-           {`  Đã xác nhận`}
-      </Radio>
-      <Radio style={radioStyle} value={2}>
-        {` Chưa xác nhận`}
-      </Radio>
+            {t('Admin_Other.1')}
+        </Radio>
+        <Radio style={radioStyle}  value={1}>
+            {t('Admin_Other.2')}
+        </Radio>
+        <Radio style={radioStyle} value={2}>
+            {t('Admin_Other.3')}
+        </Radio>
     </Radio.Group>
   );
 };
 
 
 const OrderManagementPageAdmin = (props) => {
-
-   
+    const { t } = useTranslation();
     return (
         <div>
             <div id="wrapper">
@@ -57,7 +56,7 @@ const OrderManagementPageAdmin = (props) => {
 
                     <div className="container-fluid">
                     <BreadCrumb 
-                        breadcrumb="Quản lý đơn hàng" onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
+                        breadcrumb={t('Admin_Home_BreadCrumbs.19')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
                     </BreadCrumb>
                         <div className="card mb-3">
 
@@ -65,7 +64,7 @@ const OrderManagementPageAdmin = (props) => {
                                 <div className="table-wrapper">
                                     <div className="table-title">
                                         <div className="row">
-                                            <div className="col-sm-8"><h2>Quản lý đơn hàng</h2></div>
+                                            <div className="col-sm-8"><h2>{t('Admin_Home_BreadCrumbs.19')}</h2></div>
                                         </div>
                                     </div>
                                     <div className="container">

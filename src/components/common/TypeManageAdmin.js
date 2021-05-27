@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as typeActions from "../../actions/typesAction";
+import {useTranslation} from 'react-i18next'
 import Dialog from "../common/DialogAdmin";
 import { Popconfirm } from "antd";
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BasicTable = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -88,8 +90,8 @@ const BasicTable = (props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header}>Thể loại</TableCell>
-            <TableCell className={classes.header}>Ngày tạo</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.28')}</TableCell>
+            <TableCell className={classes.header}>{t('Admin_Other.32')}</TableCell>
             <TableCell className={classes.header}></TableCell>
           </TableRow>
         </TableHead>

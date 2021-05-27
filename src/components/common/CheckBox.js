@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Radio} from 'antd';
+import {useTranslation} from 'react-i18next'
 
 
 const CheckBox = (props) => {
+  const { t } = useTranslation();
   const radioStyle = {
     display: 'block',
     height: '30px',
@@ -14,10 +16,10 @@ const CheckBox = (props) => {
   return (
     <Radio.Group onChange={props.onChange} value={props.value}>
       <Radio style={radioStyle}  value={1}>
-           {`  Thanh toán tiền mặt khi nhận hàng`}
+        {t('Customer_Shopping_Payment.13')}
       </Radio>
       <Radio style={radioStyle} value={2}>
-        {` Thanh toán thông qua MOMO`}
+        {t('Customer_Shopping_Payment.14')}
       </Radio>
     </Radio.Group>
   );

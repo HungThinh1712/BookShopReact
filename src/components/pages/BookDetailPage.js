@@ -12,6 +12,7 @@ import Description from './../common/Description'
 import Comment from '../common/CommentZone'
 import Footer from '../common/Footer'
 import BreadCrumb from "../common/Breadcrumbs"
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -53,9 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const BookDetailPage = (props) => {
-
-
-
+  const { t } =  useTranslation();
   const id = props.match.params.book_id
   const dispatch = useDispatch()
   const selectedBook = useSelector(state => state.books.selectedBook ? state.books.selectedBook : null )
@@ -116,7 +115,6 @@ const BookDetailPage = (props) => {
         <BookDetail
           bookId={selectedBook.id}
           price={selectedBook.price}
-         
           discount={Math.ceil(((selectedBook.coverPrice - selectedBook.price) / selectedBook.coverPrice) * 100)}
           coverPrice={selectedBook.coverPrice}
           name={selectedBook.bookName}
@@ -127,7 +125,7 @@ const BookDetailPage = (props) => {
           valueraiting={averageRate}
         />
         <div className={classes.container}>
-          <h4>Gợi ý dành cho bạn</h4>
+          <h4>{t('Customer_Detail.8')}</h4>
         </div>
         {suggestedBooks.length >=3?<Paper className={`cover_container ${classes.container}`} style={{ marginTop: '10px' }}>
           {showBooks}
@@ -137,7 +135,7 @@ const BookDetailPage = (props) => {
           <div></div>
          </Paper>}
         <div className={classes.container}>
-          <h4> Thông tin chi tiết</h4>
+          <h4> {t('Customer_Detail.9')}</h4>
         </div>
         <TableInfo
           publishingHouseName={selectedBook.publishingHouseName}
@@ -148,11 +146,11 @@ const BookDetailPage = (props) => {
 
         />
         <div className={classes.container}>
-          <h4>Mô tả sách</h4>
+          <h4>{t('Customer_Detail.17')}</h4>
         </div>
         <Description  description ={selectedBook.description} />
         <div className={classes.container}>
-          <h4>Khách hàng nhận xét</h4>
+          <h4>{t('Customer_Detail.18')}</h4>
           <Comment total={paging} setDefaultPage ={()=>setPage(1)} onChange={handlePageChange} page={page} selectedBook={selectedBook} />
         </div>
 

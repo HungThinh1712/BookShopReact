@@ -5,14 +5,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import {useTranslation} from 'react-i18next'
 
 export default function FormDialog(props) {
- 
-
+  const { t } = useTranslation();
   return (
-    <div>
-      
+    <div>     
       <Dialog open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">{props.tagType}</DialogTitle>
         <DialogContent>
@@ -28,10 +26,10 @@ export default function FormDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onClose} color="primary">
-            Hủy
+          {t('Admin_Other.29')}
           </Button>
           <Button onClick={props.onClick} color="primary">
-            Thêm
+          {t('Admin_Other.33')}
           </Button>
         </DialogActions>
       </Dialog>

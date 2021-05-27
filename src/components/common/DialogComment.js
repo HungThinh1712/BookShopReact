@@ -9,9 +9,10 @@ import Rating from '@material-ui/lab/Rating';
 import TextArea from 'antd/lib/input/TextArea';
 import { useDispatch, } from 'react-redux';
 import * as commentActions from './../../actions/commentAction'
+import {useTranslation} from 'react-i18next'
 
 export default function FormDialog(props) {
-
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const [rate, setRate] = useState(props.props.rating);
@@ -46,7 +47,7 @@ export default function FormDialog(props) {
     return (
         <div>
             {props.tag === 0 ? <Dialog open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Chỉnh sửa đánh giá</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('Customer_Detail.25')}</DialogTitle>
                 <DialogContent>
                     <div >
                         <div className="stars" >
@@ -61,10 +62,10 @@ export default function FormDialog(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.onClose} color="primary">
-                        Hủy
+                        {t('Admin_Other.29')}
                     </Button>
                     <Button onClick={handleSubmit} color="primary">
-                        Chỉnh sửa
+                        {t('Customer_Detail.27')}
                     </Button>
                 </DialogActions>
             </Dialog> : <Dialog
@@ -73,15 +74,15 @@ export default function FormDialog(props) {
 
                     <DialogContent>
                         <DialogTitle id="alert-dialog-description">
-                            Bạn có chắc muốn xóa comment này này ?
+                            {t('Customer_Detail.26')}
                     </DialogTitle>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleDeleteClick} color="primary">
-                            Xóa
+                            {t('Customer_Detail.24')}
                         </Button>
                         <Button onClick={props.onClose} color="primary" autoFocus>
-                            Hủy
+                            {t('Admin_Other.29')}
                         </Button>
                     </DialogActions>
                 </Dialog>}

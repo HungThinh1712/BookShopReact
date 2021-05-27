@@ -7,8 +7,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import * as authorActions from "../../actions/authorAction";
 import { toastMessage } from "./ToastHelper";
+import {useTranslation} from 'react-i18next'
+
 
 export default function FormDialog(props) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -110,7 +113,7 @@ export default function FormDialog(props) {
             </div>
             <div className="row">
               <div className="form-group mb-3 col-xs-12 col-sm-6">
-                <label>Tên tác giả</label>
+                <label>{t('Admin_Other.23')}</label>
                 <input
                   value={name}
                   onChange={handleNameInputChange}
@@ -119,7 +122,7 @@ export default function FormDialog(props) {
                 ></input>
               </div>
               <div className="form-group mb-3 col-xs-12 col-sm-6">
-                <label>Ngày sinh</label>
+                <label>{t('Admin_Other.16')}</label>
                 <input
                   value={birthday}
                   onChange={handleBirthdayInputChange}
@@ -131,7 +134,7 @@ export default function FormDialog(props) {
             </div>
           </div>
           <div className="form-group mb-3">
-            <label>Mô tả</label>
+            <label>{t('Admin_Other.26')}</label>
             <textarea
               value={description}
               onChange={handleDescriptionInputChange}
@@ -143,10 +146,10 @@ export default function FormDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onClose} color="primary">
-            Thoát
+          {t('Admin_Other.13')}
           </Button>
           <Button onClick={handleSubmit} color="primary">
-            Cập nhật
+          {t('Admin_Other.30')}
           </Button>
         </DialogActions>
       </Dialog>

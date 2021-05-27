@@ -5,7 +5,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux'
 import {getBookTagsRequest} from '../../actions/bookTagsAction'
-
+import {useTranslation} from 'react-i18next'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const BookTag =() => {
+  const { t } = useTranslation();
  
   const classes = useStyles();
 
@@ -61,9 +62,8 @@ const BookTag =() => {
             >{bookTag.name}</MenuItem>)  
 
   return (
-    
     <div className={classes.root}>
-    <div className={classes.producttag_header}>Danh mục sản phẩm</div>
+    <div className={classes.producttag_header}>{t('Customer_Search.5')}</div>
     <Paper className={classes.producttag_root}>
       <MenuList >
         {showBookTag}

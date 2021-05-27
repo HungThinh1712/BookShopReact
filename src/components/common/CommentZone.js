@@ -6,7 +6,10 @@ import AmountRating from './AmountRating'
 import WritingZone from './WriteCommentZone'
 import {useSelector} from 'react-redux'
 import Pagination from './../common/Pagination'
+import {useTranslation} from 'react-i18next'
+
 const Comment = (props) => {
+	const { t } = useTranslation();
 	const comments = useSelector(state => state.comment.comments.entities ? state.comment.comments.entities : [])
 	console.log(comments);
 	const ratings = useSelector(state => state.comment.ratings )
@@ -44,7 +47,7 @@ const Comment = (props) => {
 		<div className="row">
 			<div style={{marginRight:'30px',padding:'50px'}}>
 				<div style={{borderRightStyle: 'solid', borderRightColor: 'gray',paddingRight:'50px'}}>
-					<h5>Đánh giá</h5>
+					<h5>{t('Customer_Management.21')}</h5>
 					<h3 className="bold padding-bottom-7" style={{fontSize:'50px',color:'red'}}>{averageRate}<small style={{color:'black'}}>/ 5</small></h3>
 					<Rating  disabled value={props.selectedBook.rating} name="unique-rating" />
 				</div>
@@ -65,9 +68,6 @@ const Comment = (props) => {
             </div>:null}
 				</div>
 				</div>
-				
-				
-				
 				
 			</div>
 

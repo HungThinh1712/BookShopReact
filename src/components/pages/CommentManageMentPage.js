@@ -8,6 +8,7 @@ import * as commentActions from './../../actions/commentAction'
 import Divider from '@material-ui/core/Divider';
 import {useSelector, useDispatch} from 'react-redux';
 import BreadCrumb from "../common/Breadcrumbs";
+import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const CommentPage = (props) => {
+  const { t } =  useTranslation();
     const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -73,14 +75,14 @@ const CommentPage = (props) => {
           <Header />
           <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
-                breadcrumb="Nhận xét của tôi" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/comment_history")}>
+                breadcrumb={t('Customer_BreadCrumbs.5')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/comment_history")}>
               </BreadCrumb>
             </div>
           <div className={`${classes.container}`} >
             <div className="row">
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
-                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>Nhận xét của tôi</p>
+                <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Customer_BreadCrumbs.5')}</p>
                 {showComments}
               </div>              
             </div>
