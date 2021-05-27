@@ -102,7 +102,7 @@ const Book = (props) => {
     setAuthorId(e);
   };
   const handlePublishDateInputChange = (e) => {
-    setPublishDate(e.toISOString());
+    setPublishDate(e);
   };
   const handleAmountInputChange = (e) => {
     setAmount(e);
@@ -143,7 +143,7 @@ const Book = (props) => {
     formData.append("publishHouseId", publishHouseId);
     formData.append("typeId", typeId);
     formData.append("authorId", authorId);
-    formData.append("publishDate", publishDate);
+    formData.append("publishDate", publishDate.toISOString());
     formData.append("amount", amount);
     formData.append("price", price);
     formData.append("coverPrice", coverPrice);

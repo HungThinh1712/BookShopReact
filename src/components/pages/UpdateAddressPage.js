@@ -1,9 +1,8 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Nav from '../common/UserPageNav'
 import Header from '../common/Header'
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../common/Footer';
-import Button from '@material-ui/core/Button'
 import {useSelector} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
@@ -33,11 +32,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 const UpdateAddressPage = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     const id = userData ? userData.id : null;
     const fullName = useSelector(state => state.auth.userData && state.auth.userData.fullName ? state.auth.userData.fullName : null)
-    const specificAddress = useSelector(state => state.auth.userData && state.auth.userData.specificAddress ? state.auth.userData.specificAddress : null)
     return (
         <div>
             <div>

@@ -32,7 +32,6 @@ const ListItemIPayment = (props) => {
     </div>
   )
 
-    const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid', borderWidth: '2px', marginTop:'20px',borderColor:'blueviolet',borderRadius:'5px'  }}>

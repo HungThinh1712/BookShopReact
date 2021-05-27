@@ -45,10 +45,7 @@ export default function FormDialog(props) {
   };
   const handleSubmit = async () => {
     if (
-      name !== "" &&
-      birthday !== "" &&
-      description !== "" &&
-      imageFile !== null
+      name !== ""
     ) {
       const formData = new FormData();
       formData.append("name", name);

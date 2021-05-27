@@ -6,13 +6,11 @@ import * as provinceAction from "../../actions/provinceAction";
 import * as districtAction from "../../actions/districtAction";
 import * as wardAction from "../../actions/wardAction";
 import { toastMessage } from "./ToastHelper";
-import PlacesAutocomplete from "react-places-autocomplete";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
+import { Input } from "antd";
+import { Select } from "antd";
+import { UserOutlined, PhoneOutlined, BankOutlined } from "@ant-design/icons";
 
+const { Option } = Select;
 const AddressInputForm = (props) => {
   const dispatch = useDispatch();
   const id = props.id;
@@ -106,105 +104,207 @@ const AddressInputForm = (props) => {
   useEffect(() => {
     dispatch(wardAction.getWardsRequest(districtId));
   }, [districtId, dispatch]);
-  //Get autocomplete place from gg
-  const [addressGoogle, setAddressGoogle] = useState("");
-  const handleSelect = async (value) => {};
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div
-        style={{ display: "inline-block", marginTop: "20px", padding: "10px" }}
+        style={{
+          display: "flex",
+          marginTop: "15px",
+          padding: "10px",
+          flexDirection: "column",
+          width: "500px",
+        }}
       >
-        <div className="input-field" style={{ width: "1000px" }}>
-          <i className="fas fa-user"></i>
-          <input
-            type="text"
+        <div
+          style={{
+            display: "flex",
+            whiteSpace: "nowrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <p
+            style={{
+              marginTop: "10px",
+              fontStyle: "bold",
+              fontWeight: "600",
+              display: "flex",
+            }}
+          >
+            Họ và tên:
+          </p>
+          <Input
+            size="large"
+            style={{ width: "350px", marginBottom: "15px" }}
             value={name}
             onChange={handleNameInputChange}
-            placeholder="Họ và tên"
+            placeholder="Họ và tên"
           />
         </div>
-        <div className="input-field">
-          <i className="fas fa-phone"></i>
-          <input
-            type="text"
+
+        <div
+          style={{
+            display: "flex",
+            whiteSpace: "nowrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <p
+            style={{
+              marginTop: "10px",
+              fontStyle: "bold",
+              fontWeight: "600",
+              display: "flex",
+            }}
+          >
+            Số điện thoại:
+          </p>
+          <Input
+            size="large"
+            style={{ width: "350px", marginBottom: "15px" }}
             value={phone}
             onChange={handlePhoneInputChange}
             placeholder="Số điện thoại"
           />
-        </div>       
-        <div className="input-field">
-          <i className="fas fa-city"></i>
-          {/* <input value={city} onChange={handleCityInputChange} placeholder="Thành phố" /> */}
-          <select
+        </div>
+        <div
+          style={{
+            display: "flex",
+            whiteSpace: "nowrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <p
+            style={{
+              marginTop: "10px",
+              fontStyle: "bold",
+              fontWeight: "600",
+              display: "flex",
+            }}
+          >
+            Tỉnh/ Thành:
+          </p>
+          <Select
+            style={{ marginBottom: "15px", width: "350px" }}
+            size="large"
             value={provinceId}
-            className="cbbox !important"
             onChange={handleProvinceInputChange}
           >
-            <option value="0">Chọn Tỉnh/Thành Phố</option>
             {showProvinces}
-          </select>
-        </div>
-        <div className="input-field">
-          <i className="fas fa-archway"></i>
-          <select
-            value={districtId}
-            className="cbbox !important"
-            onChange={handleDistrictInputChange}
-          >
-            <option value="0">Chọn Quận/Huyện</option>
-            {showDistricts}
-          </select>
-        </div>
-        <div className="input-field">
-          <i className="fas fa-bullseye"></i>
-          <select
-            value={wardId}
-            className="cbbox !important"
-            onChange={handleWardInputChange}
-          >
-            <option value="0">Chọn Phường/Xã</option>
-            {showWards}
-          </select>
-        </div>
-        <div className="input-field">
-          <i className="fas fa-map-marker"></i>
-          <input
-            type="text"
-            onChange={handleAddressInputChange}
-            value={address}
-            placeholder="Địa chỉ"
-          />
+          </Select>
         </div>
 
-        {props.tag !== "1" ? (
-          <Button
-            style={{ width: "100%" }}
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
+        <div
+          style={{
+            display: "flex",
+            whiteSpace: "nowrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <p
+            style={{
+              marginTop: "10px",
+              fontStyle: "bold",
+              fontWeight: "600",
+              display: "flex",
+            }}
           >
-            Cập nhật
-          </Button>
-        ) : (
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <Button
-              style={{ width: "100%" }}
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-            >
-              Cập nhật
-            </Button>
-            <Button
-              style={{ width: "100%" }}
-              variant="contained"
-              onClick={() => props.onClick()}
-            >
-              Hủy
-            </Button>
+            Quận/ Huyện:
+          </p>
+          <Select
+            style={{ marginBottom: "15px", width: "350px" }}
+            size="large"
+            value={districtId}
+            onChange={handleDistrictInputChange}
+          >
+            {showDistricts}
+          </Select>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            whiteSpace: "nowrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <p
+            style={{
+              marginTop: "10px",
+              fontStyle: "bold",
+              fontWeight: "600",
+              display: "flex",
+            }}
+          >
+            Xã/ Phường:
+          </p>
+          <Select
+            style={{ marginBottom: "15px", width: "350px" }}
+            size="large"
+            value={wardId}
+            onChange={handleWardInputChange}
+          >
+            {showWards}
+          </Select>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            whiteSpace: "nowrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <p
+            style={{
+              marginTop: "10px",
+              fontStyle: "bold",
+              fontWeight: "600",
+              display: "flex",
+            }}
+          >
+            Địa chỉ:
+          </p>
+          <div>
+            <Input
+              size="large"
+              style={{ width: "350px", marginBottom: "15px" }}
+              prefix={<PhoneOutlined />}
+              value={address}
+              onChange={handleAddressInputChange}
+              placeholder="Địa chỉ"
+            />
+            {props.tag !== "1" ? (
+              <div>
+                <Button
+                  style={{ width: "100%" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+                >
+                  Cập nhật
+                </Button>
+                <div></div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <Button
+                  style={{ width: "100%" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+                >
+                  Cập nhật
+                </Button>
+                <Button
+                  style={{ width: "100%" }}
+                  variant="contained"
+                  onClick={() => props.onClick()}
+                >
+                  Hủy
+                </Button>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
