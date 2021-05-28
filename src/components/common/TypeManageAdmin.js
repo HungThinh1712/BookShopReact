@@ -14,6 +14,7 @@ import * as typeActions from "../../actions/typesAction";
 import {useTranslation} from 'react-i18next'
 import Dialog from "../common/DialogAdmin";
 import { Popconfirm } from "antd";
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,

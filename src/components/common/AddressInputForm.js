@@ -54,7 +54,7 @@ const AddressInputForm = (props) => {
 
   const handleSubmit = async (e) => {
     if (phone === "" || name === "") {
-      toastMessage("Vui lòng nhập đầy đủ thông tin");
+      toastMessage(t('Toast_Message.8'));
     } else {
       const userAddress = {
         id,

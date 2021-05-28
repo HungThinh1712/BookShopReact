@@ -1,6 +1,7 @@
 import CartItem from "./../models/CartItem";
 import * as Types from "./../constants/ActionType";
 import { toastMessage } from "../components/common/ToastHelper";
+import { useTranslation } from "react-i18next"
 
 const cartItemInLocal =
   JSON.parse(localStorage.getItem("cart")) != null
@@ -11,6 +12,7 @@ const initialState = {
 };
 
 export default function cartReducer(state = initialState, action) {
+  // const { t } = useTranslation();
   const userId = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData")).id
     : null;

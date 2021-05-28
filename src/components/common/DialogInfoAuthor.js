@@ -80,7 +80,7 @@ export default function FormDialog(props) {
       await dispatch(authorActions.updateAuthor(formData));
       props.onClose();
     } else {
-      toastMessage("Vui lòng nhập đầy đủ thông tin");
+      toastMessage(t('Toast_Message.8'));
     }
   };
   return (

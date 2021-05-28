@@ -2,6 +2,8 @@ import * as Types from "../constants/ActionType";
 import axios from "axios";
 import * as CallApis from "./../constants/Apis";
 import { toastMessage } from "../components/common/ToastHelper";
+import { useTranslation } from "react-i18next"
+
 export const getAuthorsRequest = (name, page, pageSize) => async (dispatch) => {
   const url = CallApis.API_URL.concat(
     `/Authors?name=${name}&page=${page}&pageSize=${pageSize}`
@@ -37,13 +39,14 @@ export const getAuthorRequest = (id) => async (dispatch) => {
 };
 
 export const addAuthor = (author) => async (dispatch) => {
+  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/Authors/Create`);
 
   await axios
     .post(url, author)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage("Thêm thành công");
+        toastMessage(t('Toast_Message.3'));
         dispatch({
           type: Types.ADD_AUTHOR, //this call test dispatch. to dispsatch to our reducer
           authors: res.data,
@@ -67,12 +70,13 @@ export const addAuthor = (author) => async (dispatch) => {
 };
 
 export const updateAuthor = (updatedAuthor) => async (dispatch) => {
+  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/Authors/Update`);
   await axios
     .put(url, updatedAuthor)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage("Cập nhật thành công");
+        toastMessage(t('Toast_Message.1'));
         dispatch({
           type: Types.UPDATE_AUTHOR,
           author: res.data,
@@ -90,12 +94,13 @@ export const updateAuthor = (updatedAuthor) => async (dispatch) => {
 };
 
 export const deleteAuthor = (id) => async (dispatch) => {
+  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/Authors/Delete?id=${id}`);
   await axios
     .delete(url)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage("Xóa thành công");
+        toastMessage(t('Toast_Message.4'));
       } else {
         let error = Object.values(res.data.errors)[0].toString();
         dispatch({

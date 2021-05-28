@@ -223,5 +223,26 @@
         "33": "Add",
         "34": "Imprint",
         "35": "Are you sure you want to delete?"
+    },
+    "Toast_Message": {
+        "1": "Update successful",
+        "2": "Invalid verification code",
+        "3": "Add Success",
+        "4": "Delete successful",
+        "5": "Update the number of books to match the books in stock",
+        "6": "Successful confirmation",
+        "7": "An error occurred during validation",
+        "8": "Please enter full information",
+        "9": "Passwords do not match",
+        "10": "Please select a rating",
+        "11": "Please enter a comment",
+        "12": "Login to continue",
+        "13": "Information cannot be blank",
+        "14": "Please select a date of birth",
+        "15": "You are not logged in. Login to continue!",
+        "16": "Please enter a card",
+        "17": "Logout successful",
+        "18": "There are products in the cart. Update quantity",
+        "19": "A new product has been added to the cart"
     }
 }

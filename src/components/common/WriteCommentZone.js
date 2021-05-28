@@ -60,9 +60,9 @@ const WriteCommentZone = (props) => {
           const page = props.page
           const commentData = {userId,bookId,rate,content,title,page};
           if(rate===0)
-            toastMessage("Vui lòng chọn đánh giá")
+            toastMessage(t('Toast_Message.10'))
           else if(content==="")
-            toastMessage("Vui lòng nhập bình luận");
+            toastMessage(t('Toast_Message.11'));
 
           else{
             await dispatch(commentActions.addComment(commentData))
@@ -72,7 +72,7 @@ const WriteCommentZone = (props) => {
           }
           }
         else{
-          toastMessage("Đăng nhập để tiếp tục");
+          toastMessage(t('Toast_Message.12'));
           setRate(0);
           setTitle("");
           setContent("");

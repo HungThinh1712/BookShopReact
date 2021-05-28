@@ -20,10 +20,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedSnackbars(props) {
   const classes = useStyles();
   
-
-
-
-  
   return (
     <div className={classes.root}>
       <Snackbar open={props.open} autoHideDuration={5000} onClose={props.onClose} >

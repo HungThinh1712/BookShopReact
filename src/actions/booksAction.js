@@ -3,6 +3,8 @@ import axios from 'axios'
 import * as backdropAction from './../actions/backdropAction'
 import * as CallApis from './../constants/Apis'
 import {toastMessage} from './../components/common/ToastHelper'
+import { useTranslation } from "react-i18next"
+
 export const getBooksRequest = (indexPage) => async (dispatch) => {
     dispatch(backdropAction.setOpenBackDrop)
     const url = CallApis.API_URL.concat(`/Books?index=${indexPage}`)
@@ -181,12 +183,12 @@ export const searchBookByNameRequest = (name,typeId,sortPrice,publishHouseId,aut
 
 export const addBook = (bookData) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Books/Create`)
-   
+    const { t } = useTranslation();
    
     await axios.post(url, bookData)
         .then(res =>  {  
             if (res.status===200 ) {
-               toastMessage("Thêm thành công")
+               toastMessage(t('Toast_Message.3'))
                dispatch({
                 type: Types.ADD_BOOK,  //this call test dispatch. to dispsatch to our reducer
                 item: res.data
@@ -212,12 +214,13 @@ export const addBook = (bookData) => async (dispatch) => {
 
 
 export const updateBook = (bookData) => async (dispatch) => {
+    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Books/Update`)
     await axios.put(url, bookData)
         .then(res =>  {  
             if (res.status===200 ) {
                
-                toastMessage("Cập nhật thành công")           
+                toastMessage(t('Toast_Message.1'))           
             
             }else {
                 console.log(res)

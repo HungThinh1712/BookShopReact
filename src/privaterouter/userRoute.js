@@ -2,8 +2,10 @@ import React from 'react';
 import {Route, Redirect} from 'react-router-dom'
 import { useSelector, } from 'react-redux';
 import { toastMessage } from "./../components/common/ToastHelper";
+import { useTranslation } from "react-i18next"
+
 const ProtectedRoute = ({component:Component,...rest}) => {
- 
+    const { t } = useTranslation();
     const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
 
     return (
@@ -12,7 +14,7 @@ const ProtectedRoute = ({component:Component,...rest}) => {
                 if(isAuthenticated ){
                     return <Component {...props}/>
                 }else{
-                    toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!");
+                    toastMessage("t('Toast_Message.15')");
                     return <Redirect to='/user_page'/>
                 }
             }

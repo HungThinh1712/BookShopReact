@@ -66,7 +66,7 @@ export default function FormDialog(props) {
       setImageFile(null);
       setImageSrc("/img/defaultAvatar.png");
     } else {
-      toastMessage("Vui lòng nhập đầy đủ thông tin");
+      toastMessage(t('Toast_Message.1'));
     }
   };
   return (

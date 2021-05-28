@@ -28,14 +28,14 @@ const FormDialog =(props) => {
         const userData = {email ,password}
         console.log("aaa");
         if(password==='' || confirmPassword===''){
-            toastMessage("Vui lòng đầy đủ thông tin")
+            toastMessage(t('Toast_Message.8'))
         }
         else if(password!=confirmPassword){
-            toastMessage("Mật khẩu không giống nhau");
+            toastMessage(t('Toast_Message.9'));
         }else{
             dispatch(authAction.changePassword(userData,props.history,props.onClose));
             props.history.push('/user_page');
-            toastMessage("Cập nhật thành công");
+            toastMessage(t('Toast_Message.1'));
            
         }
     }

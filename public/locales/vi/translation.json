@@ -223,5 +223,26 @@
         "33": "Thêm",
         "34": "Tên NXB",
         "35": "Bạn có chắc muốn xóa không?"
+    },
+    "Toast_Message": {
+        "1": "Cập nhật thành công",
+        "2": "Mã xác nhận không đúng",
+        "3": "Thêm thành công",
+        "4": "Xóa thành công",
+        "5": "Cập nhật lại số lượng sách phù hợp với sách còn trong kho",
+        "6": "Xác nhận thành công",
+        "7": "Đã có lỗi xảy ra trong quá trình xác nhận",
+        "8": "Vui lòng nhập đầy đủ thông tin",
+        "9": "Mật khẩu không trùng nhau",
+        "10": "Vui lòng chọn đánh giá",
+        "11": "Vui lòng nhập bình luận",
+        "12": "Đăng nhập để tiếp tục",
+        "13": "Thông tin không được để trống",
+        "14": "Vui lòng chọn ngày sinh",
+        "15": "Bạn chưa đăng nhập. Đăng nhập để tiếp tục!",
+        "16": "Vui lòng nhập thẻ",
+        "17": "Đăng xuất thành công",
+        "18": "Đã có sản phẩm trong giỏ hàng. Cập nhật số lượng",
+        "19": "Một sản phẩm mới đã được thêm vào giỏ hàng"
     }
 }

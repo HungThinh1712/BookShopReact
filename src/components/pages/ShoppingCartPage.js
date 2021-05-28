@@ -113,7 +113,7 @@ const ShoppingCartPage = (props) => {
       props.history.push("/address_shipping");
     } else {
       props.history.push("/user_page");
-      toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!");
+      toastMessage(t('Toast_Message.15'));
     }
   };
   return (

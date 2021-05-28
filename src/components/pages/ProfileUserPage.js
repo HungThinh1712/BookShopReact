@@ -54,12 +54,12 @@ const ProfileUserPage = (props) => {
     if(checked===false){
         const userData = {id, name,phone,birthday,sex};
         await dispatch(authActions.updateProfileUser(userData))
-        toastMessage("Cập nhật thành công")
+        toastMessage(t('Toast_Message.1'))
     }else{
         if(oldPassword ==="" || newPassword==="" || confirmPassword==="")
-            toastMessage("Thông tin không được để trống")
+            toastMessage(t('Toast_Message.13'))
         else if(newPassword !==confirmPassword)
-            toastMessage("Mật khẩu không trùng nhau")
+            toastMessage(t('Toast_Message.9'))
         else{
             const userData = {id, name,phone,birthday,sex,oldPassword,newPassword};
             await dispatch(authActions.updateProfileUserWithPassWord(userData))
