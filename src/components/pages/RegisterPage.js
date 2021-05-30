@@ -43,9 +43,9 @@ const RegisterPage = (props) => {
 
   const handleSubmit = async e => {
     if(confirmPassword !==password )
-      toastMessage("Mật khẩu không trùng nhau")
+      toastMessage(t('Toast_Message.9'))
     else if(birthDay ==="")
-     toastMessage("Vui lòng chọn ngày sinh")
+     toastMessage(t('Toast_Message.14'))
     else{
       const userData = { email, password,fullName,phone, birthDay,sex};
       await dispatch(authActions.registerUser(userData,props.history))

@@ -2,6 +2,11 @@ import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 import { toastMessage } from '../components/common/ToastHelper';
+<<<<<<< HEAD
+=======
+import { Book } from '@material-ui/icons';
+import { useTranslation } from "react-i18next"
+>>>>>>> b6bf1238e1fd3dfdb490aa71567a25dbcc9d1f40
 
 export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}`)
@@ -37,14 +42,15 @@ export const getAllOrdersRequest =  (page,pageSize,value) => async (dispatch) =>
 };
 
 export const confirmOder = (orderId) => async (dispatch) => {
+    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Orders/Admin/ConfirmOrder?orderId=${orderId}`);
     await axios.get(url).then(res =>  {  
         if (res.status===200 ) {
-            toastMessage("Xác nhận thành công")
+            toastMessage(t('Toast_Message.6'));
                    
         } 
         else{
-            toastMessage("Đã có lỗi xảy ra trong quá trình xác nhận");   
+            toastMessage(t('Toast_Message.7'));   
         }
     })
     .catch(err => {

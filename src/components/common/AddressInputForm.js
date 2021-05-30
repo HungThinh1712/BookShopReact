@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import * as provinceAction from "../../actions/provinceAction";
 import * as districtAction from "../../actions/districtAction";
 import * as wardAction from "../../actions/wardAction";
+<<<<<<< HEAD
 import {useTranslation} from 'react-i18next'
+=======
+import {useTranslation} from "react-i18next"
+>>>>>>> b6bf1238e1fd3dfdb490aa71567a25dbcc9d1f40
 import { toastMessage } from "./ToastHelper";
 import { Input } from "antd";
 import { Select } from "antd";
@@ -52,7 +56,7 @@ const AddressInputForm = (props) => {
 
   const handleSubmit = async (e) => {
     if (phone === "" || name === "") {
-      toastMessage("Vui lòng nhập đầy đủ thông tin");
+      toastMessage(t('Toast_Message.8'));
     } else {
       const userAddress = {
         id,
