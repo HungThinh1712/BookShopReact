@@ -2,11 +2,8 @@ import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 import { toastMessage } from '../components/common/ToastHelper';
-<<<<<<< HEAD
-=======
 import { Book } from '@material-ui/icons';
 import { useTranslation } from "react-i18next"
->>>>>>> b6bf1238e1fd3dfdb490aa71567a25dbcc9d1f40
 
 export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}`)

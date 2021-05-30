@@ -30,13 +30,8 @@ const FormDialog =(props) => {
         if(password==='' || confirmPassword===''){
             toastMessage(t('Toast_Message.8'))
         }
-<<<<<<< HEAD
-        else if(password!==confirmPassword){
-            toastMessage("Mật khẩu không giống nhau");
-=======
         else if(password!=confirmPassword){
             toastMessage(t('Toast_Message.9'));
->>>>>>> b6bf1238e1fd3dfdb490aa71567a25dbcc9d1f40
         }else{
             dispatch(authAction.changePassword(userData,props.history,props.onClose));
             props.history.push('/user_page');
