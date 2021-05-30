@@ -23,11 +23,10 @@ const WriteCommentZone = (props) => {
     const bookId = useSelector(state => state.books.selectedBook ? state.books.selectedBook.id : null )
     const arrays = [];
 
-    const i = 0;
 
     useEffect(()=>{
       dispatch(orderActions.getOrdersRequest(props.page,4));
-    },[props.page])
+    },[props.page,dispatch])
 
     for ( const ele of (useSelector(state => state.order.orders.entities ? state.order.orders.entities : []))){
       for  (let i = 0; i < 10;i++) {
@@ -37,7 +36,7 @@ const WriteCommentZone = (props) => {
     console.log(arrays);
 
     const checkBook = (bookId) => {
-      if (arrays.find(item => item == bookId)) {
+      if (arrays.find(item => item === bookId)) {
         return 1;
       } else return 0;
     }
@@ -80,7 +79,7 @@ const WriteCommentZone = (props) => {
       
     };
 
-    if (checkBook(bookId) == 0)
+    if (checkBook(bookId) === 0)
     {
       return (
         <div></div>

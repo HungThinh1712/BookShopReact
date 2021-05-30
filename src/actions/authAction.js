@@ -426,7 +426,7 @@ export const loginUserFacebook = (email,fullName,shoppingCartData,history) => as
             } else {
                 let error;
                
-                if(res.data="Email hoặc mật khẩu không đúng!")
+                if(res.data==="Email hoặc mật khẩu không đúng!")
                     error = res.data;
                 else
                     error = Object.values(res.data.errors)[0].toString();

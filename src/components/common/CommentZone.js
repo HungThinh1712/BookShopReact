@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { Paper } from '@material-ui/core';
 import UserComment from './Comment'

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 const useStyles = makeStyles((theme) => ({
+
 
 	root: {
 	 
@@ -30,16 +32,18 @@ const useStyles = makeStyles((theme) => ({
 		 display:'none'
 		},
 	  },
+	  
 
   }));
 
 export default function VietNameseBookNav(props) {
 	const classes = useStyles();
+
         return (
-                <div className = {`home-header ${classes.root}`} >
-		            <h2 >
-					<a >{props.title}</a>
-		            </h2>
+                <div style={{display:'flex'}}  className = {`home-header ${classes.root}`} >
+					<LibraryBooksIcon style={{paddingTop:'1px',color:'#FFFFFF',marginLeft:'10px',marginRight:"10px"}} fontSize="large" ></LibraryBooksIcon>
+		            <h2 style={{paddingTop:'1px',fontSize:'20px',fontWeight:'550',textTransform:'uppercase',paddingTop:"8px",color:'#FFFFFF'}}>{props.title}</h2>
+					
 		        </div>
         );
 }

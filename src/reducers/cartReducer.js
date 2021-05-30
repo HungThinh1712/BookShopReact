@@ -199,6 +199,7 @@ export default function cartReducer(state = initialState, action) {
         ...state,
         items: action.items,
       };
+      break;
     case Types.UPDATE_BOOK_AMOUNT:
       return {
         ...state,

@@ -105,18 +105,18 @@ const UserPageNav = (props) => {
             className="nav flex-column nav-pills"
             aria-orientation="vertical"
           >
-            <a onClick={handleUserPageClick} className="nav-link ">
+            <div onClick={handleUserPageClick} className="nav-link ">
               <i className="fas fa-user"></i> {t('Customer_Management.1')}
-            </a>
-            <a onClick={handleOrderHistoryClick} className="nav-link">
+            </div>
+            <div onClick={handleOrderHistoryClick} className="nav-link">
               <i className="fas fa-shopping-cart"></i> {t('Customer_Management.8')}
-            </a>
-            <a onClick={handleUpdateAddressClick} className="nav-link">
+            </div>
+            <div onClick={handleUpdateAddressClick} className="nav-link">
               <i className="fas fa-tag"></i> {t('Customer_Management.15')}
-            </a>
-            <a onClick={handleCommentHistoryClick} className="nav-link">
+            </div>
+            <div onClick={handleCommentHistoryClick} className="nav-link">
               <i className="fas fa-star-half-alt"></i> {t('Customer_Management.19')}
-            </a>
+            </div>
           </div>
         </div>
       </div>

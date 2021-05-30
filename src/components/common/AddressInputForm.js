@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import * as provinceAction from "../../actions/provinceAction";
 import * as districtAction from "../../actions/districtAction";
 import * as wardAction from "../../actions/wardAction";
+import {useTranslation} from 'react-i18next'
 import { toastMessage } from "./ToastHelper";
 import { Input } from "antd";
 import { Select } from "antd";
-import { UserOutlined, PhoneOutlined, BankOutlined } from "@ant-design/icons";
 
-const { Option } = Select;
 const AddressInputForm = (props) => {
   const { t } =  useTranslation();
   const dispatch = useDispatch();
@@ -268,7 +267,6 @@ const AddressInputForm = (props) => {
             <Input
               size="large"
               style={{ width: "350px", marginBottom: "15px" }}
-              prefix={<PhoneOutlined />}
               value={address}
               onChange={handleAddressInputChange}
               placeholder="Địa chỉ"

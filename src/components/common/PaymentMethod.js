@@ -5,12 +5,10 @@ import ListItemInPayment from './ListItemInPayment'
 import Button from '@material-ui/core/Button'
 import {useDispatch,useSelector} from 'react-redux';
 import * as cartActions from '../../actions/cartAction';
-import {withRouter, Redirect} from 'react-router-dom'
-import NotificationItem from '../common/NotificationItem'
+import {withRouter} from 'react-router-dom'
 import * as notificationActions from '../../actions/notificationAction'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import * as CallApis from '../../constants/Apis'
-import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   payment_method_zone: {
@@ -29,7 +27,6 @@ const PaymentMethod = (props) => {
     0
   );
   const [paymentMethod, setPaymentMethod] = useState(1);
-  const [checked, setChecked] = useState(true);
   //Connection to socket
   const [connection, setConnection] = useState(null);
 
@@ -64,7 +61,7 @@ const PaymentMethod = (props) => {
         })
         .catch((e) => console.log("Connection failed: ", e));
     }
-  }, [connection]);
+  }, [connection,dispatch,userId]);
 
   const sendMessage = async () => {
     const chatMessage = {
@@ -96,7 +93,7 @@ const PaymentMethod = (props) => {
     } else {
       dispatch(
         cartActions.payWithMomo(
-          GetTotalMoney.toFixed(3).toString().replace(".", "")
+          GetTotalMoney.toString().replace(".", "")
         )
       );
     }

@@ -3,9 +3,7 @@ const initialState = {
   books: [],
   booksInZoneVn: [],
   booksInZoneEng: [],
-  booksInMonthTag: [],
-  booksInWeekTag: [],
-  booksInYearTag: [],
+  booksByType: [],
   selectedBook: null,
   suggestedBooks: [],
   searchedResultBooks: [],
@@ -29,20 +27,10 @@ export default function bookReducer(state = initialState, action) {
         ...state,
         booksInZoneEng: action.booksInZoneEng,
       };
-    case Types.GET_BOOK_BY_MONTH_TAG:
+    case Types.GET_BOOK_BY_TYPE_HOME:
       return {
         ...state,
-        booksInMonthTag: action.booksInMonthTag,
-      };
-    case Types.GET_BOOK_BY_WEEK_TAG:
-      return {
-        ...state,
-        booksInWeekTag: action.booksInWeekTag,
-      };
-    case Types.GET_BOOK_BY_YEAR_TAG:
-      return {
-        ...state,
-        booksInYearTag: action.booksInYearTag,
+        booksByType: action.booksByType,
       };
     case Types.ADD_BOOK:
       const addedBook = action.item;

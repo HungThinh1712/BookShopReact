@@ -9,11 +9,9 @@ import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
-import BreadCrumb from "../../common/Breadcrumbs";
 import {useTranslation} from "react-i18next"
 import { Input, InputNumber } from "antd";
 import { Select } from "antd";
-import { DatePicker } from "antd";
 import { Button } from "antd";
 const { Option } = Select;
 const { TextArea } = Input;

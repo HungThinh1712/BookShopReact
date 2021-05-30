@@ -61,7 +61,7 @@ const BasicTable =(props) => {
   
   useEffect(()=>{
     dispatch(userActions.getAllUsersRequest(page,props.searchString,10));
-  },[page,props.searchString])
+  },[page,props.searchString,dispatch])
 
   const rows = useSelector(state=>state.users.users.entities ? state.users.users.entities: [])
   // const handelRowClick = (row) =>{
@@ -95,7 +95,7 @@ const BasicTable =(props) => {
               <TableCell style={{width:'150px'}}>{row.phone}</TableCell>
               <TableCell >{row.birthDay}</TableCell>
               <TableCell >{row.address}</TableCell>
-              <TableCell >{row.sex==1?'Nam':'Nữ'}</TableCell>
+              <TableCell >{row.sex===1?'Nam':'Nữ'}</TableCell>
               <TableCell style={{color:"blue"}}>{t('Admin_Other.30')}</TableCell>
             </TableRow>
             

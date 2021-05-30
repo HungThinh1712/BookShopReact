@@ -1,4 +1,4 @@
-import React, { useEffect,useState,useRef } from 'react';
+import React, { useEffect,useState } from 'react';
 import queryString from 'query-string';
 import { useDispatch,useSelector } from 'react-redux';
 import { HubConnectionBuilder } from '@microsoft/signalr';
@@ -49,13 +49,14 @@ const OrderSuccessPage = (props) => {
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
-    }, []);
+    }, [connection,dispatch,userId]);
     
       const sendMessage = async () => {
        
         const chatMessage = {
             title: 'Đặt hàng',
             content: userData.fullName + " đã đặt một đơn hàng",
+            senderId: userId,
   
         };
   

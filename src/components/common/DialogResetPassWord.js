@@ -30,7 +30,7 @@ const FormDialog =(props) => {
         if(password==='' || confirmPassword===''){
             toastMessage("Vui lòng đầy đủ thông tin")
         }
-        else if(password!=confirmPassword){
+        else if(password!==confirmPassword){
             toastMessage("Mật khẩu không giống nhau");
         }else{
             dispatch(authAction.changePassword(userData,props.history,props.onClose));

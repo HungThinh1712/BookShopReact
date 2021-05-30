@@ -1,7 +1,6 @@
 import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
-import * as bookActions from './../actions/booksAction'
 export const getCommentsRequest =  (bookId,page) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Comments?bookId=${bookId}&page=${page}`)
     await axios.get(url)
