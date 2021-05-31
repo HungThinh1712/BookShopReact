@@ -12,7 +12,7 @@ const ProtectedRoute = ({component:Component,...rest}) => {
                 if(isAuthenticated ){
                     return <Component {...props}/>
                 }else{
-                    toastMessage("t('Toast_Message.15')");
+                    toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!");
                     return <Redirect to='/user_page'/>
                 }
             }
