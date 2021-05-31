@@ -159,7 +159,18 @@
         "16": "TÁC GIẢ",
         "17": "CHI TIẾT",
         "18": "ĐƠN HÀNG",
-        "19": "Quản lý đơn hàng"
+        "19": "Quản lý đơn hàng",
+        "20": "Sách",
+        "21": "Khách hàng",
+        "22": "Tài khoản",
+        "23": "Loại sách",
+        "24": "NXB",
+        "25": "Tác giả",
+        "26": "Đơn hàng",
+        "27": "Theo năm",
+        "28": "Theo tháng",
+        "29": "Theo tuần",
+        "30": "Liên hệ"
     },
     "Admin_Book": {
         "1": "Danh sách sách",

@@ -3,7 +3,6 @@ import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 import { toastMessage} from '../components/common/ToastHelper';
 import * as backdropAction from './../actions/backdropAction'
-import { useTranslation } from "react-i18next"
 
 export const addToCart = (item,amount) =>  {
     return {
@@ -111,7 +110,6 @@ export const clearStateCart = () => (dispatch) => {
 };
 
 export const updateBookAmount = (shoppingCartData) => async (dispatch) => {
-    const { t } = useTranslation();
     dispatch(backdropAction.setOpenBackDrop)
     const url = CallApis.API_URL.concat(`/ShoppingCarts/UpdateAmountCartItemEqualsToDB`)
     await axios({
@@ -124,7 +122,7 @@ export const updateBookAmount = (shoppingCartData) => async (dispatch) => {
       }).then(res =>  {  
         if (res.status===200 ) {
             dispatch(backdropAction.setCloseBackDrop)
-            toastMessage(t('Toast_Message.5'))
+            toastMessage("Cập nhật lại số lượng sách phù hợp với sách còn trong kho")
            
             dispatch({
                 type: Types.UPDATE_BOOK_AMOUNT,  //this call test dispatch. to dispsatch to our reducer

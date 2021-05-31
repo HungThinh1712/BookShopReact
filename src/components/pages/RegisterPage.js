@@ -3,10 +3,11 @@ import Logo from './../Images/logo_hcmute.png'
 import SexCheckBox from './../common/SexCheckBok'
 import {useDispatch} from 'react-redux'
 import { toastMessage } from '../common/ToastHelper'
+import { useTranslation } from "react-i18next"
 import * as authActions from '../../actions/authAction'
-import {useTranslation} from 'react-i18next'
+
 const RegisterPage = (props) => {
-  const { t } =  useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,9 +44,9 @@ const RegisterPage = (props) => {
 
   const handleSubmit = async e => {
     if(confirmPassword !==password )
-      toastMessage(t('Toast_Message.9'))
+      toastMessage("Mật khẩu không trùng nhau")
     else if(birthDay ==="")
-     toastMessage(t('Toast_Message.14'))
+     toastMessage("Vui lòng chọn ngày sinh")
     else{
       const userData = { email, password,fullName,phone, birthDay,sex};
       await dispatch(authActions.registerUser(userData,props.history))

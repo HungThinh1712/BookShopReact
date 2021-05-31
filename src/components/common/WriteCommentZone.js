@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useSelector,useDispatch} from 'react-redux'
 import * as commentActions from './../../actions/commentAction'
 import {toastMessage} from './ToastHelper';
+import { useTranslation } from "react-i18next"
 import * as orderActions from './../../actions/orderAction'
-import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -60,9 +60,9 @@ const WriteCommentZone = (props) => {
           const page = props.page
           const commentData = {userId,bookId,rate,content,title,page};
           if(rate===0)
-            toastMessage(t('Toast_Message.10'))
+            toastMessage("Vui lòng chọn đánh giá")
           else if(content==="")
-            toastMessage(t('Toast_Message.11'));
+            toastMessage("Vui lòng nhập bình luận");
 
           else{
             await dispatch(commentActions.addComment(commentData))
@@ -72,7 +72,7 @@ const WriteCommentZone = (props) => {
           }
           }
         else{
-          toastMessage(t('Toast_Message.12'));
+          toastMessage("Đăng nhập để tiếp tục");
           setRate(0);
           setTitle("");
           setContent("");

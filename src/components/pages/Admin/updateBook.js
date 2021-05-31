@@ -9,8 +9,8 @@ import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
 import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
+import { useTranslation } from "react-i18next"
 import BreadCrumb from "../../common/Breadcrumbs";
-import {useTranslation} from "react-i18next"
 import { Input, InputNumber } from "antd";
 import { Select } from "antd";
 import { DatePicker } from "antd";
@@ -195,7 +195,7 @@ const UpdateBook = (props) => {
       setOpen(false);
       setName("");
     } else {
-      toastMessage(t('Toast_Message.16'));
+      toastMessage("Vui lòng nhập thẻ");
     }
   };
   const [tagType, setTag] = useState("");

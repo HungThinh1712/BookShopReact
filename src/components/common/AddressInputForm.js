@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import * as provinceAction from "../../actions/provinceAction";
 import * as districtAction from "../../actions/districtAction";
 import * as wardAction from "../../actions/wardAction";
-import {useTranslation} from "react-i18next"
 import { toastMessage } from "./ToastHelper";
 import { Input } from "antd";
 import { Select } from "antd";
+import { useTranslation } from "react-i18next"
 import { UserOutlined, PhoneOutlined, BankOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
@@ -54,7 +54,7 @@ const AddressInputForm = (props) => {
 
   const handleSubmit = async (e) => {
     if (phone === "" || name === "") {
-      toastMessage(t('Toast_Message.8'));
+      toastMessage("Vui lòng nhập đầy đủ thông tin");
     } else {
       const userAddress = {
         id,

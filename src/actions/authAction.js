@@ -5,8 +5,7 @@ import * as Types from '../constants/ActionType'
 import * as cartActions from './../actions/cartAction'
 import * as CallApis from './../constants/Apis'
 import * as backdropAction from './../actions/backdropAction'
-import {toastMessage} from './../components/common/ToastHelper'
-import { useTranslation } from "react-i18next"
+import { toastMessage } from "../components/common/ToastHelper";
 
 // 🔓  Login - Get user token
 export const loginUser = (userData, history,shoppingCartData) => async (dispatch) => {
@@ -102,7 +101,6 @@ export const setCurrentUser = (decoded) =>  (dispatch) => {
 };
 
 export const updateAddressOfCurrentUser = (updatedUser,history,clickEvent,tag) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Users/UpdateAddress`)
     await axios({
         
@@ -119,7 +117,7 @@ export const updateAddressOfCurrentUser = (updatedUser,history,clickEvent,tag) =
                 clickEvent.onClick();
             }
                 
-            toastMessage(t('Toast_Message.1'))
+            toastMessage("Cập nhật thành công")
             localStorage.setItem('userData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_USER_ADDRESS,
@@ -247,7 +245,6 @@ export const updateProfileUser = (updatedUser) => async (dispatch) => {
 };
 
 export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Users/UpdateProfileUserWithPassWord`)
     await axios({
         
@@ -259,7 +256,7 @@ export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) =
       }).then(res => {
         if (res.status===200) {
             localStorage.setItem('userData', JSON.stringify(res.data));
-            toastMessage(t('Toast_Message.1'))
+            toastMessage("Cập nhật thành công")
             
             dispatch( {
                 type: Types.UPDATE_PROFILE_USER_PASSWORD,
@@ -307,7 +304,6 @@ export const sendCodeResetPassWord = (email,changeFlag) => async (dispatch) => {
 };
 
 export const confirmCodeReset = (userData,history,handleClickOpen) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Users/ConfirmCodeResetPassWord`)
     await axios.put(url, userData).then(res =>  {  
         if (res.status===200 ) {
@@ -315,7 +311,7 @@ export const confirmCodeReset = (userData,history,handleClickOpen) => async (dis
                    
         } 
         else{
-            toastMessage(t('Toast_Message.2'));   
+            toastMessage("Mã xác nhận không đúng");   
         }
     })
     .catch(err => {
@@ -327,14 +323,13 @@ export const confirmCodeReset = (userData,history,handleClickOpen) => async (dis
 
 
 export const updateAvatarUser = (userData) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Users/UpdateAvatarUser`)
     await axios.put(url, userData)
         .then(res =>  {  
             if (res.status===200 ) {
                
                 localStorage.setItem('userData', JSON.stringify(res.data));
-                toastMessage(t('Toast_Message.1'))
+                toastMessage("Cập nhật thành công")
                 dispatch( {
                     type: Types.UPDATE_AVATAR_USER,
                     payload: res.data
@@ -359,7 +354,6 @@ export const updateAvatarUser = (userData) => async (dispatch) => {
 };
 
 export const changePassword = (userData,onClose) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Users/ChangePassword`)
     await axios.put(url, userData).then(res =>  {  
         if (res.status===200 ) {
@@ -368,7 +362,7 @@ export const changePassword = (userData,onClose) => async (dispatch) => {
                    
         } 
         else{
-            toastMessage(t('Toast_Message.2'));   
+            toastMessage("Mã xác nhận không đúng");   
         }
     })
     .catch(err => {

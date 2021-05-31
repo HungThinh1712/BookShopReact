@@ -9,9 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { toastMessage } from "../common/ToastHelper";
+import { useTranslation } from "react-i18next"
 import Footer from "../common/Footer";
 import BreadCrumb from "../common/Breadcrumbs";
-import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingCartPage = (props) => {
-  const { t } =  useTranslation();
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) =>
@@ -113,7 +113,7 @@ const ShoppingCartPage = (props) => {
       props.history.push("/address_shipping");
     } else {
       props.history.push("/user_page");
-      toastMessage(t('Toast_Message.15'));
+      toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!");
     }
   };
   return (

@@ -10,9 +10,9 @@ import {withRouter} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import * as authActions from './../../actions/authAction'
 import {toastMessage} from './../common/ToastHelper'
+import { useTranslation } from "react-i18next"
 import MessengerChat from '../common/MessengerCustomerChat';
 import BreadCrumb from "../common/Breadcrumbs";
-import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({    
     container: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 const ProfileUserPage = (props) => {
-    const { t } =  useTranslation();
+  const { t } = useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
     const [checked,setChecked] = useState(false);
@@ -54,12 +54,12 @@ const ProfileUserPage = (props) => {
     if(checked===false){
         const userData = {id, name,phone,birthday,sex};
         await dispatch(authActions.updateProfileUser(userData))
-        toastMessage(t('Toast_Message.1'))
+        toastMessage("Cập nhật thành công")
     }else{
         if(oldPassword ==="" || newPassword==="" || confirmPassword==="")
-            toastMessage(t('Toast_Message.13'))
+            toastMessage("Thông tin không được để trống")
         else if(newPassword !==confirmPassword)
-            toastMessage(t('Toast_Message.9'))
+            toastMessage("Mật khẩu không trùng nhau")
         else{
             const userData = {id, name,phone,birthday,sex,oldPassword,newPassword};
             await dispatch(authActions.updateProfileUserWithPassWord(userData))
