@@ -45,6 +45,8 @@ const HomePage = (props) => {
   const dispatch = useDispatch();
   const [indexPageVn, setIndexPageVn] = useState(0);
   const [indexPageEng, setIndexPageEng] = useState(0);
+  const [indexPageBookByType, setIndexPageBookByType] = useState(0);
+
   const [currentTagVnese, setCurrentTagVnese] = useState(
     "Sách bán chạy trong ngày"
   );
@@ -91,13 +93,13 @@ const HomePage = (props) => {
     const fetchBooks = () => {
       dispatch(
         bookActions.getBooksByTypeHomeRequest(
-          1,
+          indexPageBookByType,
           currentType ? currentType.id : ""
         )
       );
     };
     fetchBooks();
-  }, [dispatch, currentType ? currentType.id : ""]);
+  }, [dispatch, currentType ? currentType.id : "",indexPageBookByType]);
 
   useEffect(() => {
     const fetchBooks = () => {
@@ -119,6 +121,10 @@ const HomePage = (props) => {
   const loadMoreEng = () => {
     setIndexPageEng(indexPageEng + 1);
   };
+  const loadMoreBooksByType = () => {
+    setIndexPageBookByType(indexPageBookByType + 1);
+  };
+
 
   const showBooksVnese = booksVnese.map((book, index) => (
     <Card
@@ -252,7 +258,7 @@ const HomePage = (props) => {
 
   const onTypeClick = (type) => {
     setCurrentType(type);
-    console.log(type);
+    setIndexPageBookByType(0)
   };
   const showTypes = types.map((type, index) =>
     type === currentType ? (
@@ -423,7 +429,18 @@ const HomePage = (props) => {
             className={classes.container}
           >
             {booksByType.length > 0 && booksByType ? (
-              <div className={`cover_container `}>{showBooksByType}</div>
+              <div>
+                {booksByType.length > 2 ? (
+                  <div className={`cover_container `}>{showBooksByType}</div>
+                ) : (
+                  <div className={`cover_container `}>
+                    {showBooksByType}
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                )}
+              </div>
             ) : (
               <Empty />
             )}
@@ -447,7 +464,7 @@ const HomePage = (props) => {
                     paddingRight: "4em",
                     marginBottom: "1.7em",
                   }}
-                  onClick={loadMoreVnese}
+                  onClick={loadMoreBooksByType}
                 >
                   {t("Customer_Home.7")}
                 </Fab>

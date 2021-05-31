@@ -3,7 +3,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import {useSelector} from 'react-redux'
-
+import { Spin } from 'antd';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -22,7 +22,7 @@ export default function SimpleBackdrop() {
     <div>
    
       <Backdrop className={classes.backdrop} open={openBackDrop} >
-        <CircularProgress color="inherit" />
+        <Spin size="large" />
       </Backdrop>
     </div>
   );

@@ -2,7 +2,7 @@ import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 import { toastMessage } from '../components/common/ToastHelper';
-import { Book } from '@material-ui/icons';
+import { useTranslation } from "react-i18next"
 
 export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}`)
@@ -45,7 +45,7 @@ export const confirmOder = (orderId) => async (dispatch) => {
                    
         } 
         else{
-            toastMessage("Đã có lỗi xảy ra trong quá trình xác nhận");   
+            toastMessage('Thất bại');   
         }
     })
     .catch(err => {

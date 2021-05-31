@@ -11,8 +11,8 @@
         "2": "Sách tiếng việt",
         "3": "Sách tiếng anh",
         "4": "Flash sale",
-        "5": "Sách bán chạy trong tháng",
-        "6": "Sách bán chạy trong năm",
+        "5": "Sách hot",
+        "6": "Bestseller",
         "7": "Xem thêm",
         "8": "Tìm kiếm sản phẩm...",
         "9": "Tiếng Việt",
@@ -21,7 +21,7 @@
         "12": "Địa chỉ",
         "13": "Liên hệ với chúng tôi",
         "14": "Tina là một công ty bán sách trực tuyến được thành lập vào 10/2020 với 2 cổ đông chính là Lê Hồng Đạo và Hưng Thịnh với số vốn đầu tư lên tới gần 1 tỷ $.",
-        "15": "Sách bán chạy trong tuần"
+        "15": "Sách bán chạy trong ngày"
     },
     "Customer_MyInform": {
         "1": "Thông báo của tôi",

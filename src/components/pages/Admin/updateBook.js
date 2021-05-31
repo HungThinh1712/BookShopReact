@@ -152,11 +152,11 @@ const UpdateBook = (props) => {
     formData.append("amount", amount);
     formData.append(
       "price",
-      price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+      price
     );
     formData.append(
       "coverPrice",
-      coverPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+      coverPrice
     );
     formData.append("pageAmount", pageAmount);
     formData.append("size", size);

@@ -60,12 +60,12 @@ const OrderDetailPage = (props) => {
         bookId={item.bookId}
         authorName={item.authorName}     
       />
-      {itemsInOrder.length > 1 ? <Divider /> : null}
+ <Divider />
     </div>
   )
     return (
-        <div>
-        <div>
+        <div  >
+        <div >
           <Header />
           <div className={`${classes.container}`} >
             <div className="row">

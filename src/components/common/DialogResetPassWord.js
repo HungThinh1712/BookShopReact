@@ -26,7 +26,6 @@ const FormDialog =(props) => {
     const handleSubmit = () =>{
         const email = props.email;
         const userData = {email ,password}
-        console.log("aaa");
         if(password==='' || confirmPassword===''){
             toastMessage("Vui lòng nhập đầy đủ thông tin")
         }
@@ -41,30 +40,28 @@ const FormDialog =(props) => {
     }
 
     return (
-        <div>
-             <Dialog style={{background:'blue'}} open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{t('Customer_Management.6')}</DialogTitle>
-                <DialogContent>
-                    <div className="input-field-login">
-                    <i className="fas fa-lock"></i>
-                    <input value={password} onChange={handlePasswordChange}  type="password"  placeholder={t('Customer_Management.29')} />
-                    </div>
-                    <div className="input-field-login">
-                    <i className="fas fa-lock"></i>
-                    <input value={confirmPassword} onChange={handleConfirmPasswordChange} type="password"  placeholder={t('Customer_Management.30')} />
-                    </div>
+        <Dialog  open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">{t('Customer_Management.6')}</DialogTitle>
+        <DialogContent>
+            <div className="input-field-login">
+            <i className="fas fa-lock"></i>
+            <input value={password} onChange={handlePasswordChange}  type="password"  placeholder={t('Customer_Management.29')} />
+            </div>
+            <div className="input-field-login">
+            <i className="fas fa-lock"></i>
+            <input value={confirmPassword} onChange={handleConfirmPasswordChange} type="password"  placeholder={t('Customer_Management.30')} />
+            </div>
 
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={props.onClose} color="primary">
-                    {t('Admin_Other.29')}
-                    </Button>
-                    <Button onClick={handleSubmit}  color="primary">
-                    {t('Admin_Other.30')}
-                    </Button>
-                </DialogActions>
-            </Dialog> 
-        </div>
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={props.onClose} color="primary">
+            {t('Admin_Other.29')}
+            </Button>
+            <Button onClick={handleSubmit}  color="primary">
+            {t('Admin_Other.30')}
+            </Button>
+        </DialogActions>
+    </Dialog> 
     );
 }
 export default withRouter(FormDialog)

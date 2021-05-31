@@ -5,11 +5,13 @@ import * as Types from '../constants/ActionType'
 import * as cartActions from './../actions/cartAction'
 import * as CallApis from './../constants/Apis'
 import * as backdropAction from './../actions/backdropAction'
-import { toastMessage } from "../components/common/ToastHelper";
+import {toastMessage} from './../components/common/ToastHelper'
+import { message } from 'antd';
 
 // 🔓  Login - Get user token
 export const loginUser = (userData, history,shoppingCartData) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Auth`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.post(url, userData)
         .then(res =>  {  
             if (res.status===200 ) {
@@ -35,22 +37,24 @@ export const loginUser = (userData, history,shoppingCartData) => async (dispatch
                 else{
                     history.push('/admin')
                 }
+                dispatch(backdropAction.setCloseBackDrop)
+
             } else {
                 let error;
-               
+                dispatch(backdropAction.setCloseBackDrop)
                 if(res.data ==="Email chưa được xác nhận"){
                   
                     history.push( '/confirm_code_page',{email:userData.email})
                     error = "Tài khoản của bạn cần xác thực "
                 }
-                else if(res.data==="Email hoặc mật khẩu không đúng!")
+                else if(res.data==="Email hoặc mật khẩu không đúng!"){
                     error = res.data;
+                    message.info("Email hoặc mật khẩu không đúng!");
+                }
+
                 else
                     error = Object.values(res.data.errors)[0].toString();
-                dispatch({
-                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
-                    payload: error //sets payload to errors coming from server
-                });
+                
             }
         })
         .catch(err => {
@@ -70,8 +74,7 @@ export const setCurrentUserInfo = (userId) => async (dispatch) => {
     axios.get(url)
         .then(res => {
             if (res.status===200) {
-                localStorage.setItem('userData', JSON.stringify(res.data));
-               
+                localStorage.setItem('userData', JSON.stringify(res.data));             
                 dispatch( {
                     type: Types.SET_CURRENT_USER_INFO,
                     payload: res.data
@@ -102,6 +105,7 @@ export const setCurrentUser = (decoded) =>  (dispatch) => {
 
 export const updateAddressOfCurrentUser = (updatedUser,history,clickEvent,tag) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/UpdateAddress`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios({
         
         method: 'put',
@@ -111,13 +115,13 @@ export const updateAddressOfCurrentUser = (updatedUser,history,clickEvent,tag) =
         }
       }).then(res => {
         if (res.status===200) {
-         
+            dispatch(backdropAction.setCloseBackDrop)
             if(tag==="1"){
                 history.push('/address_shipping')
                 clickEvent.onClick();
             }
                 
-            toastMessage("Cập nhật thành công")
+            toastMessage("Cập nhật thành công")
             localStorage.setItem('userData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_USER_ADDRESS,
@@ -132,6 +136,7 @@ export const updateAddressOfCurrentUser = (updatedUser,history,clickEvent,tag) =
 
     })
     .catch(err => {
+        dispatch(backdropAction.setCloseBackDrop)
         console.log(err);
     })
         
@@ -148,6 +153,7 @@ export const logOut = () =>(dispatch)  => {
 
 export const confirmCode = (userData,shoppingCartData,history) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Auth`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.put(url, userData).then(res =>  {  
         if (res.status===200 ) {
             const token = res.data;
@@ -161,7 +167,7 @@ export const confirmCode = (userData,shoppingCartData,history) => async (dispatc
             //Decode token to get user data
             const decoded = jwt_decode(localStorage.getItem('jwtToken')!=null ? localStorage.getItem('jwtToken') : token );
             // Set current user
-           
+            dispatch(backdropAction.setCloseBackDrop)
             if(decoded.admin==="False"){
                 dispatch(cartActions.addToCartofCurrentUser(shoppingCartData))
                 dispatch(setCurrentUser(decoded));
@@ -191,12 +197,11 @@ export const registerUser = (userData, history) => async (dispatch) => {
     dispatch(backdropAction.setOpenBackDrop)
     await axios.post(url, userData)
         .then(res =>  {  
+            dispatch(backdropAction.setCloseBackDrop)
             if (res.status===200 ) {
-                dispatch(backdropAction.setCloseBackDrop)
                 history.push('/confirm_code_page',{email:userData.email})
             }else {
                 let error;    
-                dispatch(backdropAction.setCloseBackDrop)            
                 error = Object.values(res.data.errors)[0].toString();
                 dispatch({
                     type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
@@ -215,6 +220,7 @@ export const registerUser = (userData, history) => async (dispatch) => {
 
 export const updateProfileUser = (updatedUser) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/UpdateProfileUser`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios({
         
         method: 'put',
@@ -223,8 +229,8 @@ export const updateProfileUser = (updatedUser) => async (dispatch) => {
             updatedUser
         }
       }).then(res => {
+        dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200) {
-            console.log(res.data);
             localStorage.setItem('userData', JSON.stringify(res.data));
             dispatch( {
                 type: Types.UPDATE_PROFILE_USER,
@@ -246,6 +252,7 @@ export const updateProfileUser = (updatedUser) => async (dispatch) => {
 
 export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/UpdateProfileUserWithPassWord`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios({
         
         method: 'put',
@@ -254,9 +261,10 @@ export const updateProfileUserWithPassWord = (updatedUser) => async (dispatch) =
             updatedUser
         }
       }).then(res => {
+        dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200) {
             localStorage.setItem('userData', JSON.stringify(res.data));
-            toastMessage("Cập nhật thành công")
+            toastMessage("Cập nhật thành công")
             
             dispatch( {
                 type: Types.UPDATE_PROFILE_USER_PASSWORD,
@@ -281,13 +289,12 @@ export const sendCodeResetPassWord = (email,changeFlag) => async (dispatch) => {
     dispatch(backdropAction.setOpenBackDrop)
     await axios.get(url)
         .then(res =>  {  
+            dispatch(backdropAction.setCloseBackDrop)            
             if (res.status===200 ) {
-                dispatch(backdropAction.setCloseBackDrop)
                 toastMessage(res.data)
                 changeFlag(true);
             }else {
                 changeFlag(false);
-                dispatch(backdropAction.setCloseBackDrop)            
                 dispatch({
                     type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
                     payload: res.data //sets payload to errors coming from server
@@ -303,15 +310,16 @@ export const sendCodeResetPassWord = (email,changeFlag) => async (dispatch) => {
         );
 };
 
-export const confirmCodeReset = (userData,history,handleClickOpen) => async (dispatch) => {
+export const confirmCodeReset = (userData,history) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/ConfirmCodeResetPassWord`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.put(url, userData).then(res =>  {  
+        dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200 ) {
-            handleClickOpen();
-                   
+            history.push('/resetpassword',{email:userData.email})                
         } 
         else{
-            toastMessage("Mã xác nhận không đúng");   
+            toastMessage("Mật mã không đúng");   
         }
     })
     .catch(err => {
@@ -324,12 +332,14 @@ export const confirmCodeReset = (userData,history,handleClickOpen) => async (dis
 
 export const updateAvatarUser = (userData) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/UpdateAvatarUser`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.put(url, userData)
-        .then(res =>  {  
+        .then(res =>  { 
+            dispatch(backdropAction.setCloseBackDrop)
             if (res.status===200 ) {
                
                 localStorage.setItem('userData', JSON.stringify(res.data));
-                toastMessage("Cập nhật thành công")
+                toastMessage("Cập nhật thành công")
                 dispatch( {
                     type: Types.UPDATE_AVATAR_USER,
                     payload: res.data
@@ -353,16 +363,16 @@ export const updateAvatarUser = (userData) => async (dispatch) => {
         );
 };
 
-export const changePassword = (userData,onClose) => async (dispatch) => {
+export const changePassword = (userData,history) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/ChangePassword`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.put(url, userData).then(res =>  {  
+        dispatch(backdropAction.setOpenBackDrop)
         if (res.status===200 ) {
-            onClose();
-           
-                   
+            history.push('/user_page')        
         } 
         else{
-            toastMessage("Mã xác nhận không đúng");   
+            toastMessage("Cập nhật thất bại");   
         }
     })
     .catch(err => {
@@ -378,12 +388,11 @@ export const sendCodeActive = (email) => async (dispatch) => {
     dispatch(backdropAction.setOpenBackDrop)
     await axios.get(url)
         .then(res =>  {  
+            dispatch(backdropAction.setCloseBackDrop)
             if (res.status===200 ) {
-                dispatch(backdropAction.setCloseBackDrop)
                 toastMessage(res.data)
 
             }else {
-                dispatch(backdropAction.setCloseBackDrop)            
                 dispatch({
                     type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
                     payload: res.data //sets payload to errors coming from server
@@ -402,8 +411,10 @@ export const sendCodeActive = (email) => async (dispatch) => {
 
 export const loginUserFacebook = (email,fullName,shoppingCartData,history) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/CreateUserFacebook?email=${email}&fullName=${fullName}`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.get(url)
         .then(res =>  {  
+            dispatch(backdropAction.setCloseBackDrop)
             if (res.status===200 ) {
                 //Save to localStorage
                
