@@ -1,7 +1,7 @@
 import React  from "react";
 import {useTranslation} from 'react-i18next'
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+import {Button} from "antd"
+
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +87,11 @@ const ItemInOrderDetails = (props) => {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span className={classes.title}>{props.name}</span>
           {props.authorName ? (
-            <span className={classes.author}>{t('Admin_Book.11')}: {props.authorName}</span>
+            <div style={{display:'flex',flexDirection:'column'}}>
+              <span className={classes.author}>{t('Admin_Book.11')}: {props.authorName}</span>
+              <span style={{fontWeight:"600",color:'red'}} className={classes.author}>Số lượng: {props.amount}</span>
+
+            </div>
           ) : null}
         </div>
         <div className={classes.flex}></div>
@@ -124,17 +128,7 @@ const ItemInOrderDetails = (props) => {
           </div>
         </div>
         <div className={classes.btn_group}>
-          <ButtonGroup
-            size="small"
-            color="primary"
-            aria-label="outlined secondary button group"
-          >
-            <Button style={{ borderColor: "blue" }}>-</Button>
-            <Button style={{ borderColor: "blue", fontWeight: 900 }} disabled>
-              {props.amount}
-            </Button>
-            <Button style={{ borderColor: "blue" }}>+</Button>
-          </ButtonGroup>
+          <Button type="primary">Đánh giá</Button>
         </div>
       </div>
     </div>

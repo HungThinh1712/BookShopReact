@@ -2,10 +2,6 @@
 import * as Types from '../constants/ActionType'
 
 
-
-
-
-// 🔒 get user info
 export const setOpenBackDrop= (dispatch) => {
 
     dispatch( {

@@ -80,8 +80,7 @@ const HeaderinPayment = (props) => {
   }
 
   const handlePaymentClick = ()=>{
-    props.history.push('/payment')
-    dispatch(cartActions.updateBookAmount(cartItems))
+    dispatch(cartActions.updateBookAmount(props.history))
   }
 
   return (

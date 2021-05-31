@@ -3,7 +3,6 @@ import axios from 'axios'
 import * as backdropAction from './../actions/backdropAction'
 import * as CallApis from './../constants/Apis'
 import {toastMessage} from './../components/common/ToastHelper'
-import { useTranslation } from "react-i18next"
 
 export const getBooksRequest = (indexPage) => async (dispatch) => {
   dispatch(backdropAction.setOpenBackDrop);
@@ -32,18 +31,19 @@ export const getBooksByZoneRequest =
     await axios
       .get(url)
       .then((res) => {
-        dispatch(backdropAction.setCloseBackDrop);
 
         if (zone === "Sách tiếng việt") {
           dispatch({
             type: Types.GET_BOOK_BY_ZONE_VN, //this call test dispatch. to dispsatch to our reducer
             booksInZoneVn: res.data,
           });
+          dispatch(backdropAction.setCloseBackDrop);
         } else {
           dispatch({
             type: Types.GET_BOOK_BY_ZONE_ENG, //this call test dispatch. to dispsatch to our reducer
             booksInZoneEng: res.data,
           });
+          dispatch(backdropAction.setCloseBackDrop);
         }
       })
       .catch((err) => {
@@ -72,10 +72,11 @@ export const getBooksByTypeHomeRequest =
         dispatch(backdropAction.setCloseBackDrop);
         console.log("Error" + err);
       });
+      
   };
 
 export const getBookByIdRequest = (id) => async (dispatch) => {
-  console.log("aa", id);
+  dispatch(backdropAction.setOpenBackDrop);
   const url = CallApis.API_URL.concat(`/Books/Get?id=${id}`);
   await axios
     .get(url)
@@ -84,8 +85,10 @@ export const getBookByIdRequest = (id) => async (dispatch) => {
         type: Types.GET_BOOK_BY_ID, //this call test dispatch. to dispsatch to our reducer
         selectedBook: res.data,
       });
+      dispatch(backdropAction.setCloseBackDrop);
     })
     .catch((err) => {
+      dispatch(backdropAction.setCloseBackDrop);
       console.log("Error" + err);
     });
 };
@@ -140,12 +143,11 @@ export const searchBookByNameRequest =
 
 export const addBook = (bookData) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Books/Create`)
-    const { t } = useTranslation();
-   
+
     await axios.post(url, bookData)
         .then(res =>  {  
             if (res.status===200 ) {
-               toastMessage(t('Toast_Message.3'))
+               toastMessage('Thêm thành công')
                dispatch({
                 type: Types.ADD_BOOK,  //this call test dispatch. to dispsatch to our reducer
                 item: res.data
@@ -170,16 +172,16 @@ export const addBook = (bookData) => async (dispatch) => {
 };
 
 export const updateBook = (bookData) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/Books/Update`)
+    dispatch(backdropAction.setOpenBackDrop)
     await axios.put(url, bookData)
         .then(res =>  {  
+          dispatch(backdropAction.setCloseBackDrop)
             if (res.status===200 ) {
                
-                toastMessage(t('Toast_Message.1'))           
+                toastMessage("Cập nhật thành công")           
             
             }else {
-                console.log(res)
                 dispatch({
                     type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
                     payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server

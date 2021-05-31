@@ -224,9 +224,9 @@ const SearchPage = (props) => {
         ) : null}
       </div>
 
-      <div style={{ paddingTop: "180px" }}>
+     {searchedBooks && searchedBooks.length > 0 ?  <div style={{ paddingTop: "180px" }}>
         <Footer />
-      </div>
+      </div>: null}
     </div>
   );
 };

@@ -14,6 +14,7 @@ import UserPage from "./components/pages/UserPage";
 import PaymentPage from "./components/pages/PaymentPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import 'antd/dist/antd.css';
 import BackDrop from "./components/common/BackDrop";
 import OrderSuccessPage from "./components/pages/OrderSuccessPage";
 import ConfirmCodePage from "./components/pages/ConfirmCodePage";
@@ -33,6 +34,7 @@ import OrderManagementPageAdmin from "./components/pages/Admin/OrderManagementPa
 import UserManagementPageAdmin from "./components/pages/Admin/UserManageAdmin";
 import AuthorManagementPageAdmin from "./components/pages/Admin/AuthorManageAdmin";
 import TypeManagementPageAdmin from "./components/pages/Admin/TypeManageAdmin";
+import ResetPassword from "./components/pages/ResetPassword"
 import ReportPage from "./components/pages/Admin/ReportPage";
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
@@ -91,6 +93,7 @@ function App() {
             />
             <Route path="/admin" component={AdminPage} />
             <UserRoute path="/payment" component={PaymentPage} />
+            <Route path="/resetpassword" component={ResetPassword} />
             <Route path="/register" component={Regiser} />
             <Route path="/search/:searchString" component={SearchPage} />
             <Route path="/details/:book_id" component={BookDetailPage} />

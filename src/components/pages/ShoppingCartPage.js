@@ -116,11 +116,11 @@ const ShoppingCartPage = (props) => {
     }
   };
   return (
-    <div>
+    <div >
       <Header></Header>
       {Object.values(cartItems.items).length > 0 ? (
         <div className={classes.flex_div}>
-          <Paper
+          <Paper  style={{marginBottom:'200px'}}
             className={classes.container}
             style={{ display: "flex", flexDirection: "column" }}
           >
@@ -202,7 +202,7 @@ const ShoppingCartPage = (props) => {
           </div>
         </div>
       )}
-      <div style={{ paddingTop: "200px" }}>
+      <div style={{marginTop:'300px'}} >
         <Footer />
       </div>
     </div>

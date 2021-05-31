@@ -155,7 +155,7 @@ const BookDetailPage = (props) => {
         </div>
 
       </div> : null}
-      <div style={{ paddingTop: '180px', backgroundColor: '#f2f2f2' }}><Footer /></div>
+     {selectedBook ?  <div style={{ paddingTop: '180px', backgroundColor: '#f2f2f2' }}><Footer /></div> : null}
     </div>
 
   );

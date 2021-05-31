@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import * as provinceAction from "../../actions/provinceAction";
 import * as districtAction from "../../actions/districtAction";
 import * as wardAction from "../../actions/wardAction";
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import { toastMessage } from "./ToastHelper";
 import { Input } from "antd";
 import { Select } from "antd";
+const { Option } = Select;
 
 const AddressInputForm = (props) => {
-  const { t } =  useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const id = props.id;
   const [name, setName] = useState(props.name);
@@ -27,17 +28,18 @@ const AddressInputForm = (props) => {
   const [wardId, setWardId] = useState(props.wardId ? props.wardId : "0");
 
   const handleProvinceInputChange = (e) => {
-    setProvinceId(e.target.value);
+    setProvinceId(e);
     setWardId("0");
+    console.log(provinceId)
     setDistrictId("0");
   };
 
   const handleDistrictInputChange = (e) => {
-    setDistrictId(e.target.value);
+    setDistrictId(e);
     setWardId("0");
   };
   const handleWardInputChange = (e) => {
-    setWardId(e.target.value);
+    setWardId(e);
   };
 
   const handleAddressInputChange = (e) => {
@@ -50,10 +52,27 @@ const AddressInputForm = (props) => {
     setPhone(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    if (phone === "" || name === "") {
-      toastMessage(t('Toast_Message.8'));
-    } else {
+  const handleSubmit =  (e) => {
+    if (phone === "" || !phone) {
+      toastMessage("Vui lòng nhập số điện thoại");
+    }
+    else if (name === "" || !name) {
+      toastMessage("Vui lòng nhập họ tên");
+    }
+    else if (provinceId === "0" || !provinceId) {
+      toastMessage("Vui lòng chọn tỉnh/ thành phố");
+    }
+    else if (districtId === "0" || !districtId) {
+      toastMessage("Vui lòng chọn quận/ huyện");
+    }
+    else if (wardId === "0" || !wardId) {
+      toastMessage("Vui lòng chọn xã/ phường");
+    }
+    else if (address === "" || !address) {
+      toastMessage("Vui lòng nhập đỉa chỉ");
+    }
+   
+     else  {
       const userAddress = {
         id,
         name,
@@ -63,7 +82,7 @@ const AddressInputForm = (props) => {
         wardId,
         address,
       };
-      await dispatch(
+       dispatch(
         authActions.updateAddressOfCurrentUser(
           userAddress,
           props.props.history,
@@ -75,23 +94,23 @@ const AddressInputForm = (props) => {
   };
   const provinces = useSelector((state) => state.province.provinces);
   const showProvinces = provinces.map((province, index) => (
-    <option key={province.id} value={province.id}>
+    <Option  value={province.id}>
       {province.name}
-    </option>
+    </Option>
   ));
 
   const districts = useSelector((state) => state.district.districts);
   const showDistricts = districts.map((district, index) => (
-    <option key={district.id} value={district.id}>
+    <Option  value={district.id}>
       {district.name}
-    </option>
+    </Option>
   ));
 
   const wards = useSelector((state) => state.ward.wards);
   const showWards = wards.map((ward, index) => (
-    <option key={ward.id} value={ward.id}>
+    <Option  value={ward.id}>
       {ward.name}
-    </option>
+    </Option>
   ));
 
   useEffect(() => {
@@ -164,7 +183,7 @@ const AddressInputForm = (props) => {
             style={{ width: "350px", marginBottom: "15px" }}
             value={phone}
             onChange={handlePhoneInputChange}
-            placeholder={t('Customer_Management.26')}
+            placeholder={t("Customer_Management.26")}
           />
         </div>
         <div
@@ -187,9 +206,10 @@ const AddressInputForm = (props) => {
           <Select
             style={{ marginBottom: "15px", width: "350px" }}
             size="large"
-            value={provinceId}
+            defaultValue={provinceId}
             onChange={handleProvinceInputChange}
           >
+            <Option value="0">Chọn Tỉnh/ Thành phố</Option>
             {showProvinces}
           </Select>
         </div>
@@ -214,9 +234,11 @@ const AddressInputForm = (props) => {
           <Select
             style={{ marginBottom: "15px", width: "350px" }}
             size="large"
-            value={districtId}
+            defaultValue={districtId}
             onChange={handleDistrictInputChange}
           >
+            <Option value="0">Chọn Quận/ Huyện</Option>
+
             {showDistricts}
           </Select>
         </div>
@@ -240,9 +262,11 @@ const AddressInputForm = (props) => {
           <Select
             style={{ marginBottom: "15px", width: "350px" }}
             size="large"
-            value={wardId}
+            defaultValue={wardId}
             onChange={handleWardInputChange}
           >
+            <Option value="0">Chọn Xã/ Phường</Option>
+
             {showWards}
           </Select>
         </div>

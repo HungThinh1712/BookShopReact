@@ -233,13 +233,13 @@ const Book = (props) => {
                           onChange={handleTagInputChange}
                           style={{ width: "100%" }}
                         >
-                          <Option value="Sách bán chạy trong tuần">
+                          <Option value="Sách bán chạy trong ngày">
                             {t('Customer_Home.15')}
                           </Option>
-                          <Option value="Sách bán chạy trong tháng">
+                          <Option value="Sách hot">
                             {t('Customer_Home.5')}
                           </Option>
-                          <Option value="Sách bán chạy trong năm">
+                          <Option value="Bestseller">
                             {t('Customer_Home.6')}
                           </Option>
                         </Select>
