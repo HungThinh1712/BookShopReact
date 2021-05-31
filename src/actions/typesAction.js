@@ -2,7 +2,6 @@ import * as Types from "../constants/ActionType";
 import axios from "axios";
 import * as CallApis from "./../constants/Apis";
 import { toastMessage } from "../components/common/ToastHelper";
-import { useTranslation } from "react-i18next"
 
 export const getTypesRequest = (name, page, pageSize) => async (dispatch) => {
   const url = CallApis.API_URL.concat(
@@ -22,13 +21,12 @@ export const getTypesRequest = (name, page, pageSize) => async (dispatch) => {
 };
 
 export const addType = (type) => async (dispatch) => {
-  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/Types/Create`);
   await axios
     .post(url, type)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage(t('Toast_Message.3'));
+        toastMessage("Thêm thành công");
         dispatch({
           type: Types.ADD_TYPES, //this call test dispatch. to dispsatch to our reducer
           types: res.data,
@@ -50,14 +48,13 @@ export const addType = (type) => async (dispatch) => {
     });
 };
 export const updateType = (type) => async (dispatch) => {
-  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/Types/Update`);
   console.log(type);
   await axios
     .put(url, type)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage(t('Toast_Message.1'));
+        toastMessage("Cập nhật thành công");
         dispatch({
           type: Types.UPDATE_TYPE, //this call test dispatch. to dispsatch to our reducer
           payload: res.data,
@@ -79,13 +76,12 @@ export const updateType = (type) => async (dispatch) => {
     });
 };
 export const deleteType = (id) => async (dispatch) => {
-  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/Types/Delete?id=${id}`);
   await axios
     .delete(url)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage(t('Toast_Message.4'));
+        toastMessage("Xóa thành công");
        
       } else {
         let error = Object.values(res.data.errors)[0].toString();

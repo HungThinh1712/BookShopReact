@@ -2,10 +2,8 @@ import React from 'react';
 import {Route, Redirect} from 'react-router-dom'
 import { useSelector, } from 'react-redux';
 import { toastMessage } from "./../components/common/ToastHelper";
-import { useTranslation } from "react-i18next"
 
 const ProtectedRoute = ({component:Component,...rest}) => {
-    const { t } = useTranslation();
     const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
 
     return (

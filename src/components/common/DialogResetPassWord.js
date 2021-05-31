@@ -9,7 +9,7 @@ import { useDispatch, } from 'react-redux';
 import * as authAction from './../../actions/authAction'
 import { toastMessage } from './ToastHelper';
 import { withRouter } from "react-router-dom";
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from "react-i18next"
 
 const FormDialog =(props) => {
     const { t } = useTranslation();
@@ -27,14 +27,14 @@ const FormDialog =(props) => {
         const email = props.email;
         const userData = {email ,password}
         if(password==='' || confirmPassword===''){
-            toastMessage(t('Toast_Message.8'))
+            toastMessage("Vui lòng nhập đầy đủ thông tin")
         }
         else if(password!=confirmPassword){
-            toastMessage(t('Toast_Message.9'));
+            toastMessage("Mật khẩu không trùng nhau");
         }else{
             dispatch(authAction.changePassword(userData,props.history,props.onClose));
             props.history.push('/user_page');
-            toastMessage(t('Toast_Message.1'));
+            toastMessage("Cập nhật thành công");
            
         }
     }

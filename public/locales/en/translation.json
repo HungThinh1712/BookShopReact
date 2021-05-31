@@ -159,7 +159,18 @@
         "16": "AUTHOR",
         "17": "DETAILED",
         "18": "ORDER",
-        "19": "Order Management"
+        "19": "Order Management",
+        "20": "Book",
+        "21": "Customer",
+        "22": "Account",
+        "23": "Book type",
+        "24": "Publishing house",
+        "25": "Author",
+        "26": "Order",
+        "27": "By year",
+        "28": "By month",
+        "29": "By week",
+        "30": "Contact"
     },
     "Admin_Book": {
         "1": "List of books",

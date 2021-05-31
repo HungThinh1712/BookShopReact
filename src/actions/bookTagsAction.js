@@ -2,7 +2,6 @@ import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 import { toastMessage} from '../components/common/ToastHelper';
-import { useTranslation } from "react-i18next"
 
 export const getBookTagsRequest =  () => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Tags/GetAll`)
@@ -22,12 +21,11 @@ export const getBookTagsRequest =  () => async (dispatch) => {
 
 export const addBookTag = (bookTag) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Tags/Create`)
-    const { t } = useTranslation();
    
     await axios.post(url, bookTag)
         .then(res =>  {  
             if (res.status===200 ) {
-               toastMessage(t('Toast_Message.4'))
+               toastMessage("Xóa thành công")
                dispatch({
                 type: Types.ADD_BOOK_TAG,  //this call test dispatch. to dispsatch to our reducer
                 item: res.data

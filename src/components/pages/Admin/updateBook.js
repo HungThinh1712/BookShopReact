@@ -193,7 +193,7 @@ const UpdateBook = (props) => {
       setOpen(false);
       setName("");
     } else {
-      toastMessage(t('Toast_Message.16'));
+      toastMessage("Vui lòng nhập thẻ");
     }
   };
   const [tagType, setTag] = useState("");

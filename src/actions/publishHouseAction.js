@@ -2,7 +2,6 @@ import * as Types from "../constants/ActionType";
 import axios from "axios";
 import * as CallApis from "./../constants/Apis";
 import { toastMessage } from "../components/common/ToastHelper";
-import { useTranslation } from "react-i18next"
 
 export const getPublishHousesRequest =
   (name, page, pageSize) => async (dispatch) => {
@@ -23,13 +22,12 @@ export const getPublishHousesRequest =
   };
 
 export const addPublishHouse = (publishHouse) => async (dispatch) => {
-  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/PublishingHouses/Create`);
   await axios
     .post(url, publishHouse)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage(t('Toast_Message.3'));
+        toastMessage("Thêm thành công");
         dispatch({
           type: Types.ADD_PUBLISH_HOUSE, //this call test dispatch. to dispsatch to our reducer
           item: res.data,
@@ -52,13 +50,12 @@ export const addPublishHouse = (publishHouse) => async (dispatch) => {
 };
 
 export const updatePublishHouse = (updatedPublishHouse) => async (dispatch) => {
-  const { t } = useTranslation();
   const url = CallApis.API_URL.concat(`/PublishingHouses/Update`);
   await axios
     .put(url, updatedPublishHouse)
     .then((res) => {
       if (res.status === 200) {
-        toastMessage(t('Toast_Message.1'));
+        toastMessage("Cập nhật thành công");
         dispatch({
           type: Types.UPDATE_PUBLISH_HOUSE, //this call test dispatch. to dispsatch to our reducer
           payload: res.data,
@@ -100,14 +97,12 @@ export const getAllPublishingHouseRequest =
       });
   };
   export const deletePublishHouse = (id) => async (dispatch) => {
-    const { t } = useTranslation();
     const url = CallApis.API_URL.concat(`/PublishingHouses/Delete?id=${id}`);
     await axios
       .delete(url)
       .then((res) => {
         if (res.status === 200) {
-          toastMessage(t('Toast_Message.4'));
-         
+          toastMessage("Xóa thành công",);
         } else {
           let error = Object.values(res.data.errors)[0].toString();
           dispatch({

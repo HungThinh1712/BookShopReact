@@ -6,8 +6,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDispatch } from "react-redux";
 import * as authorActions from "../../actions/authorAction";
+import { useTranslation } from "react-i18next"
 import { toastMessage } from "./ToastHelper";
-import {useTranslation} from 'react-i18next'
 
 export default function FormDialog(props) {
   const { t } = useTranslation();
@@ -66,7 +66,7 @@ export default function FormDialog(props) {
       setImageFile(null);
       setImageSrc("/img/defaultAvatar.png");
     } else {
-      toastMessage(t('Toast_Message.1'));
+      toastMessage("Cập nhật thành công");
     }
   };
   return (
