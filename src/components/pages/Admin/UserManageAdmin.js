@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import Header from '../../common/Header'
 import Footer from '../../common/Footer'
 import SideBarAdminPage from '../../common/SideBarAdminPage'
-import { useDispatch, useSelector } from 'react-redux';
-import * as bookActions from '../../../actions/booksAction';
 import { withRouter } from 'react-router-dom';
-import CustormerManage from './../../common/CustormerManage'
 import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
@@ -56,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 const UserManagementPageAdmin = (props) => {
     const { t } = useTranslation();
     const classes = useStyles();
-    const dispatch = useDispatch();
     const [searchString,setSearchString] = useState(''); 
     const handleInputChange = (e)=>{
         setSearchString(e.target.value);

@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as bookActions from '../../../actions/booksAction';
 import { withRouter } from 'react-router-dom';
 import Pagination from '../../common/Pagination'
-import * as Types from '../../../constants/ActionType';
 import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
@@ -69,8 +68,7 @@ const LstBook = (props) => {
     }, [dispatch,name,page])
 
     const handleItemClick = (id) => {
-        props.history.
-        push(`/admin/details/${id}`)
+        props.history.push(`/admin/details/${id}`)
     }
 
     const total = useSelector(state => state.books.booksAdmin.total ? state.books.booksAdmin.total : 0)

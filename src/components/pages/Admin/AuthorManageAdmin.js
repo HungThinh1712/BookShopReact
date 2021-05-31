@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
-import { useDispatch } from "react-redux";
-import * as authorActions from "../../../actions/authorAction";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";

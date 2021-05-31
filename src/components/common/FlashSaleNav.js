@@ -38,7 +38,7 @@ export default function FlashSaleNav(props) {
         return (
                 <div className = {`home-header ${classes.root}`} >
 		            <h2 >
-					<a >Flash sale</a>
+					<p >Flash sale</p>
 		            </h2>
 		        </div>
         );

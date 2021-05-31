@@ -8,11 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {useSelector,useDispatch} from 'react-redux'
-import * as orderActions from '../../actions/orderAction'
 import {withRouter} from 'react-router-dom'
-import { HubConnectionBuilder } from '@microsoft/signalr';
 import Pagination from '../common/Pagination'
-import * as CallApis from '../../constants/Apis'
 import * as userActions from '../../actions/userAction'
 import {useTranslation} from 'react-i18next'
 
@@ -62,7 +59,7 @@ const BasicTable =(props) => {
   const paging = total%10===0 ? total/10: Math.floor(total/10) + 1
   useEffect(()=>{
     dispatch(userActions.getUsersRequest(page,props.searchString,10));
-  },[page,props.searchString])
+  },[page,props.searchString,dispatch])
 
   const rows = useSelector(state=>state.users.users.entities ? state.users.users.entities: [])
   // const handelRowClick = (row) =>{

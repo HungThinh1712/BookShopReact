@@ -1,11 +1,10 @@
-import React, {useEffect,useState, } from 'react';
+import React, {useEffect } from 'react';
 import Nav from '../common/UserPageNav'
 import Header from '../common/Header'
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../common/Footer';
 import CommentDialog from '../common/CommentDialog';
 import * as commentActions from './../../actions/commentAction'
-import Divider from '@material-ui/core/Divider';
 import {useSelector, useDispatch} from 'react-redux';
 import BreadCrumb from "../common/Breadcrumbs";
 import {useTranslation} from 'react-i18next'
@@ -50,7 +49,7 @@ const CommentPage = (props) => {
     const dispatch = useDispatch();
     useEffect(()=>{
       dispatch(commentActions.getCommentsUserRequest(userId));
-    },[props.page])
+    },[props.page,dispatch,userId])
 
     // const rows = useSelector(state=>state.comment.comments ? state.comment.comments: {});
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);

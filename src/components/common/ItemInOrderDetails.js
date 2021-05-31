@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React  from "react";
 import {useTranslation} from 'react-i18next'
-import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
-import * as cartActions from "./../../actions/cartAction";
 
 const useStyles = makeStyles((theme) => ({
   item: {

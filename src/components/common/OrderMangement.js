@@ -38,7 +38,7 @@ const BasicTable =(props) => {
   const dispatch = useDispatch();
   useEffect(()=>{
     dispatch(orderActions.getOrdersRequest(props.page,4));
-  },[props.page])
+  },[props.page,dispatch])
 
   const rows = useSelector(state=>state.order.orders.entities ? state.order.orders.entities: [] )
   const handelRowClick = (row) =>{
@@ -72,7 +72,7 @@ const BasicTable =(props) => {
               })
               .catch(e => console.log('Connection failed: ', e));
       }
-  }, [connection]);
+  }, [connection,dispatch,props.page]);
   const showStatus = (status) => {
     if(status==="Đang chờ xác nhận"){
       console.log(status)

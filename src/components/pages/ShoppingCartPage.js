@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import { toastMessage } from "../common/ToastHelper";
 import { useTranslation } from "react-i18next"
 import Footer from "../common/Footer";
-import BreadCrumb from "../common/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -178,6 +177,7 @@ const ShoppingCartPage = (props) => {
                   <div className="col-sm-12 empty-cart-cls text-center">
                     {" "}
                     <img
+                      alt="Giỏ hàng"
                       src="https://i.imgur.com/dCdflKN.png"
                       width="130"
                       height="130"

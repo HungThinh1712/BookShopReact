@@ -8,12 +8,11 @@ const ConfirmMomoPage = (props) => {
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const statusCode = queryString.parse(props.history.location.search).status_Code
-    console.log("aaaa",props.history.location.search)
     useEffect(()=>{
         if(statusCode===0){
             dispatch(cartActions.payForCart());
         }
-    },[dispatch])
+    },[dispatch,statusCode])
 
     return (
         <div className="container-fluid mt-100">

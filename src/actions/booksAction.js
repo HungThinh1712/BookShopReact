@@ -5,180 +5,137 @@ import * as CallApis from './../constants/Apis'
 import {toastMessage} from './../components/common/ToastHelper'
 
 export const getBooksRequest = (indexPage) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books?index=${indexPage}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.GET_ALLBOOK,  //this call test dispatch. to dispsatch to our reducer
-                books: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
+  dispatch(backdropAction.setOpenBackDrop);
+  const url = CallApis.API_URL.concat(`/Books?index=${indexPage}`);
+  await axios
+    .get(url)
+    .then((res) => {
+      dispatch(backdropAction.setCloseBackDrop);
+      dispatch({
+        type: Types.GET_ALLBOOK, //this call test dispatch. to dispsatch to our reducer
+        books: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(backdropAction.setCloseBackDrop);
+      console.log("Error" + err);
+    });
+};
+
+export const getBooksByZoneRequest =
+  (indexPage, zone, tag) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop);
+    const url = CallApis.API_URL.concat(
+      `/Books/GetBookByZone?index=${indexPage}&zoneType=${zone}&tag=${tag}`
+    );
+    await axios
+      .get(url)
+      .then((res) => {
+        dispatch(backdropAction.setCloseBackDrop);
+
+        if (zone === "Sách tiếng việt") {
+          dispatch({
+            type: Types.GET_BOOK_BY_ZONE_VN, //this call test dispatch. to dispsatch to our reducer
+            booksInZoneVn: res.data,
+          });
+        } else {
+          dispatch({
+            type: Types.GET_BOOK_BY_ZONE_ENG, //this call test dispatch. to dispsatch to our reducer
+            booksInZoneEng: res.data,
+          });
         }
-        );
+      })
+      .catch((err) => {
+        dispatch(backdropAction.setCloseBackDrop);
+        console.log("Error" + err);
+      });
+  };
 
-}
+export const getBooksByTypeHomeRequest =
+  (indexPage, type) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop);
+    const url = CallApis.API_URL.concat(
+      `/Books/GetBookByType?index=${indexPage}&type=${type}`
+    );
+    await axios
+      .get(url)
+      .then((res) => {
+        dispatch(backdropAction.setCloseBackDrop);
 
-export const getBooksByZoneVnRequest = (indexPage,zone) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books/GetBookByZone?index=${indexPage}&zoneType=${zone}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-
-            dispatch({
-                type: Types.GET_BOOK_BY_ZONE_VN,  //this call test dispatch. to dispsatch to our reducer
-                booksInZoneVn: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-
-}
-
-export const getBooksByZoneEngRequest = (indexPage,zone) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books/GetBookByZone?index=${indexPage}&zoneType=${zone}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.GET_BOOK_BY_ZONE_ENG,  //this call test dispatch. to dispsatch to our reducer
-                booksInZoneEng: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-}
-
-export const getBooksByMonthTagRequest = (indexPage,tag) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books/GetBookByTag?index=${indexPage}&tag=${tag}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.GET_BOOK_BY_MONTH_TAG,  //this call test dispatch. to dispsatch to our reducer
-                booksInMonthTag: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-}
-
-export const getBooksByWeekTagRequest = (indexPage,tag) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books/GetBookByTag?index=${indexPage}&tag=${tag}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.GET_BOOK_BY_WEEK_TAG,  //this call test dispatch. to dispsatch to our reducer
-                booksInWeekTag: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-}
-
-export const getBooksByYearTagRequest = (indexPage,tag) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books/GetBookByTag?index=${indexPage}&tag=${tag}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.GET_BOOK_BY_YEAR_TAG,  //this call test dispatch. to dispsatch to our reducer
-                booksInYearTag: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-}
+        dispatch({
+          type: Types.GET_BOOK_BY_TYPE_HOME, //this call test dispatch. to dispsatch to our reducer
+          booksByType: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch(backdropAction.setCloseBackDrop);
+        console.log("Error" + err);
+      });
+  };
 
 export const getBookByIdRequest = (id) => async (dispatch) => {
-    console.log("aa",id);
-    const url = CallApis.API_URL.concat(`/Books/Get?id=${id}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch({
-                type: Types.GET_BOOK_BY_ID,  //this call test dispatch. to dispsatch to our reducer
-                selectedBook: res.data
-            });
-        })
-        .catch(err => {
-            console.log('Error' + err);
-        }
-        );
+  console.log("aa", id);
+  const url = CallApis.API_URL.concat(`/Books/Get?id=${id}`);
+  await axios
+    .get(url)
+    .then((res) => {
+      dispatch({
+        type: Types.GET_BOOK_BY_ID, //this call test dispatch. to dispsatch to our reducer
+        selectedBook: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("Error" + err);
+    });
+};
 
-}
+export const getBookByTypeIdRequest = (typeId, bookId) => async (dispatch) => {
+  const url = CallApis.API_URL.concat(
+    `/Books/GetBookByTypeId?typeId=${typeId}&bookId=${bookId}`
+  );
+  await axios
+    .get(url)
+    .then((res) => {
+      dispatch({
+        type: Types.GET_BOOK_BY_TYPE_ID, //this call test dispatch. to dispsatch to our reducer
+        suggestedBooks: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("Error" + err);
+    });
+};
 
-export const getBookByTypeIdRequest = (typeId,bookId) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Books/GetBookByTypeId?typeId=${typeId}&bookId=${bookId}`)
-    await axios.get(url)
-        .then(res => {
-            dispatch({
-                type: Types.GET_BOOK_BY_TYPE_ID,  //this call test dispatch. to dispsatch to our reducer
-                suggestedBooks: res.data
-            });
-        })
-        .catch(err => {
-            console.log('Error' + err);
-        }
-        );
-}
-
-export const searchBookByNameRequest = (name,typeId,sortPrice,publishHouseId,authorId,tagId,page) => async (dispatch) => {
-    let url =  CallApis.API_URL.concat(`/Books/SearchBookByName?name=${name}`)
-    if(typeId !=null)
-        url = url.concat(`&typeId=${typeId}`)
-    if(sortPrice !=null)
-        url = url.concat(`&sortPrice=${sortPrice}`)
-    if(publishHouseId!=null)
-        url = url.concat(`&publishHouseId=${publishHouseId}`)
-    if(authorId!=null){
-        url = url.concat(`&authorId=${authorId}`)
+export const searchBookByNameRequest =
+  (name, typeId, sortPrice, publishHouseId, authorId, tagId, page) =>
+  async (dispatch) => {
+    let url = CallApis.API_URL.concat(`/Books/SearchBookByName?name=${name}`);
+    if (typeId != null) url = url.concat(`&typeId=${typeId}`);
+    if (sortPrice != null) url = url.concat(`&sortPrice=${sortPrice}`);
+    if (publishHouseId != null)
+      url = url.concat(`&publishHouseId=${publishHouseId}`);
+    if (authorId != null) {
+      url = url.concat(`&authorId=${authorId}`);
     }
-    if(tagId!=null){
-        url = url.concat(`&tagId=${tagId}`)
+    if (tagId != null) {
+      url = url.concat(`&tagId=${tagId}`);
     }
-    url =url.concat(`&page=${page}`)
-    dispatch(backdropAction.setOpenBackDrop)
-    await axios.get(url)
-        .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.SEARCH_BOOK,  //this call test dispatch. to dispsatch to our reducer
-                searchedResultBooks: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-
-}
-
+    url = url.concat(`&page=${page}`);
+    dispatch(backdropAction.setOpenBackDrop);
+    await axios
+      .get(url)
+      .then((res) => {
+        dispatch(backdropAction.setCloseBackDrop);
+        dispatch({
+          type: Types.SEARCH_BOOK, //this call test dispatch. to dispsatch to our reducer
+          searchedResultBooks: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch(backdropAction.setCloseBackDrop);
+        console.log("Error" + err);
+      });
+  };
 
 export const addBook = (bookData) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Books/Create`)
@@ -210,7 +167,6 @@ export const addBook = (bookData) => async (dispatch) => {
         );
 };
 
-
 export const updateBook = (bookData) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Books/Update`)
     await axios.put(url, bookData)
@@ -237,23 +193,23 @@ export const updateBook = (bookData) => async (dispatch) => {
         );
 };
 
-
-export const getBooksAdminRequest = (name,indexPage) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/Books/SearchBookByNameAdmin?name=${name}&page=${indexPage}`)
-    await axios.get(url)
-        .then(res => {
-            console.log("aaaaaaa",res.data)
-            dispatch(backdropAction.setCloseBackDrop)
-            dispatch({
-                type: Types.GET_BOOKS_ADMIN,  //this call test dispatch. to dispsatch to our reducer
-                booksAdmin: res.data
-            });
-        })
-        .catch(err => {
-            dispatch(backdropAction.setCloseBackDrop)
-            console.log('Error' + err);
-        }
-        );
-
-}
+export const getBooksAdminRequest = (name, indexPage) => async (dispatch) => {
+  dispatch(backdropAction.setOpenBackDrop);
+  const url = CallApis.API_URL.concat(
+    `/Books/SearchBookByNameAdmin?name=${name}&page=${indexPage}`
+  );
+  await axios
+    .get(url)
+    .then((res) => {
+      console.log("aaaaaaa", res.data);
+      dispatch(backdropAction.setCloseBackDrop);
+      dispatch({
+        type: Types.GET_BOOKS_ADMIN, //this call test dispatch. to dispsatch to our reducer
+        booksAdmin: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(backdropAction.setCloseBackDrop);
+      console.log("Error" + err);
+    });
+};

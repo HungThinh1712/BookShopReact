@@ -140,7 +140,7 @@ const SearchPage = (props) => {
         page
       )
     );
-  }, [searchString, typeId, price, publishHouseId, authorId, page]);
+  }, [searchString, typeId, price, publishHouseId, authorId, page,dispatch,tagId]);
 
   const showBooks = searchedBooks.map((book, index) => (
     <Card

@@ -12,7 +12,6 @@ import IconButton from "@material-ui/core/IconButton";
 import TypeManageAdmin from "../../common/TypeManageAdmin";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
-import { Popconfirm, message, Button } from "antd";
 import "antd/dist/antd.css";
 import {useTranslation} from "react-i18next"
 
@@ -57,9 +56,6 @@ const TypeManagementPageAdmin = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
-  const confirm = () => {
-    message.info("Clicked on Yes.");
-  };
   const [page, setPage] = useState(1);
   const handleInputChange = (e) => {
     setSearchString(e.target.value);

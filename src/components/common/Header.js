@@ -26,8 +26,7 @@ import * as CallApis from "../../constants/Apis";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
-import {useTranslation} from 'react-i18next'
-import { Button } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
 import ReactCountryFlag from "react-country-flag";
 
 const useStyles = makeStyles((theme) => ({
@@ -130,10 +129,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PrimarySearchAppBar = (props) => {
-  const { t, i18n } =  useTranslation();
+  const { t, i18n } = useTranslation();
   function handleClick_ChangeLang(lang) {
     i18n.changeLanguage(lang);
-
   }
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -193,7 +191,7 @@ const PrimarySearchAppBar = (props) => {
       }
     };
     fetchUser();
-  }, [dispatch,userId]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     const fetchNotification = () => {
@@ -202,7 +200,7 @@ const PrimarySearchAppBar = (props) => {
       }
     };
     fetchNotification();
-  }, [dispatch,userId]);
+  }, [dispatch, userId]);
 
   //Connection to socket
   const [connection, setConnection] = useState(null);
@@ -232,7 +230,7 @@ const PrimarySearchAppBar = (props) => {
         })
         .catch((e) => console.log("Connection failed: ", e));
     }
-  }, [connection,userId,dispatch]);
+  }, [connection, userId, dispatch]);
 
   const sendMessage = async (id) => {
     try {
@@ -392,7 +390,7 @@ const PrimarySearchAppBar = (props) => {
             <div className={classes.search}>
               <InputBase
                 onChange={handleSearchStringChange}
-                placeholder={t('Customer_Home.8')}
+                placeholder={t("Customer_Home.8")}
                 defaultValue={searchString}
                 classes={{
                   root: classes.inputRoot,
@@ -439,10 +437,10 @@ const PrimarySearchAppBar = (props) => {
                   }}
                 >
                   {notifications.length > 0 ? (
-                    <h2>{t('Customer_MyInform.1')}</h2>
+                    <h2>{t("Customer_MyInform.1")}</h2>
                   ) : (
                     <h2 style={{ color: "black" }}>
-                      {t('Customer_MyInform.5')}
+                      {t("Customer_MyInform.5")}
                     </h2>
                   )}
                   {showNotifications}
@@ -456,10 +454,10 @@ const PrimarySearchAppBar = (props) => {
                   }}
                 >
                   {notifications.length > 0 ? (
-                    <h2>{t('Customer_MyInform.1')} </h2>
+                    <h2>{t("Customer_MyInform.1")} </h2>
                   ) : (
                     <h2 style={{ color: "black" }}>
-                      {t('Customer_MyInform.5')}
+                      {t("Customer_MyInform.5")}
                     </h2>
                   )}
                   {showNotifications}
@@ -524,8 +522,18 @@ const PrimarySearchAppBar = (props) => {
               <MoreIcon />
             </IconButton>
           </div>
-          <ReactCountryFlag onClick={() => handleClick_ChangeLang('vi')} style={{fontSize: '2em', cursor: 'pointer'}} countryCode="VN" svg/>  
-          <ReactCountryFlag onClick={() => handleClick_ChangeLang('en')} style={{fontSize: '2em', cursor: 'pointer', marginLeft: '10px'}} countryCode="GB" svg/> 
+          <ReactCountryFlag
+            onClick={() => handleClick_ChangeLang("vi")}
+            style={{ fontSize: "2em", cursor: "pointer" }}
+            countryCode="VN"
+            svg
+          />
+          <ReactCountryFlag
+            onClick={() => handleClick_ChangeLang("en")}
+            style={{ fontSize: "2em", cursor: "pointer", marginLeft: "10px" }}
+            countryCode="GB"
+            svg
+          />
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

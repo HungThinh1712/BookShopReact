@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
-import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import CustormerManage from "./../../common/CustormerManage";
 import { makeStyles } from "@material-ui/core/styles";
@@ -49,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 const OrderManagementPageAdmin = (props) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
