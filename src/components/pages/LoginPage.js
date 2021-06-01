@@ -86,7 +86,7 @@ const SignIn = (props) => {
           <ArrowBackIcon onClick={()=>props.history.push('/')} className={classes.icon}  style={{borderRadius:'5px',marginTop:'0.4em',marginRight:"1px",padding:'4px',width:'40px',fontSize:'30px'}}/>
             <h2 style={{ fontWeight: "600" }}>Đăng nhập</h2>
           </div>
-          <label style={{ fontSize: "12px", fontWeight: "600" }}>Email</label>
+          <label style={{ fontSize: "12px", fontWeight: "600"}}>Email</label>
           <Input
             style={{
               borderRadius: "5px",
@@ -101,7 +101,7 @@ const SignIn = (props) => {
             Mật khẩu
           </label>
           <Input
-            style={{ borderRadius: "5px", marginBottom: "20px" }}
+            style={{ borderRadius: "5px", marginBottom: "10px" }}
             type="password"
             onChange={handlePasswordInputChange}
             placeholder="Nhập mật khẩu"
@@ -110,17 +110,20 @@ const SignIn = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              marginBottom: "10px",
             }}
           >
             <div
+                          className={classes.icon}
+
               onClick={() => props.history.push("/forget_password")}
-              style={{color: "blueviolet", cursor: "pointer" }}
+              style={{color: "blueviolet", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
             >
               Quên mật khẩu
             </div>
             <div
-              style={{ color: "blueviolet", cursor: "pointer" }}
+              className={classes.icon}
+              style={{color: "blueviolet", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
               onClick={() => props.history.push("/register")}
             >
               Đăng ký

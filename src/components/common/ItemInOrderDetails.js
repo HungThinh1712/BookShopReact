@@ -1,8 +1,9 @@
-import React  from "react";
+import React, { useState }  from "react";
 import {useTranslation} from 'react-i18next'
 import {Button} from "antd"
 
 import { makeStyles } from "@material-ui/core/styles";
+import Dialog from "../common/DialogWriteComment"
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -64,8 +65,16 @@ const useStyles = makeStyles((theme) => ({
 const ItemInOrderDetails = (props) => {
   const { t } = useTranslation();
   const classes = useStyles();
+  const [open,setOpen] = useState(false);
+  const handleClose =()=>{
+    setOpen(false)
+  }
+  const handleClick = ()=>{
+    setOpen(true);
+  }
   return (
     <div style={{ border: "none" }}>
+      <Dialog open={open}  onClose={handleClose}/>
       <div className={classes.item}>
         <div
           style={{
@@ -128,7 +137,7 @@ const ItemInOrderDetails = (props) => {
           </div>
         </div>
         <div className={classes.btn_group}>
-          <Button type="primary">Đánh giá</Button>
+          <Button onClick={handleClick} type="primary">Đánh giá</Button>
         </div>
       </div>
     </div>

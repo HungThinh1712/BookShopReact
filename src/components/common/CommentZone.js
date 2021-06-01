@@ -3,7 +3,6 @@ import Rating from '@material-ui/lab/Rating';
 import { Paper } from '@material-ui/core';
 import UserComment from './Comment'
 import AmountRating from './AmountRating'
-import WritingZone from './WriteCommentZone'
 import {useSelector} from 'react-redux'
 import Pagination from './../common/Pagination'
 import {useTranslation} from 'react-i18next'
@@ -55,7 +54,6 @@ const Comment = (props) => {
 			<div style={{marginTop:'50px'}}>
 			{ratings ? showRatings : null}
 			</div>
-			<WritingZone page={props.page}/>
 			
 			<div className="row" style={{marginTop:'10px'}}>
 				<div className="col-sm-12">

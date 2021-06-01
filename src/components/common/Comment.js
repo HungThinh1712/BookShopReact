@@ -17,7 +17,6 @@ const Comment = (props) => {
       setOpen(false);
 	};
 	
-	console.log("props",props)
 	const userId = useSelector(state=>state.auth.userData ? state.auth.userData.id : '' )
 	const date = new Date(props.createAt);
 	return (		

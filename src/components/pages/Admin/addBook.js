@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
 import { useSelector, useDispatch } from "react-redux";
 import * as typeActions from "../../../actions/typesAction";
+import axios from 'axios'
 import * as publishHouseActions from "../../../actions/publishHouseAction";
 import * as authorActions from "../../../actions/authorAction";
 import Header from "../../common/Header";
@@ -18,6 +19,7 @@ import { Button } from "antd";
 const { Option } = Select;
 const { TextArea } = Input;
 
+
 const Book = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -26,6 +28,8 @@ const Book = (props) => {
     dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
     dispatch(authorActions.getAuthorsRequest("", 1, 9999));
   }, [dispatch]);
+
+
   const types = useSelector((state) =>
     state.type.types.entities ? state.type.types.entities : []
   );
@@ -187,6 +191,27 @@ const Book = (props) => {
     }
   };
   const [tagType, setTagType] = useState("");
+
+
+    let clientId = "527d998b961ba25";
+    // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
+    let auth ='Client-ID ' + clientId;
+  const handleUploadImageToImgur=async()=>{
+    const formDataTest = new FormData();
+    formDataTest.append("image",imageFile)
+    await axios('https://api.imgur.com/3/image', {
+      method: 'POST',
+      data: formDataTest,
+      headers: {
+        Authorization: auth,
+        Accept: 'application/json',
+      },
+    }).then(res=>{
+      if(res.status===200){
+        console.log(res);
+      }
+    });
+  }
   return (
     <div>
       <div id="wrapper">
@@ -412,6 +437,14 @@ const Book = (props) => {
                       style={{ width: "100%" }}
                     >
                       {t('Admin_Book.2')}
+                    </Button>
+                    <Button
+                      type="primary"
+                      size="large"
+                      onClick={handleUploadImageToImgur}
+                      style={{ width: "100%" }}
+                    >
+                      Test upload image
                     </Button>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
