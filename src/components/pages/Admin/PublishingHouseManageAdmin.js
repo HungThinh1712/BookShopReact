@@ -143,11 +143,8 @@ const PublishingHouseManagementPageAdmin = (props) => {
             </div>
           </div>
         </div>
-        
       </div>
-      <div style={{ paddingTop: "180px" }}>
-          <Footer />
-        </div>
+      <div style={{ paddingTop: '180px' }}><Footer /></div>
     </div>
   );
 };
