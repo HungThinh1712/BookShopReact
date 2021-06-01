@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
   icon: {
     "&:hover": {
-      backgroundColor: "#ffe6d1 !important",
+      backgroundColor: "#f2f2f2 !important",
       cursor: "pointer",
     },
   },
@@ -83,13 +83,13 @@ const SignIn = (props) => {
         <div className="loginForm">
           {/* <img  style={{width:'70px',height:'80px'}} src={Logo} alt=""/> */}
           <div style={{display:'flex'}}>
-          <ArrowBackIcon onClick={()=>props.history.push('/')} className={classes.icon}  style={{backgroundColor:'#f2f2f2',borderRadius:'5px',marginTop:'0.2em',marginRight:'0.2em',padding:'5px',width:'40px',fontSize:'30px'}}/>
+          <ArrowBackIcon onClick={()=>props.history.push('/')} className={classes.icon}  style={{borderRadius:'5px',marginTop:'0.4em',marginRight:"1px",padding:'4px',width:'40px',fontSize:'30px'}}/>
             <h2 style={{ fontWeight: "600" }}>Đăng nhập</h2>
           </div>
           <label style={{ fontSize: "12px", fontWeight: "600" }}>Email</label>
           <Input
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "300px",
               marginBottom: "10px",
             }}
@@ -101,7 +101,7 @@ const SignIn = (props) => {
             Mật khẩu
           </label>
           <Input
-            style={{ borderRadius: "3px", marginBottom: "20px" }}
+            style={{ borderRadius: "5px", marginBottom: "20px" }}
             type="password"
             onChange={handlePasswordInputChange}
             placeholder="Nhập mật khẩu"
@@ -134,10 +134,11 @@ const SignIn = (props) => {
               alignItems: "center",
               display: "flex",
               justifyContent: "center",
+              borderRadius:'5px'
             }}
             onClick={handleSubmit}
           >
-            Đăng nhập
+            Truy cập
           </Button>
 
           <div className="social-media" style={{ marginTop: "10px" }}>

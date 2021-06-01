@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
   icon: {
     "&:hover": {
-      backgroundColor: "#ffe6d1 !important",
+      backgroundColor: "#f2f2f2 !important",
       cursor: "pointer",
     },
   },
@@ -74,7 +74,7 @@ const RegisterPage = (props) => {
       <form className="sign-up-form">
         <div className="loginForm">
         <div style={{display:'flex'}}>
-          <ArrowBackIcon onClick={()=>props.history.push('/user_page')} className={classes.icon}  style={{backgroundColor:'#f2f2f2',borderRadius:'5px',marginTop:'0.2em',marginRight:'0.2em',padding:'5px',width:'40px',fontSize:'30px'}}/>
+          <ArrowBackIcon onClick={()=>props.history.push('/user_page')} className={classes.icon}  style={{borderRadius:'5px',marginTop:'0.4em',marginRight:'1px',padding:'4px',width:'40px',fontSize:'30px'}}/>
             <h2 style={{ fontWeight: "600" }}>Đăng ký</h2>
           </div>
           <label style={{ fontSize: "12px", fontWeight: "600" }}>
@@ -82,7 +82,7 @@ const RegisterPage = (props) => {
           </label>
           <Input
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "400px",
               marginBottom: "10px",
             }}
@@ -93,7 +93,7 @@ const RegisterPage = (props) => {
           <label style={{ fontSize: "12px", fontWeight: "600" }}>Email</label>
           <Input
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "400px",
               marginBottom: "10px",
             }}
@@ -106,7 +106,7 @@ const RegisterPage = (props) => {
           </label>
           <Input
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "400px",
               marginBottom: "10px",
             }}
@@ -119,7 +119,7 @@ const RegisterPage = (props) => {
           </label>
           <Input
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "400px",
               marginBottom: "10px",
             }}
@@ -132,7 +132,7 @@ const RegisterPage = (props) => {
           </label>
           <Input
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "400px",
               marginBottom: "10px",
             }}
@@ -145,7 +145,7 @@ const RegisterPage = (props) => {
           </label>
           <DatePicker
             style={{
-              borderRadius: "3px",
+              borderRadius: "5px",
               width: "400px",
               marginBottom: "10px",
             }}
@@ -164,11 +164,12 @@ const RegisterPage = (props) => {
                 alignItems: "center",
                 display: "flex",
                 justifyContent: "center",
-                width:"100%"
+                width:"100%",
+                borderRadius: '5px'
               }}
               onClick={handleSubmit}
             >
-              Đăng ký
+              Tạo tại khoản
             </Button>
           </div>
           <div

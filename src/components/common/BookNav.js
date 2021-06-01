@@ -40,9 +40,9 @@ export default function VietNameseBookNav(props) {
 	const classes = useStyles();
 
         return (
-                <div style={{display:'flex'}}  className = {`home-header ${classes.root}`} >
+                <div style={{display:'flex',alignItems:'center'}}  className = {`home-header ${classes.root}`} >
 					<LibraryBooksIcon style={{paddingTop:'1px',color:'#FFFFFF',marginLeft:'10px',marginRight:"10px"}} fontSize="large" ></LibraryBooksIcon>
-		            <h2 style={{paddingTop:'1px',fontSize:'20px',fontWeight:'550',textTransform:'uppercase',paddingTop:"8px",color:'#FFFFFF'}}>{props.title}</h2>
+		            <h2 style={{paddingTop:"12px",fontSize:'20px',fontWeight:'550',textTransform:'uppercase',color:'#FFFFFF'}}>{props.title}</h2>
 					
 		        </div>
         );

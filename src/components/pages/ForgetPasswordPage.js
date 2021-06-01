@@ -12,7 +12,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const useStyles = makeStyles((theme) => ({
   icon: {
     "&:hover": {
-      backgroundColor: "#ffe6d1 !important",
+      backgroundColor: "#f2f2f2 !important",
       cursor: "pointer",
     },
   },
@@ -55,11 +55,10 @@ const ForgetPasswordPage = (props) => {
               onClick={() => props.history.push("/user_page")}
               className={classes.icon}
               style={{
-                backgroundColor: "#f2f2f2",
                 borderRadius: "5px",
-                marginTop: "0.2em",
-                marginRight: "0.2em",
-                padding: "5px",
+                marginTop: "0.4em",
+                marginRight: "1px",
+                padding: "4px",
                 width: "40px",
                 fontSize: "25px",
               }}

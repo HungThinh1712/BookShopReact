@@ -13,7 +13,7 @@ import * as authAction from "../../actions/authAction";
 const useStyles = makeStyles((theme) => ({
   icon: {
     "&:hover": {
-      backgroundColor: "#ffe6d1 !important",
+      backgroundColor: "#f2f2f2 !important",
       cursor: "pointer",
     },
   },
@@ -58,11 +58,10 @@ const SignIn = (props) => {
               onClick={() => props.history.push("/forget_password")}
               className={classes.icon}
               style={{
-                backgroundColor: "#f2f2f2",
                 borderRadius: "5px",
-                marginTop: "0.2em",
-                marginRight: "0.2em",
-                padding: "5px",
+                marginTop: "0.4em",
+                marginRight: "1px",
+                padding: "4px",
                 width: "40px",
                 fontSize: "30px",
               }}
