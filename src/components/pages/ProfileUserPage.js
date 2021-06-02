@@ -106,7 +106,7 @@ const ProfileUserPage = (props) => {
             </div>
             <div className = {`${classes.container}`} >
                 <div className = "row">
-                    <Nav imgSrc={userData ? userData.imgSrc : ''} className={classes.nav} name={name} props={props}/>
+                    <Nav imgSrc={userData ? userData.imgUrl : ''} className={classes.nav} name={name} props={props}/>
                     <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>
                         <div className="profile-content">
                             <p style={{fontSize:'25px',fontWeight:500}}>{t('Customer_Management.1')}</p>

@@ -11,6 +11,9 @@ import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
 import {useTranslation} from "react-i18next"
 import { Input, InputNumber } from "antd";
+import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import * as bookTagAction from "../../../actions/bookTagsAction"
 import { Select } from "antd";
 import { Button } from "antd";
 const { Option } = Select;
@@ -33,6 +36,9 @@ const UpdateBook = (props) => {
   const authors = useSelector((state) =>
     state.author.authors.entities ? state.author.authors.entities : []
   );
+  const tags = useSelector((state) =>
+  state.bookTags.bookTags ? state.bookTags.bookTags : []
+);
   const publishHouses = useSelector((state) =>
     state.publishHouse.publishHouses.entities
       ? state.publishHouse.publishHouses.entities
@@ -42,6 +48,11 @@ const UpdateBook = (props) => {
   const showTypes = types.map((type, index) => (
     <Option key={index} value={type.id}>
       {type.name}
+    </Option>
+  ));
+  const showTags = tags.map((tag, index) => (
+    <Option key={index} value={tag.id}>
+      {tag.name}
     </Option>
   ));
   const showAuthors = authors.map((author, index) => (
@@ -60,21 +71,7 @@ const UpdateBook = (props) => {
   const handleUpLoadClick = (event) => {
     hiddenFileInput.current.click();
   };
-  //Show review Image
-  const showPreview = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setImageFile(imageFile);
-        setImageSrc(x.target.result);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      setImageFile(null);
-      setImageSrc("/img/a.jpg");
-    }
-  };
+  
   //Input
   const [bookName, setBookName] = useState(bookData.bookName);
   const [typeId, setTypeId] = useState(bookData.typeId);
@@ -89,10 +86,9 @@ const UpdateBook = (props) => {
   const [pageAmount, setPageAmount] = useState(bookData.pageAmount);
   const [size, setSize] = useState(bookData.size);
   const [coverType, setCoverType] = useState(bookData.cover_Type);
-  const [tag, setbookTag] = useState(bookData.tag);
+  const [tag, setbookTag] = useState(bookData.tagId);
   const [description, setDescription] = useState(bookData.description);
-  const [imageSrc, setImageSrc] = useState(bookData.imageSrc);
-  const [imageFile, setImageFile] = useState(null);
+  const [imgUrl, setImgUrl] = useState(bookData.imgUrl);
   const [zoneType, setZoneType] = useState(bookData.zoneType);
 
   //HandelInputChange
@@ -161,9 +157,9 @@ const UpdateBook = (props) => {
     formData.append("pageAmount", pageAmount);
     formData.append("size", size);
     formData.append("coverType", coverType);
-    formData.append("tag", tag);
+    formData.append("tagId", tag);
     formData.append("description", description);
-    formData.append("imageFile", imageFile);
+    formData.append("imgUrl", imgUrl);
 
     //const bookData = {bookName,zoneType,publishHouseId,typeId,authorId,publishDate,amount,price,coverPrice,pageAmount,size,coverType,tagId,description,imageSrc,imageFile};
     await dispatch(bookActions.updateBook(formData));
@@ -196,6 +192,33 @@ const UpdateBook = (props) => {
       toastMessage("Vui lòng nhập thẻ");
     }
   };
+
+  const [loadingImg,setLoadingImg] =useState(0);
+
+  let clientId = "5afd6b67306a4cb";
+  // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
+  let auth = "Client-ID " + clientId;
+  const handleUploadImageToImgur = async (e) => {
+    setLoadingImg(true)
+    const formDataTest = new FormData();
+    if (e.target.files && e.target.files[0]) {
+      formDataTest.append("image", e.target.files[0]);
+      await axios("https://api.imgur.com/3/image", {
+        method: "post",
+        data: formDataTest,
+        headers: {
+          Authorization: auth,
+          Accept: "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`)
+          setLoadingImg(false)
+        }
+      });
+    }
+  };
+
   const [tagType, setTag] = useState("");
   return (
     <div>
@@ -238,15 +261,7 @@ const UpdateBook = (props) => {
                           onChange={handleTagInputChange}
                           style={{ width: "100%" }}
                         >
-                          <Option value="Sách bán chạy trong tuần">
-                            {t('Customer_Home.12')}
-                          </Option>
-                          <Option value="Sách bán chạy trong tháng">
-                            {t('Customer_Home.12')}
-                          </Option>
-                          <Option value="Sách bán chạy trong năm">
-                            {t('Customer_Home.12')}
-                          </Option>
+                         {showTags}
                         </Select>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
@@ -439,15 +454,15 @@ const UpdateBook = (props) => {
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                     <div className="row">
-                      <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <img
+                    <div className="form-group mb-3 col-xs-12 col-sm-6">
+                        {
+                          !loadingImg ? <img
                           alt=""
-                          src={imageSrc}
+                          src={imgUrl}
                           onClick={handleUpLoadClick}
                           className="tm-product-img-dummy mx-auto"
-                        >
-                          {/* <i className="fas fa-cloud-upload-alt tm-upload-icon" onClick={handleClick} ></i> */}
-                        </img>
+                        ></img> : <div style={{marginTop:'100px',marginLeft:"150px"}}><CircularProgress/></div>
+                        }
                         <div className="custom-file mt-3 mb-3">
                           <input
                             id="fileInput"
@@ -455,7 +470,7 @@ const UpdateBook = (props) => {
                             type="file"
                             style={{ display: "none" }}
                             ref={hiddenFileInput}
-                            onChange={showPreview}
+                            onChange={handleUploadImageToImgur}
                           />
                         </div>
                       </div>

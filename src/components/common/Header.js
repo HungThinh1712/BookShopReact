@@ -28,6 +28,7 @@ import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { useTranslation } from "react-i18next";
 import ReactCountryFlag from "react-country-flag";
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -175,6 +176,7 @@ const PrimarySearchAppBar = (props) => {
     split.length >= 2
       ? split[split.length - 2] + " " + split[split.length - 1]
       : split[split.length - 1];
+  
   const [searchString, setSearchString] = useState(
     props.searchString ? props.searchString : ""
   );
@@ -490,20 +492,25 @@ const PrimarySearchAppBar = (props) => {
                 color="inherit"
                 onClick={() => props.history.push("/user_page")}
               >
-                {userId || userName ? (
+                {userId || userName  ? (
                   <div
                     style={{
                       backgroundColor: "#8470FF",
                       color: "white",
-                      borderRadius: "20px",
+                      borderRadius: "30px",
                       fontSize: "15px",
                       padding: "5px",
                       borderColor: "white",
                       borderStyle: "solid",
                       borderWidth: "2px",
+                      display:'flex',
+                      alignItems:'center'
                     }}
                   >
-                    {displayName}
+                      <Avatar style={{width:"25px",height:"25px",backgroundColor:'white',color:'black',marginRight:'3px',fontSize:'10px',fontWeight:'600'}}>{ split.length >= 2
+      ? split[split.length - 2][0] + " " + split[split.length - 1][0]
+      : split[split.length - 1][0]}</Avatar>
+                      <span style={{marginBottom:'0px !important',fontWeight:'600'}}>{displayName}</span>
                   </div>
                 ) : (
                   <AccountCircle style={{ marginRight: "5px" }} />

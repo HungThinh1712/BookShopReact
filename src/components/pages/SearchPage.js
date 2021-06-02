@@ -151,7 +151,7 @@ const SearchPage = (props) => {
       )}
       coverPrice={book.coverPrice}
       title={book.bookName}
-      imageSrc={book.imageSrc}
+      imageSrc={book.imgUrl}
       valueraiting={book.rating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>

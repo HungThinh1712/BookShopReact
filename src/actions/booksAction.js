@@ -206,7 +206,6 @@ export const getBooksAdminRequest = (name, indexPage) => async (dispatch) => {
   await axios
     .get(url)
     .then((res) => {
-      console.log("aaaaaaa", res.data);
       dispatch(backdropAction.setCloseBackDrop);
       dispatch({
         type: Types.GET_BOOKS_ADMIN, //this call test dispatch. to dispsatch to our reducer

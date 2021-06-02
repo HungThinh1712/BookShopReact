@@ -95,7 +95,7 @@ const BookDetailPage = (props) => {
     discount={Math.ceil(((book.coverPrice - book.price) / book.coverPrice) * 100)}
     coverPrice={book.coverPrice}
     title={book.bookName}
-    imageSrc={book.imageSrc}
+    imageSrc={book.imgUrl}
     valueraiting={book.rating}
     onClick={() => props.history.push(`/details/${book.id}`)}
   ></Card>)
@@ -118,7 +118,7 @@ const BookDetailPage = (props) => {
           discount={Math.ceil(((selectedBook.coverPrice - selectedBook.price) / selectedBook.coverPrice) * 100)}
           coverPrice={selectedBook.coverPrice}
           name={selectedBook.bookName}
-          imageSrc={selectedBook.imageSrc}
+          imageSrc={selectedBook.imgUrl}
           bookTypeName={selectedBook.bookTypeName}
           publishingHouseName={selectedBook.publishingHouseName}
           authorName={selectedBook.authorName}

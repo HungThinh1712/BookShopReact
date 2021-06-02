@@ -48,10 +48,10 @@ const HomePage = (props) => {
   const [indexPageBookByType, setIndexPageBookByType] = useState(0);
 
   const [currentTagVnese, setCurrentTagVnese] = useState(
-    "Sách bán chạy trong ngày"
+    "60b71239f00a929ea2aa3460"
   );
   const [currentTagEng, setCurrentTagEng] = useState(
-    "Sách bán chạy trong ngày"
+    "60b71239f00a929ea2aa3460"
   );
   const booksVnese = useSelector((state) => state.books.booksInZoneVn);
   const types = useSelector((state) =>
@@ -135,7 +135,7 @@ const HomePage = (props) => {
       )}
       coverPrice={book.coverPrice}
       title={book.bookName}
-      imageSrc={book.imageSrc}
+      imageSrc={book.imgUrl}
       valueraiting={book.rating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
@@ -150,7 +150,7 @@ const HomePage = (props) => {
       )}
       coverPrice={book.coverPrice}
       title={book.bookName}
-      imageSrc={book.imageSrc}
+      imageSrc={book.imgUrl}
       valueraiting={book.rating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
@@ -165,7 +165,7 @@ const HomePage = (props) => {
       )}
       coverPrice={book.coverPrice}
       title={book.bookName}
-      imageSrc={book.imageSrc}
+      imageSrc={book.imgUrl}
       valueraiting={book.rating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
@@ -175,11 +175,11 @@ const HomePage = (props) => {
     setCurrentTagVnese(tag);
     setIndexPageVn(0);
   };
-  const tagVnese = ["Sách bán chạy trong ngày", "Sách hot", "Bestseller"];
+  const tagVnese = [{id: "60b71239f00a929ea2aa3460",name:"Sách bán chạy trong ngày"}, {id:"60b71244f00a929ea2aa3461",name:"Sách hot"}, {id:"60b7124ff00a929ea2aa3462",name:"Bestseller"}];
   const showTagVnese = tagVnese.map((tag, index) =>
-    tag === currentTagVnese ? (
+    tag.id === currentTagVnese ? (
       <div
-        onClick={() => tagVneseClick(tag)}
+        onClick={() => tagVneseClick(tag.id)}
         style={{
           borderRadius: "4px",
           fontSize: "15px",
@@ -194,12 +194,12 @@ const HomePage = (props) => {
           fontWeight: "600",
         }}
       >
-        {tag}
+        {tag.name}
       </div>
     ) : (
       <div
         className={classes.tag}
-        onClick={() => tagVneseClick(tag)}
+        onClick={() => tagVneseClick(tag.id)}
         style={{
           backgroundColor: "white",
           padding: "5px",
@@ -207,7 +207,7 @@ const HomePage = (props) => {
           marginRight: "30px",
         }}
       >
-        {tag}
+        {tag.name}
       </div>
     )
   );
@@ -217,11 +217,11 @@ const HomePage = (props) => {
     setCurrentTagEng(tagE);
     setIndexPageEng(0);
   };
-  const tagEng = ["Sách bán chạy trong ngày", "Sách hot", "Bestseller"];
+  const tagEng = [{id: "60b71239f00a929ea2aa3460",name:"Sách bán chạy trong ngày"}, {id:"60b71244f00a929ea2aa3461",name:"Sách hot"}, {id:"60b7124ff00a929ea2aa3462",name:"Bestseller"}];
   const showTagEng = tagEng.map((tagE, index) =>
-    tagE === currentTagEng ? (
+    tagE.id === currentTagEng ? (
       <div
-        onClick={() => tagEndClick(tagE)}
+        onClick={() => tagEndClick(tagE.id)}
         style={{
           borderRadius: "4px",
           fontSize: "15px",
@@ -236,12 +236,12 @@ const HomePage = (props) => {
           fontWeight: "600",
         }}
       >
-        {tagE}
+        {tagE.name}
       </div>
     ) : (
       <div
         className={classes.tag}
-        onClick={() => tagEndClick(tagE)}
+        onClick={() => tagEndClick(tagE.id)}
         style={{
           backgroundColor: "white",
           padding: "5px",
@@ -249,7 +249,7 @@ const HomePage = (props) => {
           marginRight: "30px",
         }}
       >
-        {tagE}
+        {tagE.name}
       </div>
     )
   );

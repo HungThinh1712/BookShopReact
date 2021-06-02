@@ -4,6 +4,7 @@ import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { withRouter } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
+import Avatar from '@material-ui/core/Avatar';
 
 const UserPageNav = (props) => {
   const { t } = useTranslation();
@@ -58,12 +59,13 @@ const UserPageNav = (props) => {
     <div className="col-xs-5 col-sm-4 col-md-3">
       <div className="profile-sidebar">
         <div className="profile-userpic">
-          <img
-            src={imageSrc ? imageSrc : props.imageSrc}
+          {
+            imageSrc ? <img
+            src={imageSrc}
             onClick={handleUpLoadClick}
-            className="img-responsive"
             alt={t('Customer_Management.1')}
-          />
+          />: <div style={{display:'flex',justifyContent:'center'}}><Avatar  onClick={handleUpLoadClick}  style={{width:'90px',height:'90px',fontSize:'50px',fontWeight:'500',color:'white',fontWeight:'600'}}>TH</Avatar></div>
+          }
           <div style={{ display: "none" }} className="custom-file mt-3 mb-3">
             <input
               id="fileInput"

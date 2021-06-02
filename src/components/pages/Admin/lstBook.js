@@ -81,7 +81,7 @@ const LstBook = (props) => {
         key={book.id}
         price={book.price}
         title={book.bookName}
-        imageSrc={book.imageSrc}
+        imageSrc={book.imgUrl}
         id={book.id}
         onClick={() => handleItemClick(book.id)}
     ></ItemBookInAdmin>)
