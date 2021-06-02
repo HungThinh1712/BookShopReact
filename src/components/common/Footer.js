@@ -4,7 +4,6 @@ import {useTranslation} from 'react-i18next'
 const Footer = () => {
   const { t } = useTranslation();
   return (
-    <div>
       <div className="div_footer">
         <div  className="main-content">
           <div className="left box">
@@ -51,7 +50,6 @@ const Footer = () => {
             <span className="far fa-copyright"></span><span> 2020 All rights reserved.</span>
           </center>
         </div>
-      </div>
     </div>
   );
 };

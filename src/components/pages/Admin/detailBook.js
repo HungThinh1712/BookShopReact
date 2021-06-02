@@ -78,7 +78,7 @@ const Book = (props) => {
         <div id="wrapper">
           <Header notShow="notShow" />
           <SideBarAdminPage />
-          <div id="content-wrapper" style={{ marginTop: "100px" }}>
+          <div id="content-wrapper" style={{ marginTop: "100px", marginLeft: "250px" }}>
             <div className="container-fluid">
               <BreadCrumb
                 breadcrumb={t("Admin_Book.5")}
@@ -301,9 +301,6 @@ const Book = (props) => {
           </div>
         </div>
       ) : null}
-      <div style={{ paddingTop: "180px" }}>
-        <Footer />
-      </div>
     </div>
   );
 };

@@ -11,12 +11,11 @@ const index = (props) => {
             <div id="wrapper">
                 <Header notShow="notShow"/>
                 <SideBarAdminPage/>
-
-                <div id="content-wrapper"  style={{with:'100%',marginTop:'93px', marginRight:'20px', marginLeft:'20px'}}>
+                <div id="content-wrapper"  style={{with:'100%',marginTop:'93px', marginRight:'20px', marginLeft:'250px'}}>
                     <HomeAdmin></HomeAdmin>
                 </div>
             </div>
-            <div style={{ paddingTop: '180px' }}><Footer /></div>
+            
         </div>
     );
 };

@@ -58,7 +58,7 @@ const OrderManagementPageAdmin = (props) => {
         <Header notShow="notShow" />
         <SideBarAdminPage />
 
-        <div id="content-wrapper" style={{ marginTop: "100px" }}>
+        <div id="content-wrapper" style={{ marginTop: "100px", marginLeft: "250px" }}>
           <div className="container-fluid">
           <BreadCrumb 
             breadcrumb={t('Admin_Home_BreadCrumbs.3')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/customer_page")}>
@@ -98,9 +98,6 @@ const OrderManagementPageAdmin = (props) => {
             </div>
           </div>
         </div>
-      </div>
-      <div style={{ paddingTop: "180px" }}>
-        <Footer />
       </div>
     </div>
   );

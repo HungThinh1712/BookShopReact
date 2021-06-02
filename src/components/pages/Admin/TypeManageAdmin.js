@@ -92,7 +92,7 @@ const TypeManagementPageAdmin = (props) => {
         ></Dialog>
         <Header notShow="notShow" />
         <SideBarAdminPage />
-        <div id="content-wrapper" style={{ marginTop: "100px" }}>
+        <div id="content-wrapper" style={{ marginTop: "100px", marginLeft: "250px" }}>
           <div className="container-fluid">
             <BreadCrumb
               breadcrumb={t('Admin_Home_BreadCrumbs.6')}
@@ -149,9 +149,6 @@ const TypeManagementPageAdmin = (props) => {
             </div>
           </div>
         </div>
-      </div>
-      <div style={{ paddingTop: "180px" }}>
-        <Footer />
       </div>
     </div>
   );

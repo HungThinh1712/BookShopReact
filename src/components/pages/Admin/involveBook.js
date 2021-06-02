@@ -14,7 +14,7 @@ const OrderManage = (props) => {
         <div id="wrapper">
             <Header notShow="notShow" />
             <SideBarAdminPage />
-            <div id="content-wrapper" style={{ marginTop: '100px' }}>
+            <div id="content-wrapper" style={{ marginTop: '100px', marginLeft: '250px' }}>
 
                 <div className="container-fluid">
                     <div className="card mb-3">
@@ -38,7 +38,6 @@ const OrderManage = (props) => {
                 </div>
             </div>
         </div>
-        <div style={{ paddingTop: '180px' }}><Footer /></div>
     </div>
     );
 };

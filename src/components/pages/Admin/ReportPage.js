@@ -70,7 +70,7 @@ const VerticalBar = () => {
       <Header notShow="notShow" />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <SideBarAdminPage />
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", marginLeft: '250px' }}>
           <div style={{ marginTop: "120px", marginLeft: "10px" }}>
             <BreadCrumb breadcrumb="Thống kê doanh thu theo năm"></BreadCrumb>
           </div>

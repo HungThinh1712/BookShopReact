@@ -232,7 +232,7 @@ const UpdateBook = (props) => {
         ></Dialog>
         <Header />
         <SideBarAdminPage />
-        <div id="content-wrapper" style={{ marginTop: "100px" }}>
+        <div id="content-wrapper" style={{ marginTop: "100px", marginLeft:'250px' }}>
           <div className="container-fluid">
             <div className="card-body">
               <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
@@ -481,9 +481,6 @@ const UpdateBook = (props) => {
             </div>
           </div>
         </div>
-      </div>
-      <div style={{ paddingTop: "180px" }}>
-        <Footer />
       </div>
     </div>
   );

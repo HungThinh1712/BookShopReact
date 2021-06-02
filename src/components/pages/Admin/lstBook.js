@@ -95,7 +95,7 @@ const LstBook = (props) => {
             <div id="wrapper">
                 <Header notShow="notShow" />
                 <SideBarAdminPage />
-                <div id="content-wrapper" style={{ marginTop: '100px' }}> 
+                <div id="content-wrapper" style={{ marginTop: '100px', marginLeft: '260px' }}> 
                     <div className="container-fluid">
                     <BreadCrumb
                         breadcrumb={t('Admin_Home_BreadCrumbs.4')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/books")}>
@@ -143,7 +143,6 @@ const LstBook = (props) => {
                     </div> : null}
                 </div>
             </div> 
-            <div style={{ paddingTop: '180px' }}><Footer /></div>
         </div>
     );
 };

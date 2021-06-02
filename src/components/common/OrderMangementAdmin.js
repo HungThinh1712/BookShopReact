@@ -169,12 +169,12 @@ const BasicTable = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header}>{t('Admin_Other.5')}</TableCell>
-            <TableCell className={classes.header}>{t('Admin_Other.6')}</TableCell>
-            <TableCell className={classes.header}>{t('Admin_Other.7')}</TableCell>
-            <TableCell className={classes.header}>{t('Admin_Other.9')}</TableCell>
-            <TableCell className={classes.header}>{t('Admin_Other.10')}</TableCell>
-            <TableCell className={classes.header}>{t('Admin_Other.11')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "250px" }}>{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "500px" }}>{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "300px" }}>{t('Admin_Other.9')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.11')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -185,21 +185,21 @@ const BasicTable = () => {
               className={classes.row}
               key={index}
             >
-              <TableCell component="th" scope="row" style={{ width: "150px" }}>
+              <TableCell component="th" scope="row" style={{ width: "200px" }}>
                 {row.orderId}
               </TableCell>
-              <TableCell style={{ width: "150px" }}>{row.createAt}</TableCell>
+              <TableCell style={{ width: "250px" }}>{row.createAt}</TableCell>
               <TableCell style={{ width: "300px" }}>
                 {row.description}
               </TableCell>
-              <TableCell>{row.userName}</TableCell>
-              <TableCell>
+              <TableCell style={{ width: "200px" }}>{row.userName}</TableCell>
+              <TableCell style={{ width: "200px" }}>
                 {row.totalMoney
                   .toString()
                   .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
                 đ
               </TableCell>
-              <TableCell
+              <TableCell style={{ width: "200px" }}
                 onClick={(e) => {
                   if(row.status==="Đang chờ xác nhận"){
                     sendMessage(row.userId, row.id, row.orderId);
