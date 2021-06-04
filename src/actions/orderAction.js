@@ -19,6 +19,22 @@ export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
             }
         );
 };
+export const getOrderRequest =  (id) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Orders/GetOrder?id=${id}`)
+    await axios.get(url)
+        .then(res => {
+           
+            dispatch({
+                type: Types.GET_ORDER,  //this call test dispatch. to dispsatch to our reducer
+                order: res.data
+            });
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
+};
+
 
 export const getAllOrdersRequest =  (page,pageSize,value) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Orders/Admin?page=${page}&pageSize=${pageSize}&status=${value}`)

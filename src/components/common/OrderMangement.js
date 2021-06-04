@@ -42,7 +42,7 @@ const BasicTable =(props) => {
 
   const rows = useSelector(state=>state.order.orders.entities ? state.order.orders.entities: [] )
   const handelRowClick = (row) =>{
-    props.history.push('/order_details', {itemsInOrder:row.items})
+    props.history.push(`/order_details/${row.id}`)
   }
 
   const [ connection, setConnection ] = useState(null);

@@ -85,7 +85,7 @@ function App() {
             <AdminRoute path="/admin/customer_page" component={CustomerAdmin} />
             <AdminRoute path="/admin/report_page" component={ReportPage} />
             <Route path="/user_page" component={UserPage} />
-            <UserRoute path="/order_details" component={OrderDetailPage} />
+            <UserRoute path="/order_details/:id" component={OrderDetailPage} />
             <Route path="/confirm_code_page" component={ConfirmCodePage} />
             <UserRoute
               path="/order_success_page"

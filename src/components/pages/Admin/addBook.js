@@ -73,7 +73,7 @@ const Book = (props) => {
     hiddenFileInput.current.click();
   };
   const [imgUrl, setImgUrl] = useState("/img/a.jpg");
-  const [loadingImg,setLoadingImg] =useState(0);
+  const [loadingImg,setLoadingImg] =useState(false);
 
   let clientId = "5afd6b67306a4cb";
   // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";

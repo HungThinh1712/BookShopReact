@@ -5,6 +5,7 @@ import * as cartActions from "./../../actions/cartAction";
 import { withRouter } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
 import Avatar from '@material-ui/core/Avatar';
+import axios from 'axios';
 
 const UserPageNav = (props) => {
   const { t } = useTranslation();
@@ -31,37 +32,57 @@ const UserPageNav = (props) => {
   const handleUpLoadClick = (event) => {
     hiddenFileInput.current.click();
   };
-  const showPreview = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setImageFile(imageFile);
-        setImageSrc(x.target.result);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      setImageFile(null);
-      setImageSrc(props.imgSrc);
-    }
-  };
+  
   const handleSubmit = () => {
     const formData = new FormData();
-    formData.append("imageFile", imageFile);
+    formData.append("imgUrl", imgUrl);
 
     //const bookData = {bookName,zoneType,publishHouseId,typeId,authorId,publishDate,amount,price,coverPrice,pageAmount,size,coverType,tagId,description,imageSrc,imageFile};
     dispatch(authActions.updateAvatarUser(formData));
-    setImageFile(null);
   };
-  const [imageSrc, setImageSrc] = useState(props.imgSrc);
-  const [imageFile, setImageFile] = useState(null);
+  const [imgUrl, setImgUrl] = useState(props.imgSrc);
+  const [imgFile,setImgFile] = useState(null);
+  const [loadingImg,setLoadingImg] =useState(false);
+
+  let clientId = "5afd6b67306a4cb";
+  // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
+  let auth = "Client-ID " + clientId;
+  const handleUploadImageToImgur = async (e) => {
+    setLoadingImg(true)
+    const formDataTest = new FormData();
+    if (e.target.files && e.target.files[0]) {
+      formDataTest.append("image", e.target.files[0]);
+      let imageFile = e.target.files[0];
+      setImgFile(imageFile)
+      await axios("https://api.imgur.com/3/image", {
+        method: "post",
+        data: formDataTest,
+        headers: {
+          Authorization: auth,
+          Accept: "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`)
+          setLoadingImg(false)
+        }
+      });
+    }else{
+      setImgFile(null);
+      setImgUrl(props.imgSrc)
+    }
+  };
+  const handleCancelClick = ()=>{
+    setImgUrl(props.imgSrc)
+    setImgFile(null);
+  }
   return (
     <div className="col-xs-5 col-sm-4 col-md-3">
       <div className="profile-sidebar">
         <div className="profile-userpic">
           {
-            imageSrc ? <img
-            src={imageSrc}
+            imgUrl ? <img
+            src={imgUrl}
             onClick={handleUpLoadClick}
             alt={t('Customer_Management.1')}
           />: <div style={{display:'flex',justifyContent:'center'}}><Avatar  onClick={handleUpLoadClick}  style={{width:'90px',height:'90px',fontSize:'50px',fontWeight:'500',color:'white',fontWeight:'600'}}>TH</Avatar></div>
@@ -73,7 +94,7 @@ const UserPageNav = (props) => {
               type="file"
               style={{ display: "none" }}
               ref={hiddenFileInput}
-              onChange={showPreview}
+              onChange={handleUploadImageToImgur}
             />
           </div>
         </div>
@@ -81,7 +102,7 @@ const UserPageNav = (props) => {
           <div className="profile-usertitle-name">{props.name}</div>
         </div>
         <div className="profile-userbuttons">
-          {imageFile ? (
+          {imgUrl !==props.imgSrc ? (
             <button
               onClick={handleSubmit}
               type="button"
@@ -98,9 +119,17 @@ const UserPageNav = (props) => {
               {t('Customer_Management.2')}
             </button>
           )}
-          <button className="btn btn-danger btn-sm" onClick={handleLogoutClick}>
-          {t('Customer_Management.3')}
-          </button>
+          { imgUrl ===props.imgSrc ?
+            <button className="btn btn-danger btn-sm" onClick={handleLogoutClick}>
+            {t('Customer_Management.3')}
+            </button> :  <button
+              onClick={handleCancelClick}
+              type="button"
+              className="btn btn-success btn-sm"
+            >
+              Hủy
+            </button>
+          }
         </div>
         <div className="profile-usermenu">
           <div

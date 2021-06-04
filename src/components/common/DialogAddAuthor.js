@@ -8,13 +8,12 @@ import { useDispatch } from "react-redux";
 import * as authorActions from "../../actions/authorAction";
 import { useTranslation } from "react-i18next"
 import { toastMessage } from "./ToastHelper";
+import axios from "axios"
 
 export default function FormDialog(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [imageSrc, setImageSrc] = useState("/img/defaultAvatar.png");
-  const [imageFile, setImageFile] = useState(null);
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState("");
   const [description, setDescription] = useState("");
@@ -31,21 +30,34 @@ export default function FormDialog(props) {
   const handleDescriptionInputChange = (e) => {
     setDescription(e.target.value);
   };
-  //Show review Image
-  const showPreview = (e) => {
+
+  const [imgUrl, setImgUrl] = useState("https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png");
+  const [loadingImg,setLoadingImg] =useState(false);
+
+  let clientId = "5afd6b67306a4cb";
+  // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
+  let auth = "Client-ID " + clientId;
+  const handleUploadImageToImgur = async (e) => {
+    setLoadingImg(true)
+    const formDataTest = new FormData();
     if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setImageFile(imageFile);
-        setImageSrc(x.target.result);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      setImageFile(null);
-      setImageSrc("/img/defaultAvatar.png");
+      formDataTest.append("image", e.target.files[0]);
+      await axios("https://api.imgur.com/3/image", {
+        method: "post",
+        data: formDataTest,
+        headers: {
+          Authorization: auth,
+          Accept: "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`)
+          setLoadingImg(false)
+        }
+      });
     }
   };
+  
   const handleSubmit = async () => {
     if (
       name !== ""
@@ -54,7 +66,7 @@ export default function FormDialog(props) {
       formData.append("name", name);
       formData.append("birthday", birthday);
       formData.append("description", description);
-      formData.append("imageFile", imageFile);
+      formData.append("imgUrl", imgUrl);
       console.log(formData);
       await dispatch(authorActions.addAuthor(formData));
       props.onClose();
@@ -63,10 +75,9 @@ export default function FormDialog(props) {
       setName("");
       setBirthday("");
       setDescription("");
-      setImageFile(null);
-      setImageSrc("/img/defaultAvatar.png");
+      setImgUrl("https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png");
     } else {
-      toastMessage("Cập nhật thành công");
+      toastMessage("Vui lòng nhập tên tác giả");
     }
   };
   return (
@@ -82,7 +93,7 @@ export default function FormDialog(props) {
         <DialogContent>
           <div className="profile-userpic">
             <img
-              src={imageSrc ? imageSrc : props.imageSrc}
+              src={imgUrl}
               onClick={handleUpLoadClick}
               className="img-responsive"
               alt="Thông tin cá nhân"
@@ -94,7 +105,7 @@ export default function FormDialog(props) {
                 type="file"
                 style={{ display: "none" }}
                 ref={hiddenFileInput}
-                onChange={showPreview}
+                onChange={handleUploadImageToImgur}
               />
             </div>
             <div className="row">

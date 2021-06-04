@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Nav from '../common/UserPageNav'
 import Header from '../common/Header'
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../common/Footer';
 import ItemInOrder from '../common/ItemInOrderDetails';
 import Divider from '@material-ui/core/Divider';
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next'
+import * as orderAction from "../../actions/orderAction"
 
 const useStyles = makeStyles((theme) => ({
 
@@ -44,9 +45,17 @@ const useStyles = makeStyles((theme) => ({
 const OrderDetailPage = (props) => {
   const { t } =  useTranslation();
     const classes = useStyles();
-    const itemsInOrder =props.history.location.state.itemsInOrder
+    const dispatch = useDispatch();
+    const id = props.match.params.id
+    const order = useSelector((state)=>state.order.order ?  state.order.order : null)
+    
+    const itemsInOrder =useSelector((state)=>state.order.order ?  state.order.order.items : [])
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
+    useEffect(()=>{
+      dispatch(orderAction.getOrderRequest(id));
+    },[id])
     const showItemsInOrder = itemsInOrder.map((item) =>
+  
 
     <div >
       <ItemInOrder
@@ -58,7 +67,11 @@ const OrderDetailPage = (props) => {
         amount={item.amount}
         imageSrc={item.imageSrc}
         bookId={item.bookId}
-        authorName={item.authorName}     
+        authorName={item.authorName} 
+        status = {order.status} 
+        itemStatus ={item.statusRate} 
+        orderId = {order.id}  
+        userId ={userData.id}
       />
  <Divider />
     </div>

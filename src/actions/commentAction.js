@@ -56,11 +56,7 @@ export const addComment = (comment) => async (dispatch) => {
     await axios.post(url, comment)
         .then(res =>  {  
             if (res.status===200 ) {
-                //dispatch(backdropAction.setCloseBackDrop)
-                dispatch({
-                    type: Types.ADD_COMMENT,  //this call test dispatch. to dispsatch to our reducer
-                    payload: res.data //sets payload to errors coming from server
-                });
+               
             }else {
                 let error;    
                 //dispatch(backdropAction.setCloseBackDrop)            

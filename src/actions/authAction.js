@@ -367,7 +367,7 @@ export const changePassword = (userData,history) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/ChangePassword`)
     dispatch(backdropAction.setOpenBackDrop)
     await axios.put(url, userData).then(res =>  {  
-        dispatch(backdropAction.setOpenBackDrop)
+        dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200 ) {
             history.push('/user_page')        
         } 

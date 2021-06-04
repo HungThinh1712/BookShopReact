@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { toastMessage } from "./ToastHelper";
 import { useTranslation } from "react-i18next";
+import * as bookAction from '../../actions/booksAction'
+import * as commentActions from '../../actions/commentAction'
+import * as orderActions from '../../actions/orderAction'
 
 import { Input } from "antd";
 import { Button } from "antd";
@@ -21,6 +24,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function FormDialog(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [rate, setRate] = useState(0);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const handleRatingChange = e => {
+    setRate(e.target.value);
+};
+const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+};
+const handleContentChange = (e) => {
+    setContent(e.target.value);
+};
+const handleSubmit =  async () => {
+  const orderId = props.orderId;
+  const bookId = props.bookId;
+  const userId = props.userId;
+  const commentData = {  bookId, rate, content, title, orderId,userId };
+  await dispatch(commentActions.addComment(commentData))
+  props.onClose();
+  await dispatch(orderActions.getOrderRequest(orderId))
+  toastMessage("Đánh giá thành công")
+
+};
   return (
     <div>
       <Dialog
@@ -34,15 +61,15 @@ export default function FormDialog(props) {
         <DialogContent>
         <div style={{marginTop:"-10px"}} className={classes.container}>
                <div >
-               <Rating size="large" />
-                <Input style={{marginBottom:"10px"}} />
+               <Rating  onChange={handleRatingChange} size="large" />
+                <Input onChange={handleTitleChange} style={{marginBottom:"10px"}} />
               </div>
-              <TextArea rows={4} />
+              <TextArea onChange={handleContentChange} rows={4} />
                </div>
         </DialogContent>
         <DialogActions>
           <div style={{display:'flex'}}>
-          <Button style={{marginRight:'10px'}} type="primary">Gửi đánh giá</Button>
+          <Button onClick={handleSubmit} style={{marginRight:'10px'}} type="primary">Gửi đánh giá</Button>
           <Button onClick={props.onClose} style={{marginRight:'17px'}} type="danger">Hủy</Button>
           </div>
         </DialogActions>

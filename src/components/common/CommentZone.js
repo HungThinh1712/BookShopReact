@@ -33,7 +33,6 @@ const Comment = (props) => {
 	action ={props.setDefaultPage}
 	
   ></UserComment> )
-  console.log("aaabbb",props.actionTag)
   const showRatings = ratings.map((rating, index) => <AmountRating
 	value={rating.value}
 	amount = {rating.amount}

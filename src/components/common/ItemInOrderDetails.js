@@ -4,6 +4,7 @@ import {Button} from "antd"
 
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "../common/DialogWriteComment"
+import { Tag } from 'antd';
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -74,7 +75,7 @@ const ItemInOrderDetails = (props) => {
   }
   return (
     <div style={{ border: "none" }}>
-      <Dialog open={open}  onClose={handleClose}/>
+      <Dialog open={open} bookId={props.bookId} orderId ={props.orderId} userId= {props.userId} onClose={handleClose}/>
       <div className={classes.item}>
         <div
           style={{
@@ -136,9 +137,13 @@ const ItemInOrderDetails = (props) => {
             </span>
           </div>
         </div>
-        <div className={classes.btn_group}>
-          <Button onClick={handleClick} type="primary">Đánh giá</Button>
-        </div>
+        {
+          props.status ==="Đã xác nhận" ? <div className={classes.btn_group}>
+          {
+            props.itemStatus ===false ? <Button onClick={handleClick} type="primary">Đánh giá</Button> : <Tag color="#87d068">Đã đánh giá</Tag>
+          }
+        </div>: null
+        }
       </div>
     </div>
   );
