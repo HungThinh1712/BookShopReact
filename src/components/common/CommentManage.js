@@ -83,11 +83,11 @@ const BasicTable =(props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow style={{height:'80px',fontWeight:'900'}} >
-            <TableCell className={classes.header} >Ngày nhận xét</TableCell>
-            <TableCell className={classes.header} >Tên cuốn sách</TableCell>
-            <TableCell className={classes.header} >Tiêu đề</TableCell>
-            <TableCell className={classes.header} >Nội dung</TableCell>
-            <TableCell className={classes.header} >Đánh giá</TableCell>
+            <TableCell className={classes.header} >{t('Customer_Management.22')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Book.6')}</TableCell>
+            <TableCell className={classes.header} >{t('Customer_Management.20')}</TableCell>
+            <TableCell className={classes.header} >{t('Customer_Management.23')}</TableCell>
+            <TableCell className={classes.header} >{t('Customer_Management.21')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

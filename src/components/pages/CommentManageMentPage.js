@@ -47,7 +47,7 @@ const CommentPage = (props) => {
   const { t } =  useTranslation();
     const classes = useStyles();
     const dispatch = useDispatch();
-    // const total  = useSelector(state=>state.comment.comments.total ? state.comment.comments.total: 0 )
+    const total  = useSelector(state=>state.comment.comments.total ? state.comment.comments.total: 0 )
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
     const [page,setPage] =useState(1);
     const handlePageChange = (event, value) => {
@@ -55,7 +55,7 @@ const CommentPage = (props) => {
       setPage(value);
     
     };
-  // const paging = total%4===0 ? total/4 : Math.floor(total/4) + 1
+  const paging = total%4===0 ? total/4 : Math.floor(total/4) + 1
 
     return (
         <div>
