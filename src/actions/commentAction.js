@@ -1,7 +1,24 @@
 import * as Types from '../constants/ActionType'
 import axios from 'axios'
 import * as CallApis from './../constants/Apis'
-export const getCommentsRequest =  (bookId,page) => async (dispatch) => {
+
+export const getCommentRequest =  (page, pageSize) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Comments/GetComents?page=${page}&pageSize=${pageSize}`)
+    await axios.get(url)
+        .then(res => {
+           
+            dispatch({
+                type: Types.GET_COMMENT,  //this call test dispatch. to dispsatch to our reducer
+                comments: res.data
+            });
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
+};
+
+export const getCommentsRequest =  (bookId, page) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Comments?bookId=${bookId}&page=${page}`)
     await axios.get(url)
         .then(res => {

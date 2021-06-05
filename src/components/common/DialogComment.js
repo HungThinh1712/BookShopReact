@@ -5,7 +5,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Rating from '@material-ui/lab/Rating';
-
 import { useDispatch, } from 'react-redux';
 import * as commentActions from './../../actions/commentAction'
 import {useTranslation} from 'react-i18next'
@@ -13,7 +12,6 @@ import {useTranslation} from 'react-i18next'
 export default function FormDialog(props) {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-
     const [rate, setRate] = useState(props.props.rating);
     const [title, setTitle] = useState(props.props.title);
     const [content, setContent] = useState(props.props.content);
@@ -43,6 +41,7 @@ export default function FormDialog(props) {
         props.onClose();
 
     };
+    
     return (
         <div>
             {props.tag === 0 ? <Dialog open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
