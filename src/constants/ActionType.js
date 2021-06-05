@@ -22,6 +22,7 @@ export const GET_PUBLISHHOUSES = "GET_PUBLISHHOUSES";
 export const GET_AUTHORS = "GET_AUTHORS";
 export const GET_AUTHOR = "GET_AUTHOR";
 export const GET_COMMENTS = "GET_COMMENTS";
+export const GET_COMMENT = "GET_COMMENT";
 export const LOG_OUT = "LOG_OUT";
 export const CLEAR_CART_STATE = "CLEAR_CART_STATE";
 export const GET_RATINGS = "GET_RATINGS";

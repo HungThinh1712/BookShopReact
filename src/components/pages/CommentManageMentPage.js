@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react';
+import React, {useEffect, useState } from 'react';
 import Nav from '../common/UserPageNav'
 import Header from '../common/Header'
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import CommentDialog from '../common/CommentDialog';
 import * as commentActions from './../../actions/commentAction'
 import {useSelector, useDispatch} from 'react-redux';
 import BreadCrumb from "../common/Breadcrumbs";
+import CommentManage from '../common/CommentManage'
 import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
@@ -44,30 +45,18 @@ const useStyles = makeStyles((theme) => ({
 
 const CommentPage = (props) => {
   const { t } =  useTranslation();
-    const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).id : null
     const classes = useStyles();
     const dispatch = useDispatch();
-    useEffect(()=>{
-      dispatch(commentActions.getCommentsUserRequest(userId));
-    },[props.page,dispatch,userId])
-
-    // const rows = useSelector(state=>state.comment.comments ? state.comment.comments: {});
+    // const total  = useSelector(state=>state.comment.comments.total ? state.comment.comments.total: 0 )
     const userData = useSelector(state => state.auth.userData ? state.auth.userData : null);
-    const showComments = (
+    const [page,setPage] =useState(1);
+    const handlePageChange = (event, value) => {
+    
+      setPage(value);
+    
+    };
+  // const paging = total%4===0 ? total/4 : Math.floor(total/4) + 1
 
-    <div >
-      <CommentDialog
-        key={useSelector(state=>state.comment.comments.id)}
-        title={useSelector(state=>state.comment.comments.title)}
-        content={useSelector(state=>state.comment.comments.content)}
-        createAt={useSelector(state=>state.comment.comments.createAt)}
-        imgSrc={useSelector(state=>state.comment.comments.imgSrc)}
-        bookId={useSelector(state=>state.comment.comments.bookId)}
-        bookName={useSelector(state=>state.comment.comments.bookName)}     
-        rate={useSelector(state=>state.comment.comments.rate)}
-      />
-    </div>
-  )
     return (
         <div>
         <div>
@@ -82,7 +71,7 @@ const CommentPage = (props) => {
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
                 <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Customer_BreadCrumbs.5')}</p>
-                {showComments}
+                <CommentManage page ={page} />
               </div>              
             </div>
           </div>
