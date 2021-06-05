@@ -18,13 +18,14 @@ export default function FormDialog(props) {
         key={item.bookId}
         title={item.name}
         price={item.price}
+        authorName ={item.authorName}
         coverPrice={item.coverPrice}
         discount={Math.ceil(((item.coverPrice - item.price) / item.coverPrice) * 100)}
         amount={item.amount}
         imageSrc={item.imageSrc}
         bookId={item.bookId}   
       />
-      {itemsInOrder.length > 1 ? <Divider /> : null}
+ <Divider /> 
     </div>
   )
     

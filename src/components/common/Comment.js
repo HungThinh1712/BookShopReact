@@ -23,7 +23,7 @@ const Comment = (props) => {
 				<div style={{display:'flex'}}>
 					<Dialog actionTag={props.actionTag} action={props.action} page={props.page} open={open} tag={tag} onClose={handleClose} props={props} ></Dialog>
 					<div className="col-sm-2" >
-						<img src={props.imgSrc} alt="" className="img-rounded" style={{ borderRadius: '50%',maxWidth:'50px',maxHeight:'50px' }} />
+						<img src={props.imgUrl} alt="" className="img-rounded" style={{ borderRadius: '50%',maxWidth:'50px',maxHeight:'50px' }} />
 						<div className="review-block-name"><div >{props.name}</div></div>
 						<div className="review-block-date">{date.getUTCDate() + " tháng " + (date.getUTCMonth()+1) +',' + "  " + date.getUTCFullYear()}<br /></div>
 					</div>
@@ -33,10 +33,7 @@ const Comment = (props) => {
 						</div>
 						<div className="review-block-title">{props.title}</div>
 						<div className="review-block-description">{props.content}</div>
-						{userId===props.userId ?<div style={{display:'flex',flexDirection:'row',marginTop:'-30px'}}>
-							<div onClick={()=>handleClickOpen(0)}  style={{fontSize:'12px',color:'blue',cursor:'pointer'}} >{t('Customer_Detail.23')}</div>
-							<div onClick={()=>handleClickOpen(1)} style={{fontSize:'12px',color:'blue',marginLeft:'15px',cursor:'pointer'}} >{t('Customer_Detail.24')}</div>
-						</div>:null}
+				
 					</div>
 				</div>
 	);

@@ -14,7 +14,7 @@ const ItemBookInAdmin = (props) => {
                 </div>
                 <div className="product-content">
                     <h3 className="title" ><div>{props.title}</div></h3>
-                    <div className="price">{props.price}</div>
+                    <div className="price">{props.price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</div>
                 </div>
                 <ul className="social">
                     <li ><p data-tip={t('Admin_Book.5')}><i className="fa fa-search"></i></p></li>

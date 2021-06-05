@@ -28,7 +28,7 @@ const Comment = (props) => {
 	createAt ={comment.createAt}
 	id={comment.id}
 	userId ={comment.userId}
-	imgSrc ={comment.imgSrc}
+	imgUrl ={comment.imgUrl}
 	page ={props.page}
 	action ={props.setDefaultPage}
 	
@@ -56,7 +56,7 @@ const Comment = (props) => {
 			
 			<div className="row" style={{marginTop:'10px'}}>
 				<div className="col-sm-12">
-					<div className="review-block" style={{width:'100%'}}>
+					<div  style={{width:'100%'}}>
 						{comments ? showComments : null}
 					</div>
 					<div style={{marginTop:'10px',marginLeft:'auto'}}>

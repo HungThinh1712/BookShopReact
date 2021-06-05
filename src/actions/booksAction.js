@@ -85,12 +85,13 @@ export const getBookByIdRequest = (id) => async (dispatch) => {
         type: Types.GET_BOOK_BY_ID, //this call test dispatch. to dispsatch to our reducer
         selectedBook: res.data,
       });
-      dispatch(backdropAction.setCloseBackDrop);
     })
     .catch((err) => {
       dispatch(backdropAction.setCloseBackDrop);
       console.log("Error" + err);
     });
+    dispatch(backdropAction.setCloseBackDrop);
+
 };
 
 export const getBookByTypeIdRequest = (typeId, bookId) => async (dispatch) => {

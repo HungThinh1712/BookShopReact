@@ -402,13 +402,8 @@ const Book = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="cover_type">{t("Admin_Book.18")}</label>
-                        <input
-                          id="size"
+                        <Input
                           onChange={handleCoverTypeChange}
-                          name="size"
-                          type="text"
-                          className="form-control validate"
-                          required
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">

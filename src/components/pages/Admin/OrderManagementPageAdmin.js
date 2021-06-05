@@ -66,7 +66,7 @@ const OrderManagementPageAdmin = (props) => {
                                         </div>
                                     </div>
                                     <div className="container">
-                                        <div className="row">
+                                        <div className="row" style={{marginBottom:"10px"}}>
                                             {CheckBox()}
                                         </div>
                                         <div className="row">

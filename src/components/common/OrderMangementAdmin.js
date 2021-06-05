@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as orderActions from '../../actions/orderAction'
 import { withRouter } from 'react-router-dom'
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import {Button,Tag} from "antd";
 import Pagination from '../common/Pagination'
 import * as CallApis from '../../constants/Apis'
 import Dialog from '../common/DialogDetailItemAdmin'
@@ -26,11 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
   confirm: {
     "&:hover": {
-      backgroundColor: "white",
+      backgroundColor: "#9400D3",
       cursor: "pointer",
-    },
-    display: "inline-block",
-    height: "20px",
+    }
   },
 
   row: {
@@ -133,15 +132,14 @@ const BasicTable = () => {
   const showStatus = (status) => {
     if (status === "Đang chờ xác nhận") {
       return (
-        <div
-          className={classes.confirm}
-          style={{ textDecoration: "underline", color: "blue" }}
+        <Button type="primary" className={classes.confirm}
         >
-          <p>Xác nhận đơn hàng</p>
-        </div>
+          
+          Xác nhận 
+        </Button>
       );
     } else {
-      return <div style={{ color: "green" }}>{status}</div>;
+      return <Tag color="#ff8419">{status}</Tag>;
     }
   };
 
@@ -169,10 +167,11 @@ const BasicTable = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "150px" }}>{t('Admin_Other.5')}</TableCell>
             <TableCell className={classes.header} style={{ width: "250px" }}>{t('Admin_Other.6')}</TableCell>
             <TableCell className={classes.header} style={{ width: "500px" }}>{t('Admin_Other.7')}</TableCell>
             <TableCell className={classes.header} style={{ width: "300px" }}>{t('Admin_Other.9')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "300px" }}>Số điện thoại</TableCell>
             <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.10')}</TableCell>
             <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.11')}</TableCell>
           </TableRow>
@@ -189,17 +188,18 @@ const BasicTable = () => {
                 {row.orderId}
               </TableCell>
               <TableCell style={{ width: "250px" }}>{row.createAt}</TableCell>
-              <TableCell style={{ width: "300px" }}>
+              <TableCell style={{ width: "200px" }}>
                 {row.description}
               </TableCell>
               <TableCell style={{ width: "200px" }}>{row.userName}</TableCell>
+              <TableCell style={{ width: "200px" }}>{row.phoneNumber}</TableCell>
               <TableCell style={{ width: "200px" }}>
                 {row.totalMoney
                   .toString()
                   .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
                 đ
               </TableCell>
-              <TableCell style={{ width: "200px" }}
+              <TableCell style={{ width: "250px" }}
                 onClick={(e) => {
                   if(row.status==="Đang chờ xác nhận"){
                     sendMessage(row.userId, row.id, row.orderId);

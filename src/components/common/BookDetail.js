@@ -9,6 +9,7 @@ import CartIcon from "../../image/ic-cart@2x.png";
 import { useSelector, useDispatch } from "react-redux";
 import * as cartActions from "./../../actions/cartAction";
 import {useTranslation} from 'react-i18next'
+import * as backDropAction from '../../actions/backdropAction'
 
 const useStyles = makeStyles((theme) => ({
   container: {

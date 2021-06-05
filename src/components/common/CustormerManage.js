@@ -90,7 +90,7 @@ const BasicTable =(props) => {
               </TableCell>
               <TableCell style={{width:'150px'}} >{row.email}</TableCell>
               <TableCell style={{width:'150px'}}>{row.phone}</TableCell>
-              <TableCell >{row.birthDay}</TableCell>
+              <TableCell >{row.birthDay==="0001-01-01"?"Chưa cập nhật ngày sinh": row.birthDay}</TableCell>
               <TableCell >{row.address}</TableCell>    
               <TableCell  >{row.sumOrder} đơn</TableCell>
             </TableRow>

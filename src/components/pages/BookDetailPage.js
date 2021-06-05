@@ -7,6 +7,7 @@ import Card from '../common/Card'
 import { useSelector, useDispatch } from 'react-redux'
 import * as bookActions from '../../actions/booksAction'
 import * as commentActions from '../../actions/commentAction'
+import * as backDropAction from '../../actions/backdropAction'
 import TableInfo from './../common/TableInfo'
 import Description from './../common/Description'
 import Comment from '../common/CommentZone'
@@ -68,8 +69,10 @@ const BookDetailPage = (props) => {
     setPage(value);
   };
   const paging = total%3===0 ? total/3 : Math.floor(total/3) + 1
-  useEffect( () => {
-    dispatch(bookActions.getBookByIdRequest(id))
+  useEffect(  () => {
+
+     dispatch(bookActions.getBookByIdRequest(id))
+
 
   }, [dispatch,id])
 

@@ -985,23 +985,19 @@ label.star:before {
   width: 400px;
   height: 0px;
   position: absolute;
-  top: 63px;
-  right: 62px;
-  border-radius: 5px 0px 5px 5px;
+  top: 50px;
+  right: -45px;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .notifications h2 {
-  font-size: 14px;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  color: #999;
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 5px;
+  color: #111;
 }
 
-.notifications h2 span {
-  color: #f00;
-}
+
 
 .notifications-item {
   display: flex;
@@ -1021,13 +1017,12 @@ label.star:before {
   height: 50px;
   margin-right: 9px;
   border-radius: 50%;
-  margin-top: 2px;
 }
 
 .notifications-item .text h4 {
   color: #777;
   font-size: 16px;
-  margin-top: 3px;
+
 }
 
 .notifications-item .text p {

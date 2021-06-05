@@ -102,7 +102,7 @@ const UpdateBook = (props) => {
     setAuthorId(e);
   };
   const handlePublishDateInputChange = (e) => {
-    setPublishDate(e.toISOString());
+    setPublishDate(e.target.value);
   };
   const handleAmountInputChange = (e) => {
     setAmount(e);
@@ -343,14 +343,10 @@ const UpdateBook = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="publish_date">{t('Admin_Book.12')}</label>
-                        <input
+                        <Input
                           value={publishDate}
                           onChange={handlePublishDateInputChange}
-                          id="publish_date"
-                          name="publish_date"
                           type="date"
-                          className="form-control validate"
-                          data-large-mode="true"
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
@@ -410,10 +406,7 @@ const UpdateBook = (props) => {
                           value={coverType}
                           id="size"
                           onChange={handleCoverTypeChange}
-                          name="size"
-                          type="text"
-                          className="form-control validate"
-                          required
+
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">

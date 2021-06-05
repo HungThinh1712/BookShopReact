@@ -281,7 +281,7 @@ const PrimarySearchAppBar = (props) => {
       content={notification.content}
       timeAgo={notification.timeAgo}
       orderId={notification.orderId}
-      imgSrc={notification.imgSrc}
+      imgSrc={notification.imgUrl}
       onClick={() => sendMessage(notification.id)}
       onDelete={() => deleteMessage(notification.id)}
       status={notification.status}
@@ -431,8 +431,9 @@ const PrimarySearchAppBar = (props) => {
               {notifications.length > 1 ? (
                 <div
                   style={{
+                    borderRadius:"5px",
                     marginTop: "20px",
-                    height: "380px",
+                    height: "600px",
                     display: `${opacity}`,
                     backgroundColor: "white",
                     overflow: "auto",
