@@ -161,7 +161,7 @@ const SignIn = (props) => {
             </div>
             <div style={{ cursor: "pointer" }} className="social-icon">
               <GoogleLogin
-                clientId="466677084136-vkvki5nla0hgf9b0058j09fsn7uh6jvc.apps.googleusercontent.com"
+                clientId="466677084136-koq86l9ktvvdolnitinanfcv1men5te2.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 render={(renderProps) => (
                   <i
