@@ -64,6 +64,7 @@ const SignIn = (props) => {
     }
   };
   const responseGoogle = (response) => {
+    console.log(response)
     dispatch(
       authActions.loginUserFacebook(
         response.profileObj.email,

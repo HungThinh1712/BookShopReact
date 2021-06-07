@@ -45,7 +45,6 @@ const handleSubmit =  async () => {
   await dispatch(commentActions.addComment(commentData))
   props.onClose();
   await dispatch(orderActions.getOrderRequest(orderId))
-  toastMessage("Đánh giá thành công")
 
 };
   return (

@@ -94,7 +94,7 @@ const Card = (props) => {
           />
         </div>
         <span style={{ marginBottom: "100px", color: "red", fontSize: "15px" }}>
-          (0)
+          {`(${props.countRating})`}
         </span>
       </div>
     </div>

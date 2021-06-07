@@ -103,7 +103,8 @@ const BasicTable =(props) => {
               </TableCell>
               <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
               <TableCell style={{width:'300px'}}>{row.description}</TableCell>
-              <TableCell >{row.totalMoney} đ</TableCell>
+              <TableCell >{row.totalMoney.toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</TableCell>
               <TableCell >{showStatus(row.status)}</TableCell>
               
             </TableRow>

@@ -3,8 +3,7 @@ import Nav from '../common/UserPageNav'
 import Header from '../common/Header'
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../common/Footer';
-import CommentDialog from '../common/CommentDialog';
-import * as commentActions from './../../actions/commentAction'
+import Pagination from '@material-ui/lab/Pagination';
 import {useSelector, useDispatch} from 'react-redux';
 import BreadCrumb from "../common/Breadcrumbs";
 import CommentManage from '../common/CommentManage'
@@ -28,18 +27,7 @@ const useStyles = makeStyles((theme) => ({
       },
     
     },
-    pagination: {
-      [theme.breakpoints.up('sm')]: {
-        marginLeft:'auto', marginRight:'120px'
-      },
-      [theme.breakpoints.up('lg')]: {
-        marginLeft:'auto', marginRight:'120px'
-      },
-      [theme.breakpoints.down('xs')]: {
-        marginLeft:'auto', marginRight:'0'
-      },
-    
-    },
+   
   
   }));
 
@@ -55,8 +43,8 @@ const CommentPage = (props) => {
       setPage(value);
     
     };
-  const paging = total%4===0 ? total/4 : Math.floor(total/4) + 1
 
+  const paging = total%4===0 ? total/4 : Math.floor(total/4) + 1
     return (
         <div>
         <div>
@@ -72,7 +60,11 @@ const CommentPage = (props) => {
               <div className="col-xs-7 col-sm-8 " >
                 <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Customer_BreadCrumbs.5')}</p>
                 <CommentManage page ={page} />
-              </div>              
+                {total > 4 ? <div style={{display:'flex',justifyContent:'flex-end',marginTop:'10px'}} className={classes.pagination} >
+              <Pagination color="primary" count={paging} onChange={handlePageChange} page={page}/>
+            </div>:null}         
+              </div>   
+             
             </div>
           </div>
         </div>

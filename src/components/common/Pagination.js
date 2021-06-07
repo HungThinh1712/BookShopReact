@@ -17,7 +17,7 @@ export default function PaginationControlled(props) {
   const page = props.tag===true ? 1 : props.page
   return (
     <div className={classes.root}>
-      <Pagination count={props.total} page={page} onChange={props.onChange} />
+      <Pagination color="primary" count={props.total} page={page} onChange={props.onChange} />
     </div>
   );
 }

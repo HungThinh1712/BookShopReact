@@ -137,6 +137,7 @@ const HomePage = (props) => {
       title={book.bookName}
       imageSrc={book.imgUrl}
       valueraiting={book.rating}
+      countRating ={book.countRating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
   ));
@@ -152,6 +153,7 @@ const HomePage = (props) => {
       title={book.bookName}
       imageSrc={book.imgUrl}
       valueraiting={book.rating}
+      countRating ={book.countRating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
   ));
@@ -167,6 +169,7 @@ const HomePage = (props) => {
       title={book.bookName}
       imageSrc={book.imgUrl}
       valueraiting={book.rating}
+      countRating ={book.countRating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
   ));

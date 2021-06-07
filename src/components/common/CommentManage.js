@@ -14,6 +14,7 @@ import * as CallApis from '../../constants/Apis'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import {useTranslation} from 'react-i18next'
 import StarIcon from '@material-ui/icons/Star';
+import Rating from '@material-ui/lab/Rating';
 import { yellow } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
@@ -97,7 +98,7 @@ const BasicTable =(props) => {
               <TableCell >{row.bookName}</TableCell>
               <TableCell >{row.title}</TableCell>
               <TableCell >{row.content}</TableCell>
-              <TableCell >{row.rate} <StarIcon style={{ color: yellow[900] }}/></TableCell>
+              <TableCell ><Rating disabled value={row.rate}/></TableCell>
             </TableRow>
             
           ))}
