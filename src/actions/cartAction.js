@@ -90,9 +90,9 @@ export const deleteIntemInCartofCurrentUser = (bookId) => async (dispatch) => {
         
 };
 
-export const payForCart = (paymentType) => async (dispatch) => {
+export const payForCart = (paymentType,totalMoney,shippingFee) => async (dispatch) => {
     dispatch(backdropAction.setOpenBackDrop)
-    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart?paymentType=${paymentType}`)
+    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart?paymentType=${paymentType}&totalMoney=${totalMoney}&shippingFee=${shippingFee}`)
     await axios.get(url).then(res =>  {  
         dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200 ) {

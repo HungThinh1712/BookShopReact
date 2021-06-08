@@ -10,6 +10,7 @@ import * as notificationActions from '../../actions/notificationAction'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import * as CallApis from '../../constants/Apis'
 import {useTranslation} from 'react-i18next'
+import axios from "axios"
 
 const useStyles = makeStyles((theme) => ({
   payment_method_zone: {
@@ -48,6 +49,7 @@ const PaymentMethod = (props) => {
   const userData = useSelector((state) =>
     state.auth.userData ? state.auth.userData : null
   );
+
   useEffect(() => {
     if (connection) {
       connection
@@ -85,11 +87,12 @@ const PaymentMethod = (props) => {
       console.log("Sending message failed.", e);
     }
   };
-
+ const shipingFee =props.distanceAndFee ? props.distanceAndFee.shippingFee :null;
+ const sumMoney = GetTotalMoney + shipingFee
   const handleClick = () => {
     if (paymentMethod === 1) {
       const paymentType = 1;
-      dispatch(cartActions.payForCart(paymentType));
+      dispatch(cartActions.payForCart(paymentType,GetTotalMoney,shipingFee));
       sendMessage();
       props.history.push("/order_success_page");
     } else {
@@ -127,7 +130,7 @@ const PaymentMethod = (props) => {
           onChange={handlePaymentMethodInputChange}
         />
       </div>
-      <ListItemInPayment style={{ marginTop: "40px" }} />
+      <ListItemInPayment distanceAndFee={props.distanceAndFee}  style={{ marginTop: "40px" }} />
       <Button
         onClick={handleClick}
         variant="contained"

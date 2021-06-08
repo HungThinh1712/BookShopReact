@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import Button from '@material-ui/core/Button'
 import ItemInPayment from './ItemCartInPayment'
 import {useSelector,useDispatch} from "react-redux";
 import * as cartAction from './../../actions/cartAction'
 import { withRouter } from "react-router-dom";
 import {useTranslation} from 'react-i18next'
+import axios from "axios"
+import * as CallApis from "../../constants/Apis"
 
 const ListItemIPayment = (props) => {
   const { t } = useTranslation();
@@ -21,6 +23,9 @@ const ListItemIPayment = (props) => {
     }
    fetchUser();
   },[userId,dispatch])
+  const shippingFee = props.distanceAndFee ? props.distanceAndFee.shippingFee :null
+  const sumMoney = GetTotalMoney + shippingFee;
+  
   const showCartItems = Object.values(cartItems.items).map((cartItem)=>
 
     <div >
@@ -46,9 +51,16 @@ const ListItemIPayment = (props) => {
                 {showCartItems}
                 <div style={{backgroundColor:'blueviolet',height:'1px'}}></div>
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
+                    <div style={{ fontWeight: '600', fontSize: '13px', padding: '2px',marginLeft:'10px' }}>Phí vận chuyển</div>
+                    <div style={{ padding: '2px',marginRight:'10px' }}>
+                        <div style={{fontSize:'13px',fontWeight:'500'}}>{`${shippingFee}đ (${props.distanceAndFee ? props.distanceAndFee.distance:null })`}</div>
+                    </div>
+                </div>
+                <div style={{backgroundColor:'blueviolet',height:'0.5px'}}></div>
+                <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '600', fontSize: '17px', padding: '10px' }}>{t('Customer_Shopping_Payment.4')}</div>
                     <div style={{ padding: '10px', marginLeft: '200px' }}>
-                        <div style={{color:'red',fontSize:'20px',fontWeight:'500'}}>{GetTotalMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</div>
+                        <div style={{color:'red',fontSize:'20px',fontWeight:'500'}}>{sumMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ</div>
                     </div>
                 </div>
             </div>

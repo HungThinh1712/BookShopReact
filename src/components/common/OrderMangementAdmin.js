@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as orderActions from '../../actions/orderAction'
 import { withRouter } from 'react-router-dom'
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import {Button,Tag} from "antd";
+import {Button,Tag,Tooltip} from "antd";
 import Pagination from '../common/Pagination'
 import * as CallApis from '../../constants/Apis'
 import Dialog from '../common/DialogDetailItemAdmin'
@@ -19,7 +19,7 @@ import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650,
+    minWidth: 800,
   },
   header: {
     fontWeight: 900,
@@ -160,18 +160,25 @@ const BasicTable = () => {
     setItems(row.items);
     handleClickOpen();
   };
+  const hanldeTooltip = (row)=>{
+    return <span>{`Phí ship: ${row.shippingFee.toString()
+      .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
 
+    Giá bán: ${row.totalMoney.toString()
+      .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}</span>
+  }
   return (
     <TableContainer component={Paper}>
       <Dialog open={open} onClose={handleClose} items={items}></Dialog>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header} style={{ width: "150px" }}>{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "180px" }}>{t('Admin_Other.5')}</TableCell>
             <TableCell className={classes.header} style={{ width: "250px" }}>{t('Admin_Other.6')}</TableCell>
-            <TableCell className={classes.header} style={{ width: "500px" }}>{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "400px" }}>{t('Admin_Other.7')}</TableCell>
             <TableCell className={classes.header} style={{ width: "300px" }}>{t('Admin_Other.9')}</TableCell>
-            <TableCell className={classes.header} style={{ width: "300px" }}>Số điện thoại</TableCell>
+            <TableCell className={classes.header} style={{ width: "200px" }}>Số điện thoại</TableCell>
+            <TableCell className={classes.header} style={{ width: "350px" }}>Địa chỉ giao hàng</TableCell>
             <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.10')}</TableCell>
             <TableCell className={classes.header} style={{ width: "200px" }}>{t('Admin_Other.11')}</TableCell>
           </TableRow>
@@ -184,7 +191,7 @@ const BasicTable = () => {
               className={classes.row}
               key={index}
             >
-              <TableCell component="th" scope="row" style={{ width: "200px" }}>
+              <TableCell component="th" scope="row" style={{ width: "180px" }}>
                 {row.orderId}
               </TableCell>
               <TableCell style={{ width: "250px" }}>{row.createAt}</TableCell>
@@ -193,13 +200,14 @@ const BasicTable = () => {
               </TableCell>
               <TableCell style={{ width: "200px" }}>{row.userName}</TableCell>
               <TableCell style={{ width: "200px" }}>{row.phoneNumber}</TableCell>
+              <TableCell style={{ width: "350px" }}>{row.userAddress}</TableCell>
               <TableCell style={{ width: "200px" }}>
-                {row.totalMoney
+                <Tooltip style={{fontSize:"10px"}} title={()=>hanldeTooltip(row)} size="small" >{(row.totalMoney + row.shippingFee)
                   .toString()
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
-                đ
+                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                đ</Tooltip>
               </TableCell>
-              <TableCell style={{ width: "250px" }}
+              <TableCell style={{ width: "200px" }}
                 onClick={(e) => {
                   if(row.status==="Đang chờ xác nhận"){
                     sendMessage(row.userId, row.id, row.orderId);

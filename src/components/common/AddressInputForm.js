@@ -30,7 +30,6 @@ const AddressInputForm = (props) => {
   const handleProvinceInputChange = (e) => {
     setProvinceId(e);
     setWardId("0");
-    console.log(provinceId)
     setDistrictId("0");
   };
 
