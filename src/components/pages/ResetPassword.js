@@ -9,6 +9,7 @@ import { Button } from "antd";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useTranslation } from "react-i18next";
 import * as authAction from "../../actions/authAction";
+import background from "../Images/background2.jpg"
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -47,7 +48,7 @@ const SignIn = (props) => {
   const classes = useStyles();
   return (
     <div
-      style={{ backgroundColor: "#f2f2f2", height: "100%" }}
+    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})` }}
       className="signin-signup"
     >
       <form>
@@ -98,7 +99,7 @@ const SignIn = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              marginBottom: "0px",
             }}
           ></div>
           <Button

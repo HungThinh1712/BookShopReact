@@ -8,6 +8,7 @@ import GoogleLogin from "react-google-login";
 import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import background from "../Images/background2.jpg"
 
 const useStyles = makeStyles((theme) => ({
   
@@ -77,9 +78,10 @@ const SignIn = (props) => {
   const classes = useStyles();
   return (
     <div
-      style={{ backgroundColor: "#f2f2f2", height: "100%" }}
+      style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})` }}
       className="signin-signup"
     >
+    
       <form>
         <div className="loginForm">
           {/* <img  style={{width:'70px',height:'80px'}} src={Logo} alt=""/> */}
@@ -131,7 +133,7 @@ const SignIn = (props) => {
             </div>
           </div>
           <Button
-            style={{ marginBottom: "15px" }}
+            style={{ marginBottom: "10px" }}
             type="primary"
             size="large"
             style={{

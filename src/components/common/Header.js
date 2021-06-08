@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: "#8470FF",
+    backgroundColor: "#0000FF",
   },
   toolBar: {
     [theme.breakpoints.up("sm")]: {

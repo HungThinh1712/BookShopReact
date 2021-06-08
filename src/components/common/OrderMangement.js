@@ -13,6 +13,7 @@ import {withRouter} from 'react-router-dom'
 import * as CallApis from '../../constants/Apis'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import {useTranslation} from 'react-i18next'
+import { Tag } from 'antd';
 
 const useStyles = makeStyles({
   table: {
@@ -75,11 +76,11 @@ const BasicTable =(props) => {
   }, [connection,dispatch,props.page]);
   const showStatus = (status) => {
     if(status==="Đang chờ xác nhận"){
-      console.log(status)
-      return <div style={{color:'green'}}>{status}</div>
+
+      return <Tag color="#87d068">{status}</Tag>
     }
     else{
-      return <div style={{color:'blue'}}>{status}</div>
+      return <Tag color="#108ee9" >{status}</Tag>
     }
   }
   return (

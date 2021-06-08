@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux'
 import * as authActions from '../../actions/authAction'
 import {useTranslation} from "react-i18next"
+import background from "../Images/background2.jpg"
 
 const ConfirmCodePage = (props) => {
   const { t } = useTranslation();
