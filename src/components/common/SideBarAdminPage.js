@@ -35,6 +35,7 @@ const SideBarAdminPage = (props) => {
                             <Dropdown.Item onClick={()=>props.history.push('/admin/ordermanagement_page')} icon={<Icon icon="shopping-cart" />} eventKey="3-4">{t('Admin_Home_BreadCrumbs.26')}</Dropdown.Item>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/authormanagement_page')} icon={<Icon icon="peoples" />} eventKey="3-5">{t('Admin_Home_BreadCrumbs.25')}</Dropdown.Item>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/pulishinghousemanagement_page')} icon={<Icon icon="simplybuilt" />} eventKey="3-6">{t('Admin_Home_BreadCrumbs.24')}</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>props.history.push('/admin/add_promotion')} icon={<Icon icon="audio-description" />} eventKey="3-7">Khuyến mãi</Dropdown.Item>
                         </Dropdown>
                         <Dropdown eventKey="4" title={t('Admin_Home_BreadCrumbs.10')} icon={<Icon icon="bar-chart" />}>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/report_page')} icon={<Icon icon="pie-chart" />} eventKey="4-1">{t('Admin_Home_BreadCrumbs.27')}</Dropdown.Item>
