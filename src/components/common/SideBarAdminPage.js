@@ -6,11 +6,11 @@ import 'rsuite/dist/styles/rsuite-default.css';
 
 const styles = {
     width: 240,
-    height: '100%',
+    height: '500px',
     display: 'inline-table',
     marginRight: 10,
-    marginTop: 78,
-    backgroundColor: '#3399ff',
+    marginTop: 64,
+    backgroundColor: "#114b5f",
     position: 'fixed',
     top: 0,
     overflow: 'auto'
@@ -20,11 +20,11 @@ const SideBarAdminPage = (props) => {
     const { t } = useTranslation();
     return (
         <div style={styles}>
-            <div>
-                <Sidenav appearance="inverse" defaultOpenKeys={['3', '4']}>
+            <div style={{color:"#114b5f !important"}}>
+                <Sidenav  style={{backgroundColor:'#114b5f '}} appearance="inverse" defaultOpenKeys={['3', '4']}>
                     <Sidenav.Body>
-                    <Nav>
-                        <Nav.Item eventKey="1" active icon={<Icon icon="home" /> } onClick={()=>props.history.push('/admin')}>
+                    <Nav style={{backgroundColor:'#114b5f !important'}}>
+                        <Nav.Item  style={{backgroundColor:'#114b5f !important'}} eventKey="1" active icon={<Icon icon="home" /> } onClick={()=>props.history.push('/admin')}>
                         {t('Admin_Home_BreadCrumbs.1')}
                         </Nav.Item>
                         <Dropdown eventKey="3" title={t('Admin_Home_BreadCrumbs.2')} icon={<Icon icon="magic" />}>

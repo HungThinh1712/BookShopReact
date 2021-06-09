@@ -114,7 +114,7 @@ const PaymentMethod = (props) => {
           flexDirection: "column",
           borderStyle: "solid",
           borderWidth: "2px",
-          borderColor: "blueviolet",
+          borderColor: "#253528",
           borderRadius: "5px",
           height:'127px'
         }}
@@ -124,7 +124,7 @@ const PaymentMethod = (props) => {
             {t('Customer_Shopping_Payment.12')}
           </div>
         </div>
-        <div style={{ backgroundColor: "blueviolet", height: "1px" }}></div>
+        <div style={{ backgroundColor: "#253528", height: "1px" }}></div>
         <CheckBox
           value={paymentMethod}
           onChange={handlePaymentMethodInputChange}
@@ -134,7 +134,7 @@ const PaymentMethod = (props) => {
       <Button
         onClick={handleClick}
         variant="contained"
-        style={{ width: "100%", marginTop: "10px" }}
+        style={{ width: "100%", marginTop: "10px",backgroundColor:"#8ba889",fontWeight:"700",color:'white' }}
         color="primary"
       >
         {t('Customer_Shopping_Payment.15')}

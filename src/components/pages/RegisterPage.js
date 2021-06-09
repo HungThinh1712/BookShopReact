@@ -11,7 +11,7 @@ import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { DatePicker } from "antd";
-import background from "../Images/background2.jpg"
+import background from "../Images/background.jpg"
 const useStyles = makeStyles((theme) => ({
   
 
@@ -69,7 +69,7 @@ const RegisterPage = (props) => {
   };
   return (
     <div
-    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})` }}
+    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})`,display:'flex',justifyContent:'flex-end' }}
     className="signin-signup"
     >
       <form className="sign-up-form">

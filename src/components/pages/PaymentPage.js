@@ -110,7 +110,7 @@ const PaymentPage = (props) => {
               flexDirection: "column",
               borderStyle: "solid",
               borderWidth: "2px",
-              borderColor: "blueviolet",
+              borderColor: "#253528",
               borderRadius: "5px",
             }}
           >
@@ -130,7 +130,7 @@ const PaymentPage = (props) => {
                 </Button>
               </div>
             </div>
-            <div style={{ backgroundColor: "blueviolet", height: "1px" }}></div>
+            <div style={{ backgroundColor: "#253528", height: "1px" }}></div>
             <div style={{ padding: "0 10px 10px 10px" }}>
               <div
                 style={{

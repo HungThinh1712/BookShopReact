@@ -27,10 +27,9 @@ export const getOrderRequest =  (id) => async (dispatch) => {
     dispatch(backDropAction.setOpenBackDrop)
 
     await axios.get(url)
-    dispatch(backDropAction.setCloseBackDrop)
 
         .then(res => {
-           
+            dispatch(backDropAction.setCloseBackDrop)
             dispatch({
                 type: Types.GET_ORDER,  //this call test dispatch. to dispsatch to our reducer
                 order: res.data

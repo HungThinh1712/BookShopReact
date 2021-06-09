@@ -4,7 +4,7 @@ const ItemCartInPayment = (props) => {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <div style={{ display: "flex" }}>
-        <div style={{ fontWeight: "500", fontSize: "14px", padding: "10px" }}>
+        <div style={{ fontWeight: "500", fontSize: "14px", padding: "10px",color: "#253528" }}>
           {props.amount} x{" "}
         </div>
         <div
@@ -12,7 +12,7 @@ const ItemCartInPayment = (props) => {
             fontWeight: "500",
             fontSize: "14px",
             padding: "10px",
-            color: "blueviolet",
+            color: "#253528",
           }}
         >
           {props.title}

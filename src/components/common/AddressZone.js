@@ -88,7 +88,7 @@ const HeaderinPayment = (props) => {
       {specificAddress ? <div className={classes.address_zone} >
         <div >
           <div style={{ fontWeight: '700', fontSize:'30px',color:'red'}}  >2. {t('Customer_Shopping_Payment.6')}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid',borderWidth: '2px', padding: '10px',marginTop:'20px',borderColor:'blueviolet',borderRadius:'5px'}}>
+          <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid',borderWidth: '2px', padding: '10px',marginTop:'20px',borderColor:'#253528',borderRadius:'5px'}}>
               <div style={{ fontWeight: '800',color:'red',fontFamily: 'Roboto ' }}>{userData.fullName}</div>
               <div style={{fontSize:'14px',fontWeight:'500'}} >{t('Customer_Shopping_Payment.6')}: {userData.specificAddress}, {userData.wardName}, {userData.districtName}, {userData.provinceName}</div>
               <div style={{display:'flex'}}>
@@ -96,7 +96,7 @@ const HeaderinPayment = (props) => {
                 <div style={{fontSize:'14px',fontWeight:'500',color:'red'}}>{userData.phone}</div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row',marginTop:'10px' }} >
-                <Button variant="contained" color="primary" size='small' style={{marginRight:'10px'}} onClick={handlePaymentClick}>{t('Customer_Shopping_Payment.9')}</Button>
+                <Button variant="contained" size='small' style={{marginRight:'10px',backgroundColor:"#8ba889",fontWeight:"700",color:'white'}} onClick={handlePaymentClick}>{t('Customer_Shopping_Payment.9')}</Button>
                 <Button variant="contained" size='small'  onClick={(hideAddressForm)=>handleOpenAddressFormClick(hideAddressForm)} >{t('Customer_Shopping_Payment.10')}</Button>
               </div>
           </div>
@@ -105,10 +105,10 @@ const HeaderinPayment = (props) => {
       </div> :<div className={classes.address_zone} >
         <div >
           <h8 style={{ fontWeight: '800'}}  >2. {t('Customer_Shopping_Payment.6')}</h8>
-          <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid',borderWidth: '2px', padding: '10px',marginTop:'20px'}}>
+          <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid',borderWidth: '2px', borderColor:"#253528", padding: '10px',marginTop:'20px'}}>
               <div style={{fontSize:'20px',fontWeight:'500'}} >{t('Customer_Shopping_Payment.21')}</div>
               <div style={{ display: 'flex', flexDirection: 'row',marginTop:'10px' }} >
-                <Button variant="contained" color="primary" size='small' style={{marginRight:'10px'}} onClick={handleOpenAddressFormClick}>{t('Customer_Shopping_Payment.22')}</Button>
+                <Button  size='small' style={{marginRight:'10px',backgroundColor:"#8ba889",fontWeight:"700",color:'white'}} onClick={handleOpenAddressFormClick}>{t('Customer_Shopping_Payment.22')}</Button>
               </div>
           </div>
         </div>

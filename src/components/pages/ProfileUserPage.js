@@ -42,7 +42,7 @@ const ProfileUserPage = (props) => {
     const id = userData ? userData.id : null;
     const [name,setName] =useState(userData && userData.fullName ?userData.fullName:'');
     const [phone,setPhone] = useState(userData && userData.phone ?userData.phone:'')
-    const [birthday, setBirthday] = useState(userData && userData.birthDay ?userData.birthDay:'');
+    const [birthday, setBirthday] = useState(userData && userData.birthDay ?userData.birthDay:null);
     const [email, setEmail] = useState(userData && userData.email ? userData.email:'');
     const [sex, setSex] = useState(userData && userData.sex ?userData.sex:1);
     const [oldPassword, setOldPassWord] = useState("");
@@ -95,11 +95,11 @@ const ProfileUserPage = (props) => {
 
  
     return (
-        <div>
+        <div style={{backgroundColor:"#EDECE7"}}>
             <div>
             <MessengerChat/>
             <Header/>
-            <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
+            <div style={{ paddingTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
                 breadcrumb={t('Customer_Management.1')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/user_page")}>
               </BreadCrumb>
@@ -107,8 +107,8 @@ const ProfileUserPage = (props) => {
             <div className = {`${classes.container}`} >
                 <div className = "row">
                     <Nav imgSrc={userData ? userData.imgUrl : ''} className={classes.nav} name={name} props={props}/>
-                    <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>
-                        <div className="profile-content">
+                    <div className="col-xs-7 col-sm-8 " >
+                        <div style={{borderRadius:"5px"}} className="profile-content">
                             <p style={{fontSize:'25px',fontWeight:500}}>{t('Customer_Management.1')}</p>
                             <div className="input-field-userpage">
                                 <i className="fas fa-user"></i>
@@ -128,7 +128,7 @@ const ProfileUserPage = (props) => {
                             </div>
                             <div  className="input-field-userpage">
                                 <i className="fas fa-calendar-alt"></i>
-                                <input value={birthday} onChange={handleBirthdayInputChange} type="date" placeholder={t('Customer_Management.27')} />
+                                <input value={birthday==="0001-01-01" ? null : birthday} onChange={handleBirthdayInputChange} type="date" placeholder={t('Customer_Management.27')} />
                             </div>
                             <div  className="sex">
                                 <Checkbox checked={checked} onChange={onChangeChecked}><span style={{paddingLeft:'8px'}}>{t('Customer_Management.6')}</span></Checkbox>

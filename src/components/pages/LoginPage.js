@@ -9,6 +9,7 @@ import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import background from "../Images/background2.jpg"
+import background1 from "../Images/background.jpg"
 
 const useStyles = makeStyles((theme) => ({
   
@@ -78,12 +79,12 @@ const SignIn = (props) => {
   const classes = useStyles();
   return (
     <div
-      style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})` }}
+      style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background1})`,display:'flex',justifyContent:'flex-end' }}
       className="signin-signup"
     >
     
       <form>
-        <div className="loginForm">
+        <div style={{display:'flex',justifyContent:'flex-end'}} className="loginForm">
           {/* <img  style={{width:'70px',height:'80px'}} src={Logo} alt=""/> */}
           <div style={{display:'flex'}}>
           <ArrowBackIcon onClick={()=>props.history.push('/')} className={classes.icon}  style={{borderRadius:'5px',marginTop:'0.4em',marginRight:"1px",padding:'4px',width:'40px',fontSize:'30px'}}/>
@@ -120,27 +121,28 @@ const SignIn = (props) => {
                           className={classes.icon}
 
               onClick={() => props.history.push("/forget_password")}
-              style={{color: "blueviolet", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
+              style={{color: "#49654e", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
             >
               Quên mật khẩu
             </div>
             <div
               className={classes.icon}
-              style={{color: "blueviolet", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
+              style={{color: "#49654e", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
               onClick={() => props.history.push("/register")}
             >
               Đăng ký
             </div>
           </div>
           <Button
-            style={{ marginBottom: "10px" }}
-            type="primary"
+            style={{ marginBottom: "10px"}}
             size="large"
             style={{
               alignItems: "center",
               display: "flex",
               justifyContent: "center",
-              borderRadius:'5px'
+              borderRadius:'5px',
+              background:'#253528',
+              color:"White"
             }}
             onClick={handleSubmit}
           >

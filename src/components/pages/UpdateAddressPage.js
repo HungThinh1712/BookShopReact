@@ -40,16 +40,16 @@ const UpdateAddressPage = (props) => {
         <div>
             <div>
             <Header/>
-            <div style={{ marginTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
+            <div style={{ paddingTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
               <BreadCrumb
                 breadcrumb={t('Customer_Management.15')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/update_address_page")}>
               </BreadCrumb>
             </div>
             <div  className = {`${classes.container}`} >
                 <div className = "row">
-                    <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName}  props={props}/>
-                    <div className="col-xs-7 col-sm-8 " style={{borderStyle:'solid',borderColor:'#5995fd'}}>
-                        <div className="profile-content">
+                    <Nav imgSrc={userData.imgUrl} className={classes.nav} name={userData.fullName}  props={props}/>
+                    <div className="col-xs-7 col-sm-8 " >
+                        <div   style={{borderRadius:"5px"}}className="profile-content">
                             <p style={{fontSize:'25px',fontWeight:500}}>{t('Customer_Management.16')}</p>
                             <AddressInputForm
                              name = {fullName ? userData.fullName: fullName }

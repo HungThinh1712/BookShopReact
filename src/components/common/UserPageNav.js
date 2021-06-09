@@ -77,8 +77,8 @@ const UserPageNav = (props) => {
     setImgFile(null);
   }
   return (
-    <div className="col-xs-5 col-sm-4 col-md-3">
-      <div className="profile-sidebar">
+    <div   className="col-xs-5 col-sm-4 col-md-3">
+      <div style={{backgroundColor:"#c6dabf",height:'800px'}} className="profile-sidebar">
         <div className="profile-userpic">
           {
             imgUrl ? <img

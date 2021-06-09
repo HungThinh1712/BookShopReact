@@ -47,7 +47,7 @@ const OrderManageMentPage = (props) => {
         <Header />
         <div
           style={{
-            marginTop: "100px",
+            paddingTop: "100px",
             marginLeft: "85px",
             marginBottom: "-100px",
           }}
@@ -61,7 +61,7 @@ const OrderManageMentPage = (props) => {
         <div className={`${classes.container}`}>
           <div className="row">
             <Nav
-              imgSrc={userData.imgSrc}
+              imgSrc={userData.imgUrl}
               className={classes.nav}
               name={userData.fullName}
               props={props}

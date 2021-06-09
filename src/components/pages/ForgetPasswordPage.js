@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import background from "../Images/background2.jpg"
+import background from "../Images/background.jpg"
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -46,7 +46,7 @@ const ForgetPasswordPage = (props) => {
   };
   return (
     <div
-    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})` }}
+    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})`,display:'flex',justifyContent:'flex-end' }}
     className="signin-signup"
     >
       <form>

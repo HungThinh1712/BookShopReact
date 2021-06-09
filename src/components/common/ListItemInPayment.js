@@ -40,23 +40,23 @@ const ListItemIPayment = (props) => {
 
     return (
         <div>
-            <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid', borderWidth: '2px', marginTop:'20px',borderColor:'blueviolet',borderRadius:'5px'  }}>
+            <div style={{ display: 'flex', flexDirection: 'column', borderStyle: 'solid', borderWidth: '2px', marginTop:'20px',borderColor:'#253528',borderRadius:'5px'  }}>
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '700', fontSize: '17px', padding: '10px' }}>{t('Customer_Shopping_Payment.23')}</div>
                     <div style={{ padding: '10px', marginLeft: '200px' }}>
                         <Button onClick={() => props.history.push("/cart")} variant="contained" size="small">{t('Customer_Shopping_Payment.10')}</Button>
                     </div>
                 </div>
-                <div style={{backgroundColor:'blueviolet',height:'1px'}}></div> 
+                <div style={{backgroundColor:'#253528',height:'1px'}}></div> 
                 {showCartItems}
-                <div style={{backgroundColor:'blueviolet',height:'1px'}}></div>
+                <div style={{backgroundColor:'#253528',height:'1px'}}></div>
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '600', fontSize: '13px', padding: '2px',marginLeft:'10px' }}>Phí vận chuyển</div>
                     <div style={{ padding: '2px',marginRight:'10px' }}>
                         <div style={{fontSize:'13px',fontWeight:'500'}}>{`${shippingFee}đ (${props.distanceAndFee ? props.distanceAndFee.distance:null })`}</div>
                     </div>
                 </div>
-                <div style={{backgroundColor:'blueviolet',height:'0.5px'}}></div>
+                <div style={{backgroundColor:'#253528',height:'0.5px'}}></div>
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '600', fontSize: '17px', padding: '10px' }}>{t('Customer_Shopping_Payment.4')}</div>
                     <div style={{ padding: '10px', marginLeft: '200px' }}>
