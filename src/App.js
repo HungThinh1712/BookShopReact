@@ -19,6 +19,7 @@ import BackDrop from "./components/common/BackDrop";
 import OrderSuccessPage from "./components/pages/OrderSuccessPage";
 import ConfirmCodePage from "./components/pages/ConfirmCodePage";
 import AddBooksAdmin from "./components/pages/Admin/addBook";
+import AddPromotion from "./components/pages/Admin/addPromote";
 import LstBookAdmin from "./components/pages/Admin/lstBook";
 import OrderDetailPage from "./components/pages/OrderDetailPage";
 import UpdateAddressPage from "./components/pages/UpdateAddressPage";
@@ -60,6 +61,7 @@ function App() {
               component={UpdateAddressPage}
             />
             <AdminRoute path="/admin/add_book_page" component={AddBooksAdmin} />
+            <AdminRoute path="/admin/add_promotion" component={AddPromotion} />
             <AdminRoute path="/admin/details/:id" component={DetailBookAdmin} />
             <AdminRoute path="/admin/update_book" component={UpdateBookAdmin} />
             <AdminRoute
