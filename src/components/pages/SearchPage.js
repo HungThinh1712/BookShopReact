@@ -20,28 +20,33 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "0px",
       marginRight: "0px",
       marginTop: "50px",
+      paddingLeft:'15px'
     },
     [theme.breakpoints.up("lg")]: {
       marginLeft: "90px",
       marginRight: "87px",
       marginTop: "30px",
+      paddingLeft:'15px'
+
     },
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0px",
       marginRight: "0px",
       marginTop: "108px",
+      paddingLeft:'15px'
+
     },
   },
   drop_down: {
     [theme.breakpoints.up("sm")]: {
       marginLeft: "0px",
       marginRight: "0px",
-      marginTop: "108px",
+      paddingTop: "108px",
       display: "flex",
     },
     [theme.breakpoints.up("lg")]: {
       display: "flex",
-      marginTop: "108px",
+      paddingTop: "108px",
       marginLeft: "90px",
       marginRight: "87px",
     },
@@ -50,8 +55,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "0px",
       marginRight: "0px",
       display: "none",
-      marginTop: "108px",
+      paddingTop: "108px",
     },
+    backgroundColor:"#EDECE7 !important"
   },
 }));
 
@@ -160,11 +166,13 @@ const SearchPage = (props) => {
 
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   return (
-    <div>
+    <div style={{backgroundColor:"#EDECE7 !important"}}>
+      <div style={{backgroundColor:"#EDECE7 !important"}}>
       <Header searchString={searchString}></Header>
 
-      <div>
-        <div className={classes.drop_down}>
+      <div style={{backgroundColor:"#EDECE7"}}>
+        <div style={{backgroundColor:"#EDECE7 !important"}}>
+        <div style={{backgroundColor:"#EDECE7 !important"}} className={classes.drop_down}>
           <DropDown
             label={t('Customer_Search.1')}
             handleChange={handleTypeChange}
@@ -194,18 +202,19 @@ const SearchPage = (props) => {
             type="5"
           />
         </div>
+        </div>
         {searchedBooks.length > 2 ? (
-          <Paper className={`cover_container_searchpage ${classes.container}`}>
+          <div className={`cover_container_searchpage ${classes.container}`}>
             {showBooks}
-          </Paper>
+          </div>
         ) : (
-          <Paper className={`cover_container_searchpage ${classes.container}`}>
+          <div className={`cover_container_searchpage ${classes.container}`}>
             {showBooks}
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-          </Paper>
+          </div>
         )}
         {total > 10 ? (
           <div
@@ -228,6 +237,7 @@ const SearchPage = (props) => {
      {searchedBooks && searchedBooks.length > 0 ?  <div style={{ paddingTop: "180px" }}>
         <Footer />
       </div>: null}
+    </div>
     </div>
   );
 };

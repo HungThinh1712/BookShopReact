@@ -2,7 +2,7 @@
         Vnese Books
 ======================*/
 .home-header {
-  background: #f3e9d2;
+  background: #EDECE7;
   height: 40px;
   margin-top: 20px;
   margin-bottom: 15px;
@@ -57,7 +57,9 @@ button:hover {
 }
 .cover_container {
   display: grid;
+  background-color: #EDECE7;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding-left: 15px;
 }
 .cover_container_searchpage {
   display: grid;

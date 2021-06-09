@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   author: {
     marginLeft: "30px",
     marginTop: "16px",
+    fontWeight:'600',
     fontSize: "14px",
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0px",
@@ -173,16 +174,15 @@ const IteminCart = (props) => {
         <div className={classes.btn_group}>
           <ButtonGroup
             size="small"
-            color="primary"
             aria-label="outlined secondary button group"
           >
-            <Button style={{ borderColor: "blue" }} onClick={handleDecrease}>
+            <Button style={{ borderColor: "#1a936f" }} onClick={handleDecrease}>
               -
             </Button>
-            <Button style={{ borderColor: "blue", fontWeight: 900 }} disabled>
+            <Button style={{ borderColor: "#1a936f"}} disabled>
               {amount}
             </Button>
-            <Button style={{ borderColor: "blue" }} onClick={handleIncrease}>
+            <Button style={{ borderColor: "#1a936f" }} onClick={handleIncrease}>
               +
             </Button>
           </ButtonGroup>

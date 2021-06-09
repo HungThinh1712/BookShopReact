@@ -10,19 +10,19 @@ import Footer from "../common/Footer";
 import { useTranslation } from "react-i18next";
 import Fab from "@material-ui/core/Fab";
 import { Empty } from "antd";
-import Divider from '@material-ui/core/Divider'
+import Divider from "@material-ui/core/Divider";
 import * as typeActions from "../../actions/typesAction";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    borderRadius:"0 0 5px 5px",
+    borderRadius: "0 0 5px 5px",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "0px",
       marginRight: "0px",
     },
     [theme.breakpoints.up("lg")]: {
-      marginLeft: "87px",
-      marginRight: "87px",
+      marginLeft: "100px",
+      marginRight: "100px",
     },
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0px",
@@ -101,7 +101,7 @@ const HomePage = (props) => {
       );
     };
     fetchBooks();
-  }, [dispatch, currentType ? currentType.id : "",indexPageBookByType]);
+  }, [dispatch, currentType ? currentType.id : "", indexPageBookByType]);
 
   useEffect(() => {
     const fetchBooks = () => {
@@ -127,7 +127,6 @@ const HomePage = (props) => {
     setIndexPageBookByType(indexPageBookByType + 1);
   };
 
-
   const showBooksVnese = booksVnese.map((book, index) => (
     <Card
       key={book.id}
@@ -139,7 +138,7 @@ const HomePage = (props) => {
       title={book.bookName}
       imageSrc={book.imgUrl}
       valueraiting={book.rating}
-      countRating ={book.countRating}
+      countRating={book.countRating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
   ));
@@ -155,7 +154,7 @@ const HomePage = (props) => {
       title={book.bookName}
       imageSrc={book.imgUrl}
       valueraiting={book.rating}
-      countRating ={book.countRating}
+      countRating={book.countRating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
   ));
@@ -171,7 +170,7 @@ const HomePage = (props) => {
       title={book.bookName}
       imageSrc={book.imgUrl}
       valueraiting={book.rating}
-      countRating ={book.countRating}
+      countRating={book.countRating}
       onClick={() => props.history.push(`/details/${book.id}`)}
     ></Card>
   ));
@@ -180,16 +179,21 @@ const HomePage = (props) => {
     setCurrentTagVnese(tag);
     setIndexPageVn(0);
   };
-  const tagVnese = [{id: "60b71239f00a929ea2aa3460",name:"Sách bán chạy trong ngày"}, {id:"60b71244f00a929ea2aa3461",name:"Sách hot"}, {id:"60b7124ff00a929ea2aa3462",name:"Bestseller"}];
+  const tagVnese = [
+    { id: "60b71239f00a929ea2aa3460", name: "Sách bán chạy trong ngày" },
+    { id: "60b71244f00a929ea2aa3461", name: "Sách hot" },
+    { id: "60b7124ff00a929ea2aa3462", name: "Bestseller" },
+  ];
   const showTagVnese = tagVnese.map((tag, index) =>
     tag.id === currentTagVnese ? (
       <div
+        style={{}}
         onClick={() => tagVneseClick(tag.id)}
         style={{
           borderRadius: "4px",
           fontSize: "15px",
           borderColor: "#e23e57",
-          backgroundColor: "white",
+          backgroundColor: "#EDECE7",
           padding: "5px",
           borderStyle: "solid",
           borderWidth: "thin",
@@ -206,7 +210,7 @@ const HomePage = (props) => {
         className={classes.tag}
         onClick={() => tagVneseClick(tag.id)}
         style={{
-          backgroundColor: "white",
+          backgroundColor: "#EDECE7",
           padding: "5px",
           color: "black",
           marginRight: "30px",
@@ -222,7 +226,11 @@ const HomePage = (props) => {
     setCurrentTagEng(tagE);
     setIndexPageEng(0);
   };
-  const tagEng = [{id: "60b71239f00a929ea2aa3460",name:"Sách bán chạy trong ngày"}, {id:"60b71244f00a929ea2aa3461",name:"Sách hot"}, {id:"60b7124ff00a929ea2aa3462",name:"Bestseller"}];
+  const tagEng = [
+    { id: "60b71239f00a929ea2aa3460", name: "Sách bán chạy trong ngày" },
+    { id: "60b71244f00a929ea2aa3461", name: "Sách hot" },
+    { id: "60b7124ff00a929ea2aa3462", name: "Bestseller" },
+  ];
   const showTagEng = tagEng.map((tagE, index) =>
     tagE.id === currentTagEng ? (
       <div
@@ -231,7 +239,7 @@ const HomePage = (props) => {
           borderRadius: "4px",
           fontSize: "15px",
           borderColor: "#e23e57",
-          backgroundColor: "white",
+          backgroundColor: "#EDECE7",
           padding: "5px",
           borderStyle: "solid",
           borderWidth: "thin",
@@ -248,7 +256,7 @@ const HomePage = (props) => {
         className={classes.tag}
         onClick={() => tagEndClick(tagE.id)}
         style={{
-          backgroundColor: "white",
+          backgroundColor: "#EDECE7",
           padding: "5px",
           color: "black",
           marginRight: "30px",
@@ -263,7 +271,7 @@ const HomePage = (props) => {
 
   const onTypeClick = (type) => {
     setCurrentType(type);
-    setIndexPageBookByType(0)
+    setIndexPageBookByType(0);
   };
   const showTypes = types.map((type, index) =>
     type === currentType ? (
@@ -272,9 +280,9 @@ const HomePage = (props) => {
         style={{
           borderRadius: "4px",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
           borderColor: "#e23e57",
-          backgroundColor: "white",
+          backgroundColor: "#EDECE7",
           padding: "5px",
           borderStyle: "solid",
           borderWidth: "thin",
@@ -291,7 +299,7 @@ const HomePage = (props) => {
         className={classes.tag}
         onClick={() => onTypeClick(type)}
         style={{
-          backgroundColor: "white",
+          backgroundColor: "#EDECE7",
           padding: "5px",
           color: "black",
           marginRight: "30px",
@@ -303,7 +311,7 @@ const HomePage = (props) => {
   );
 
   return (
-    <div >
+    <div>
       <div>
         <MessengerChat />
         <Header></Header>
@@ -311,10 +319,9 @@ const HomePage = (props) => {
           style={{
             marginTop: "70px",
             marginLeft: "100px",
-            marginBottom: "-100px"
+            marginBottom: "-100px",
           }}
-        >
-        </div>
+        ></div>
         <div>
           <div style={{ display: "flex", paddingTop: "108px" }}></div>
           <BookNav
@@ -326,14 +333,15 @@ const HomePage = (props) => {
             style={{
               display: "flex",
               padding: "20px",
-              backgroundColor: "white",
-              borderRadius:'0 0 0 0'
+              backgroundColor: "#EDECE7",
+              borderRadius: "0 0 0 0",
+              justifyContent: "center",
             }}
           >
             {showTagVnese}
           </div>
           <div
-            style={{ display: "grid", backgroundColor: "white" }}
+            style={{ display: "grid", backgroundColor: "#EDECE7" }}
             className={classes.container}
           >
             {booksVnese.length > 0 ? (
@@ -346,7 +354,7 @@ const HomePage = (props) => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginTop: "25px"
+                  marginTop: "25px",
                 }}
               >
                 <Fab
@@ -356,8 +364,8 @@ const HomePage = (props) => {
                   style={{
                     padding: "0.5em",
                     width: "200px",
-                    backgroundColor:"#1a936f",
-                    color:'white',
+                    backgroundColor: "#1a936f",
+                    color: "white",
                     fontWeight: "600",
                     paddingLeft: "4em",
                     paddingRight: "4em",
@@ -371,21 +379,22 @@ const HomePage = (props) => {
             ) : null}
           </div>
 
-          <div style={{ marginTop: "30px", zIndex: 2 }}></div>
-          <BookNav title={t("Customer_Home.3")} />
+          <div style={{ marginTop: "80px", zIndex: 2 }}></div>
+          <BookNav type="EN" title={t("Customer_Home.3")} />
           <div
             className={classes.container}
             style={{
               display: "flex",
+              backgroundColor: "#EDECE7",
+              borderRadius: "0 0 0 0",
+              justifyContent: "center",
               padding: "20px",
-              backgroundColor: "white",
-              borderRadius:'0 0 0 0'
             }}
           >
             {showTagEng}
           </div>
           <div
-            style={{ display: "grid", backgroundColor: "white" }}
+            style={{ display: "grid", backgroundColor: "#EDECE7" }}
             className={classes.container}
           >
             {booksEng.length > 0 ? (
@@ -401,7 +410,7 @@ const HomePage = (props) => {
               }}
             >
               <Fab
-                variant="outlined"           
+                variant="outlined"
                 size="medium"
                 style={{
                   padding: "0.5em",
@@ -410,8 +419,8 @@ const HomePage = (props) => {
                   paddingLeft: "4em",
                   paddingRight: "4em",
                   marginBottom: "1.7em",
-                  color:'white',
-                  backgroundColor:"#1a936f"
+                  color: "white",
+                  backgroundColor: "#1a936f",
                 }}
                 onClick={loadMoreEng}
               >
@@ -419,30 +428,30 @@ const HomePage = (props) => {
               </Fab>
             </div>
           </div>
-          <div style={{ marginTop: "30px", zIndex: 2 }}></div>
+          <div style={{ marginTop: "80px", zIndex: 2 }}></div>
+          <BookNav type="CT" title="Thể loại khác" />
           {types ? (
             <div
               className={classes.container}
               style={{
                 display: "flex",
                 padding: "20px",
-                backgroundColor: "white",
-                justifyContent:'center',
-                borderRadius:'5px 5px 0 0'
+                backgroundColor: "#EDECE7",
+                justifyContent: "center",
+                borderRadius: "5px 5px 0 0",
               }}
             >
               {showTypes}
             </div>
           ) : null}
-          <Divider className={classes.container}/>
           <div
-            style={{ display: "grid", backgroundColor: "white" }}
+            style={{ display: "grid", backgroundColor: "#EDECE7" }}
             className={classes.container}
           >
             {booksByType.length > 0 && booksByType ? (
               <div>
                 {booksByType.length > 2 ? (
-                  <div  className={`cover_container `}>{showBooksByType}</div>
+                  <div className={`cover_container `}>{showBooksByType}</div>
                 ) : (
                   <div className={`cover_container `}>
                     {showBooksByType}
@@ -471,8 +480,8 @@ const HomePage = (props) => {
                     padding: "0.5em",
                     width: "200px",
                     fontWeight: "600",
-                    backgroundColor:"#1a936f",
-                    color:'white',
+                    backgroundColor: "#1a936f",
+                    color: "white",
                     paddingLeft: "4em",
                     paddingRight: "4em",
                     marginBottom: "1.7em",
@@ -486,7 +495,7 @@ const HomePage = (props) => {
           </div>
         </div>
       </div>
-      <div style={{ paddingTop: "180px"}}>
+      <div style={{ paddingTop: "180px" }}>
         <Footer />
       </div>
     </div>

@@ -119,7 +119,7 @@ const BookDetail = (props) => {
   };
   const classes = useStyles();
   return (
-    <div style={{ backgroundColor: "#e23e57", paddingTop: "120px" }}>
+    <div style={{ backgroundColor: "#EDECE7", paddingTop: "120px" }}>
       <Paper className={` ${classes.container}`}>
         <div className={classes.cover_product_detail}>
           <div className={classes.card_image_detail}>

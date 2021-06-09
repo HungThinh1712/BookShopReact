@@ -96,7 +96,7 @@ const PaymentPage = (props) => {
     });
   },[dispatch])
   return (
-    <div>
+    <div style={{backgroundColor:'#EDECE7',height:'760px'}}>
       <HeaderInPayment step={2} />
       <div className={classes.title}>
         3. {t("Customer_Shopping_Payment.11")}

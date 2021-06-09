@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import EngIcon from '../Images/En.png';
+import VNIcon from '../Images/Vn.png';
+import NavVnese from '../Images/NavVnese.png' 
 const useStyles = makeStyles((theme) => ({
 
 
@@ -41,8 +43,8 @@ export default function VietNameseBookNav(props) {
 
         return (
                 <div style={{display:'flex',alignItems:'center',borderRadius:'5px 5px 0 0',justifyContent:'center'}}  className = {`home-header ${classes.root}`} >
-					<LibraryBooksIcon style={{paddingTop:'1px',color:'#114b5f',marginLeft:'10px',marginRight:"10px"}} fontSize="large" ></LibraryBooksIcon>
-		            <h2 style={{paddingTop:"12px",fontSize:'20px',fontWeight:'550',textTransform:'uppercase',color:'#114b5f'}}>{props.title}</h2>
+					{props.type==="EN" ? <img src={EngIcon} style={{paddingTop:'1px',color:'#114b5f',marginLeft:'10px',marginRight:"2px",width:"50px",height:"50px"}} fontSize="large" ></img>: <img src={VNIcon} style={{paddingTop:'1px',color:'#114b5f',marginLeft:'10px',marginRight:"2px",width:"50px",height:"50px"}} fontSize="large" ></img>}
+		            <h2 style={{paddingTop:"12px",fontSize:'20px',fontWeight:'550',textTransform:'uppercase',color:'#114b5f',fontFamily:"Gagalin"}}>{props.title}</h2>
 					
 		        </div>
         );

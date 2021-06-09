@@ -162,7 +162,7 @@ const ShoppingCartPage = (props) => {
             <Button
               className={classes.button_order}
               variant="contained"
-              color="primary"
+               style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}
               onClick={handleClick}
             >
               {t('Customer_Shopping_Payment.5')}

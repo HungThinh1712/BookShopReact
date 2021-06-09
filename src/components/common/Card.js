@@ -10,8 +10,12 @@ const useStyles = makeStyles((theme) => ({
         "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)",
 
       cursor: "pointer",
-      borderRadius:'5px'
+     
     },
+    backgroundColor:'white',
+    marginRight:'15px',
+    borderRadius:'7px',
+    marginBottom:'15px'
   },
 }));
 

@@ -119,7 +119,7 @@ const BookDetailPage = (props) => {
   const classes = useStyles();
 
   return (
-    <div style={{ backgroundColor: "#e23e57" }}>
+    <div style={{ backgroundColor: "#EDECE7" }}>
       <Header/>
       {selectedBook != null ? (
         <div >
@@ -199,7 +199,7 @@ const BookDetailPage = (props) => {
         </div>
       ) : null}
       {selectedBook ? (
-        <div style={{ paddingTop: "180px", backgroundColor: "#e23e57" }}>
+        <div style={{ paddingTop: "180px", backgroundColor: "#EDECE7" }}>
           <Footer />
         </div>
       ) : null}

@@ -4,7 +4,7 @@ import HeaderInPayment from '../common/HeaderInPayment'
 
 const AddressPage = () => {
     return (
-        <div>
+        <div style={{backgroundColor:'#EDECE7',height:'760px'}}>
             <HeaderInPayment step ={1}/>
             <AddressZone/>
         </div>
