@@ -114,7 +114,7 @@ function AddPromotion() {
                       <div style={{ padding: '2px'}}>
                       <Radio.Group name="radiogroup" defaultValue={1}>
                         <Radio value={1} checked={true}>Tất cả</Radio>
-                        <Radio value={2}>Tìm theo thư mục</Radio>
+                        <Radio value={2}>Tìm theo danh mục</Radio>
                         <Radio value={3}>Tìm theo sản phẩm</Radio>
                       </Radio.Group>
                       </div>
