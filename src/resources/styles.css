@@ -2,9 +2,10 @@
         Vnese Books
 ======================*/
 .home-header {
-  background: #9999ff;
+  background: #f3e9d2;
   height: 40px;
   margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 /*====================
@@ -34,9 +35,9 @@ button:hover {
 }
 .card_title {
   font-size: 1em;
-  color: #141414;
+  color: #564a4a;
   font-weight: 500;
-  opacity: 0.7;
+  opacity: 0.9;
   overflow: hidden;
 }
 .card_discount {
@@ -48,8 +49,8 @@ button:hover {
   font-family: "Roboto";
 }
 .card_price {
-  font-size: 0.8em;
-  color: #141414;
+  font-size: 0.9em;
+  color: #564a4a;
   font-weight: "bold";
   opacity: 0.7;
   margin-top: 0;
@@ -259,7 +260,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   width: 100%;
-  background: rgb(139, 119, 228);
+  background:#114b5f;
 }
 .main-content {
   display: flex;
@@ -331,7 +332,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 .bottom center {
   padding: 5px;
   font-size: 0.7em;
-  background: #111;
+  background: #9fe6a0;
 }
 .bottom center span {
   color: #656565;

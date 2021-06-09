@@ -10,10 +10,12 @@ import Footer from "../common/Footer";
 import { useTranslation } from "react-i18next";
 import Fab from "@material-ui/core/Fab";
 import { Empty } from "antd";
+import Divider from '@material-ui/core/Divider'
 import * as typeActions from "../../actions/typesAction";
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    borderRadius:"0 0 5px 5px",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "0px",
       marginRight: "0px",
@@ -30,11 +32,11 @@ const useStyles = makeStyles((theme) => ({
   tag: {
     "&:hover": {
       borderRadius: "4px",
-      borderColor: "red",
+      borderColor: "#e23e57",
       cursor: "pointer",
       borderStyle: "solid",
       borderWidth: "thin",
-      color: "red !important",
+      color: "#e23e57 !important",
     },
   },
 }));
@@ -186,12 +188,12 @@ const HomePage = (props) => {
         style={{
           borderRadius: "4px",
           fontSize: "15px",
-          borderColor: "red",
+          borderColor: "#e23e57",
           backgroundColor: "white",
           padding: "5px",
           borderStyle: "solid",
           borderWidth: "thin",
-          color: "red",
+          color: "#e23e57",
           marginRight: "30px",
           cursor: "pointer",
           fontWeight: "600",
@@ -228,12 +230,12 @@ const HomePage = (props) => {
         style={{
           borderRadius: "4px",
           fontSize: "15px",
-          borderColor: "red",
+          borderColor: "#e23e57",
           backgroundColor: "white",
           padding: "5px",
           borderStyle: "solid",
           borderWidth: "thin",
-          color: "red",
+          color: "#e23e57",
           marginRight: "30px",
           cursor: "pointer",
           fontWeight: "600",
@@ -270,12 +272,13 @@ const HomePage = (props) => {
         style={{
           borderRadius: "4px",
           fontSize: "15px",
-          borderColor: "red",
+          fontWeight:"600",
+          borderColor: "#e23e57",
           backgroundColor: "white",
           padding: "5px",
           borderStyle: "solid",
           borderWidth: "thin",
-          color: "red",
+          color: "#e23e57",
           cursor: "pointer",
           fontWeight: "600",
           marginRight: "20px",
@@ -300,20 +303,17 @@ const HomePage = (props) => {
   );
 
   return (
-    <div style={{ backgroundColor: "#f2f2f2" }}>
+    <div >
       <div>
         <MessengerChat />
         <Header></Header>
         <div
           style={{
-            marginTop: "80px",
+            marginTop: "70px",
             marginLeft: "100px",
-            marginBottom: "-100px",
+            marginBottom: "-100px"
           }}
         >
-          {/* <BreadCrumb
-              breadcrumb="" onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/")}>
-            </BreadCrumb> */}
         </div>
         <div>
           <div style={{ display: "flex", paddingTop: "108px" }}></div>
@@ -327,6 +327,7 @@ const HomePage = (props) => {
               display: "flex",
               padding: "20px",
               backgroundColor: "white",
+              borderRadius:'0 0 0 0'
             }}
           >
             {showTagVnese}
@@ -345,16 +346,18 @@ const HomePage = (props) => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginTop: "25px",
+                  marginTop: "25px"
                 }}
               >
                 <Fab
                   variant="outlined"
-                  color="primary"
+                  color="#4aa96c"
                   size="medium"
                   style={{
                     padding: "0.5em",
                     width: "200px",
+                    backgroundColor:"#1a936f",
+                    color:'white',
                     fontWeight: "600",
                     paddingLeft: "4em",
                     paddingRight: "4em",
@@ -368,7 +371,7 @@ const HomePage = (props) => {
             ) : null}
           </div>
 
-          <div style={{ marginTop: "20px", zIndex: 2 }}></div>
+          <div style={{ marginTop: "30px", zIndex: 2 }}></div>
           <BookNav title={t("Customer_Home.3")} />
           <div
             className={classes.container}
@@ -376,6 +379,7 @@ const HomePage = (props) => {
               display: "flex",
               padding: "20px",
               backgroundColor: "white",
+              borderRadius:'0 0 0 0'
             }}
           >
             {showTagEng}
@@ -397,8 +401,7 @@ const HomePage = (props) => {
               }}
             >
               <Fab
-                variant="outlined"
-                color="primary"
+                variant="outlined"           
                 size="medium"
                 style={{
                   padding: "0.5em",
@@ -407,6 +410,8 @@ const HomePage = (props) => {
                   paddingLeft: "4em",
                   paddingRight: "4em",
                   marginBottom: "1.7em",
+                  color:'white',
+                  backgroundColor:"#1a936f"
                 }}
                 onClick={loadMoreEng}
               >
@@ -414,7 +419,7 @@ const HomePage = (props) => {
               </Fab>
             </div>
           </div>
-          <div style={{ marginTop: "20px", zIndex: 2 }}></div>
+          <div style={{ marginTop: "30px", zIndex: 2 }}></div>
           {types ? (
             <div
               className={classes.container}
@@ -422,11 +427,14 @@ const HomePage = (props) => {
                 display: "flex",
                 padding: "20px",
                 backgroundColor: "white",
+                justifyContent:'center',
+                borderRadius:'5px 5px 0 0'
               }}
             >
               {showTypes}
             </div>
           ) : null}
+          <Divider className={classes.container}/>
           <div
             style={{ display: "grid", backgroundColor: "white" }}
             className={classes.container}
@@ -434,7 +442,7 @@ const HomePage = (props) => {
             {booksByType.length > 0 && booksByType ? (
               <div>
                 {booksByType.length > 2 ? (
-                  <div className={`cover_container `}>{showBooksByType}</div>
+                  <div  className={`cover_container `}>{showBooksByType}</div>
                 ) : (
                   <div className={`cover_container `}>
                     {showBooksByType}
@@ -463,6 +471,8 @@ const HomePage = (props) => {
                     padding: "0.5em",
                     width: "200px",
                     fontWeight: "600",
+                    backgroundColor:"#1a936f",
+                    color:'white',
                     paddingLeft: "4em",
                     paddingRight: "4em",
                     marginBottom: "1.7em",
@@ -476,7 +486,7 @@ const HomePage = (props) => {
           </div>
         </div>
       </div>
-      <div style={{ paddingTop: "180px", backgroundColor: "#f2f2f2" }}>
+      <div style={{ paddingTop: "180px"}}>
         <Footer />
       </div>
     </div>

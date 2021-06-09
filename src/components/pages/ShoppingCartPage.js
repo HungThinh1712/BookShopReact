@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   flex_div: {
     display: "flex",
+    backgroundColor:"9fe6a0",
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       flexDirection: "column",
@@ -83,7 +84,7 @@ const ShoppingCartPage = (props) => {
   );
 
   const showCartItems = Object.values(cartItems.items).map((cartItem) => (
-    <div>
+    <div >
       <IteminCart
         key={cartItem.bookId}
         title={cartItem.name}

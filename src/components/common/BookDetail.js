@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       alignItem: "center",
     },
+    paddingLeft:'-50px'
   },
   card_title_detail: {
     fontSize: "2vw",
@@ -118,7 +119,7 @@ const BookDetail = (props) => {
   };
   const classes = useStyles();
   return (
-    <div style={{ backgroundColor: "#f2f2f2", paddingTop: "120px" }}>
+    <div style={{ backgroundColor: "#e23e57", paddingTop: "120px" }}>
       <Paper className={` ${classes.container}`}>
         <div className={classes.cover_product_detail}>
           <div className={classes.card_image_detail}>
@@ -208,7 +209,7 @@ const BookDetail = (props) => {
             <div style={{ marginBottom: "0.5em", marginLeft: "0px" }}>
               <Button
                 onClick={handleAddToCart}
-                size="small"
+                size="medium"
                 variant="contained"
                 color="primary"
                 style={{ fontSize: "1em" }}

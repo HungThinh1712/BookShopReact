@@ -14,7 +14,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Logo from "./../Images/logo_hcmute.png";
+import Logo from "./../Images/logo.png";
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as cartAction from "./../../actions/cartAction";
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: "#0000FF",
+    backgroundColor: "#114b5f",
   },
   toolBar: {
     [theme.breakpoints.up("sm")]: {
@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: "none",
     textTransform: "uppercase",
+    color:'white',
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -67,8 +68,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Righteous",
   },
   logo: {
-    display: "block",
-    maxWidth: "5%",
+    width:"7%",
     cursor: "pointer",
   },
   search: {
@@ -380,14 +380,6 @@ const PrimarySearchAppBar = (props) => {
             alt=""
           />
           <div style={{ flexGrow: "0.04" }}></div>
-          <Typography
-            onClick={handleClickHomePage}
-            className={classes.title}
-            variant="h6"
-            noWrap
-          >
-            Tina
-          </Typography>
           {props.notShow ? null : (
             <div className={classes.search}>
               <InputBase
@@ -496,7 +488,7 @@ const PrimarySearchAppBar = (props) => {
                 {userId || userName  ? (
                   <div
                     style={{
-                      backgroundColor: "#8470FF",
+                      backgroundColor: "#88d498",
                       color: "white",
                       borderRadius: "30px",
                       fontSize: "15px",

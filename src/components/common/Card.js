@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
         "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)",
 
       cursor: "pointer",
+      borderRadius:'5px'
     },
   },
 }));
@@ -32,7 +33,7 @@ const Card = (props) => {
         <div
           style={{
             borderRadius: "22px",
-            backgroundColor: "#F7941E",
+            backgroundColor: "#f55c47",
             width: "44px",
             height: "44px",
             position: "absolute",
@@ -65,10 +66,9 @@ const Card = (props) => {
       <p style={{ marginBottom: 0 }}>
         <span
           style={{
-            fontWeight: "900",
-            color: "red",
+            fontWeight: "700",
+            color: "#f55c47",
             fontSize: "20px",
-            fontFamily: "Roboto",
           }}
         >
           {props.price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ

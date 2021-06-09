@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
       table_info: {
-        marginLeft:'87px',width:'25%',backgroundColor:'#8470FF',
+        marginLeft:'87px',width:'25%',backgroundColor:'#522546',
         [theme.breakpoints.down('sm')]: {
           marginTop: '5px',
           marginLeft: '0px',

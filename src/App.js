@@ -42,7 +42,7 @@ import UserRoute from "./privaterouter/userRoute";
 
 function App() {
   return (
-    <div className="App">
+    <div style={{backgroundColor:"#f3e9d2"}} className="App">
       <Router>
         <ToastContainer />
         <BackDrop />

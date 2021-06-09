@@ -7,14 +7,14 @@ const Footer = () => {
       <div className="div_footer">
         <div  className="main-content">
           <div className="left box">
-            <h2>{t('Customer_Home.11')}</h2>
+            <h2 style={{color:'#88d498'}}>{t('Customer_Home.11')}</h2>
             <div className="content">
-              <p>{t('Customer_Home.14')}</p>
+              <p >{t('Customer_Home.14')}</p>
             </div>
           </div>
 
           <div className="center box">
-            <h2>{t('Customer_Home.12')}</h2>
+            <h2  style={{color:'#88d498'}}>{t('Customer_Home.12')}</h2>
             <div className="content">
               <div className="place" >
                 <span className="fas fa-map-marker-alt"></span>
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
 
           <div className="right box">
-            <h2>{t('Customer_Home.13')}</h2>
+            <h2  style={{color:'#88d498'}}>{t('Customer_Home.13')}</h2>
             <div className="content">
              
             </div>

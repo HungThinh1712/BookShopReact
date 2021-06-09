@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme) => ({
 
 
   paragraph: {
+    backgroundColor:"#522546",
+    color:'white',
     [theme.breakpoints.up('sm')]: {
       marginLeft: '0px',
       marginRight: '0px',
