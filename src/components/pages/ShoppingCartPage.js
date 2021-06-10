@@ -170,7 +170,8 @@ const ShoppingCartPage = (props) => {
           </div>
         </div>
       ) : (
-        <div className="container-fluid mt-100">
+        <div style={{display:'flex',alignContent:'center',justifyContent:'center',backgroundColor:"#EDECE7",paddingTop:'200px'}}>
+          <div >
           <div className="row">
             <div className="col-md-12">
               <div className="card">
@@ -179,9 +180,9 @@ const ShoppingCartPage = (props) => {
                     {" "}
                     <img
                       alt="Giỏ hàng"
-                      src="https://i.imgur.com/dCdflKN.png"
-                      width="130"
-                      height="130"
+                      src="https://i.pinimg.com/originals/c6/0f/ea/c60fea3ac3aab2e82c2f7ea901ef55f6.jpg?fbclid=IwAR1nrsHtpUGScp40zEzmSxUzNT1X5-h3uT92t64Hq7nzF3Rxpfo86f9qt9k"
+                      width="200"
+                      height="200"
                       className="img-fluid mb-4 mr-3"
                     />
                     <h3>
@@ -190,17 +191,19 @@ const ShoppingCartPage = (props) => {
                     <h4>
                       {t('Customer_Shopping_Payment.20')}
                     </h4>{" "}
-                    <button
-                      className="btn btn-primary cart-btn-transform m-3"
+                    <Button
+                       variant="contained"
+                        style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}
                       onClick={() => props.history.push("/")}
                     >
                       {t('Customer_Shopping_Payment.18')}
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         </div>
       )}
       <div style={{marginTop:'300px'}} >

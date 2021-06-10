@@ -297,9 +297,8 @@ const AddressInputForm = (props) => {
             {props.tag !== "1" ? (
               <div>
                 <Button
-                  style={{ width: "100%" }}
+                  style={{ width: "100%",backgroundColor:"#1a936f",color:"#fff",fontWeight:'600' }}
                   variant="contained"
-                  color="primary"
                   onClick={handleSubmit}
                 >
                   Cập nhật

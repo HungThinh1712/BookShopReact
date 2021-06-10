@@ -166,7 +166,9 @@ const RegisterPage = (props) => {
                 display: "flex",
                 justifyContent: "center",
                 width:"100%",
-                borderRadius: '5px'
+                borderRadius: '5px',
+                background:"#49654e",
+                color:'#fff'
               }}
               onClick={handleSubmit}
             >
@@ -174,7 +176,7 @@ const RegisterPage = (props) => {
             </Button>
           </div>
           <div
-            style={{ color: "blueviolet", cursor: "pointer",display:'flex',justifyContent:'center'}}
+            style={{ color: "#49654e", cursor: "pointer",display:'flex',justifyContent:'center'}}
             onClick={() => props.history.push("/user_page")}
           >
             <span>{t("Customer_Management.44")}</span>

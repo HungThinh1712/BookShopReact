@@ -7,6 +7,13 @@ import {useTranslation} from 'react-i18next';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 
+const panelStyles = {
+  padding: '15px 20px',
+  color: '#aaa'
+};
+
+
+
 const UserPageNav = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -78,7 +85,7 @@ const UserPageNav = (props) => {
   }
   return (
     <div   className="col-xs-5 col-sm-4 col-md-3">
-      <div style={{backgroundColor:"#c6dabf",height:'800px'}} className="profile-sidebar">
+      <div style={{backgroundColor:"#c6dabf",height:'100%'}} className="profile-sidebar">
         <div className="profile-userpic">
           {
             imgUrl ? <img

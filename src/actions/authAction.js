@@ -124,7 +124,7 @@ export const updateAddressOfCurrentUser =
           dispatch(backdropAction.setCloseBackDrop);
           dispatch({
             type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
-            payload: res.data, //sets payload to errors coming from server
+            payload: "Đỉa chỉ không hợp lệ", //sets payload to errors coming from server
           });
         }
       })
