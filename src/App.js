@@ -40,8 +40,12 @@ import ReportPage from "./components/pages/Admin/ReportPage";
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
 import UserRoute from "./privaterouter/userRoute";
+import { useTranslation } from "react-i18next";
+
 
 function App() {
+  const { i18n } = useTranslation();
+  i18n.changeLanguage('vi');
   return (
     <div style={{backgroundColor:"#EDECE7"}} className="App">
       <Router>
