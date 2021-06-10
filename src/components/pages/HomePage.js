@@ -312,7 +312,9 @@ const HomePage = (props) => {
 
   return (
     <div>
+      {booksVnese && booksVnese.length > 0 ?
       <div>
+        <div>
         <MessengerChat />
         <Header></Header>
         <div
@@ -498,6 +500,8 @@ const HomePage = (props) => {
       <div style={{ paddingTop: "180px" }}>
         <Footer />
       </div>
+      </div>: null
+      }
     </div>
   );
 };

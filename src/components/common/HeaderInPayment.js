@@ -5,13 +5,14 @@ import Typography from '@material-ui/core/Typography';
 import Stepper from './Stepper'
 import Paper from '@material-ui/core/Paper';
 import { withRouter } from "react-router-dom";
+import Logo from "./../Images/logo.png";
 const useStyles = makeStyles((theme) => ({
 
     grow: {
       flexGrow: 1,
     },
     appBar: {
-      backgroundColor: 'white',
+      backgroundColor: '#114b5f',
   
     },
     toolBar: {
@@ -43,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
       fontFamily: 'Righteous'
     },
+    logo: {
+      width:"7%",
+      cursor: "pointer",
+    },
   }));
 const HeaderInPayment = (props) => {
     const classes = useStyles();
@@ -50,9 +55,12 @@ const HeaderInPayment = (props) => {
         <div>
             <Paper className={classes.appBar} >
                 <Toolbar className={classes.toolBar}>
-                    <Typography onClick={() => props.history.push("/")} className={classes.title} variant="h6" noWrap>
-                        Tina
-                    </Typography>
+                <img
+            onClick={()=>props.history.push("/")}
+            className={classes.logo}
+            src={Logo}
+            alt=""
+          />
                     <div style={{ flexGrow: '0.1' }}></div>
                     <Stepper step ={props.step} />
                 </Toolbar >

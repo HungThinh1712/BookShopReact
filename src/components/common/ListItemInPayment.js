@@ -23,7 +23,7 @@ const ListItemIPayment = (props) => {
     }
    fetchUser();
   },[userId,dispatch])
-  const shippingFee = props.distanceAndFee ? props.distanceAndFee.shippingFee :null
+  const shippingFee = props.distanceAndFee ? props.distanceAndFee.shippingFee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") :null
   const sumMoney = GetTotalMoney + shippingFee;
   
   const showCartItems = Object.values(cartItems.items).map((cartItem)=>

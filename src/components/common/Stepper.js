@@ -8,7 +8,7 @@ import {useTranslation} from 'react-i18next'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '70%',
-    backgroundColor:'#8470FF'
+    backgroundColor:'#114b5f'
   },
   button: {
     marginRight: theme.spacing(1),
@@ -32,14 +32,14 @@ export default function HorizontalLinearStepper(props) {
   const steps = getSteps()
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep}>
+      <Stepper style={{background:"#114b5f"}} activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
 
           return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+            <Step style={{color:'#88d498'}}  key={label} {...stepProps}>
+              <StepLabel  {...labelProps}><span style={{color:'#88d498'}}>{label}</span></StepLabel>
             </Step>
           );
         })}
