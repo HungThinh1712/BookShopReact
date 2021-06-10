@@ -26,7 +26,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { useTranslation } from "react-i18next";
-import ReactCountryFlag from "react-country-flag";
 import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
@@ -521,7 +520,7 @@ const PrimarySearchAppBar = (props) => {
               <MoreIcon />
             </IconButton>
           </div>
-          <ReactCountryFlag
+          {/* <ReactCountryFlag
             onClick={() => handleClick_ChangeLang("vi")}
             style={{ fontSize: "2em", cursor: "pointer" }}
             countryCode="VN"
@@ -532,7 +531,7 @@ const PrimarySearchAppBar = (props) => {
             style={{ fontSize: "2em", cursor: "pointer", marginLeft: "10px" }}
             countryCode="GB"
             svg
-          />
+          /> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
