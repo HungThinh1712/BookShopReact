@@ -40,7 +40,13 @@ import ReportPage from "./components/pages/Admin/ReportPage";
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
 import UserRoute from "./privaterouter/userRoute";
+<<<<<<< HEAD
 import { useTranslation } from "react-i18next"
+=======
+import { useTranslation } from "react-i18next";
+
+
+>>>>>>> 5512773d782947fc4c1c7cc1e492f1661a9fcd03
 function App() {
   const { i18n } = useTranslation();
   i18n.changeLanguage('vi');
