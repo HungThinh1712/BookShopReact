@@ -6,6 +6,9 @@ import * as CallApis from '../../constants/Apis'
 import * as notificationActions from './../../actions/notificationAction'
 import * as cartActions from './../../actions/cartAction'
 import {useTranslation} from 'react-i18next'
+import Header from "../common/Header"
+import Footer from "../common/Footer";
+import { Button } from "@material-ui/core";
 
 const OrderSuccessPage = (props) => {
     const { t } =  useTranslation();
@@ -75,7 +78,9 @@ const OrderSuccessPage = (props) => {
           }
     }
     return (
-        <div className="container-fluid mt-100">
+        <div style={{backgroundColor:"#EDECE7"}}>
+            <Header/>
+            <div  style={{display:'flex',alignContent:'center',justifyContent:'center',backgroundColor:"#EDECE7",paddingTop:'200px'}}>
             <div className="row">
                 {errorCode==='0' || errorCode===undefined || errorCode===null ? <div className="col-md-12">
                     <div className="card">
@@ -83,7 +88,7 @@ const OrderSuccessPage = (props) => {
                             <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
                                 <h3><strong>{t('Customer_Shopping_Payment.16')}</strong></h3>
                                 <h4>{t('Customer_Shopping_Payment.17')}</h4>
-                                <button  className="btn btn-primary cart-btn-transform m-3" onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</button>
+                                <Button   style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}  onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</Button>
                             </div>
                         </div>
                     </div>
@@ -92,12 +97,16 @@ const OrderSuccessPage = (props) => {
                         <div className="card-body cart">
                             <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
                                 <h3><strong>{t('Customer_Shopping_Payment.25')}</strong></h3>
-                                <button  className="btn btn-primary cart-btn-transform m-3" onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</button>
+                                <Button   style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}  onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</Button>
                             </div>
                         </div>
                     </div>
                 </div>}
             </div>
+        </div>
+        <div style={{marginTop:'300px'}} >
+        <Footer />
+      </div>
         </div>
     );
 };

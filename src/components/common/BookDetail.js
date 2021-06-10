@@ -211,14 +211,13 @@ const BookDetail = (props) => {
                 onClick={handleAddToCart}
                 size="medium"
                 variant="contained"
-                color="primary"
-                style={{ fontSize: "1em" }}
+                style={{ fontSize: "15px",background:'#1a936f',color:"white",fontWeight:"600" }}
               >
                 <img
                   src={CartIcon}
                   style={{
-                    width: "15px",
-                    height: "15px",
+                    width: "20px",
+                    height: "20px",
                     marginRight: "10px",
                     fontSize: "0.85em",
                   }}

@@ -23,8 +23,11 @@ const ListItemIPayment = (props) => {
     }
    fetchUser();
   },[userId,dispatch])
-  const shippingFee = props.distanceAndFee ? props.distanceAndFee.shippingFee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") :null
+  const shippingFee = props.distanceAndFee ? props.distanceAndFee.shippingFee:null
   const sumMoney = GetTotalMoney + shippingFee;
+
+  const temp = {...props.distanceAndFee}
+  var tempFee = temp && temp.shippingFee ? temp.shippingFee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") :null
   
   const showCartItems = Object.values(cartItems.items).map((cartItem)=>
 
@@ -53,7 +56,7 @@ const ListItemIPayment = (props) => {
                 <div style={{ display: 'flex',justifyContent:'space-between' }} >
                     <div style={{ fontWeight: '600', fontSize: '13px', padding: '2px',marginLeft:'10px' }}>Phí vận chuyển</div>
                     <div style={{ padding: '2px',marginRight:'10px' }}>
-                        <div style={{fontSize:'13px',fontWeight:'500'}}>{`${shippingFee}đ (${props.distanceAndFee ? props.distanceAndFee.distance:null })`}</div>
+                        <div style={{fontSize:'13px',fontWeight:'500'}}>{`${tempFee}đ (${props.distanceAndFee ? props.distanceAndFee.distance:null })`}</div>
                     </div>
                 </div>
                 <div style={{backgroundColor:'#253528',height:'0.5px'}}></div>

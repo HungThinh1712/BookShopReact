@@ -312,12 +312,11 @@ const HomePage = (props) => {
 
   return (
     <div>
-      {booksVnese && booksVnese.length > 0 ?
       <div>
-        <div>
         <MessengerChat />
         <Header></Header>
-        <div
+         {booksVnese && booksVnese.length > 0 ? <div>
+          <div
           style={{
             marginTop: "70px",
             marginLeft: "100px",
@@ -496,12 +495,11 @@ const HomePage = (props) => {
             ) : null}
           </div>
         </div>
+         </div>: null}
       </div>
-      <div style={{ paddingTop: "180px" }}>
+      {booksVnese && booksVnese.length > 0 ? <div style={{ paddingTop: "180px" }}>
         <Footer />
-      </div>
-      </div>: null
-      }
+      </div>:null}
     </div>
   );
 };

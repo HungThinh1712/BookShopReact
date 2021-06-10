@@ -32,7 +32,7 @@ const Description = (props) => {
   return (
     <div>
       <Paper className={classes.paragraph}>
-        <p style={{ height: '50%', padding: '10px' }}>{props.description}</p>
+        <p style={{ height: '50%', padding: '10px',fontWeight:'600' }}>{props.description}</p>
       </Paper>
     </div>
   );

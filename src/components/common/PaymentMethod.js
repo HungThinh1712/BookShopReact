@@ -134,7 +134,7 @@ const PaymentMethod = (props) => {
       <Button
         onClick={handleClick}
         variant="contained"
-        style={{ width: "100%", marginTop: "10px",backgroundColor:"#8ba889",fontWeight:"700",color:'white' }}
+        style={{ width: "100%", marginTop: "10px",backgroundColor:"#8ba889",fontWeight:"600",color:'white' }}
         color="primary"
       >
         {t('Customer_Shopping_Payment.15')}

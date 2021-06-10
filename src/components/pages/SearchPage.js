@@ -89,10 +89,11 @@ const SearchPage = (props) => {
       : []
   );
   const tags = [
-    { id: "Sách bàn chạy trong tuần", name: "Sách bàn chạy trong tuần" },
-    { id: "Sách bàn chạy trong tháng", name: "Sách bàn chạy trong tháng" },
-    { id: "Sách bàn chạy trong năm", name: "Sách bàn chạy trong năm" },
+    { id: "60b71239f00a929ea2aa3460", name: "Sách bán chạy trong ngày" },
+    { id: "60b71244f00a929ea2aa3461", name: "Sách hot" },
+    { id: "60b7124ff00a929ea2aa3462", name: "Bestseller" },
   ];
+ 
   const total = useSelector((state) =>
     state.books.searchedResultBooks.total
       ? state.books.searchedResultBooks.total
@@ -120,18 +121,26 @@ const SearchPage = (props) => {
 
   const handleTypeChange = (event, values) => {
     values != null ? setTypeId(values.id) : setTypeId(null);
+    setPage(1);
   };
   const handlePublishHouseChange = (event, values) => {
     values != null ? setPublishHouseId(values.id) : setPublishHouseId(null);
+    setPage(1);
+
   };
   const handleAuthorChange = (event, values) => {
     values != null ? setAuthorId(values.id) : setAuthorId(null);
+    setPage(1);
+
   };
   const handleTagChange = (event, values) => {
     values != null ? setTagId(values.id) : setTagId(null);
+    setPage(1);
+
   };
   const handlePriceChange = (event, values) => {
     values != null ? setPrice(Object.values(values)[0]) : setPrice("asc");
+    setPage(1);
   };
 
   useEffect(() => {
