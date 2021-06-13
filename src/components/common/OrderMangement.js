@@ -14,6 +14,9 @@ import * as CallApis from '../../constants/Apis'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import {useTranslation} from 'react-i18next'
 import { Tag } from 'antd';
+import { Tabs } from 'antd';
+
+const { TabPane } = Tabs;
 
 const useStyles = makeStyles({
   table: {
@@ -37,9 +40,10 @@ const BasicTable =(props) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [status,setStatus] = useState(0);
   useEffect(()=>{
-    dispatch(orderActions.getOrdersRequest(props.page,4));
-  },[props.page,dispatch])
+    dispatch(orderActions.getOrdersRequest(props.page,4,status));
+  },[props.page,dispatch,status])
 
   const rows = useSelector(state=>state.order.orders.entities ? state.order.orders.entities: [] )
   const handelRowClick = (row) =>{
@@ -83,8 +87,13 @@ const BasicTable =(props) => {
       return <Tag color="#108ee9" >{status}</Tag>
     }
   }
+  const handleTabChange =(key)=>{
+    setStatus(key);
+  }
   return (
     
+    <Tabs defaultActiveKey="0" onChange={handleTabChange} >
+    <TabPane tab="Đang chờ xác nhận" key="0">
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
@@ -114,6 +123,133 @@ const BasicTable =(props) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </TabPane>
+    <TabPane tab="Đã xác nhận" key="1">
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead >
+          <TableRow style={{height:'80px',fontWeight:'900'}} >
+            <TableCell className={classes.header} >{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.8')}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow onClick={()=>handelRowClick(row)} style={{height:'80px'}} className={classes.row} key={row.name}>
+              <TableCell component="th" scope="row" style={{width:'150px'}}>
+                {row.orderId}
+              </TableCell>
+              <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
+              <TableCell style={{width:'300px'}}>{row.description}</TableCell>
+              <TableCell >{row.totalMoney.toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</TableCell>
+              <TableCell >{showStatus(row.status)}</TableCell>
+              
+            </TableRow>
+            
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </TabPane>
+    <TabPane tab="Đang giao hàng" key="2">
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead >
+          <TableRow style={{height:'80px',fontWeight:'900'}} >
+            <TableCell className={classes.header} >{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.8')}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow onClick={()=>handelRowClick(row)} style={{height:'80px'}} className={classes.row} key={row.name}>
+              <TableCell component="th" scope="row" style={{width:'150px'}}>
+                {row.orderId}
+              </TableCell>
+              <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
+              <TableCell style={{width:'300px'}}>{row.description}</TableCell>
+              <TableCell >{row.totalMoney.toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</TableCell>
+              <TableCell >{showStatus(row.status)}</TableCell>
+              
+            </TableRow>
+            
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </TabPane>
+    <TabPane tab="Đã giao hàng" key="3">
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead >
+          <TableRow style={{height:'80px',fontWeight:'900'}} >
+            <TableCell className={classes.header} >{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.8')}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow onClick={()=>handelRowClick(row)} style={{height:'80px'}} className={classes.row} key={row.name}>
+              <TableCell component="th" scope="row" style={{width:'150px'}}>
+                {row.orderId}
+              </TableCell>
+              <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
+              <TableCell style={{width:'300px'}}>{row.description}</TableCell>
+              <TableCell >{row.totalMoney.toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</TableCell>
+              <TableCell >{showStatus(row.status)}</TableCell>
+              
+            </TableRow>
+            
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </TabPane>
+    <TabPane tab="Đã hủy" key="4">
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead >
+          <TableRow style={{height:'80px',fontWeight:'900'}} >
+            <TableCell className={classes.header} >{t('Admin_Other.5')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.6')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.7')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.10')}</TableCell>
+            <TableCell className={classes.header} >{t('Admin_Other.8')}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow onClick={()=>handelRowClick(row)} style={{height:'80px'}} className={classes.row} key={row.name}>
+              <TableCell component="th" scope="row" style={{width:'150px'}}>
+                {row.orderId}
+              </TableCell>
+              <TableCell style={{width:'150px'}} >{row.createAt}</TableCell>
+              <TableCell style={{width:'300px'}}>{row.description}</TableCell>
+              <TableCell >{row.totalMoney.toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</TableCell>
+              <TableCell >{showStatus(row.status)}</TableCell>
+              
+            </TableRow>
+            
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </TabPane>
+  </Tabs>
+    
     
   );
 }

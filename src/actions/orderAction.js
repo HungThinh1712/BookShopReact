@@ -5,8 +5,8 @@ import { toastMessage } from '../components/common/ToastHelper';
 import { useTranslation } from "react-i18next"
 import * as backDropAction from "../actions/backdropAction"
 
-export const getOrdersRequest =  (page,pageSize) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}`)
+export const getOrdersRequest =  (page,pageSize,status) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}&status=${status}`)
     dispatch(backDropAction.setOpenBackDrop)
 
     await axios.get(url)
@@ -43,7 +43,10 @@ export const getOrderRequest =  (id) => async (dispatch) => {
 
 
 export const getAllOrdersRequest =  (page,pageSize,value) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Orders/Admin?page=${page}&pageSize=${pageSize}&status=${value}`)
+    const url = CallApis.API_URL.concat(`/Orders/Admin?page=${page}&pageSize=${pageSize}`)
+    if(value){
+        url = url.concat(`&status=${value}`)
+    }
     dispatch(backDropAction.setOpenBackDrop)
     await axios.get(url)
         .then(res => {
@@ -61,8 +64,8 @@ export const getAllOrdersRequest =  (page,pageSize,value) => async (dispatch) =>
     
 };
 
-export const confirmOder = (orderId) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Orders/Admin/ConfirmOrder?orderId=${orderId}`);
+export const confirmOder = (orderId,status) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Orders/Admin/ConfirmOrder?orderId=${orderId}&status=${status}`);
     dispatch(backDropAction.setOpenBackDrop)
     await axios.get(url).then(res =>  {  
         dispatch(backDropAction.setCloseBackDrop)

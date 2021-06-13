@@ -422,8 +422,8 @@ const PrimarySearchAppBar = (props) => {
                 <div
                   style={{
                     borderRadius:"5px",
-                    marginTop: "20px",
-                    height: "600px",
+                    marginTop: "10px",
+                    maxHeight:'600px',
                     display: `${opacity}`,
                     backgroundColor: "white",
                     overflow: "auto",
