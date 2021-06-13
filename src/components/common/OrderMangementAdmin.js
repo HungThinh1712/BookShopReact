@@ -161,11 +161,14 @@ const BasicTable = () => {
     handleClickOpen();
   };
   const hanldeTooltip = (row)=>{
-    return <span>{`Phí ship: ${row.shippingFee.toString()
-      .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
-
-    Giá bán: ${row.totalMoney.toString()
+    return <div style={{display:"flex",flexDirection:"column"}}>
+       <span>{`Phí ship: ${row.shippingFee.toString()
       .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}</span>
+      <span>{`Tổng tiền: ${row.totalMoney.toString()
+        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}</span>
+    </div>
+
+    
   }
   return (
     <TableContainer component={Paper}>

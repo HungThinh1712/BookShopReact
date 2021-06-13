@@ -9,6 +9,8 @@ import {useTranslation} from 'react-i18next'
 import Header from "../common/Header"
 import Footer from "../common/Footer";
 import { Button } from "@material-ui/core";
+import Cart from "../Images/cart.jpg"
+import NoCart from "../Images/Nocart.jpg"
 
 const OrderSuccessPage = (props) => {
     const { t } =  useTranslation();
@@ -85,7 +87,7 @@ const OrderSuccessPage = (props) => {
                 {errorCode==='0' || errorCode===undefined || errorCode===null ? <div className="col-md-12">
                     <div className="card">
                         <div className="card-body cart">
-                            <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
+                            <div className="col-sm-12 empty-cart-cls text-center"> <img src={Cart} alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
                                 <h3><strong>{t('Customer_Shopping_Payment.16')}</strong></h3>
                                 <h4>{t('Customer_Shopping_Payment.17')}</h4>
                                 <Button   style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}  onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</Button>
@@ -95,7 +97,7 @@ const OrderSuccessPage = (props) => {
                 </div>:<div className="col-md-12">
                     <div className="card">
                         <div className="card-body cart">
-                            <div className="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
+                            <div className="col-sm-12 empty-cart-cls text-center"> <img src={NoCart} alt="" width="130" height="130" className="img-fluid mb-4 mr-3" />
                                 <h3><strong>{t('Customer_Shopping_Payment.25')}</strong></h3>
                                 <Button   style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}  onClick={() => props.history.push('/')}>{t('Customer_Shopping_Payment.18')}</Button>
                             </div>
