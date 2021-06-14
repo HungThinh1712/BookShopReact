@@ -231,6 +231,14 @@ const PrimarySearchAppBar = (props) => {
         .catch((e) => console.log("Connection failed: ", e));
     }
   }, [connection, userId, dispatch]);
+  const [opacity, setOpacity] = useState("none");
+  const bellIconClick = () => {
+    if (userId !== null) {
+      dispatch(notificationActions.getNotificationsRequest(userId));
+    }
+    if (opacity === "none") setOpacity("");
+    else setOpacity("none");
+  };
 
   const sendMessage = async (id) => {
     try {
@@ -245,8 +253,10 @@ const PrimarySearchAppBar = (props) => {
       });
       if (userData.isAdmin === false) {
         props.history.push("/order_history");
+        setOpacity("none");
       } else if (userData.isAdmin === true) {
         props.history.push("/admin/ordermanagement_page");
+        setOpacity("none");
       }
     } catch (e) {
       console.log("Sending message failed.", e);
@@ -343,14 +353,7 @@ const PrimarySearchAppBar = (props) => {
     </Menu>
   );
 
-  const [opacity, setOpacity] = useState("none");
-  const bellIconClick = () => {
-    if (userId !== null) {
-      dispatch(notificationActions.getNotificationsRequest(userId));
-    }
-    if (opacity === "none") setOpacity("");
-    else setOpacity("none");
-  };
+  
   const handleClickHomePage = () => {
     console.log(userData);
     if (userData && userData.isAdmin === false) {

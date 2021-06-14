@@ -12,12 +12,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: {
       display: "flex",
       marginLeft: "20px",
-      marginTop: "20px",
     },
     [theme.breakpoints.down("lg")]: {
       display: "flex",
       marginLeft: "20px",
-      marginTop: "20px",
     },
     [theme.breakpoints.down("sm")]: {
       display: "flex",
@@ -74,7 +72,7 @@ const ItemInOrderDetails = (props) => {
     setOpen(true);
   }
   return (
-    <div style={{ border: "none" }}>
+    <div style={{ border: "none", background:'white',borderRadius:'5px'}}>
       <Dialog open={open} bookId={props.bookId} orderId ={props.orderId} userId= {props.userId} onClose={handleClose}/>
       <div className={classes.item}>
         <div
@@ -84,14 +82,12 @@ const ItemInOrderDetails = (props) => {
             display: "flex",
             alignContent: "center",
             justifyContent: "center",
-            marginBottom: "12px",
           }}
         >
           <img
-            className="card_image"
             src={props.imageSrc}
             alt="product "
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
+            style={{ maxWidth: "100%", maxHeight: "100%",padding:'5px' }}
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>

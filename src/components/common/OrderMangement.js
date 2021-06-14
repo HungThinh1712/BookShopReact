@@ -14,6 +14,11 @@ import * as CallApis from '../../constants/Apis'
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import {useTranslation} from 'react-i18next'
 import { Tag } from 'antd';
+import CancelIcon from "../Images/cancel.png";
+import Delivery from "../Images/Delivery.jpg"
+import Confirming from "../Images/Confirming.png"
+import Deliveried from "../Images/Deliveried.png"
+import Confirmed from "../Images/Confirmed.png"
 import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
@@ -41,6 +46,7 @@ const BasicTable =(props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [status,setStatus] = useState(0);
+  
   useEffect(()=>{
     dispatch(orderActions.getOrdersRequest(props.page,4,status));
   },[props.page,dispatch,status])
@@ -78,18 +84,44 @@ const BasicTable =(props) => {
               .catch(e => console.log('Connection failed: ', e));
       }
   }, [connection,dispatch,props.page]);
-  const showStatus = (status) => {
-    if(status==="Đang chờ xác nhận"){
 
-      return <Tag color="#87d068">{status}</Tag>
-    }
-    else{
-      return <Tag color="#108ee9" >{status}</Tag>
-    }
-  }
+  
   const handleTabChange =(key)=>{
     setStatus(key);
   }
+
+  const showStatus = (status) => {
+    if (status === 0) {
+      return (
+        <div>
+        <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Confirming}></img>
+        <span style={{fontWeight:"800"}}>Chờ xác nhận</span>
+      </div>
+      );
+    } else if (status === 1) {
+      return <div>
+      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Confirmed}></img>
+      <span style={{fontWeight:"800"}}>Đã xác nhận</span>
+    </div>;
+    } else if (status === 2) {
+      return <div>
+      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Delivery}></img>
+      <span style={{fontWeight:"800"}}>Đang giao hàng</span>
+    </div>;
+    } else if (status === 3) {
+      return <div>
+      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Deliveried}></img>
+      <span style={{fontWeight:"800"}}>Đã giao hàng</span>
+    </div>
+    } else {
+      return (
+        <div>
+          <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={CancelIcon}></img>
+          <span style={{fontWeight:"800"}}>Đã hủy</span>
+        </div>
+      );
+    }
+  };
   return (
     
     <Tabs defaultActiveKey="0" onChange={handleTabChange} >

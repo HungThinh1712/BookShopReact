@@ -6,7 +6,10 @@ import { useTranslation } from "react-i18next"
 import * as backDropAction from "../actions/backdropAction"
 
 export const getOrdersRequest =  (page,pageSize,status) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}&status=${status}`)
+    let url = CallApis.API_URL.concat(`/Orders?page=${page}&pageSize=${pageSize}`)
+    if(status){
+        url = url.concat(`&status=${status}`)
+    }
     dispatch(backDropAction.setOpenBackDrop)
 
     await axios.get(url)

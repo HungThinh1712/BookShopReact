@@ -16,7 +16,11 @@ import Pagination from "../common/Pagination";
 import * as CallApis from "../../constants/Apis";
 import Dialog from "../common/DialogDetailItemAdmin";
 import { useTranslation } from "react-i18next";
-
+import CancelIcon from "../Images/cancel.png";
+import Delivery from "../Images/Delivery.jpg"
+import Confirming from "../Images/Confirming.png"
+import Deliveried from "../Images/Deliveried.png"
+import Confirmed from "../Images/Confirmed.png"
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 1000,
@@ -28,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
   },
 
   confirm: {
-    backgroundColor:"#eaffd0",
-    border:"none !important",
-    color:'black',
+    backgroundColor: "#eaffd0",
+    border: "none !important",
+    color: "black",
     "&:hover": {
       backgroundColor: "#fce38a",
       cursor: "pointer",
-      color:"black"
+      color: "black",
     },
   },
   delivery: {
-    backgroundColor:"#fce38a",
-    border:"none !important",
-    color:'black',
+    backgroundColor: "#fce38a",
+    border: "none !important",
+    color: "black",
     "&:hover": {
       backgroundColor: "#f38181",
       cursor: "pointer",
-      color:"black"
+      color: "black",
     },
   },
 
@@ -130,20 +134,18 @@ const BasicTable = () => {
         userId: userId,
         orderCode: orderId,
         orderId: id,
-        type:"Confirm"
+        type: "Confirm",
       };
-    }
-    else if (status === 2) {
+    } else if (status === 2) {
       chatMessage = {
         title: "Shipper đang giao hàng",
         content: `Đơn hàng của bạn đã được nhận bởi Shipper. Mã đơn hàng: ${orderId}. Dự kiến giao hàng từ 3-5 ngày kể từ lúc nhận thông báo này.`,
         userId: userId,
         orderCode: orderId,
         orderId: id,
-        type:"Delivery"
+        type: "Delivery",
       };
-    }
-    else if (status === 4) {
+    } else if (status === 4) {
       chatMessage = {
         title: "Xác nhận đơn hàng",
         content: `Đơn hàng của bạn đã được xác nhận bởi quản trị viên. Mã đơn hàng: ${orderId}`,
@@ -152,7 +154,7 @@ const BasicTable = () => {
         orderId: id,
       };
     }
-  
+
     dispatch(orderActions.confirmOder(id, status));
 
     try {
@@ -175,7 +177,7 @@ const BasicTable = () => {
         <Button
           type="primary"
           size="small"
-          onClick={() => sendMessage(row.userId, row.id, row.orderId,1)}
+          onClick={() => sendMessage(row.userId, row.id, row.orderId, 1)}
           className={classes.confirm}
         >
           Xác nhận
@@ -184,13 +186,17 @@ const BasicTable = () => {
     }
     if (row.status === 1) {
       return (
-        <Button           size="small"
-        onClick={() => sendMessage(row.userId, row.id, row.orderId,2)} type="primary" className={classes.delivery}>
+        <Button
+          size="small"
+          onClick={() => sendMessage(row.userId, row.id, row.orderId, 2)}
+          type="primary"
+          className={classes.delivery}
+        >
           Giao hàng
         </Button>
       );
     }
-    if (row.status === 2 || row.status ==3 || row.status ==4) {
+    if (row.status === 2 || row.status == 3 || row.status == 4) {
       return <Tag color="#ff8419">Không thể hủy</Tag>;
     }
   };
@@ -226,15 +232,34 @@ const BasicTable = () => {
   };
   const showStatus = (status) => {
     if (status === 0) {
-      return <Tag style={{backgroundColor:"#95e1d3"}}>Đang chờ xác nhận</Tag>;
+      return (
+        <div>
+        <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Confirming}></img>
+        <span style={{fontWeight:"800"}}>Chờ xác nhận</span>
+      </div>
+      );
     } else if (status === 1) {
-      return <Tag style={{backgroundColor:"#eaffd0"}} >Đã xác nhận</Tag>
+      return <div>
+      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Confirmed}></img>
+      <span style={{fontWeight:"800"}}>Đã xác nhận</span>
+    </div>;
     } else if (status === 2) {
-      return <Tag style={{backgroundColor:"#fce38a"}}>Đang giao hàng</Tag>;
+      return <div>
+      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Delivery}></img>
+      <span style={{fontWeight:"800"}}>Đang giao hàng</span>
+    </div>;
     } else if (status === 3) {
-      return <Tag style={{backgroundColor:"#f38181"}}>Đã giao hàng</Tag>;
+      return <div>
+      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Deliveried}></img>
+      <span style={{fontWeight:"800"}}>Đã giao hàng</span>
+    </div>
     } else {
-      return <Tag style={{backgroundColor:"#f55"}}>Đã hủy</Tag>;
+      return (
+        <div>
+          <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={CancelIcon}></img>
+          <span style={{fontWeight:"800"}}>Đã hủy</span>
+        </div>
+      );
     }
   };
   return (
@@ -264,10 +289,10 @@ const BasicTable = () => {
             <TableCell className={classes.header} style={{ width: "100px" }}>
               {t("Admin_Other.10")}
             </TableCell>
-            <TableCell className={classes.header} style={{ width: "200px" }}>
+            <TableCell className={classes.header} style={{ width: "500px" }}>
               Trạng thái
             </TableCell>
-            <TableCell className={classes.header} style={{ width: "150px" }}>
+            <TableCell className={classes.header} style={{ width: "50px" }}>
               {t("Admin_Other.11")}
             </TableCell>
           </TableRow>
@@ -284,14 +309,14 @@ const BasicTable = () => {
                 {row.orderId}
               </TableCell>
               <TableCell style={{ width: "250px" }}>{row.createAt}</TableCell>
-              <TableCell style={{ width: "250px" }}>
+              <TableCell style={{ width: "300px" }}>
                 {row.description}
               </TableCell>
               <TableCell style={{ width: "150px" }}>{row.userName}</TableCell>
               <TableCell style={{ width: "200px" }}>
                 {row.phoneNumber}
               </TableCell>
-              <TableCell style={{ width: "350px" }}>
+              <TableCell style={{ width: "300px" }}>
                 {row.userAddress}
               </TableCell>
               <TableCell style={{ width: "100px" }}>
@@ -306,10 +331,10 @@ const BasicTable = () => {
                   đ
                 </Tooltip>
               </TableCell>
-              <TableCell style={{ width: "200px" }}>
+              <TableCell style={{ width: "500" }}>
                 {showStatus(row.status)}
               </TableCell>
-              <TableCell style={{ width: "200px" }}>
+              <TableCell style={{ width: "50px" }}>
                 {showActions(row)}
               </TableCell>
             </TableRow>

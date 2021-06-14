@@ -15,15 +15,15 @@ const useStyles = makeStyles((theme) => ({
     container: {
       [theme.breakpoints.up('sm')]: {
         marginLeft: '0px',
-        marginTop: '80px'
+        paddingTop: '80px'
       },
       [theme.breakpoints.up('lg')]: {
         marginLeft: '87px',
-        marginTop: '120px'
+        paddingTop: '120px'
       },
       [theme.breakpoints.down('xs')]: {
         marginLeft: '0px',
-        marginTop: '80px'
+        paddingTop: '80px'
       },
     
     },
@@ -77,15 +77,15 @@ const OrderDetailPage = (props) => {
     </div>
   )
     return (
-        <div  >
+        <div   >
         <div >
-          <Header />
+          <Header style={{backgroundColor:"#EDECE7"}} />
           <div className={`${classes.container}`} >
             <div className="row">
             <Nav imgSrc={userData.imgSrc} className={classes.nav} name={userData.fullName} props={props} />
               <div className="col-xs-7 col-sm-8 " >
                 <p style={{ fontSize: '25px', fontWeight: 500, marginTop: "-7px" }}>{t('Admin_Other.4')}</p>
-                {showItemsInOrder}
+                <div style={{background:'white',borderRadius:'5px'}}>{showItemsInOrder}</div>
               </div>              
             </div>
           </div>
