@@ -3,8 +3,8 @@ import axios from 'axios'
 import * as CallApis from './../constants/Apis'
 
 
-export const getNotificationsRequest =  (userId) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Notification?userId=${userId}`)
+export const getNotificationsRequest =  () => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Notification`)
     await axios.get(url)
         .then(res => {
             dispatch({

@@ -53,10 +53,8 @@ export const addToCartofCurrentUser = (shoppingCartData) => async (dispatch) => 
 export const getCartByUserIdRequest = () => async (dispatch) => {
 
     const url = CallApis.API_URL.concat(`/ShoppingCarts/Get`)
-    dispatch(backdropAction.setOpenBackDrop)
     await axios.get(url)
         .then(res => {
-            dispatch(backdropAction.setCloseBackDrop)
             dispatch({
                 type: Types.GET_CART_BY_USER_ID,  //this call test dispatch. to dispsatch to our reducer
                 items: res.data
@@ -90,13 +88,13 @@ export const deleteIntemInCartofCurrentUser = (bookId) => async (dispatch) => {
         
 };
 
-export const payForCart = (paymentType,totalMoney,shippingFee) => async (dispatch) => {
-    dispatch(backdropAction.setOpenBackDrop)
+export const payForCart = (paymentType,totalMoney,shippingFee,sendMessage) => async (dispatch) => {
+
     const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart?paymentType=${paymentType}&totalMoney=${totalMoney}&shippingFee=${shippingFee}`)
     await axios.get(url).then(res =>  {  
-        dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200 ) {
             dispatch(getCartByUserIdRequest())
+            sendMessage(res.data.orderId);
         } else {
            
         }
@@ -170,13 +168,11 @@ export const updateAmountBookCurrentUser_Server = (bookId,amount) => async (disp
 
 export const payWithMomo = (money) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/ShoppingCarts/PayByMomo?totalMoney=${money}`)
-    dispatch(backdropAction.setOpenBackDrop)
     await axios({
         
         method: 'get',
         url: url,
       }).then(res =>  {  
-        dispatch(backdropAction.setCloseBackDrop)
         if (res.status===200 ) {
             window.open(res.data,"_self")
         } else {

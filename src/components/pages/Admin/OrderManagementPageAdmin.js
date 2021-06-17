@@ -47,11 +47,12 @@ const OrderManagementPageAdmin = (props) => {
     const { t } = useTranslation();
     return (
         <div>
+            <SideBarAdminPage />
             <div id="wrapper">
                 <Header notShow="notShow" />
 
-                <SideBarAdminPage />
-                <div id="content-wrapper" style={{ marginTop: '100px', marginLeft: '250px' }}>
+                
+                <div  style={{ marginTop: '100px', marginLeft: '250px' }}>
                     <div className="container-fluid">
                     <BreadCrumb 
                         breadcrumb={t('Admin_Home_BreadCrumbs.19')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/ordermanagement_page")}>
@@ -66,9 +67,6 @@ const OrderManagementPageAdmin = (props) => {
                                         </div>
                                     </div>
                                     <div className="container">
-                                        <div className="row" style={{marginBottom:"10px"}}>
-                                            {CheckBox()}
-                                        </div>
                                         <div className="row">
                                             <OrderManagementAdmin />
                                         </div>

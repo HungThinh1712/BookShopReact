@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import ButtonMaterial from "@material-ui/core/Button";
-import AddressInputForm from "./AddressInputForm";
 import { useSelector, useDispatch } from "react-redux";
-import Zoom from "react-reveal/Zoom";
 import * as cartActions from "../../actions/cartAction";
 import { useTranslation } from "react-i18next";
 import { Modal, Button, Input, Spin } from "antd";
+import { toastMessage } from "./ToastHelper";
 import PlacesAutocomplete, {
   geocodeByAddress,
   geocodeByPlaceId,
   getLatLng,
 } from "react-places-autocomplete";
-
+import * as authActions from "./../../actions/authAction";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -66,19 +65,35 @@ const HeaderinPayment = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [hideAddressForm, setHideAdressForm] = useState("none");
+  const [tempAddress,setTempAddress] = useState("");
   const userData = useSelector((state) =>
     state.auth.userData ? state.auth.userData : null
   );
-  const fullName = useSelector((state) =>
-    state.auth.userData && state.auth.userData.fullName
-      ? state.auth.userData.fullName
-      : null
+  const [name, setName] = useState(
+    useSelector((state) =>
+      state.auth.userData && state.auth.userData.fullName
+        ? state.auth.userData.fullName
+        : null
+    )
   );
+  const [ward,setWard] = useState("")
+  const [province,setProvince] = useState("")
+  const [district,setDistrict] =useState("")
+  const [phone, setPhone] = useState(
+    useSelector((state) =>
+      state.auth.userData && state.auth.userData.phone
+        ? state.auth.userData.phone
+        : null
+    )
+  );
+  
   const specificAddress = useSelector((state) =>
     state.auth.userData && state.auth.userData.specificAddress
       ? state.auth.userData.specificAddress
       : null
   );
+
+
   const id = useSelector((state) =>
     state.auth.userData && state.auth.userData.id
       ? state.auth.userData.id
@@ -99,15 +114,62 @@ const HeaderinPayment = (props) => {
   const handlePaymentClick = () => {
     dispatch(cartActions.updateBookAmount(props.history));
   };
-  const [address, setAddress] = useState("");
-  const handleSelect = async (value) => {};
+  const [address, setAddress] = useState(specificAddress);
+  const handleSelect = (value) => {
+    setTempAddress(value);
+    const arr = value.split(",")
+    setAddress(arr[0]);
+    setWard(arr[1] ? arr[1] : "");
+    setDistrict(arr[2] ? arr[2] : "")
+    setProvince(arr[3] ? arr[3] : "");
+
+    //setAddress(value);
+  };
+  
+  useEffect(()=>{
+    const arrAddress = specificAddress.split(",")
+  setAddress(arrAddress[0]);
+  setWard(arrAddress[1] ? arrAddress[1] : "");
+  setDistrict(arrAddress[2] ? arrAddress[2] : "")
+  setProvince(arrAddress[3] ? arrAddress[3] : "");
+  },[])
+
+  const handleNameInputChange = (e) => {
+    setName(e.target.value);
+  };
+  const handlePhoneInputChange = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    if (phone === "" || !phone) {
+      toastMessage("Vui lòng nhập số điện thoại");
+    } else if (name === "" || !name) {
+      toastMessage("Vui lòng nhập họ tên");
+    } else if (address === "" || !address) {
+      toastMessage("Vui lòng nhập đỉa chỉ");
+    } else {
+      const userAddress = {
+        id,
+        name,
+        phone,
+        tempAddress,
+      };
+      dispatch(
+        authActions.updateAddressOfCurrentUser(userAddress, props.history, "1")
+      );
+      setVisible(false);
+    }
+  };
   return (
     <div>
       <Modal
         title="Cập nhật địa chỉ"
         visible={visible}
-        onOk={hidenModal}
+        onOk={handleSubmit}
         onCancel={hidenModal}
+        style={{top:30}}
+        width={500}
         okText="Cập nhật"
         cancelText="Hủy"
       >
@@ -116,7 +178,7 @@ const HeaderinPayment = (props) => {
           onChange={setAddress}
           onSelect={handleSelect}
           shouldFetchSuggestions={address.length > 3}
-          debounce = {1000}
+          debounce={1000}
         >
           {({
             getInputProps,
@@ -124,8 +186,37 @@ const HeaderinPayment = (props) => {
             getSuggestionItemProps,
             loading,
           }) => (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignContent: "space-between",
+              }}
+            >
+              <label style={{ fontSize: "12px", fontWeight: "600" }}>
+                Họ và tên
+              </label>
               <Input
+                onChange={handleNameInputChange}
+                value={name}
+                placeholder="Nhập họ tên"
+                style={{ marginBottom: "10px", borderRadius: "5px" }}
+              ></Input>
+              <label style={{ fontSize: "12px", fontWeight: "600" }}>
+                Số điện thoại
+              </label>
+              <Input
+                onChange={handlePhoneInputChange}
+                value={phone}
+                style={{ marginBottom: "10px", borderRadius: "5px" }}
+                placeholder="Nhập số điện thoại"
+              ></Input>
+              <label style={{ fontSize: "12px", fontWeight: "600" }}>
+                Địa chỉ
+              </label>
+              <Input
+                style={{ borderRadius: "5px", marginBottom: "10px" }}
                 {...getInputProps({ placeholder: "Nhập địa chỉ" })}
               ></Input>
               <div>
@@ -133,10 +224,43 @@ const HeaderinPayment = (props) => {
                 {suggestions.map((suggestion) => {
                   const style = {
                     backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                    cursor: "pointer",
                   };
-                  return <div {...getSuggestionItemProps(suggestion,{style})}>{suggestion.description}</div>;
+                  return (
+                    <div
+                      style={{ marginTop: "10px" }}
+                      {...getSuggestionItemProps(suggestion, { style })}
+                    >
+                      {suggestion.description}
+                    </div>
+                  );
                 })}
               </div>
+              <label style={{ fontSize: "12px", fontWeight: "600" }}>
+                Xã/ Phường
+              </label>
+              <Input
+                value={ward}
+                style={{ marginBottom: "10px", borderRadius: "5px" }}
+                placeholder="Nhập số điện thoại"
+              ></Input>
+               <label style={{ fontSize: "12px", fontWeight: "600" }}>
+                Quận/ Huyện
+              </label>
+              <Input
+                value={district}
+                style={{ marginBottom: "10px", borderRadius: "5px" }}
+                placeholder="Nhập số điện thoại"
+              ></Input>
+              <label style={{ fontSize: "12px", fontWeight: "600" }}>
+                Tỉnh/ Thành phố
+              </label>
+              <Input
+                value={province}
+                style={{ marginBottom: "10px", borderRadius: "5px" }}
+                placeholder="Nhập số điện thoại"
+              ></Input>
+
             </div>
           )}
         </PlacesAutocomplete>
@@ -169,9 +293,7 @@ const HeaderinPayment = (props) => {
                 {userData.fullName}
               </div>
               <div style={{ fontSize: "14px", fontWeight: "500" }}>
-                {t("Customer_Shopping_Payment.6")}: {userData.specificAddress},{" "}
-                {userData.wardName}, {userData.districtName},{" "}
-                {userData.provinceName}
+                {t("Customer_Shopping_Payment.6")}: {userData.specificAddress}
               </div>
               <div style={{ display: "flex" }}>
                 <div
@@ -249,16 +371,17 @@ const HeaderinPayment = (props) => {
                 }}
               >
                 <Button
-                  size="small"
+                  size="medium"
                   style={{
                     marginRight: "10px",
                     backgroundColor: "#8ba889",
-                    fontWeight: "700",
+                    fontWeight: "600",
                     color: "white",
+                    borderRadius: "5px",
                   }}
-                  onClick={handleOpenAddressFormClick}
+                  onClick={() => setVisible(true)}
                 >
-                  {t("Customer_Shopping_Payment.22")}
+                  Cập nhật đỉa chỉ giao hàng
                 </Button>
               </div>
             </div>
@@ -266,7 +389,7 @@ const HeaderinPayment = (props) => {
         </div>
       )}
       <div style={{ display: `${hideAddressForm}` }}>
-        <Zoom>
+        {/* <Zoom>
           <AddressInputForm
             display={hideAddressForm}
             onClick={(hideAddressForm) =>
@@ -282,7 +405,7 @@ const HeaderinPayment = (props) => {
             props={props}
             tag="1"
           />
-        </Zoom>
+        </Zoom> */}
       </div>
     </div>
   );

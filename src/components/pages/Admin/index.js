@@ -7,11 +7,11 @@ import {withRouter} from 'react-router-dom'
 
 const index = (props) => {
     return (
-        <div>
-            <div id="wrapper">
+        <div style={{backgroundColor:"#EDECE7"}}>
+            <div style={{backgroundColor:"#EDECE7"}} id="wrapper">
                 <Header notShow="notShow"/>
                 <SideBarAdminPage/>
-                <div id="content-wrapper"  style={{with:'100%',marginTop:'93px', marginRight:'20px', marginLeft:'250px'}}>
+                <div id="content-wrapper"  style={{width:'100%',height:"100%" ,marginTop:'93px', marginRight:'20px', marginLeft:'250px'}}>
                     <HomeAdmin></HomeAdmin>
                 </div>
             </div>

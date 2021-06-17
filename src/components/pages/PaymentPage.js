@@ -142,9 +142,7 @@ const PaymentPage = (props) => {
                 {userData.fullName}
               </div>
               <div style={{ fontSize: "13px", fontWeight: "500" }}>
-                {t("Customer_Shopping_Payment.6")}: {userData.specificAddress},{" "}
-                {userData.wardName}, {userData.districtName},{" "}
-                {userData.provinceName}
+                {t("Customer_Shopping_Payment.6")}: {userData.specificAddress}
               </div>
               <div style={{ display: "flex" }}>
                 <div

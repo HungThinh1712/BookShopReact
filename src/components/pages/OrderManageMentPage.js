@@ -59,20 +59,20 @@ const OrderManageMentPage = (props) => {
           ></BreadCrumb>
         </div>
         <div className={`${classes.container}`}>
-          <div className="row">
+          <div style={{display:'flex'}}>
             <Nav
               imgSrc={userData.imgUrl}
               className={classes.nav}
               name={userData.fullName}
               props={props}
             />
-            <div className="col-xs-7 col-sm-8 ">
+            <div className="col-xs-7 col-sm-9 ">
               <p
                 style={{ fontSize: "25px", fontWeight: 500, marginTop: "7px" }}
               >
                 {t("Customer_BreadCrumbs.3")}
               </p>
-              <OrderManageMent page={page} />
+              <OrderManageMent page={page} setPage={setPage} />
               {total > 4 ? (
                 <div
                   style={{

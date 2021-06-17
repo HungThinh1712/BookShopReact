@@ -105,7 +105,7 @@ const ProfileUserPage = (props) => {
               </BreadCrumb>
             </div>
             <div className = {`${classes.container}`} >
-                <div className = "row">
+                <div style={{display:'flex'}}>
                     <Nav imgSrc={userData ? userData.imgUrl : ''} className={classes.nav} name={name} props={props}/>
                     <div className="col-xs-7 col-sm-8 " >
                         <div style={{borderRadius:"5px"}} className="profile-content">

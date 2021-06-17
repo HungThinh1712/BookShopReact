@@ -11,32 +11,50 @@ import { useSelector, useDispatch } from "react-redux";
 import * as orderActions from "../../actions/orderAction";
 import { withRouter } from "react-router-dom";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import { Button, Tag, Tooltip } from "antd";
+import { Modal } from "antd";
+import { Tag, Tooltip } from "antd";
+import Button from "@material-ui/core/Button";
 import Pagination from "../common/Pagination";
 import * as CallApis from "../../constants/Apis";
 import Dialog from "../common/DialogDetailItemAdmin";
 import { useTranslation } from "react-i18next";
 import CancelIcon from "../Images/cancel.png";
-import Delivery from "../Images/Delivery.jpg"
-import Confirming from "../Images/Confirming.png"
-import Deliveried from "../Images/Deliveried.png"
-import Confirmed from "../Images/Confirmed.png"
+import Delivery from "../Images/Delivery.jpg";
+import Confirming from "../Images/Confirming.png";
+import Deliveried from "../Images/Deliveried.png";
+import Confirmed from "../Images/Confirmed.png";
+import { Tabs } from "antd";
+import { Input } from "antd";
+
+const { TextArea } = Input;
+const { TabPane } = Tabs;
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 1000,
-    marginLeft: "0px !important",
-    marginRight: "0px",
+    border: "solid",
+    borderWidth: "2px",
   },
   header: {
-    fontWeight: 900,
+    fontWeight: 600,
   },
 
   confirm: {
-    backgroundColor: "#eaffd0",
+    backgroundColor: "#fce38a",
     border: "none !important",
     color: "black",
     "&:hover": {
-      backgroundColor: "#fce38a",
+      backgroundColor: "#f3819",
+      cursor: "pointer",
+      color: "black",
+    },
+  },
+  cancelButton: {
+    backgroundColor: "#f38181",
+    border: "none !important",
+    color: "black",
+    "&:hover": {
+      backgroundColor: "#f3819",
       cursor: "pointer",
       color: "black",
     },
@@ -82,48 +100,49 @@ const BasicTable = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+  const [statusKey, setStatusKey] = useState(0);
 
   const total = useSelector((state) =>
     state.order.orders.total ? state.order.orders.total : 0
   );
   const paging = total % 10 === 0 ? total / 10 : Math.floor(total / 10) + 1;
   useEffect(() => {
-    dispatch(orderActions.getAllOrdersRequest(page, 10));
-  }, [dispatch, page]);
+    dispatch(orderActions.getAllOrdersRequest(page, 10, statusKey));
+  }, [dispatch, page, statusKey]);
+
+  const handleTabChange = (key) => {
+    setStatusKey(key);
+    setPage(1);
+  };
 
   const rows = useSelector((state) =>
     state.order.orders.entities ? state.order.orders.entities : []
   );
-  // const handelRowClick = (row) =>{
 
-  //   props.history.push('/order_details', {itemsInOrder:row.items})
-  // }
-  const [connection, setConnection] = useState(null);
+  //Cancel
+  const [reason, setReason] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+  const [userId,setUserId] = useState(null);
+  const [orderCode, setOrderCode] = useState(null);
 
-  useEffect(() => {
-    const url = CallApis.API_URL.concat(`/hubs/notification`);
-    const newConnection = new HubConnectionBuilder()
-      .withUrl(url)
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(newConnection);
-  }, []);
-
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then((result) => {
-          connection.on("ReceiveMessage", (message) => {
-            if (message != null) {
-              dispatch(orderActions.getAllOrdersRequest(page, 10));
-            }
-          });
-        })
-        .catch((e) => console.log("Connection failed: ", e));
-    }
-  }, [dispatch, connection, page]);
+  const handleResonChange = (e) => {
+    setReason(e.target.value);
+  };
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleCancelOrderClick = (row) => {
+    setModalVisible(true);
+    setOrderId(row.id);
+    setOrderCode(row.orderId);
+    setUserId(row.userId)
+  };
+  const handleOkClick = async () => {
+    await dispatch(orderActions.cancelOder(orderId, reason));
+    setModalVisible(false);
+    setPage(1);
+    await dispatch(orderActions.getOrdersRequest(page, 4, 0));
+    sendMessage(userId,orderId,orderCode,4);
+  };
+ 
 
   const sendMessage = async (userId, id, orderId, status) => {
     let chatMessage = null;
@@ -145,17 +164,25 @@ const BasicTable = () => {
         orderId: id,
         type: "Delivery",
       };
-    } else if (status === 4) {
+    } else if (status === 3) {
       chatMessage = {
-        title: "Xác nhận đơn hàng",
-        content: `Đơn hàng của bạn đã được xác nhận bởi quản trị viên. Mã đơn hàng: ${orderId}`,
+        title: "Đã giao hàng",
+        content: `Đơn hàng của bạn đã được giao. Mã đơn hàng: ${orderId}. Bạn vui lòng xác nhận nhận hàng nếu sản phẩm đúng như mong muốn của bạn. Hệ thống sẽ tự cập nhật trạng thái đơn hàng sau 2 ngày kể từ lúc nhận thông báo này.`,
         userId: userId,
         orderCode: orderId,
         orderId: id,
+        type: "ConfirmDelivery",
+      };
+    } else if (status === 4) {
+      chatMessage = {
+        title: "Hủy đơn hàng",
+        content: `Đơn hàng của bạn bị hủy bởi quản trị viên. Mã đơn hàng: ${orderId}. Lí do: ${reason}`,
+        userId: userId,
+        orderCode: orderId,
+        orderId: id,
+        type:"Cancel"
       };
     }
-
-    dispatch(orderActions.confirmOder(id, status));
 
     try {
       const url = CallApis.API_URL.concat(`/Notification/messages`);
@@ -166,42 +193,15 @@ const BasicTable = () => {
           "Content-Type": "application/json",
         },
       });
+      if(status!==4)
+        {
+          await dispatch(orderActions.confirmOder(id, status));
+        }
+      await dispatch(orderActions.getAllOrdersRequest(page, 10, statusKey));
     } catch (e) {
       console.log("Sending message failed.", e);
     }
   };
-
-  const showActions = (row) => {
-    if (row.status === 0) {
-      return (
-        <Button
-          type="primary"
-          size="small"
-          onClick={() => sendMessage(row.userId, row.id, row.orderId, 1)}
-          className={classes.confirm}
-        >
-          Xác nhận
-        </Button>
-      );
-    }
-    if (row.status === 1) {
-      return (
-        <Button
-          size="small"
-          onClick={() => sendMessage(row.userId, row.id, row.orderId, 2)}
-          type="primary"
-          className={classes.delivery}
-        >
-          Giao hàng
-        </Button>
-      );
-    }
-    if (row.status === 2 || row.status == 3 || row.status == 4) {
-      return <Tag color="#ff8419">Không thể hủy</Tag>;
-    }
-  };
-
-  //Dialog
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = (value) => {
@@ -230,124 +230,729 @@ const BasicTable = () => {
       </div>
     );
   };
-  const showStatus = (status) => {
-    if (status === 0) {
+
+  const showConfirmStatus = (row) => {
+    if (row.confirmStatus === 0) {
       return (
-        <div>
-        <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Confirming}></img>
-        <span style={{fontWeight:"800"}}>Chờ xác nhận</span>
-      </div>
+        <Button
+          variant="contained"
+          style={{ fontWeight: "600" }}
+          size="small"
+          onClick={() => sendMessage(row.userId, row.id, row.orderId, 3)}
+          className={classes.delivery}
+        >
+          Xác nhận giao hàng
+        </Button>
       );
-    } else if (status === 1) {
-      return <div>
-      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Confirmed}></img>
-      <span style={{fontWeight:"800"}}>Đã xác nhận</span>
-    </div>;
-    } else if (status === 2) {
-      return <div>
-      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Delivery}></img>
-      <span style={{fontWeight:"800"}}>Đang giao hàng</span>
-    </div>;
-    } else if (status === 3) {
-      return <div>
-      <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={Deliveried}></img>
-      <span style={{fontWeight:"800"}}>Đã giao hàng</span>
-    </div>
-    } else {
+    } else if (row.confirmStatus === 1) {
       return (
-        <div>
-          <img style={{width:'40px',height:"30px",marginRight:"5px"}} src={CancelIcon}></img>
-          <span style={{fontWeight:"800"}}>Đã hủy</span>
-        </div>
+        <Tag style={{ backgroundColor: "#fce38a", color: "black" }}>
+          Shipper đã giao hàng
+        </Tag>
       );
     }
   };
-  return (
-    <TableContainer component={Paper}>
-      <Dialog open={open} onClose={handleClose} items={items}></Dialog>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow style={{ height: "80px", fontWeight: "600" }}>
-            <TableCell className={classes.header} style={{ width: "120px" }}>
-              {t("Admin_Other.5")}
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "250px" }}>
-              {t("Admin_Other.6")}
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "250px" }}>
-              {t("Admin_Other.7")}
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "280px" }}>
-              {t("Admin_Other.9")}
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "200px" }}>
-              Số điện thoại
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "300px" }}>
-              Địa chỉ giao hàng
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "100px" }}>
-              {t("Admin_Other.10")}
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "500px" }}>
-              Trạng thái
-            </TableCell>
-            <TableCell className={classes.header} style={{ width: "50px" }}>
-              {t("Admin_Other.11")}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <TableRow
-              onDoubleClick={() => handelRowClick(row)}
-              style={{ height: "80px" }}
-              className={classes.row}
-              key={index}
-            >
-              <TableCell component="th" scope="row" style={{ width: "120px" }}>
-                {row.orderId}
-              </TableCell>
-              <TableCell style={{ width: "250px" }}>{row.createAt}</TableCell>
-              <TableCell style={{ width: "300px" }}>
-                {row.description}
-              </TableCell>
-              <TableCell style={{ width: "150px" }}>{row.userName}</TableCell>
-              <TableCell style={{ width: "200px" }}>
-                {row.phoneNumber}
-              </TableCell>
-              <TableCell style={{ width: "300px" }}>
-                {row.userAddress}
-              </TableCell>
-              <TableCell style={{ width: "100px" }}>
-                <Tooltip
-                  style={{ fontSize: "10px" }}
-                  title={() => hanldeTooltip(row)}
-                  size="small"
-                >
-                  {(row.totalMoney + row.shippingFee)
-                    .toString()
-                    .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
-                  đ
-                </Tooltip>
-              </TableCell>
-              <TableCell style={{ width: "500" }}>
-                {showStatus(row.status)}
-              </TableCell>
-              <TableCell style={{ width: "50px" }}>
-                {showActions(row)}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
 
-      {total > 10 ? (
-        <div className={classes.pagination} style={{ marginTop: "10px" }}>
-          <Pagination total={paging} onChange={handlePageChange} page={page} />
-        </div>
-      ) : null}
-    </TableContainer>
+  return (
+    <div>
+       <Modal
+        title="Hủy đơn hàng"
+        visible={modalVisible}
+        style={{ top: 100 }}
+        onOk={() => handleOkClick()}
+        onCancel={() => setModalVisible(false)}
+        okText="Xác nhận"
+        cancelText="Thoát"
+      >
+        <label style={{ fontSize: "12px", fontWeight: "600" }}>Lý do hủy</label>
+        <TextArea value={reason} onChange={handleResonChange} rows={4} />
+      </Modal>
+      <Dialog open={open} onClose={handleClose} items={items}></Dialog>
+      <Tabs defaultActiveKey="0" onChange={handleTabChange}>
+        <TabPane tab="Đang chờ xác nhận" key="0">
+          <TableContainer component={Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow
+                  style={{
+                    height: "80px",
+                    borderBottomStyle: "solid !important",
+                  }}
+                >
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "120px" }}
+                  >
+                    {t("Admin_Other.5")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    {t("Admin_Other.6")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    {t("Admin_Other.7")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    {t("Admin_Other.9")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Số điện thoại
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Địa chỉ giao hàng
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "100px" }}
+                  >
+                    {t("Admin_Other.10")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Trạng thái
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "50px" }}
+                  >
+                    {t("Admin_Other.11")}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    onDoubleClick={() => handelRowClick(row)}
+                    style={{ height: "80px" }}
+                    hover
+                    key={index}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ width: "120px" }}
+                    >
+                      {row.orderId}
+                    </TableCell>
+                    <TableCell style={{ width: "250px" }}>
+                      {row.createAt}
+                    </TableCell>
+                    <TableCell style={{ width: "300px" }}>
+                      {row.description}
+                    </TableCell>
+                    <TableCell style={{ width: "150px" }}>
+                      {row.userName}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.phoneNumber}
+                    </TableCell>
+                    <TableCell style={{ width: "400px" }}>
+                      {row.userAddress}
+                    </TableCell>
+                    <TableCell style={{ width: "100px" }}>
+                      <Tooltip
+                        style={{ fontSize: "10px" }}
+                        title={() => hanldeTooltip(row)}
+                        size="small"
+                      >
+                        {(row.totalMoney + row.shippingFee)
+                          .toString()
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                        đ
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell style={{ width: "350px" }}>
+                      <div>
+                        <img
+                          style={{
+                            width: "40px",
+                            height: "30px",
+                            marginRight: "5px",
+                          }}
+                          src={Confirming}
+                        ></img>
+                        <span style={{ fontWeight: "800" }}>Chờ xác nhận</span>
+                      </div>
+                    </TableCell>
+                    <TableCell style={{ width: "300px" }}>
+                     <div style={{display:'flex'}}>
+                     <Button
+                        variant="contained"
+                        style={{ fontWeight: "600",marginRight:'10px' }}
+                        size="small"
+                        onClick={() =>
+                          sendMessage(row.userId, row.id, row.orderId, 1)
+                        }
+                        className={classes.confirm}
+                      >
+                        Xác nhận
+                      </Button>
+                      <Button
+                        variant="contained"
+                        style={{ fontWeight: "600" }}
+                        size="small"
+                        onClick={()=>handleCancelOrderClick(row)}
+                        className={classes.cancelButton}
+                      >
+                        Hủy
+                      </Button>
+                     </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
+            {total > 10 ? (
+              <div className={classes.pagination} style={{ marginTop: "10px" }}>
+                <Pagination
+                  total={paging}
+                  onChange={handlePageChange}
+                  page={page}
+                />
+              </div>
+            ) : null}
+          </TableContainer>
+        </TabPane>
+        <TabPane tab="Đã xác nhận" key="1">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow style={{ height: "80px", fontWeight: "600" }}>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "120px" }}
+                  >
+                    {t("Admin_Other.5")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "250px" }}
+                  >
+                    {t("Admin_Other.6")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "250px" }}
+                  >
+                    {t("Admin_Other.7")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "280px" }}
+                  >
+                    {t("Admin_Other.9")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Số điện thoại
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "300px" }}
+                  >
+                    Địa chỉ giao hàng
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "100px" }}
+                  >
+                    {t("Admin_Other.10")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "500px" }}
+                  >
+                    Trạng thái
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    {t("Admin_Other.11")}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    onDoubleClick={() => handelRowClick(row)}
+                    style={{ height: "80px" }}
+                    hover
+                    key={index}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ width: "120px" }}
+                    >
+                      {row.orderId}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.createAt}
+                    </TableCell>
+                    <TableCell style={{ width: "300px" }}>
+                      {row.description}
+                    </TableCell>
+                    <TableCell style={{ width: "150px" }}>
+                      {row.userName}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.phoneNumber}
+                    </TableCell>
+                    <TableCell style={{ width: "400px" }}>
+                      {row.userAddress}
+                    </TableCell>
+                    <TableCell style={{ width: "100px" }}>
+                      <Tooltip
+                        style={{ fontSize: "10px" }}
+                        title={() => hanldeTooltip(row)}
+                        size="small"
+                      >
+                        {(row.totalMoney + row.shippingFee)
+                          .toString()
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                        đ
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      <div>
+                        <img
+                          style={{
+                            width: "40px",
+                            height: "30px",
+                            marginRight: "5px",
+                          }}
+                          src={Confirmed}
+                        ></img>
+                        <span style={{ fontWeight: "800" }}>Đã xác nhận</span>
+                      </div>
+                    </TableCell>
+                    <TableCell style={{ width: "250px" }}>
+                      <Button
+                        variant="contained"
+                        style={{ fontWeight: "600" }}
+                        size="small"
+                        onClick={() =>
+                          sendMessage(row.userId, row.id, row.orderId, 2)
+                        }
+                        className={classes.delivery}
+                      >
+                        Giao hàng
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
+            {total > 10 ? (
+              <div className={classes.pagination} style={{ marginTop: "10px" }}>
+                <Pagination
+                  total={paging}
+                  onChange={handlePageChange}
+                  page={page}
+                />
+              </div>
+            ) : null}
+          </TableContainer>
+        </TabPane>
+        <TabPane tab="Đang giao hàng" key="2">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow style={{ height: "80px", fontWeight: "600" }}>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "120px" }}
+                  >
+                    {t("Admin_Other.5")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    {t("Admin_Other.7")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    {t("Admin_Other.9")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Số điện thoại
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "300px" }}
+                  >
+                    Địa chỉ giao hàng
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "100px" }}
+                  >
+                    {t("Admin_Other.10")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Trạng thái
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Thao tác
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    onDoubleClick={() => handelRowClick(row)}
+                    style={{ height: "80px" }}
+                    hover
+                    key={index}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ width: "120px" }}
+                    >
+                      {row.orderId}
+                    </TableCell>
+
+                    <TableCell style={{ width: "200px" }}>
+                      {row.description}
+                    </TableCell>
+                    <TableCell style={{ width: "150px" }}>
+                      {row.userName}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.phoneNumber}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.userAddress}
+                    </TableCell>
+                    <TableCell style={{ width: "100px" }}>
+                      <Tooltip
+                        style={{ fontSize: "10px" }}
+                        title={() => hanldeTooltip(row)}
+                        size="small"
+                      >
+                        {(row.totalMoney + row.shippingFee)
+                          .toString()
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                        đ
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell style={{ width: "400px" }}>
+                      <div>
+                        <img
+                          style={{
+                            width: "40px",
+                            height: "30px",
+                            marginRight: "5px",
+                          }}
+                          src={Delivery}
+                        ></img>
+                        <span style={{ fontWeight: "800" }}>
+                          Đang giao hàng
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell style={{ width: "240px" }}>
+                      {showConfirmStatus(row)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
+            {total > 10 ? (
+              <div className={classes.pagination} style={{ marginTop: "10px" }}>
+                <Pagination
+                  total={paging}
+                  onChange={handlePageChange}
+                  page={page}
+                />
+              </div>
+            ) : null}
+          </TableContainer>
+        </TabPane>
+        <TabPane tab="Đã giao hàng" key="3">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow style={{ height: "80px", fontWeight: "600" }}>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "120px" }}
+                  >
+                    {t("Admin_Other.5")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "250px" }}
+                  >
+                    {t("Admin_Other.6")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "250px" }}
+                  >
+                    {t("Admin_Other.7")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "280px" }}
+                  >
+                    {t("Admin_Other.9")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Số điện thoại
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "300px" }}
+                  >
+                    Địa chỉ giao hàng
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "100px" }}
+                  >
+                    {t("Admin_Other.10")}
+                  </TableCell>
+
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "50px" }}
+                  >
+                    {t("Admin_Other.11")}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    onDoubleClick={() => handelRowClick(row)}
+                    style={{ height: "80px" }}
+                    hover
+                    key={index}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ width: "120px" }}
+                    >
+                      {row.orderId}
+                    </TableCell>
+                    <TableCell style={{ width: "250px" }}>
+                      {row.createAt}
+                    </TableCell>
+                    <TableCell style={{ width: "300px" }}>
+                      {row.description}
+                    </TableCell>
+                    <TableCell style={{ width: "150px" }}>
+                      {row.userName}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.phoneNumber}
+                    </TableCell>
+                    <TableCell style={{ width: "300px" }}>
+                      {row.userAddress}
+                    </TableCell>
+                    <TableCell style={{ width: "100px" }}>
+                      <Tooltip
+                        style={{ fontSize: "10px" }}
+                        title={() => hanldeTooltip(row)}
+                        size="small"
+                      >
+                        {(row.totalMoney + row.shippingFee)
+                          .toString()
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                        đ
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell style={{ width: "500" }}>
+                      <div>
+                        <img
+                          style={{
+                            width: "40px",
+                            height: "30px",
+                            marginRight: "5px",
+                          }}
+                          src={Deliveried}
+                        ></img>
+                        <span style={{ fontWeight: "800" }}>Đã giao hàng</span>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
+            {total > 10 ? (
+              <div className={classes.pagination} style={{ marginTop: "10px" }}>
+                <Pagination
+                  total={paging}
+                  onChange={handlePageChange}
+                  page={page}
+                />
+              </div>
+            ) : null}
+          </TableContainer>
+        </TabPane>
+        <TabPane tab="Đã hủy" key="4">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow style={{ height: "80px", fontWeight: "600" }}>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "120px" }}
+                  >
+                    {t("Admin_Other.5")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "250px" }}
+                  >
+                    {t("Admin_Other.6")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "250px" }}
+                  >
+                    {t("Admin_Other.7")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "280px" }}
+                  >
+                    {t("Admin_Other.9")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Số điện thoại
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "300px" }}
+                  >
+                    Địa chỉ giao hàng
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "100px" }}
+                  >
+                    {t("Admin_Other.10")}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    onDoubleClick={() => handelRowClick(row)}
+                    style={{ height: "80px" }}
+                    hover
+                    key={index}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ width: "120px" }}
+                    >
+                      {row.orderId}
+                    </TableCell>
+                    <TableCell style={{ width: "250px" }}>
+                      {row.createAt}
+                    </TableCell>
+                    <TableCell style={{ width: "300px" }}>
+                      {row.description}
+                    </TableCell>
+                    <TableCell style={{ width: "150px" }}>
+                      {row.userName}
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.phoneNumber}
+                    </TableCell>
+                    <TableCell style={{ width: "400px" }}>
+                      {row.userAddress}
+                    </TableCell>
+                    <TableCell style={{ width: "100px" }}>
+                      <Tooltip
+                        style={{ fontSize: "10px" }}
+                        title={() => hanldeTooltip(row)}
+                        size="small"
+                      >
+                        {(row.totalMoney + row.shippingFee)
+                          .toString()
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                        đ
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      <div>
+                        <img
+                          style={{
+                            width: "40px",
+                            height: "30px",
+                            marginRight: "5px",
+                          }}
+                          src={CancelIcon}
+                        ></img>
+                        <span style={{ fontWeight: "800" }}>Đã hủy</span>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
+            {total > 10 ? (
+              <div className={classes.pagination} style={{ marginTop: "10px" }}>
+                <Pagination
+                  total={paging}
+                  onChange={handlePageChange}
+                  page={page}
+                />
+              </div>
+            ) : null}
+          </TableContainer>
+        </TabPane>
+      </Tabs>
+    </div>
   );
 };
 export default withRouter(BasicTable);

@@ -50,27 +50,28 @@ const PaymentMethod = (props) => {
     state.auth.userData ? state.auth.userData : null
   );
 
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then((result) => {
-          console.log("Connected!");
+  // useEffect(() => {
+  //   if (connection) {
+  //     connection
+  //       .start()
+  //       .then((result) => {
+  //         console.log("Connected!");
 
-          connection.on("ReceiveMessage", (message) => {
-            if (message !== null) {
-              dispatch(notificationActions.getNotificationsRequest(userId));
-            }
-          });
-        })
-        .catch((e) => console.log("Connection failed: ", e));
-    }
-  }, [connection,dispatch,userId]);
+  //         connection.on("ReceiveMessage", (message) => {
+  //           if (message !== null) {
+  //             dispatch(notificationActions.getNotificationsRequest(userId));
+  //           }
+  //         });
+  //       })
+  //       .catch((e) => console.log("Connection failed: ", e));
+  //   }
+  // }, [connection,dispatch,userId]);
 
-  const sendMessage = async () => {
+  const sendMessage = async (orderId) => {
+    console.log("aaa");
     const chatMessage = {
       title: "Đặt hàng",
-      content: userData.fullName + " đã đặt một đơn hàng",
+      content: `${userData.fullName} đã đặt một đơn hàng. Mã đơn hàng: ${orderId}`,
       senderId: userData.id,
     };
 
@@ -88,12 +89,12 @@ const PaymentMethod = (props) => {
     }
   };
  const shipingFee =props.distanceAndFee ? props.distanceAndFee.shippingFee :null;
- const sumMoney = GetTotalMoney + shipingFee
+
   const handleClick = () => {
     if (paymentMethod === 1) {
       const paymentType = 1;
-      dispatch(cartActions.payForCart(paymentType,GetTotalMoney,shipingFee));
-      sendMessage();
+      dispatch(cartActions.payForCart(paymentType,GetTotalMoney,shipingFee,sendMessage));
+
       props.history.push("/order_success_page");
     } else {
       dispatch(

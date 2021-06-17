@@ -96,7 +96,7 @@ export const setCurrentUser = (decoded) => (dispatch) => {
 };
 
 export const updateAddressOfCurrentUser =
-  (updatedUser, history, clickEvent, tag) => async (dispatch) => {
+  (updatedUser, history, tag) => async (dispatch) => {
     const url = CallApis.API_URL.concat(`/Users/UpdateAddress`);
     dispatch(backdropAction.setOpenBackDrop);
     await axios({
@@ -109,10 +109,10 @@ export const updateAddressOfCurrentUser =
       .then((res) => {
         if (res.status === 200) {
           dispatch(backdropAction.setCloseBackDrop);
-          if (tag === "1") {
-            history.push("/address_shipping");
-            clickEvent.onClick();
-          }
+          // if (tag === "1") {
+          //   history.push("/address_shipping");
+          //   clickEvent.onClick();
+          // }
 
           toastMessage("Cập nhật thành công");
           localStorage.setItem("userData", JSON.stringify(res.data));

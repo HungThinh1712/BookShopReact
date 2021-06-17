@@ -25,7 +25,7 @@ const HomeAdmin = (props) => {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
-    <div>
+    <div style={{backgroundColor:"#EDECE7",height:'100%'}}>
       <GridContainer>
       <GridItem xs={12} sm={6} md={4}>
           <Card>

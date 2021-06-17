@@ -26,7 +26,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { useTranslation } from "react-i18next";
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: "none",
     textTransform: "uppercase",
-    color:'white',
+    color: "white",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Righteous",
   },
   logo: {
-    width:"7%",
+    width: "7%",
     cursor: "pointer",
   },
   search: {
@@ -132,6 +133,14 @@ const PrimarySearchAppBar = (props) => {
   function handleClick_ChangeLang(lang) {
     i18n.changeLanguage(lang);
   }
+  const [openNoti, setOpenNoti] = React.useState(false);
+  const handleBellClick = () => {
+    setOpenNoti((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpenNoti(false);
+  };
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -174,7 +183,7 @@ const PrimarySearchAppBar = (props) => {
     split.length >= 2
       ? split[split.length - 2] + " " + split[split.length - 1]
       : split[split.length - 1];
-  
+
   const [searchString, setSearchString] = useState(
     props.searchString ? props.searchString : ""
   );
@@ -195,12 +204,10 @@ const PrimarySearchAppBar = (props) => {
 
   useEffect(() => {
     const fetchNotification = () => {
-      if (userId != null) {
-        dispatch(notificationActions.getNotificationsRequest(userId));
-      }
+      dispatch(notificationActions.getNotificationsRequest());
     };
     fetchNotification();
-  }, [dispatch, userId]);
+  }, [dispatch]);
 
   //Connection to socket
   const [connection, setConnection] = useState(null);
@@ -223,18 +230,19 @@ const PrimarySearchAppBar = (props) => {
           console.log("Connected!");
 
           connection.on("ReceiveMessage", (message) => {
-            if (message !== null && message.userId === userId) {
-              dispatch(notificationActions.getNotificationsRequest(userId));
+            if (message !== null) {
+              dispatch(notificationActions.getNotificationsRequest());
             }
           });
         })
         .catch((e) => console.log("Connection failed: ", e));
     }
-  }, [connection, userId, dispatch]);
+  }, [connection, dispatch]);
   const [opacity, setOpacity] = useState("none");
+
   const bellIconClick = () => {
     if (userId !== null) {
-      dispatch(notificationActions.getNotificationsRequest(userId));
+      dispatch(notificationActions.getNotificationsRequest());
     }
     if (opacity === "none") setOpacity("");
     else setOpacity("none");
@@ -353,7 +361,6 @@ const PrimarySearchAppBar = (props) => {
     </Menu>
   );
 
-  
   const handleClickHomePage = () => {
     console.log(userData);
     if (userData && userData.isAdmin === false) {
@@ -421,12 +428,12 @@ const PrimarySearchAppBar = (props) => {
               </Badge>
             </IconButton>
             <div className="notifications" id="box">
-              {notifications.length > 1 ? (
+              {notifications.length >= 1 ? (
                 <div
                   style={{
-                    borderRadius:"5px",
+                    borderRadius: "5px",
                     marginTop: "10px",
-                    maxHeight:'600px',
+                    maxHeight: "650px",
                     display: `${opacity}`,
                     backgroundColor: "white",
                     overflow: "auto",
@@ -486,7 +493,7 @@ const PrimarySearchAppBar = (props) => {
                 color="inherit"
                 onClick={() => props.history.push("/user_page")}
               >
-                {userId || userName  ? (
+                {userId || userName ? (
                   <div
                     style={{
                       backgroundColor: "#88d498",
@@ -497,14 +504,35 @@ const PrimarySearchAppBar = (props) => {
                       borderColor: "white",
                       borderStyle: "solid",
                       borderWidth: "2px",
-                      display:'flex',
-                      alignItems:'center'
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
-                      <Avatar style={{width:"25px",height:"25px",backgroundColor:'white',color:'black',marginRight:'3px',fontSize:'10px',fontWeight:'600'}}>{ split.length >= 2
-      ? split[split.length - 2][0] + " " + split[split.length - 1][0]
-      : split[split.length - 1][0]}</Avatar>
-                      <span style={{marginBottom:'0px !important',fontWeight:'600'}}>{displayName}</span>
+                    <Avatar
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        backgroundColor: "white",
+                        color: "black",
+                        marginRight: "3px",
+                        fontSize: "10px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {split.length >= 2
+                        ? split[split.length - 2][0] +
+                          " " +
+                          split[split.length - 1][0]
+                        : split[split.length - 1][0]}
+                    </Avatar>
+                    <span
+                      style={{
+                        marginBottom: "0px !important",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {displayName}
+                    </span>
                   </div>
                 ) : (
                   <AccountCircle style={{ marginRight: "5px" }} />

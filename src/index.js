@@ -14,7 +14,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Suspense fallback = {(<div>Loading~~~~~</div>)}>
         <App />
-      </Suspense>,
+      </Suspense>
     </Provider>,
   document.getElementById('root')
 )

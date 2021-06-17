@@ -46,10 +46,8 @@ export const getOrderRequest =  (id) => async (dispatch) => {
 
 
 export const getAllOrdersRequest =  (page,pageSize,value) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Orders/Admin?page=${page}&pageSize=${pageSize}`)
-    if(value){
-        url = url.concat(`&status=${value}`)
-    }
+    const url = CallApis.API_URL.concat(`/Orders/Admin?page=${page}&pageSize=${pageSize}&status=${value}`)
+    
     dispatch(backDropAction.setOpenBackDrop)
     await axios.get(url)
         .then(res => {
@@ -73,7 +71,26 @@ export const confirmOder = (orderId,status) => async (dispatch) => {
     await axios.get(url).then(res =>  {  
         dispatch(backDropAction.setCloseBackDrop)
         if (res.status===200 ) {
-            toastMessage("Xác nhận thành công");
+           toastMessage("Thành công")
+                   
+        } 
+        else{
+            toastMessage('Thất bại');   
+        }
+    })
+    .catch(err => {
+           
+        }
+    );
+        
+};
+export const cancelOder = (orderId,reason) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Orders/CancelOrder?orderId=${orderId}&reason=${reason}`);
+    dispatch(backDropAction.setOpenBackDrop)
+    await axios.get(url).then(res =>  {  
+        dispatch(backDropAction.setCloseBackDrop)
+        if (res.status===200 ) {
+            toastMessage("Hủy thành công");
                    
         } 
         else{
