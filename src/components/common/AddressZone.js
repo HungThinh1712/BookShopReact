@@ -114,7 +114,7 @@ const HeaderinPayment = (props) => {
   const handlePaymentClick = () => {
     dispatch(cartActions.updateBookAmount(props.history));
   };
-  const [address, setAddress] = useState(specificAddress);
+  const [address, setAddress] = useState(specificAddress ? specificAddress : "");
   const handleSelect = (value) => {
     setTempAddress(value);
     const arr = value.split(",")
@@ -244,7 +244,7 @@ const HeaderinPayment = (props) => {
               <Input
                 value={ward}
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
-                placeholder="Nhập số điện thoại"
+                placeholder="Nhập xã/ phường"
               ></Input>
                <label style={{ fontSize: "12px", fontWeight: "600" }}>
                 Quận/ Huyện
@@ -252,7 +252,7 @@ const HeaderinPayment = (props) => {
               <Input
                 value={district}
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
-                placeholder="Nhập số điện thoại"
+                placeholder="Nhập quận/ huyện"
               ></Input>
               <label style={{ fontSize: "12px", fontWeight: "600" }}>
                 Tỉnh/ Thành phố
@@ -260,7 +260,7 @@ const HeaderinPayment = (props) => {
               <Input
                 value={province}
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
-                placeholder="Nhập số điện thoại"
+                placeholder="Nhập tỉnh/thành phố"
               ></Input>
 
             </div>
