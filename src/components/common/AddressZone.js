@@ -127,11 +127,13 @@ const HeaderinPayment = (props) => {
   };
   
   useEffect(()=>{
+   if(specificAddress){
     const arrAddress = specificAddress.split(",")
-  setAddress(arrAddress[0]);
-  setWard(arrAddress[1] ? arrAddress[1] : "");
-  setDistrict(arrAddress[2] ? arrAddress[2] : "")
-  setProvince(arrAddress[3] ? arrAddress[3] : "");
+    setAddress(arrAddress[0]);
+    setWard(arrAddress[1] ? arrAddress[1] : "");
+    setDistrict(arrAddress[2] ? arrAddress[2] : "")
+    setProvince(arrAddress[3] ? arrAddress[3] : "");
+   }
   },[])
 
   const handleNameInputChange = (e) => {
