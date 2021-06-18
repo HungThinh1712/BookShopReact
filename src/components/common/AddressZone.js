@@ -116,12 +116,13 @@ const HeaderinPayment = (props) => {
   };
   const [address, setAddress] = useState(specificAddress ? specificAddress : "");
   const handleSelect = (value) => {
-    setTempAddress(value);
+   
     const arr = value.split(",")
     setAddress(arr[0]);
     setWard(arr[1] ? arr[1] : "");
     setDistrict(arr[2] ? arr[2] : "")
     setProvince(arr[3] ? arr[3] : "");
+    setTempAddress(`${address}, ${ward}, ${district}, ${province}`);
 
     //setAddress(value);
   };
@@ -142,6 +143,15 @@ const HeaderinPayment = (props) => {
   const handlePhoneInputChange = (e) => {
     setPhone(e.target.value);
   };
+  const handleWardInputChange = (e) => {
+    setWard(e.target.value);
+  };
+  const handleDistrictInputChange = (e) => {
+    setDistrict(e.target.value);
+  };
+  const handleProvniceInputChange = (e) => {
+    setProvince(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     if (phone === "" || !phone) {
@@ -151,6 +161,7 @@ const HeaderinPayment = (props) => {
     } else if (address === "" || !address) {
       toastMessage("Vui lòng nhập đỉa chỉ");
     } else {
+      setTempAddress(`${address}, ${ward}, ${district}, ${province}`);
       const userAddress = {
         id,
         name,
@@ -245,12 +256,15 @@ const HeaderinPayment = (props) => {
                 value={ward}
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
                 placeholder="Nhập xã/ phường"
+                onChange={handleWardInputChange}
+
               ></Input>
                <label style={{ fontSize: "12px", fontWeight: "600" }}>
                 Quận/ Huyện
               </label>
               <Input
                 value={district}
+                onChange={handleDistrictInputChange}
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
                 placeholder="Nhập quận/ huyện"
               ></Input>
@@ -259,6 +273,8 @@ const HeaderinPayment = (props) => {
               </label>
               <Input
                 value={province}
+                onChange={handleProvniceInputChange}
+
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
                 placeholder="Nhập tỉnh/thành phố"
               ></Input>
