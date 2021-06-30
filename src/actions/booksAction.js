@@ -21,6 +21,23 @@ export const getBooksRequest = (indexPage) => async (dispatch) => {
       console.log("Error" + err);
     });
 };
+export const getAllBooksRequest = () => async (dispatch) => {
+  dispatch(backdropAction.setOpenBackDrop);
+  const url = CallApis.API_URL.concat(`/Books/GetAllBook`);
+  await axios
+    .get(url)
+    .then((res) => {
+      dispatch(backdropAction.setCloseBackDrop);
+      dispatch({
+        type: Types.GET_All_BOOKS, //this call test dispatch. to dispsatch to our reducer
+        books: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(backdropAction.setCloseBackDrop);
+      console.log("Error" + err);
+    });
+};
 
 export const getBooksByZoneRequest =
   (indexPage, zone, tag) => async (dispatch) => {

@@ -600,6 +600,19 @@ cbbox:hover {
 .btn-loginpage:hover {
   background-color: #4d84e2;
 }
+.txt-promotion{
+  color: #4466f2;
+}
+.txt-promotion:hover{
+  cursor: pointer;
+}
+.promotion_card{
+  background-color: white;
+}
+.promotion_card:hover{
+  cursor: pointer;
+  background-color: rgb(136, 212, 152);
+}
 @media (max-width: 870px) {
   .signin-signup {
     width: 100%;

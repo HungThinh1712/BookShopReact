@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import { useSelector, useDispatch } from "react-redux";
 import * as orderActions from "../../actions/orderAction";
 import { withRouter } from "react-router-dom";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 import { Modal } from "antd";
 import { Tag, Tooltip } from "antd";
 import Button from "@material-ui/core/Button";

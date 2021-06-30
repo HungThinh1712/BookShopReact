@@ -27,7 +27,7 @@ import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { useTranslation } from "react-i18next";
 import Avatar from "@material-ui/core/Avatar";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import { message, notification } from 'antd';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -133,14 +133,14 @@ const PrimarySearchAppBar = (props) => {
   function handleClick_ChangeLang(lang) {
     i18n.changeLanguage(lang);
   }
-  const [openNoti, setOpenNoti] = React.useState(false);
-  const handleBellClick = () => {
-    setOpenNoti((prev) => !prev);
-  };
+  // const [openNoti, setOpenNoti] = React.useState(false);
+  // const handleBellClick = () => {
+  //   setOpenNoti((prev) => !prev);
+  // };
 
-  const handleClickAway = () => {
-    setOpenNoti(false);
-  };
+  // const handleClickAway = () => {
+  //   setOpenNoti(false);
+  // };
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -209,35 +209,28 @@ const PrimarySearchAppBar = (props) => {
     fetchNotification();
   }, [dispatch]);
 
-  //Connection to socket
-  const [connection, setConnection] = useState(null);
 
   useEffect(() => {
-    const url = CallApis.API_URL.concat(`/hubs/notification`);
-    const newConnection = new HubConnectionBuilder()
-      .withUrl(url)
+      const connection = new HubConnectionBuilder()
+      .withUrl(CallApis.API_URL.concat(`/hubs/notification`))
       .withAutomaticReconnect()
       .build();
+      
+      connection
+      .start()
+      .then((result) => {
+       
 
-    setConnection(newConnection);
+        connection.on("ReceiveMessage", (message) => {
+          if (message.userId === userId && message) {
+            dispatch(notificationActions.getNotificationsRequest());           
+          }
+        });
+      })
+      .catch((e) => console.log("Connection failed: ", e));
+     
   }, []);
 
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then((result) => {
-          console.log("Connected!");
-
-          connection.on("ReceiveMessage", (message) => {
-            if (message !== null) {
-              dispatch(notificationActions.getNotificationsRequest());
-            }
-          });
-        })
-        .catch((e) => console.log("Connection failed: ", e));
-    }
-  }, [connection, dispatch]);
   const [opacity, setOpacity] = useState("none");
 
   const bellIconClick = () => {

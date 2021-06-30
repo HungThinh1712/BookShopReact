@@ -1,16 +1,13 @@
 import React, {  useState } from "react";
 import Header from "../../common/Header";
-import Footer from "../../common/Footer";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import * as publishHouseActions from "../../../actions/publishHouseAction";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
-import PublishingHouseManageAdmin from "../../common/PublishingHouseManageAdmin";
-import Dialog from "../../common/Dialog";
+import PromotionTable from "../../common/PromotionList";
 import BreadCrumb from "../../common/Breadcrumbs";
 import {useTranslation} from "react-i18next"
 
@@ -56,45 +53,20 @@ const PublishingHouseManagementPageAdmin = (props) => {
   const handleInputChange = (e) => {
     setSearchString(e.target.value);
   };
-  const [page, setPage] = useState(1);
-  const [open, setOpen] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleButtonAddClick = async () => {
-    await dispatch(publishHouseActions.addPublishHouse({ name: name }));
-    setOpen(false);
-    await dispatch(publishHouseActions.getPublishHousesRequest("", 1, 10));
-    setPage(1);
-  };
+  
 
   return (
     <div>
-      <div   id="wrapper">
-        <Dialog
-          open={open}
-          onClick={handleButtonAddClick}
-          tagType="Thêm nhà xuất bản"
-          onClose={handleClose}
-          onChange={handleChangeName}
-        ></Dialog>
+      <div id="wrapper">
         <Header notShow="notShow" />
         <SideBarAdminPage />
-        <div style={{backgroundColor:"#EDECE7"}} id="content-wrapper" style={{ marginTop: "100px", marginLeft:"250px" }}>
+        <div id="content-wrapper" style={{ marginTop: "100px", marginLeft:"250px" }}>
           <div className="container-fluid">
             <BreadCrumb
-              breadcrumb={t('Admin_Home_BreadCrumbs.7')}
+              breadcrumb="Quản lý khuyến mãi"
               onClick={() => props.history.push("/admin")}
               onClick2={() =>
-                props.history.push("/admin/pulishinghousemanagement_page")
+                props.history.push("/admin/promotions")
               }
             ></BreadCrumb>
             <div className="card mb-3">
@@ -108,11 +80,11 @@ const PublishingHouseManagementPageAdmin = (props) => {
                       <div className="col-sm-4">
                         <div>
                           <button
-                            onClick={handleClickOpen}
                             type="button"
                             className="btn btn-info add-new"
+                            onClick={()=>props.history.push("/admin/add_promotion")}
                           >
-                            <i className="fa fa-plus"></i> {t('Admin_Other.31')}
+                            <i className="fa fa-plus"></i>Thêm khuyến mãi
                           </button>
                         </div>
                       </div>
@@ -134,8 +106,8 @@ const PublishingHouseManagementPageAdmin = (props) => {
                         </IconButton>
                       </div>
                     </div>
-                    <div className="row">
-                      <PublishingHouseManageAdmin page={page} setPage={setPage} searchString={searchString} />
+                    <div  className="row">
+                      <PromotionTable  />
                     </div>
                   </div>
                 </div>

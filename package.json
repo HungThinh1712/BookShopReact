@@ -21,6 +21,7 @@
     "i18next-browser-languagedetector": "^6.1.1",
     "i18next-http-backend": "^1.2.4",
     "jwt-decode": "^3.0.0",
+    "qs": "^6.10.1",
     "query-string": "^6.13.8",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",

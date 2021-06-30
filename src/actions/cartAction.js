@@ -88,9 +88,14 @@ export const deleteIntemInCartofCurrentUser = (bookId) => async (dispatch) => {
         
 };
 
-export const payForCart = (paymentType,totalMoney,shippingFee,sendMessage) => async (dispatch) => {
+export const payForCart = (paymentType,totalMoney,shippingFee,sendMessage,promotionCode) => async (dispatch) => {
 
-    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart?paymentType=${paymentType}&totalMoney=${totalMoney}&shippingFee=${shippingFee}`)
+    let url = CallApis.API_URL.concat(`/ShoppingCarts/PayForCart?paymentType=${paymentType}&totalMoney=${totalMoney}&shippingFee=${shippingFee}`)
+    if(promotionCode !==null){
+        console.log(url);
+       url = url.concat(`&promotionCode=${promotionCode}`)
+    }
+  
     await axios.get(url).then(res =>  {  
         if (res.status===200 ) {
             dispatch(getCartByUserIdRequest())
@@ -166,8 +171,12 @@ export const updateAmountBookCurrentUser_Server = (bookId,amount) => async (disp
         
 };
 
-export const payWithMomo = (money) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/ShoppingCarts/PayByMomo?totalMoney=${money}`)
+export const payWithMomo = (money,shippingFee,discountMoney,promotionCode) => async (dispatch) => {
+    const sum = money + shippingFee - discountMoney;
+    let url = CallApis.API_URL.concat(`/ShoppingCarts/PayByMomo?totalMoney=${sum.toString().replace(".", "")}&shippingFee=${shippingFee}`)
+    if(promotionCode){
+        url = url.concat(`&promotionCode=${promotionCode}`)
+    }
     await axios({
         
         method: 'get',

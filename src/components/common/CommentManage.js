@@ -11,7 +11,6 @@ import {useSelector,useDispatch} from 'react-redux'
 import * as commentActions from './../../actions/commentAction'
 import {withRouter} from 'react-router-dom'
 import * as CallApis from '../../constants/Apis'
-import { HubConnectionBuilder } from '@microsoft/signalr';
 import {useTranslation} from 'react-i18next'
 import StarIcon from '@material-ui/icons/Star';
 import Rating from '@material-ui/lab/Rating';
@@ -45,34 +44,6 @@ const BasicTable =(props) => {
 
   const rows = useSelector(state=>state.comment.comments.entities ? state.comment.comments.entities: [] )
 
-  const [ connection, setConnection ] = useState(null);
-   
-
-  useEffect(() => {
-      const url = CallApis.API_URL.concat(`/hubs/notification`)
-      const newConnection = new HubConnectionBuilder()
-          .withUrl(url)
-          .withAutomaticReconnect()
-          .build();
-
-      setConnection(newConnection);
-  }, []);
-
-  useEffect(() => {
-      if (connection) {
-          connection.start()
-              .then(result => {
-                  console.log('Connected!');
-  
-                  connection.on('ReceiveMessage', message => {
-                      if(message!==null ){
-                        dispatch(commentActions.getCommentRequest(props.page,4));
-                      }
-                  });
-              })
-              .catch(e => console.log('Connection failed: ', e));
-      }
-  }, [connection,dispatch,props.page]);
 
   const handelRowClick = (row) =>{
     props.history.push(`/details/${row.bookId}`)

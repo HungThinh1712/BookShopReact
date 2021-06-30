@@ -100,13 +100,13 @@ const HeaderinPayment = (props) => {
       : null
   );
 
-  const handleOpenAddressFormClick = (value) => {
-    if (value === "" || value === undefined) {
-      setHideAdressForm("none");
-    } else {
-      setHideAdressForm("");
-    }
-  };
+  // const handleOpenAddressFormClick = (value) => {
+  //   if (value === "" || value === undefined) {
+  //     setHideAdressForm("none");
+  //   } else {
+  //     setHideAdressForm("");
+  //   }
+  // };
   const [visible, setVisible] = useState(false);
   const hidenModal = () => {
     setVisible(false);
@@ -119,11 +119,10 @@ const HeaderinPayment = (props) => {
    
     const arr = value.split(",")
     setAddress(arr[0]);
-    setWard(arr[1] ? arr[1] : "");
-    setDistrict(arr[2] ? arr[2] : "")
-    setProvince(arr[3] ? arr[3] : "");
-    setTempAddress(`${address}, ${ward}, ${district}, ${province}`);
-
+    setWard(arr[1] );
+    setDistrict(arr[2] )
+    setProvince(arr[3]);
+    setTempAddress(`${arr[0]}, ${arr[1]}, ${arr[2]}, ${arr[3]}`);
     //setAddress(value);
   };
   
@@ -135,7 +134,7 @@ const HeaderinPayment = (props) => {
     setDistrict(arrAddress[2] ? arrAddress[2] : "")
     setProvince(arrAddress[3] ? arrAddress[3] : "");
    }
-  },[])
+  },[specificAddress])
 
   const handleNameInputChange = (e) => {
     setName(e.target.value);
@@ -161,7 +160,6 @@ const HeaderinPayment = (props) => {
     } else if (address === "" || !address) {
       toastMessage("Vui lòng nhập đỉa chỉ");
     } else {
-      setTempAddress(`${address}, ${ward}, ${district}, ${province}`);
       const userAddress = {
         id,
         name,

@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import * as orderActions from "./../../actions/orderAction";
 import { withRouter } from "react-router-dom";
 import * as CallApis from "../../constants/Apis";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 import { useTranslation } from "react-i18next";
 import { toastMessage } from "./ToastHelper";
 import CancelIcon from "../Images/cancel.png";
@@ -79,34 +78,7 @@ const BasicTable = (props) => {
     props.history.push(`/order_details/${row.id}`);
   };
 
-  const [connection, setConnection] = useState(null);
-
-  useEffect(() => {
-    const url = CallApis.API_URL.concat(`/hubs/notification`);
-    const newConnection = new HubConnectionBuilder()
-      .withUrl(url)
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(newConnection);
-  }, []);
-
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then((result) => {
-          console.log("Connected!");
-
-          connection.on("ReceiveMessage", (message) => {
-            if (message !== null) {
-              dispatch(orderActions.getOrdersRequest(props.page, 4, status));
-            }
-          });
-        })
-        .catch((e) => console.log("Connection failed: ", e));
-    }
-  }, [connection, dispatch, props.page]);
+  
   const sendMessage = async () => {
     const chatMessage = {
       title: "Hủy đơn hàng",

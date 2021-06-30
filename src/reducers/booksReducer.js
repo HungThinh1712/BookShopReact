@@ -8,6 +8,7 @@ const initialState = {
   suggestedBooks: [],
   searchedResultBooks: [],
   booksAdmin: [],
+  allBooks : [],
 };
 
 export default function bookReducer(state = initialState, action) {
@@ -58,6 +59,11 @@ export default function bookReducer(state = initialState, action) {
         ...state,
         booksAdmin: action.booksAdmin,
       };
+      case Types.GET_All_BOOKS:
+        return {
+          ...state,
+          allBooks: action.books,
+        };
     default:
       return state;
   }

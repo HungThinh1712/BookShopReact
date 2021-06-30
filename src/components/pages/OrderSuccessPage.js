@@ -1,7 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import queryString from 'query-string';
 import { useDispatch,useSelector } from 'react-redux';
-import { HubConnectionBuilder } from '@microsoft/signalr';
 import * as CallApis from '../../constants/Apis'
 import * as notificationActions from './../../actions/notificationAction'
 import * as cartActions from './../../actions/cartAction'
@@ -16,45 +15,24 @@ const OrderSuccessPage = (props) => {
     const { t } =  useTranslation();
     const dispatch = useDispatch();
     const errorCode = queryString.parse(props.history.location.search).errorCode
+    const amount = queryString.parse(props.history.location.search).amount
+    const shippingFee = queryString.parse(props.history.location.search).shippingFee
+
+    const promotionCode = queryString.parse(props.history.location.search).promotionCode ? queryString.parse(props.history.location.search).promotionCode : null;
     
     useEffect(()=>{
         if(errorCode==='0'){
             const paymentType =2;
-            dispatch(cartActions.payForCart(paymentType));
-            sendMessage()
+            dispatch(cartActions.payForCart(paymentType,amount,shippingFee,sendMessage,promotionCode));
         }
     },[dispatch,errorCode])
     
-    const [ connection, setConnection ] = useState(null);
    
 
-    useEffect(() => {
-          const url = CallApis.API_URL.concat(`/hubs/notification`)
-        const newConnection = new HubConnectionBuilder()
-            .withUrl(url)
-            .withAutomaticReconnect()
-            .build();
-  
-        setConnection(newConnection);
-    }, []);
+    
   
     const userId = useSelector(state=>state.auth.userData ? state.auth.userData.id: null)
     const userData = useSelector(state=>state.auth.userData ? state.auth.userData:null)
-    useEffect(() => {
-        if (connection) {
-            connection.start()
-                .then(result => {
-                    console.log('Connected!');
-    
-                    connection.on('ReceiveMessage', message => {
-                        if(message!==null && message.userId ===userId){
-                          dispatch(notificationActions.getNotificationsRequest(userId))
-                        }
-                    });
-                })
-                .catch(e => console.log('Connection failed: ', e));
-        }
-    }, [connection,dispatch,userId]);
     
       const sendMessage = async () => {
        

@@ -15,6 +15,7 @@ import wardReducer from './wardReducer'
 import notificationReducer from './notificationReducer'
 import userReducer from './userReducer'
 import statisticReducer from './statisticReducer'
+import promotionReducer from './promotionReducer'
 
 
 const appReducer = combineReducers({
@@ -33,6 +34,7 @@ const appReducer = combineReducers({
     ward:wardReducer,
     notifications:notificationReducer,
     users:userReducer,
-    statistics:statisticReducer
+    statistics:statisticReducer,
+    promotions:promotionReducer,
 });
 export default appReducer;

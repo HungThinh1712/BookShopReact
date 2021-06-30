@@ -12,6 +12,7 @@ import {withRouter} from 'react-router-dom'
 import Pagination from '../common/Pagination'
 import * as userActions from '../../actions/userAction'
 import {useTranslation} from 'react-i18next'
+import moment from "moment";
 
 const useStyles = makeStyles((theme)=>({
   table: {
@@ -89,9 +90,9 @@ const BasicTable =(props) => {
                 {row.fullName}
               </TableCell>
               <TableCell style={{width:'150px'}} >{row.email}</TableCell>
-              <TableCell style={{width:'150px'}}>{row.phone}</TableCell>
-              <TableCell >{row.birthDay==="0001-01-01"?"Chưa cập nhật ngày sinh": row.birthDay}</TableCell>
-              <TableCell >{row.address}</TableCell>    
+              <TableCell style={{width:'150px'}}>{row.phone ? row.phone : "Chưa cập nhật số điện thoại"}</TableCell>
+              <TableCell >{row.birthDay==="01/01/0001 12:00:00 AM"?"Chưa cập nhật ngày sinh": moment(row.birthday).format("DD/MM/YYYY")}</TableCell>
+              <TableCell >{row.specificAddress ? row.specificAddress : "Chưa cập nhật địa chỉ"}</TableCell>    
               <TableCell  >{row.sumOrder} đơn</TableCell>
             </TableRow>
           ))}
