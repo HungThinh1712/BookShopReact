@@ -75,7 +75,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                   <div className="table-title">
                     <div className="row">
                       <div className="col-sm-8">
-                        <h2>{t('Admin_Home_BreadCrumbs.7')}</h2>
+                        <h2>Quản lý khuyến mãi</h2>
                       </div>
                       <div className="col-sm-4">
                         <div>

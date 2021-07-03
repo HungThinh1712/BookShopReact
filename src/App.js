@@ -38,6 +38,7 @@ import AuthorManagementPageAdmin from "./components/pages/Admin/AuthorManageAdmi
 import TypeManagementPageAdmin from "./components/pages/Admin/TypeManageAdmin";
 import ResetPassword from "./components/pages/ResetPassword"
 import ReportPage from "./components/pages/Admin/ReportPage";
+import PromotionDetail from "./components/pages/Admin/detailPromotion"
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
 import UserRoute from "./privaterouter/userRoute";
@@ -66,6 +67,7 @@ function App() {
             <AdminRoute path="/admin/add_book_page" component={AddBooksAdmin} />
             <AdminRoute path="/admin/add_promotion" component={AddPromotion} />
             <AdminRoute path="/admin/promotions" component={PromotionList} />
+            <AdminRoute path="/admin/promotiondetail/:id" component={PromotionDetail} />
             <AdminRoute path="/admin/details/:id" component={DetailBookAdmin} />
             <AdminRoute path="/admin/update_book" component={UpdateBookAdmin} />
             <AdminRoute

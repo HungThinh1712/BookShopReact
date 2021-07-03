@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {withRouter} from 'react-router-dom'
-import { Button } from "antd";
+import { withRouter } from "react-router-dom";
+import { Button, DatePicker } from "antd";
 import { Input } from "antd";
 import * as userAction from "../../../actions/userAction";
 import * as bookAction from "../../../actions/booksAction";
 import * as promotionAction from "../../../actions/promontionAction";
 import { Select } from "antd";
-import { DatePicker } from "antd";
+import { SaveFilled,StopFilled } from "@ant-design/icons";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
 import Header from "../../common/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,18 +14,26 @@ import { Checkbox } from "antd";
 import { Tooltip } from "antd";
 import { Tabs } from "antd";
 import { toastMessage } from "../../common/ToastHelper";
+import moment from "moment";
+import { Tag } from "antd";
+import { Popconfirm } from 'antd';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { Option } = Select;
 
-const AddPromotion=(props)  =>{
+const AddPromotion = (props) => {
   const dispatch = useDispatch();
-
+  const promotionId = props.match.params.id;
   useEffect(() => {
     dispatch(userAction.getAllUsersRequest());
     dispatch(bookAction.getAllBooksRequest());
-  }, [dispatch]);
+    dispatch(promotionAction.getPromontion(promotionId));
+  }, [dispatch, promotionId]);
+
+  const selectedPromotion = useSelector((state) =>
+    state.promotions.promotion ? state.promotions.promotion : null
+  );
 
   const users = useSelector((state) =>
     state.users.allUsers ? state.users.allUsers : []
@@ -33,7 +41,8 @@ const AddPromotion=(props)  =>{
   const books = useSelector((state) =>
     state.books.allBooks ? state.books.allBooks : []
   );
-
+  const booksLength = books !== [] ? books.length : 0;
+  const usersLength = users !== [] ? users.length : 0;
   const showUsers = users.map((user, index) => (
     <Option key={index} value={user.id}>
       {user.fullName}
@@ -86,18 +95,40 @@ const AddPromotion=(props)  =>{
 
   //Input
   const [promotionCode, setPromotionCode] = useState(null);
+  const [id, setId] = useState(promotionId);
   const [promotionName, setPromotionName] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [countApply, setCountApply] = useState(null);
   const [promotionType, setPromotionType] = useState(0);
   const [minMoney, setMinMoney] = useState(null);
-  const [discountMoney, setDiscountMoney] = useState(0);
+  const [discountMoney, setDiscountMoney] = useState(null);
   const [description, setDescription] = useState(null);
+  const [status, setStatus] = useState(null);
+  useEffect(() => {
+    if (selectedPromotion) {
+      setPromotionCode(selectedPromotion.promotionCode);
+      setPromotionName(selectedPromotion.promotionName);
+      setStartDate(selectedPromotion.startDate);
+      setEndDate(selectedPromotion.endDate);
+      console.log(startDate)
+      setCountApply(selectedPromotion.countApply);
+      setPromotionType(selectedPromotion.promotionType);
+      setMinMoney(selectedPromotion.minMoney);
+      setDiscountMoney(selectedPromotion.discountMoney);
+      setDescription(selectedPromotion.description);
+      setBookIds(selectedPromotion.bookIds);
+      setCustomerIds(selectedPromotion.customerIds);
+      setStatus(selectedPromotion.status);
+      if (selectedPromotion.bookIds.length === booksLength) {
+        setCheckedBook(true);
+      }
+      if (selectedPromotion.customerIds.length === usersLength) {
+        setCheckedUser(true);
+      }
+    }
+  }, [selectedPromotion]);
 
-  const handleTabChange = (key) => {
-    setPromotionType(key);
-  };
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -107,12 +138,12 @@ const AddPromotion=(props)  =>{
   const handlePromotionNameChange = (e) => {
     setPromotionName(e.target.value);
   };
-  const handlePromotionStartDateChange = (e) => {
-    setStartDate(e);
-    console.log(startDate);
+  const handlePromotionStartDateChange = (date, dateString) => {
+    setStartDate(dateString);
+   
   };
-  const handlePromotionEndDateChange = (e) => {
-    setEndDate(e);
+  const handlePromotionEndDateChange = (date, dateString) => {
+    setEndDate(date);
   };
   const handleCountApplyChange = (e) => {
     setCountApply(e.target.value);
@@ -123,39 +154,31 @@ const AddPromotion=(props)  =>{
   const handleDiscountMoneyChange = (e) => {
     setDiscountMoney(e.target.value);
   };
-  const  handleAddPromotion =async () => {
-    if(!promotionCode){
+  const handleUpdatePromotion = () => {
+    if (!promotionCode) {
       toastMessage("Vui lòng nhập mã khuyến mãi");
-    }
-    else if(!promotionName){
+    } else if (!promotionName) {
       toastMessage("Vui lòng nhập tên khuyến mãi");
-    }
-    else if(!promotionCode){
+    } else if (!promotionCode) {
       toastMessage("Vui lòng nhập mã khuyến mãi");
-    }
-    else if(!customerIds){
+    } else if (!customerIds) {
       toastMessage("Vui lòng chọn đối tượng áp dụng");
-    }
-    else if(!startDate){
+    } else if (!startDate) {
       toastMessage("Vui lòng chọn ngày bắt đầu");
-    }
-    else if(!endDate){
+    } else if (!endDate) {
       toastMessage("Vui lòng ngày kết thúc");
-    }
-    else if(!countApply){
+    } else if (!countApply) {
       toastMessage("Vui lòng nhập số lần áp dụng");
-    }
-    else if(promotionType===0 && !discountMoney){
+    } else if (promotionType === 0 && !discountMoney) {
       toastMessage("Vui lòng nhập số tiền giảm giá");
-    }
-    else if(!bookIds){
-      toastMessage("Vui lòng chọn sản phẩm")
-    }
-    else if(!minMoney){
-      toastMessage("Vui lòng nhập số tiền tối thiểu")
-    }
-    else {
+    } else if (!bookIds) {
+      toastMessage("Vui lòng chọn sản phẩm");
+    } else if (!minMoney) {
+      toastMessage("Vui lòng nhập số tiền tối thiểu");
+    } else {
+      
       const promotion = {
+        id,
         promotionCode,
         promotionName,
         customerIds,
@@ -168,11 +191,102 @@ const AddPromotion=(props)  =>{
         discountMoney,
         bookIds,
       };
-      await dispatch(promotionAction.addPromotion(promotion,props.history));
-      await dispatch(promotionAction.getPromontions(1,10,0))
+      dispatch(promotionAction.updatePromotion(promotion, props.history));
+    }
+  };
+  const showTag = () => {
+    if (status === 0) {
+      return (
+        <Tag
+          color="warning"
+          style={{
+            fontSize: "12px",
+            borderRadius: "20px",
+            fontWeight: "600",
+            width: "100px",
+            height: "30px",
+            marginLeft: "20px",
+            marginBottom: "7px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Chưa kích hoạt
+        </Tag>
+      );
+    }
+    if (status === 1) {
+      return (
+        <Tag
+          color="#87d068"
+          style={{
+            fontSize: "12px",
+            borderRadius: "20px",
+            fontWeight: "600",
+            width: "100px",
+            height: "30px",
+            marginLeft: "20px",
+            marginBottom: "7px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Đã kích hoạt
+        </Tag>
+      );
+    }
+    if (status === 2) {
+      return (
+        <Tag
+          color="#108ee9"
+          style={{
+            fontSize: "12px",
+            borderRadius: "20px",
+            fontWeight: "600",
+            width: "100px",
+            height: "30px",
+            marginLeft: "20px",
+            marginBottom: "7px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Đang diễn ra
+        </Tag>
+      );
+    }
+    if (status === 3) {
+      return (
+        <Tag
+          color="#f50"
+          style={{
+            fontSize: "12px",
+            borderRadius: "20px",
+            fontWeight: "600",
+            width: "100px",
+            height: "30px",
+            marginLeft: "20px",
+            marginBottom: "7px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Đã hủy
+        </Tag>
+      );
     }
   };
 
+  const confirm = ()=>{
+    const id = promotionId
+    const body ={id}
+    dispatch(promotionAction.cancelPromotion(id,props.history))
+  }
+  const dateFormat = 'YYYY/MM/DD';
   return (
     <div id="wrapper">
       <Header notShow="notShow" />
@@ -181,8 +295,35 @@ const AddPromotion=(props)  =>{
         id="content-wrapper"
         style={{ marginTop: "100px", marginLeft: "250px" }}
       >
-        <div>
-          <h4>THÊM KHUYẾN MÃI</h4>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h4>Chi tiết khuyến mãi</h4>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "66%",
+            }}
+          >
+            {showTag()}
+            <div>
+            {
+              status===0 || status ==1 ? <div><Popconfirm placement="bottom"
+              title="Bạn có chắc muốn hủy mã khuyến mãi này?"
+              onConfirm={()=>confirm()}
+              okText="Đồng ý"
+              cancelText="Thoát"
+            >
+              <Tooltip title="Hủy khuyến mãi">
+              <StopFilled style={{ color: "#f50", fontSize: "30px",marginRight:'10px',cursor:'pointer' }}/>
+              </Tooltip>
+            </Popconfirm>
+              <Tooltip title="Lưu">
+              <SaveFilled onClick={handleUpdatePromotion} style={{ color: "#114b5f", fontSize: "30px",cursor:'pointer' }} />
+              </Tooltip></div>: null
+            }
+             
+            </div>
+          </div>
         </div>
         <div
           className="container-fluid"
@@ -285,7 +426,7 @@ const AddPromotion=(props)  =>{
                         Ngày bắt đầu
                       </label>
                       <DatePicker
-                        value={startDate}
+                        value={moment(startDate, dateFormat)} 
                         onChange={handlePromotionStartDateChange}
                         style={{ width: "100%" }}
                       />
@@ -305,7 +446,7 @@ const AddPromotion=(props)  =>{
                         Ngày kết thúc
                       </label>
                       <DatePicker
-                        value={endDate}
+                       value={moment(endDate, dateFormat)}
                         onChange={handlePromotionEndDateChange}
                         style={{ width: "100%" }}
                       />
@@ -372,137 +513,135 @@ const AddPromotion=(props)  =>{
               </div>
               <div className="row tm-edit-product-row">
                 <div className="col-xl-10 col-lg-10 col-md-12">
-                  <Tabs defaultActiveKey="0" onChange={handleTabChange}>
-                    <TabPane tab="Giảm số tiền" key="0">
-                      <div
-                        className="form-group mb-3"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <h6>Điều kiện áp dụng</h6>
-                      </div>
-                      <div className="row">
-                        <div className="form-group mb-3 col-xs-12 col-sm-4">
-                          <label>
-                            <span
-                              style={{
-                                color: "red",
-                                fontSize: "5px",
-                                marginRight: "5px",
-                                marginTop: "-5px",
-                              }}
-                            >
-                              <i className="fas fa-star-of-life"></i>
-                            </span>
-                            Tổng tiền đơn hàng tối thiểu
-                          </label>
-                          <Input
-                            value={minMoney}
-                            onChange={handlePromotionMinMoneyChange}
-                            placeholder="Nhập số tiền"
-                          />
+                  <Tabs>
+                    {promotionType === 0 ? (
+                      <TabPane tab="Giảm số tiền">
+                        <div
+                          className="form-group mb-3"
+                          style={{ marginTop: "20px" }}
+                        >
+                          <h6>Điều kiện áp dụng</h6>
                         </div>
-                        <div className="form-group mb-3 col-xs-12 col-sm-4">
-                          <label>
-                            <span
-                              style={{
-                                color: "red",
-                                fontSize: "5px",
-                                marginRight: "5px",
-                                marginTop: "-5px",
-                              }}
-                            >
-                              <i className="fas fa-star-of-life"></i>
-                            </span>
-                            Số tiền được giảm
-                          </label>
-                          <Input
-                            value={discountMoney}
-                            onChange={handleDiscountMoneyChange}
-                            placeholder="Nhập số tiền"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        className="form-group mb-3"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <h6>Danh sách sản phẩm</h6>
-                      </div>
-                      <div className="row">
-                        <div className="form-group mb-3 col-xs-12 col-sm-4">
-                          <Tooltip title="Tất cả khách hàng">
-                            <Checkbox
-                              checked={checkedBook}
-                              onChange={handleCheckBoxAllBooksChange}
-                              style={{ marginRight: "5px" }}
+                        <div className="row">
+                          <div className="form-group mb-3 col-xs-12 col-sm-4">
+                            <label>
+                              <span
+                                style={{
+                                  color: "red",
+                                  fontSize: "5px",
+                                  marginRight: "5px",
+                                  marginTop: "-5px",
+                                }}
+                              >
+                                <i className="fas fa-star-of-life"></i>
+                              </span>
+                              Tổng tiền đơn hàng tối thiểu
+                            </label>
+                            <Input
+                              value={minMoney}
+                              onChange={handlePromotionMinMoneyChange}
+                              placeholder="Nhập số tiền"
                             />
-                          </Tooltip>
-                          <label>Sản phẩm</label>
-                          <Select
-                            onChange={handleSelectBookChange}
-                            value={bookIds}
-                            mode="multiple"
-                            placeholder="Chọn sản phẩm"
-                            style={{ width: "100%" }}
-                          >
-                            {showBooks}
-                          </Select>
-                        </div>
-                      </div>
-                    </TabPane>
-                    <TabPane tab="Miễn phí giao hàng" key="1">
-                      <div
-                        className="form-group mb-3"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <h6>Điều kiện áp dụng</h6>
-                      </div>
-                      <div className="row">
-                        <div className="form-group mb-3 col-xs-12 col-sm-4">
-                          <label>Tổng tiền đơn hàng tối thiểu</label>
-                          <Input  value={minMoney}
-                            onChange={handlePromotionMinMoneyChange} placeholder="Nhập số tiền" />
-                        </div>
-                      </div>
-                      <div
-                        className="form-group mb-3"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <h6>Danh sách sản phẩm</h6>
-                      </div>
-                      <div className="row">
-                        <div className="form-group mb-3 col-xs-12 col-sm-4">
-                          <Tooltip title="Tất cả khách hàng">
-                            <Checkbox
-                              checked={checkedBook}
-                              onChange={handleCheckBoxAllBooksChange}
-                              style={{ marginRight: "5px" }}
+                          </div>
+                          <div className="form-group mb-3 col-xs-12 col-sm-4">
+                            <label>
+                              <span
+                                style={{
+                                  color: "red",
+                                  fontSize: "5px",
+                                  marginRight: "5px",
+                                  marginTop: "-5px",
+                                }}
+                              >
+                                <i className="fas fa-star-of-life"></i>
+                              </span>
+                              Số tiền được giảm
+                            </label>
+                            <Input
+                              value={discountMoney}
+                              onChange={handleDiscountMoneyChange}
+                              placeholder="Nhập số tiền"
                             />
-                          </Tooltip>
-                          <label>Sản phẩm</label>
-                          <Select
-                            onChange={handleSelectBookChange}
-                            value={bookIds}
-                            mode="multiple"
-                            placeholder="Chọn sản phẩm"
-                            style={{ width: "100%" }}
-                          >
-                            {showBooks}
-                          </Select>
+                          </div>
                         </div>
-                      </div>
-                    </TabPane>
+                        <div
+                          className="form-group mb-3"
+                          style={{ marginTop: "20px" }}
+                        >
+                          <h6>Danh sách sản phẩm</h6>
+                        </div>
+                        <div className="row">
+                          <div className="form-group mb-3 col-xs-12 col-sm-12">
+                            <Tooltip title="Tất cả khách hàng">
+                              <Checkbox
+                                checked={checkedBook}
+                                onChange={handleCheckBoxAllBooksChange}
+                                style={{ marginRight: "5px" }}
+                              />
+                            </Tooltip>
+                            <label>Sản phẩm</label>
+                            <Select
+                              onChange={handleSelectBookChange}
+                              value={bookIds}
+                              mode="multiple"
+                              placeholder="Chọn sản phẩm"
+                              style={{ width: "100%" }}
+                            >
+                              {showBooks}
+                            </Select>
+                          </div>
+                        </div>
+                      </TabPane>
+                    ) : (
+                      <TabPane tab="Miễn phí giao hàng" key="1">
+                        <div
+                          className="form-group mb-3"
+                          style={{ marginTop: "20px" }}
+                        >
+                          <h6>Điều kiện áp dụng</h6>
+                        </div>
+                        <div className="row">
+                          <div className="form-group mb-3 col-xs-12 col-sm-4">
+                            <label>Tổng tiền đơn hàng tối thiểu</label>
+                            <Input
+                              value={minMoney}
+                              onChange={handlePromotionMinMoneyChange}
+                              placeholder="Nhập số tiền"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="form-group mb-3"
+                          style={{ marginTop: "20px" }}
+                        >
+                          <h6>Danh sách sản phẩm</h6>
+                        </div>
+                        <div className="row">
+                          <div className="form-group mb-3 col-xs-12 col-sm-12">
+                            <Tooltip title="Tất cả khách hàng">
+                              <Checkbox
+                                checked={checkedBook}
+                                onChange={handleCheckBoxAllBooksChange}
+                                style={{ marginRight: "5px" }}
+                              />
+                            </Tooltip>
+                            <label>Sản phẩm</label>
+                            <Select
+                              onChange={handleSelectBookChange}
+                              value={bookIds}
+                              mode="multiple"
+                              placeholder="Chọn sản phẩm"
+                              style={{ width: "100%" }}
+                            >
+                              {showBooks}
+                            </Select>
+                          </div>
+                        </div>
+                      </TabPane>
+                    )}
                   </Tabs>
 
-                  <div className="row">
-                    <Button
-                      type="primary"
-                      onClick={handleAddPromotion}
-                      style={{ width: "15%", marginLeft: "15px" }}
-                    >
-                      <i className="fas fa-plus"></i>Thêm mới
-                    </Button>
-                  </div>
+                  <div className="row"></div>
                 </div>
               </div>
             </div>
@@ -511,6 +650,6 @@ const AddPromotion=(props)  =>{
       </div>
     </div>
   );
-}
+};
 
 export default withRouter(AddPromotion);

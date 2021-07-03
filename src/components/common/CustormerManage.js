@@ -80,7 +80,6 @@ const BasicTable =(props) => {
             <TableCell className={classes.header} >{t('Admin_Other.15')}</TableCell>
             <TableCell className={classes.header} >{t('Admin_Other.16')}</TableCell>
             <TableCell className={classes.header} >{t('Admin_Other.17')}</TableCell>
-            <TableCell className={classes.header} >{t('Admin_Other.18')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -91,9 +90,8 @@ const BasicTable =(props) => {
               </TableCell>
               <TableCell style={{width:'150px'}} >{row.email}</TableCell>
               <TableCell style={{width:'150px'}}>{row.phone ? row.phone : "Chưa cập nhật số điện thoại"}</TableCell>
-              <TableCell >{row.birthDay==="01/01/0001 12:00:00 AM"?"Chưa cập nhật ngày sinh": moment(row.birthday).format("DD/MM/YYYY")}</TableCell>
+              <TableCell style={{width:'200px'}} >{row.birthDay==="01-01-0001" ?"Chưa cập nhật ngày sinh":row.birthDay}</TableCell>
               <TableCell >{row.specificAddress ? row.specificAddress : "Chưa cập nhật địa chỉ"}</TableCell>    
-              <TableCell  >{row.sumOrder} đơn</TableCell>
             </TableRow>
           ))}
         </TableBody>

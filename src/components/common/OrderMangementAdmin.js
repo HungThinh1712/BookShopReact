@@ -18,10 +18,6 @@ import * as CallApis from "../../constants/Apis";
 import Dialog from "../common/DialogDetailItemAdmin";
 import { useTranslation } from "react-i18next";
 import CancelIcon from "../Images/cancel.png";
-import Delivery from "../Images/Delivery.jpg";
-import Confirming from "../Images/Confirming.png";
-import Deliveried from "../Images/Deliveried.png";
-import Confirmed from "../Images/Confirmed.png";
 import { Tabs } from "antd";
 import { Input } from "antd";
 
@@ -322,12 +318,6 @@ const BasicTable = () => {
                   </TableCell>
                   <TableCell
                     className={classes.header}
-                    style={{ width: "200px" }}
-                  >
-                    Trạng thái
-                  </TableCell>
-                  <TableCell
-                    className={classes.header}
                     style={{ width: "50px" }}
                   >
                     {t("Admin_Other.11")}
@@ -375,19 +365,6 @@ const BasicTable = () => {
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
-                    </TableCell>
-                    <TableCell style={{ width: "350px" }}>
-                      <div>
-                        <img
-                          style={{
-                            width: "40px",
-                            height: "30px",
-                            marginRight: "5px",
-                          }}
-                          src={Confirming}
-                        ></img>
-                        <span style={{ fontWeight: "800" }}>Chờ xác nhận</span>
-                      </div>
                     </TableCell>
                     <TableCell style={{ width: "300px" }}>
                      <div style={{display:'flex'}}>
@@ -476,12 +453,7 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.10")}
                   </TableCell>
-                  <TableCell
-                    className={classes.header}
-                    style={{ width: "500px" }}
-                  >
-                    Trạng thái
-                  </TableCell>
+                  
                   <TableCell
                     className={classes.header}
                     style={{ width: "200px" }}
@@ -531,20 +503,7 @@ const BasicTable = () => {
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      <div>
-                        <img
-                          style={{
-                            width: "40px",
-                            height: "30px",
-                            marginRight: "5px",
-                          }}
-                          src={Confirmed}
-                        ></img>
-                        <span style={{ fontWeight: "800" }}>Đã xác nhận</span>
-                      </div>
-                    </TableCell>
+                    </TableCell>                   
                     <TableCell style={{ width: "250px" }}>
                       <Button
                         variant="contained"
@@ -615,12 +574,7 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.10")}
                   </TableCell>
-                  <TableCell
-                    className={classes.header}
-                    style={{ width: "200px" }}
-                  >
-                    Trạng thái
-                  </TableCell>
+                  
                   <TableCell
                     className={classes.header}
                     style={{ width: "200px" }}
@@ -668,21 +622,6 @@ const BasicTable = () => {
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
-                    </TableCell>
-                    <TableCell style={{ width: "400px" }}>
-                      <div>
-                        <img
-                          style={{
-                            width: "40px",
-                            height: "30px",
-                            marginRight: "5px",
-                          }}
-                          src={Delivery}
-                        ></img>
-                        <span style={{ fontWeight: "800" }}>
-                          Đang giao hàng
-                        </span>
-                      </div>
                     </TableCell>
                     <TableCell style={{ width: "240px" }}>
                       {showConfirmStatus(row)}
@@ -750,13 +689,6 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.10")}
                   </TableCell>
-
-                  <TableCell
-                    className={classes.header}
-                    style={{ width: "50px" }}
-                  >
-                    {t("Admin_Other.11")}
-                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -801,19 +733,7 @@ const BasicTable = () => {
                         đ
                       </Tooltip>
                     </TableCell>
-                    <TableCell style={{ width: "500" }}>
-                      <div>
-                        <img
-                          style={{
-                            width: "40px",
-                            height: "30px",
-                            marginRight: "5px",
-                          }}
-                          src={Deliveried}
-                        ></img>
-                        <span style={{ fontWeight: "800" }}>Đã giao hàng</span>
-                      </div>
-                    </TableCell>
+                    
                   </TableRow>
                 ))}
               </TableBody>
