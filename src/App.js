@@ -39,6 +39,7 @@ import TypeManagementPageAdmin from "./components/pages/Admin/TypeManageAdmin";
 import ResetPassword from "./components/pages/ResetPassword"
 import ReportPage from "./components/pages/Admin/ReportPage";
 import PromotionDetail from "./components/pages/Admin/detailPromotion"
+import TopFive from "./components/pages/Admin/topFiveBooks"
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
 import UserRoute from "./privaterouter/userRoute";
@@ -92,6 +93,7 @@ function App() {
             />
             <AdminRoute path="/admin/customer_page" component={CustomerAdmin} />
             <AdminRoute path="/admin/report_page" component={ReportPage} />
+            <AdminRoute path="/admin/topfivebooks" component={TopFive} />
             <Route path="/user_page" component={UserPage} />
             <UserRoute path="/order_details/:id" component={OrderDetailPage} />
             <Route path="/confirm_code_page" component={ConfirmCodePage} />

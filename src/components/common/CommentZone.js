@@ -10,7 +10,6 @@ import {useTranslation} from 'react-i18next'
 const Comment = (props) => {
 	const { t } = useTranslation();
 	const comments = useSelector(state => state.comment.comments.entities ? state.comment.comments.entities : [])
-	console.log(comments);
 	const ratings = useSelector(state => state.comment.ratings )
 	//Calculate rating of book
 	const sumRate =  Object.values(ratings).reduce((total, item) => total + item.amount * item.value, 0) ? Object.values(ratings).reduce((total, item) => total + item.amount * item.value, 0) : 0 ;
@@ -36,6 +35,7 @@ const Comment = (props) => {
   const showRatings = ratings.map((rating, index) => <AmountRating
 	value={rating.value}
 	amount = {rating.amount}
+	sumAmountRate ={sumAmountRate}
    
   ></AmountRating>) 
   
@@ -47,7 +47,12 @@ const Comment = (props) => {
 				<div style={{borderRightStyle: 'solid', borderRightColor: 'gray',paddingRight:'50px'}}>
 					<h5>{t('Customer_Management.21')}</h5>
 					<h3 className="bold padding-bottom-7" style={{fontSize:'50px',color:'red'}}>{averageRate}<small style={{color:'black'}}>/ 5</small></h3>
-					<Rating  disabled value={props.selectedBook.rating} name="unique-rating" />
+					<Rating
+                name="read-only"
+                value={averageRate}
+                precision={0.5}
+                readOnly
+              />
 				</div>
 			</div>
 			<div style={{marginTop:'50px'}}>

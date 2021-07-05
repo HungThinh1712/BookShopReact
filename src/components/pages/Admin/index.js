@@ -11,7 +11,7 @@ const index = (props) => {
             <div style={{backgroundColor:"#EDECE7"}} id="wrapper">
                 <Header notShow="notShow"/>
                 <SideBarAdminPage/>
-                <div id="content-wrapper"  style={{width:'100%',height:"100%" ,marginTop:'93px', marginRight:'20px', marginLeft:'250px'}}>
+                <div id="content-wrapper"  style={{width:'100%',paddingBottom:'90px',height:"100%" ,marginTop:'93px', marginRight:'20px', marginLeft:'250px'}}>
                     <HomeAdmin></HomeAdmin>
                 </div>
             </div>

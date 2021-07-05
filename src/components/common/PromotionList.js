@@ -373,7 +373,7 @@ const BasicTable = (props) => {
           ) : null}
         </TableContainer>
       </TabPane>
-      <TabPane tab="Đã hủy" key="3">
+      <TabPane tab="Đã hết hạn" key="3">
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
@@ -468,101 +468,7 @@ const BasicTable = (props) => {
           ) : null}
         </TableContainer>
       </TabPane>
-      <TabPane tab="Đã hết hạn" key="4">
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow style={{ height: "80px", fontWeight: "900" }}>
-                <TableCell
-                  className={classes.header}
-                  style={{ width: "500px" }}
-                >
-                  Mã khuyến mãi
-                </TableCell>
-                <TableCell
-                  className={classes.header}
-                  style={{ width: "500px" }}
-                >
-                  Tên khuyến mãi
-                </TableCell>
-                <TableCell
-                  className={classes.header}
-                  style={{ width: "500px" }}
-                >
-                  Loại khuyến mãi
-                </TableCell>
-                <TableCell
-                  className={classes.header}
-                  style={{ width: "500px" }}
-                >
-                  Ngày bắt đầu
-                </TableCell>
-                <TableCell
-                  className={classes.header}
-                  style={{ width: "500px" }}
-                >
-                  Ngày kết thúc
-                </TableCell>
-                <TableCell
-                  className={classes.header}
-                  style={{ width: "500px" }}
-                >
-                  Tác vụ
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  style={{ height: "80px" }}
-                  className={classes.row}
-                  key={index}
-                >
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    style={{ width: "500px", borderBottom: "none" }}
-                  >
-                    {row.promotionCode}
-                  </TableCell>
-                  <TableCell style={{ width: "300px", borderBottom: "none" }}>
-                    {row.promotionName}
-                  </TableCell>
-                  <TableCell style={{ width: "300px", borderBottom: "none" }}>
-                    {row.promotionType === 0 ? "Giảm số tiền" : "FreeShip"}
-                  </TableCell>
-                  <TableCell style={{ width: "300px", borderBottom: "none" }}>
-                    {moment(row.startDate).format("DD/MM/YYYY")}
-                  </TableCell>
-                  <TableCell style={{ width: "300px", borderBottom: "none" }}>
-                    {moment(row.endDate).format("DD/MM/YYYY")}
-                  </TableCell>
-                  <TableCell style={{ width: "300px", borderBottom: "none" }}>
-                    <span
-                      onClick={() =>
-                        props.history.push(`/admin/promotiondetail/${row.id}`)
-                      }
-                      className={classes.detail}
-                      style={{ padding: "5px", fontWeight: "600" }}
-                    >
-                      Xem chi tiết
-                    </span>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          {total > 10 ? (
-            <div className={classes.pagination} style={{ marginTop: "10px" }}>
-              <Pagination
-                total={paging}
-                onChange={handlePageChange}
-                page={page}
-              />
-            </div>
-          ) : null}
-        </TableContainer>
-      </TabPane>
+      
       
     </Tabs>
   );

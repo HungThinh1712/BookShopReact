@@ -52,11 +52,7 @@ const OrderManageMentPage = (props) => {
             marginBottom: "-100px",
           }}
         >
-          <BreadCrumb
-            breadcrumb={t("Customer_BreadCrumbs.3")}
-            onClick={() => props.history.push("/")}
-            onClick2={() => props.history.push("/order_history")}
-          ></BreadCrumb>
+        
         </div>
         <div className={`${classes.container}`}>
           <div style={{display:'flex'}}>
@@ -66,7 +62,7 @@ const OrderManageMentPage = (props) => {
               name={userData.fullName}
               props={props}
             />
-            <div className="col-xs-7 col-sm-9 ">
+            <div className="col-xs-7 col-sm-8">
               <p
                 style={{ fontSize: "25px", fontWeight: 500, marginTop: "7px" }}
               >

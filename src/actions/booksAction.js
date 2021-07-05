@@ -147,11 +147,11 @@ export const searchBookByNameRequest =
     await axios
       .get(url)
       .then((res) => {
-        dispatch(backdropAction.setCloseBackDrop);
         dispatch({
           type: Types.SEARCH_BOOK, //this call test dispatch. to dispsatch to our reducer
           searchedResultBooks: res.data,
         });
+        dispatch(backdropAction.setCloseBackDrop);
       })
       .catch((err) => {
         dispatch(backdropAction.setCloseBackDrop);

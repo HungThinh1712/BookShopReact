@@ -42,8 +42,9 @@ const handleSubmit =  async () => {
   const bookId = props.bookId;
   const userId = props.userId;
   const commentData = {  bookId, rate, content, title, orderId,userId };
-  await dispatch(commentActions.addComment(commentData))
   props.onClose();
+  await dispatch(commentActions.addComment(commentData))
+ 
   await dispatch(orderActions.getOrderRequest(orderId))
 
 };

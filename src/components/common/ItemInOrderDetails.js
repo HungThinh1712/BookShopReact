@@ -134,7 +134,7 @@ const ItemInOrderDetails = (props) => {
           </div>
         </div>
         {
-          props.status ==="Đã xác nhận" ? <div className={classes.btn_group}>
+          props.status ===3 ? <div className={classes.btn_group}>
           {
             props.itemStatus ===false ? <Button onClick={handleClick} type="primary">Đánh giá</Button> : <Tag color="#87d068">Đã đánh giá</Tag>
           }

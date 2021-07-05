@@ -19,5 +19,18 @@ export const getNotificationsRequest =  () => async (dispatch) => {
     
 };
 
+export const markAsAllReadRequest =  () => async (dispatch) => {
+    const url = CallApis.API_URL.concat(`/Notification/MarkAsAllRead`)
+    await axios.post(url)
+        .then(res => {
+            
+        })
+        .catch(err => {
+                console.log('Error' + err);
+            }
+        );
+    
+};
+
 
 

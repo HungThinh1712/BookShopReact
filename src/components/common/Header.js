@@ -312,7 +312,10 @@ const PrimarySearchAppBar = (props) => {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-
+  const markAsAllRead = async ()=>{
+    await dispatch(notificationActions.markAsAllReadRequest());
+    await dispatch(notificationActions.getNotificationsRequest());
+  }
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -420,7 +423,7 @@ const PrimarySearchAppBar = (props) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <div className="notifications" id="box">
+            <div className="notifications">
               {notifications.length >= 1 ? (
                 <div
                   style={{
@@ -433,28 +436,32 @@ const PrimarySearchAppBar = (props) => {
                   }}
                 >
                   {notifications.length > 0 ? (
-                    <h2>{t("Customer_MyInform.1")}</h2>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:"center",padding:'10px'}}>
+                      <span style={{color:'#111',fontSize:"25px",fontWeight:'700',marginRight:'10px'}}>Thông báo</span>
+                      <span onClick={markAsAllRead} className="read-all" style={{color:'#111',fontSize:"15px",fontWeight:'500',marginRight:'10px',color:'blue',cursor:'pointer'}}>Đã Xem tất cả</span>
+                    </div>
                   ) : (
-                    <h2 style={{ color: "black" }}>
-                      {t("Customer_MyInform.5")}
-                    </h2>
+                    <span style={{color:'#111',fontSize:"25px",fontWeight:'700',marginRight:'10px'}}>Thông báo</span>
+
                   )}
                   {showNotifications}
                 </div>
               ) : (
                 <div
                   style={{
-                    marginTop: "20px",
+                    borderRadius: "5px",
+                    marginTop: "10px",
+                    maxHeight: "650px",
                     display: `${opacity}`,
                     backgroundColor: "white",
+                    overflow: "auto",
                   }}
                 >
                   {notifications.length > 0 ? (
                     <h2>{t("Customer_MyInform.1")} </h2>
                   ) : (
-                    <h2 style={{ color: "black" }}>
-                      {t("Customer_MyInform.5")}
-                    </h2>
+                    <span style={{color:'#111',fontSize:"15px",fontWeight:'700',marginLeft:'15px'}}>Hiện chưa có thông báo nào</span>
+
                   )}
                   {showNotifications}
                 </div>

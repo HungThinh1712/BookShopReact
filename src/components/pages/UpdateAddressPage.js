@@ -41,9 +41,7 @@ const UpdateAddressPage = (props) => {
             <div>
             <Header/>
             <div style={{ paddingTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
-              <BreadCrumb
-                breadcrumb={t('Customer_Management.15')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/update_address_page")}>
-              </BreadCrumb>
+            
             </div>
             <div  className = {`${classes.container}`} >
                 <div className = "row">

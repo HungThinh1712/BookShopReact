@@ -148,7 +148,7 @@ const HomeAdmin = (props) => {
                 </CardIcon>
                 </div>
               <p className={classes.cardCategory}>{t('Admin_Home_BreadCrumbs.2')}</p>
-              <h6 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.15')}</h6>
+              <h3 className={classes.cardTitle}>{t('Admin_Home_BreadCrumbs.15')}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

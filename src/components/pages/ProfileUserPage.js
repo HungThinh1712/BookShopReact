@@ -100,9 +100,7 @@ const ProfileUserPage = (props) => {
             <MessengerChat/>
             <Header/>
             <div style={{ paddingTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
-              <BreadCrumb
-                breadcrumb={t('Customer_Management.1')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/user_page")}>
-              </BreadCrumb>
+             
             </div>
             <div className = {`${classes.container}`} >
                 <div style={{display:'flex'}}>

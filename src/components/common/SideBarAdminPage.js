@@ -44,8 +44,7 @@ const SideBarAdminPage = (props) => {
                         </Dropdown>
                         <Dropdown eventKey="4" title={t('Admin_Home_BreadCrumbs.10')} icon={<Icon icon="bar-chart" />}>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/report_page')} icon={<Icon icon="pie-chart" />} eventKey="4-1">{t('Admin_Home_BreadCrumbs.27')}</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>props.history.push('/admin/report_page')} icon={<Icon icon="line-chart" />} eventKey="4-2">{t('Admin_Home_BreadCrumbs.28')}</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>props.history.push('/admin/report_page')} icon={<Icon icon="area-chart" />} eventKey="4-3">{t('Admin_Home_BreadCrumbs.29')}</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>props.history.push('/admin/topfivebooks')} icon={<Icon icon="line-chart" />} eventKey="4-2">Sản phẩm bán chạy</Dropdown.Item>
                         </Dropdown>
                         {/* <Nav.Item eventKey="2" icon={<Icon icon="envelope" />}>
                         {t('Admin_Home_BreadCrumbs.30')}

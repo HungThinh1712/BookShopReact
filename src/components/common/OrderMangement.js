@@ -21,6 +21,7 @@ import Confirmed from "../Images/Confirmed.png";
 import { Tabs } from "antd";
 import { Modal } from "antd";
 import { Input } from "antd";
+import { Empty } from 'antd';
 
 const { TextArea } = Input;
 
@@ -200,9 +201,9 @@ const BasicTable = (props) => {
       <Tabs defaultActiveKey="0" onChange={handleTabChange}>
         <TabPane tab="Đang chờ xác nhận" key="0">
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow style={{ height: "80px", fontWeight: "900" }}>
+           {rows.length > 0 ? <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+                <TableRow style={{ height: "70px", fontWeight: "900" }}>
                   <TableCell className={classes.header}>
                     {t("Admin_Other.5")}
                   </TableCell>
@@ -263,14 +264,14 @@ const BasicTable = (props) => {
                     </TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
-            </Table>
+              </TableBody> 
+            </Table>:<Empty description="Chưa có đơn hàng"/> }
           </TableContainer>
         </TabPane>
         <TabPane tab="Đã xác nhận" key="1">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-              <TableHead>
+             {rows.length > 0 ?<div> <TableHead>
                 <TableRow style={{ height: "80px", fontWeight: "900" }}>
                   <TableCell className={classes.header}>
                     {t("Admin_Other.5")}
@@ -300,33 +301,34 @@ const BasicTable = (props) => {
                     <TableCell
                       component="th"
                       scope="row"
-                      style={{ width: "150px" }}
+                      style={{ width: "200px" }}
                     >
                       {row.orderId}
                     </TableCell>
-                    <TableCell style={{ width: "150px" }}>
+                    <TableCell style={{ width: "200px" }}>
                       {row.createAt}
                     </TableCell>
-                    <TableCell style={{ width: "300px" }}>
+                    <TableCell style={{ width: "200px" }}>
                       {row.description}
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ width: "200px" }}>
                       {row.totalMoney
                         .toString()
                         .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
                       đ
                     </TableCell>
-                    <TableCell>{showStatus(row.status)}</TableCell>
+                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
+              </TableBody></div>: <Empty description="Chưa có đơn hàng"/>}
             </Table>
           </TableContainer>
         </TabPane>
         <TabPane tab="Đang giao hàng" key="2">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-              <TableHead>
+              {rows.length > 0 ?<div>
+                <TableHead>
                 <TableRow style={{ height: "80px", fontWeight: "900" }}>
                   <TableCell className={classes.header}>
                     {t("Admin_Other.5")}
@@ -357,23 +359,23 @@ const BasicTable = (props) => {
                     <TableCell
                       component="th"
                       scope="row"
-                      style={{ width: "120px" }}
+                      style={{ width: "100px" }}
                     >
                       {row.orderId}
                     </TableCell>
-                    <TableCell style={{ width: "120px" }}>
+                    <TableCell style={{ width: "150px" }}>
                       {row.createAt}
                     </TableCell>
-                    <TableCell style={{ width: "200px" }}>
+                    <TableCell style={{ width: "150px" }}>
                       {row.description}
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ width: "150px" }}>
                       {row.totalMoney
                         .toString()
                         .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
                       đ
                     </TableCell>
-                    <TableCell>{showStatus(row.status)}</TableCell>
+                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
                     <TableCell style={{ minWidth: "200px" }}>
                       <span
                         onClick={(e) => {
@@ -389,13 +391,14 @@ const BasicTable = (props) => {
                   </TableRow>
                 ))}
               </TableBody>
+              </div>: <Empty description="Chưa có đơn hàng"/>}
             </Table>
           </TableContainer>
         </TabPane>
         <TabPane tab="Đã giao hàng" key="3">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-              <TableHead>
+            {rows.length > 0 ? <div>  <TableHead>
                 <TableRow style={{ height: "80px", fontWeight: "900" }}>
                   <TableCell className={classes.header}>
                     {t("Admin_Other.5")}
@@ -425,33 +428,33 @@ const BasicTable = (props) => {
                     <TableCell
                       component="th"
                       scope="row"
-                      style={{ width: "150px" }}
+                      style={{ width: "200px" }}
                     >
                       {row.orderId}
                     </TableCell>
-                    <TableCell style={{ width: "150px" }}>
+                    <TableCell style={{ width: "200px" }}>
                       {row.createAt}
                     </TableCell>
-                    <TableCell style={{ width: "300px" }}>
+                    <TableCell style={{ width: "200px" }}>
                       {row.description}
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ width: "200px" }}>
                       {row.totalMoney
                         .toString()
                         .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
                       đ
                     </TableCell>
-                    <TableCell>{showStatus(row.status)}</TableCell>
+                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
+              </TableBody></div>:<Empty description="Chưa có đơn hàng" />}
             </Table>
           </TableContainer>
         </TabPane>
         <TabPane tab="Đã hủy" key="4">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-              <TableHead>
+             {rows.length > 0 ? <div> <TableHead>
                 <TableRow style={{ height: "80px", fontWeight: "900" }}>
                   <TableCell className={classes.header}>
                     {t("Admin_Other.5")}
@@ -481,26 +484,26 @@ const BasicTable = (props) => {
                     <TableCell
                       component="th"
                       scope="row"
-                      style={{ width: "150px" }}
+                      style={{ width: "200px" }}
                     >
                       {row.orderId}
                     </TableCell>
-                    <TableCell style={{ width: "150px" }}>
+                    <TableCell style={{ width: "200px" }}>
                       {row.createAt}
                     </TableCell>
-                    <TableCell style={{ width: "300px" }}>
+                    <TableCell style={{ width: "200px" }}>
                       {row.description}
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ width: "200px" }}>
                       {row.totalMoney
                         .toString()
                         .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
                       đ
                     </TableCell>
-                    <TableCell>{showStatus(row.status)}</TableCell>
+                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
+              </TableBody></div>:<Empty description="Chưa có đơn hàng"></Empty>}
             </Table>
           </TableContainer>
         </TabPane>

@@ -1010,8 +1010,8 @@ label.star:before {
 
 .notifications h2 {
   font-size: 20px;
-  font-weight: 600;
-  padding-left: 5px;
+  font-weight: 700;
+  margin-left: 10px;
   color: #111;
 }
 
@@ -1020,7 +1020,7 @@ label.star:before {
 .notifications-item {
   display: flex;
   border-bottom: 1px solid #eee;
-  padding: 6px 9px;
+  padding-left: 6px;
   margin-bottom: 0px;
   cursor: pointer;
 }
@@ -1028,6 +1028,7 @@ label.star:before {
 .notifications-item:hover {
   background-color: #eee;
 }
+
 
 .notifications-item img {
   display: block;

@@ -6,7 +6,11 @@ import * as userAction from "../../../actions/userAction";
 import * as bookAction from "../../../actions/booksAction";
 import * as promotionAction from "../../../actions/promontionAction";
 import { Select } from "antd";
-import { SaveFilled,StopFilled } from "@ant-design/icons";
+import {
+  SaveOutlined,
+  StopOutlined,
+  PoweroffOutlined,
+} from "@ant-design/icons";
 import SideBarAdminPage from "../../common/SideBarAdminPage";
 import Header from "../../common/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,14 +20,27 @@ import { Tabs } from "antd";
 import { toastMessage } from "../../common/ToastHelper";
 import moment from "moment";
 import { Tag } from "antd";
-import { Popconfirm } from 'antd';
+import { Popconfirm } from "antd";
+import { makeStyles } from "@material-ui/core/styles";
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { Option } = Select;
 
+const useStyles = makeStyles((theme) => ({
+  activeIcon: {
+    padding: "5px",
+    borderRadius: "5px",
+    "&:hover": {
+      backgroundColor: "#FFC074",
+      cursor: "pointer",
+    },
+  },
+}));
+
 const AddPromotion = (props) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const promotionId = props.match.params.id;
   useEffect(() => {
     dispatch(userAction.getAllUsersRequest());
@@ -109,9 +126,9 @@ const AddPromotion = (props) => {
     if (selectedPromotion) {
       setPromotionCode(selectedPromotion.promotionCode);
       setPromotionName(selectedPromotion.promotionName);
-      setStartDate(selectedPromotion.startDate);
-      setEndDate(selectedPromotion.endDate);
-      console.log(startDate)
+      setStartDate(moment(selectedPromotion.startDate).format("YYYY/MM/DD"));
+      setEndDate(moment(selectedPromotion.endDate).format("YYYY/MM/DD"));
+      console.log(startDate);
       setCountApply(selectedPromotion.countApply);
       setPromotionType(selectedPromotion.promotionType);
       setMinMoney(selectedPromotion.minMoney);
@@ -140,10 +157,9 @@ const AddPromotion = (props) => {
   };
   const handlePromotionStartDateChange = (date, dateString) => {
     setStartDate(dateString);
-   
   };
   const handlePromotionEndDateChange = (date, dateString) => {
-    setEndDate(date);
+    setEndDate(dateString);
   };
   const handleCountApplyChange = (e) => {
     setCountApply(e.target.value);
@@ -176,7 +192,6 @@ const AddPromotion = (props) => {
     } else if (!minMoney) {
       toastMessage("Vui lòng nhập số tiền tối thiểu");
     } else {
-      
       const promotion = {
         id,
         promotionCode,
@@ -197,28 +212,63 @@ const AddPromotion = (props) => {
   const showTag = () => {
     if (status === 0) {
       return (
-        <Tag
-          color="warning"
-          style={{
-            fontSize: "12px",
-            borderRadius: "20px",
-            fontWeight: "600",
-            width: "100px",
-            height: "30px",
-            marginLeft: "20px",
-            marginBottom: "7px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <div
+          style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}
         >
-          Chưa kích hoạt
-        </Tag>
+          <Tag
+            color="warning"
+            style={{
+              fontSize: "12px",
+              borderRadius: "20px",
+              fontWeight: "600",
+              width: "100px",
+              height: "30px",
+              marginLeft: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Chưa kích hoạt
+          </Tag>
+          {selectedPromotion.status === 0 ? (
+            <Tooltip title="Kích hoạt">
+              <PoweroffOutlined
+                className={classes.activeIcon}
+                style={{
+                  fontSize: "22px",
+                  marginRight: "5px",
+                  cursor: "pointer",
+                }}
+              />
+            </Tooltip>
+          ) : (
+            <Popconfirm
+              placement="bottom"
+              title="Bạn có chắc muốn hủy mã khuyến mãi này?"
+              onConfirm={() => confirm()}
+              okText="Đồng ý"
+              cancelText="Thoát"
+            >
+              <Tooltip title="Hủy khuyến mãi">
+                <StopOutlined
+                  className={classes.activeIcon}
+                  style={{
+                    fontSize: "22px",
+                    marginRight: "5px",
+                    cursor: "pointer",
+                  }}
+                />
+              </Tooltip>
+            </Popconfirm>
+          )}
+        </div>
       );
     }
     if (status === 1) {
       return (
-        <Tag
+     <div   style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+          <Tag
           color="#87d068"
           style={{
             fontSize: "12px",
@@ -226,8 +276,7 @@ const AddPromotion = (props) => {
             fontWeight: "600",
             width: "100px",
             height: "30px",
-            marginLeft: "20px",
-            marginBottom: "7px",
+            marginLeft: "10px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -235,6 +284,25 @@ const AddPromotion = (props) => {
         >
           Đã kích hoạt
         </Tag>
+        <Popconfirm
+        placement="bottom"
+        title="Bạn có chắc muốn hủy kích hoạt mã khuyến mãi này?"
+        onConfirm={() => confirm()}
+        okText="Đồng ý"
+        cancelText="Thoát"
+      >
+        <Tooltip title="Hủy kích hoạt">
+          <StopOutlined
+            className={classes.activeIcon}
+            style={{
+              fontSize: "22px",
+              marginRight: "5px",
+              cursor: "pointer",
+            }}
+          />
+        </Tooltip>
+      </Popconfirm>
+     </div>
       );
     }
     if (status === 2) {
@@ -281,12 +349,11 @@ const AddPromotion = (props) => {
     }
   };
 
-  const confirm = ()=>{
-    const id = promotionId
-    const body ={id}
-    dispatch(promotionAction.cancelPromotion(id,props.history))
-  }
-  const dateFormat = 'YYYY/MM/DD';
+  const confirm = () => {
+    const id = promotionId;
+    dispatch(promotionAction.cancelPromotion(id, props.history));
+  };
+  const dateFormat = "YYYY/MM/DD";
   return (
     <div id="wrapper">
       <Header notShow="notShow" />
@@ -306,22 +373,21 @@ const AddPromotion = (props) => {
           >
             {showTag()}
             <div>
-            {
-              status===0 || status ==1 ? <div><Popconfirm placement="bottom"
-              title="Bạn có chắc muốn hủy mã khuyến mãi này?"
-              onConfirm={()=>confirm()}
-              okText="Đồng ý"
-              cancelText="Thoát"
-            >
-              <Tooltip title="Hủy khuyến mãi">
-              <StopFilled style={{ color: "#f50", fontSize: "30px",marginRight:'10px',cursor:'pointer' }}/>
-              </Tooltip>
-            </Popconfirm>
-              <Tooltip title="Lưu">
-              <SaveFilled onClick={handleUpdatePromotion} style={{ color: "#114b5f", fontSize: "30px",cursor:'pointer' }} />
-              </Tooltip></div>: null
-            }
-             
+              {status === 0 || status == 1 ? (
+                <div>
+                  <Tooltip title="Lưu">
+                    <SaveOutlined
+                      className={classes.activeIcon}
+                      onClick={handleUpdatePromotion}
+                      style={{
+                        fontSize: "22px",
+                        marginRight: "5px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </Tooltip>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -426,7 +492,8 @@ const AddPromotion = (props) => {
                         Ngày bắt đầu
                       </label>
                       <DatePicker
-                        value={moment(startDate, dateFormat)} 
+                        value={moment(startDate, dateFormat)}
+                        allowClear={false}
                         onChange={handlePromotionStartDateChange}
                         style={{ width: "100%" }}
                       />
@@ -446,7 +513,8 @@ const AddPromotion = (props) => {
                         Ngày kết thúc
                       </label>
                       <DatePicker
-                       value={moment(endDate, dateFormat)}
+                        value={moment(endDate, dateFormat)}
+                        allowClear={false}
                         onChange={handlePromotionEndDateChange}
                         style={{ width: "100%" }}
                       />

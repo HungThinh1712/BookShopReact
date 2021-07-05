@@ -15,8 +15,7 @@ export const getBookTagsRequest =  () => async (dispatch) => {
         .catch(err => {
                 console.log('Error' + err);
             }
-        );
-    
+        );  
 };
 
 export const addBookTag = (bookTag) => async (dispatch) => {

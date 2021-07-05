@@ -13,6 +13,7 @@ import * as bookTagActions from "../../actions/bookTagsAction";
 import Footer from "../common/Footer";
 import {useTranslation} from 'react-i18next'
 import Pagination from "../common/Pagination";
+import { Empty } from 'antd';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -212,7 +213,9 @@ const SearchPage = (props) => {
           />
         </div>
         </div>
-        {searchedBooks.length > 2 ? (
+        {
+          searchedBooks.length > 0 ? <div>
+            {searchedBooks.length > 2 ? (
           <div className={`cover_container_searchpage ${classes.container}`}>
             {showBooks}
           </div>
@@ -241,6 +244,9 @@ const SearchPage = (props) => {
             />
           </div>
         ) : null}
+          </div> : <Empty  description ="Không tìm thấy kết quả" imageStyle={{marginTop:'80px'
+    }}  style={{height:'580px'}}/>
+        }
       </div>
 
      {searchedBooks && searchedBooks.length > 0 ?  <div style={{ paddingTop: "180px" }}>

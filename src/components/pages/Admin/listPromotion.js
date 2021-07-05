@@ -106,7 +106,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                         </IconButton>
                       </div>
                     </div>
-                    <div  className="row">
+                    <div style={{paddingBottom:"100px"}}  className="row">
                       <PromotionTable  />
                     </div>
                   </div>

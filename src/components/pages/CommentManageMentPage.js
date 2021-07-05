@@ -50,9 +50,7 @@ const CommentPage = (props) => {
         <div>
           <Header />
           <div style={{ paddingTop: "100px", marginLeft: "85px", marginBottom:"-100px"}}>
-              <BreadCrumb
-                breadcrumb={t('Customer_BreadCrumbs.5')} onClick={()=>props.history.push("/")} onClick2={()=>props.history.push("/comment_history")}>
-              </BreadCrumb>
+            
             </div>
           <div className={`${classes.container}`} >
             <div className="row">
