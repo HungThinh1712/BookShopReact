@@ -10,7 +10,7 @@ import * as notificationActions from "../../actions/notificationAction";
 import * as CallApis from "../../constants/Apis";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { Modal } from "antd";
+import { Empty, Modal } from "antd";
 import { Input } from "antd";
 import * as promotionActions from "../../actions/promontionAction";
 import ItemPromotion from "../common/PromotionItem";
@@ -206,9 +206,9 @@ const PaymentMethod = (props) => {
             Áp dụng
           </Button>
         </div>
-        <div style={{ maxHeight: "400px", overflow: "auto" }}>
+       {promotionsByMe.length > 0 ?  <div style={{ maxHeight: "400px", overflow: "auto" }}>
           {showPromotions}
-        </div>
+        </div>: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Không có mã khuyến mãi phù hợp"/>}
       </Modal>
       <div
         style={{

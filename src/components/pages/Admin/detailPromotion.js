@@ -235,6 +235,7 @@ const AddPromotion = (props) => {
             <Tooltip title="Kích hoạt">
               <PoweroffOutlined
                 className={classes.activeIcon}
+                onClick={()=>active()}
                 style={{
                   fontSize: "22px",
                   marginRight: "5px",
@@ -352,6 +353,10 @@ const AddPromotion = (props) => {
   const confirm = () => {
     const id = promotionId;
     dispatch(promotionAction.cancelPromotion(id, props.history));
+  };
+  const active = () => {
+    const id = promotionId;
+    dispatch(promotionAction.activePromotion(id, props.history));
   };
   const dateFormat = "YYYY/MM/DD";
   return (

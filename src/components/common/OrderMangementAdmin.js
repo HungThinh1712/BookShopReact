@@ -26,9 +26,7 @@ const { TabPane } = Tabs;
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 1000,
-    border: "solid",
-    borderWidth: "2px",
+    minWidth: 650
   },
   header: {
     fontWeight: 600,
@@ -841,19 +839,7 @@ const BasicTable = () => {
                         đ
                       </Tooltip>
                     </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      <div>
-                        <img
-                          style={{
-                            width: "40px",
-                            height: "30px",
-                            marginRight: "5px",
-                          }}
-                          src={CancelIcon}
-                        ></img>
-                        <span style={{ fontWeight: "800" }}>Đã hủy</span>
-                      </div>
-                    </TableCell>
+                   
                   </TableRow>
                 ))}
               </TableBody>

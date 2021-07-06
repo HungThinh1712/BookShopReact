@@ -12,7 +12,7 @@ import { Menu, Dropdown } from "antd";
 const PromotionItem = (props) => {
   const menu = (
     <Menu style={{ pointerEvents: "none" }}>
-      <Menu.Item>
+     {props.promotion.promotionType===0 ?  <Menu.Item>
         <li style={{ fontWeight: "600" }}>
           <ul>
             {" "}
@@ -32,7 +32,20 @@ const PromotionItem = (props) => {
             .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ.`}</ul>
           <ul>Mỗi khách hàng chỉ được áp dụng 1 lần.</ul>
         </li>
-      </Menu.Item>
+      </Menu.Item>:  <Menu.Item>
+        <li style={{ fontWeight: "600" }}>
+          <ul>
+            {" "}
+            {`Sử dụng trước ngày ${
+              props.promotion
+                ? moment(props.promotion.endDate).format("DD/MM/YYYY")
+                : null
+            }`}
+          </ul>
+          <ul>Miễn phí giao hàng</ul>
+          <ul>Mỗi khách hàng chỉ được áp dụng 1 lần.</ul>
+        </li>
+      </Menu.Item>}
     </Menu>
   );
   const showPromotionTitle = () => {

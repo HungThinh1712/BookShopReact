@@ -8,9 +8,12 @@ import GoogleLogin from "react-google-login";
 import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import background from "../Images/background2.jpg"
 import background1 from "../Images/background.jpg"
-
+import FacebookIcon from '@material-ui/icons/Facebook';
+import {
+  GoogleOutlined,
+  FaceBookOutlined
+} from '@ant-design/icons';
 const useStyles = makeStyles((theme) => ({
   
 
@@ -150,28 +153,28 @@ const SignIn = (props) => {
           </Button>
 
           <div className="social-media" style={{ marginTop: "10px" }}>
-            <div style={{ cursor: "pointer" }} className="social-icon">
+            <div style={{ cursor: "pointer",alignItems:'center',justifyContent:'center' }} className="social-icon">
               <FacebookLogin
                 appId="513590556436339"
                 callback={responseFacebook}
                 render={(renderProps) => (
-                  <i
-                    className="fab fa-facebook-f"
+                  <div style={{ cursor: "pointer",display:"flex",alignItems:'center',justifyContent:'center' }}
+                    
                     onClick={renderProps.onClick}
-                  ></i>
+                  ><FacebookIcon /></div>
                 )}
                 icon="fa-facebook"
               />
             </div>
-            <div style={{ cursor: "pointer" }} className="social-icon">
+            <div style={{ cursor: "pointer",alignItems:'center',justifyContent:'center' }} className="social-icon">
               <GoogleLogin
                 clientId="466677084136-koq86l9ktvvdolnitinanfcv1men5te2.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 render={(renderProps) => (
-                  <i
-                    className="fab fa-google"
+                  <div style={{ cursor: "pointer",display:"flex",alignItems:'center',justifyContent:'center' }}
+                    
                     onClick={renderProps.onClick}
-                  ></i>
+                  ><GoogleOutlined/></div>
                 )}
                 cookiePolicy={"single_host_origin"}
               />

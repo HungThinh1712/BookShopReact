@@ -5,12 +5,14 @@ import * as cartActions from "./../../actions/cartAction";
 import { withRouter } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
 import Avatar from '@material-ui/core/Avatar';
+import { useSelector } from "react-redux";
 import axios from 'axios';
+import PersonIcon from '@material-ui/icons/Person';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import HomeIcon from '@material-ui/icons/Home';
+import GradeIcon from '@material-ui/icons/Grade';
+import MoneyIcon from '@material-ui/icons/Money';
 
-const panelStyles = {
-  padding: '15px 20px',
-  color: '#aaa'
-};
 
 
 
@@ -34,6 +36,9 @@ const UserPageNav = (props) => {
   const handleUpdateAddressClick = () => {
     props.history.push("/update_address_page");
   };
+  const handlePromotionClick = () => {
+    props.history.push("/promotion");
+  };
   const hiddenFileInput = React.useRef(null);
 
   const handleUpLoadClick = (event) => {
@@ -50,6 +55,17 @@ const UserPageNav = (props) => {
   const [imgUrl, setImgUrl] = useState(props.imgSrc);
   const [imgFile,setImgFile] = useState(null);
   const [loadingImg,setLoadingImg] =useState(false);
+
+  const userName = useSelector((state) =>
+    state.auth.userData ? state.auth.userData.fullName : null
+  );
+  //Get first name
+  var split = userName ? userName.split(" ") : "";
+  const displayName =
+    split.length >= 2
+      ? split[split.length - 2] + " " + split[split.length - 1]
+      : split[split.length - 1];
+
 
   let clientId = "5afd6b67306a4cb";
   // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
@@ -88,11 +104,14 @@ const UserPageNav = (props) => {
       <div style={{backgroundColor:"#c6dabf",height:'100%'}} className="profile-sidebar">
         <div className="profile-userpic">
           {
-            imgUrl ? <img
+             imgUrl &&  imgUrl !=="https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"  ? <img
             src={imgUrl}
             onClick={handleUpLoadClick}
             alt={t('Customer_Management.1')}
-          />: <div style={{display:'flex',justifyContent:'center'}}><Avatar  onClick={handleUpLoadClick}  style={{width:'90px',height:'90px',fontSize:'50px',fontWeight:'500',color:'white',fontWeight:'600'}}>TH</Avatar></div>
+          />: <div style={{display:'flex',justifyContent:'center'}}><Avatar  onClick={handleUpLoadClick}  style={{width:'90px',height:'90px',fontSize:'50px',fontWeight:'500',color:'white',fontWeight:'600'}}> {split.length >= 2
+            ? split[split.length - 2][0] +
+              split[split.length - 1][0]
+            : split[split.length - 1][0]}</Avatar></div>
           }
           <div style={{ display: "none" }} className="custom-file mt-3 mb-3">
             <input
@@ -143,17 +162,17 @@ const UserPageNav = (props) => {
             className="nav flex-column nav-pills"
             aria-orientation="vertical"
           >
-            <div onClick={handleUserPageClick} className="nav-link ">
-              <i className="fas fa-user"></i> {t('Customer_Management.1')}
+            <div style={{display:'flex',alignItems:'center'}} onClick={handleUserPageClick} className="nav-link ">
+              <i><PersonIcon fontSize="medium"/></i> {t('Customer_Management.1')}
             </div>
-            <div onClick={handleOrderHistoryClick} className="nav-link">
-              <i className="fas fa-shopping-cart"></i> {t('Customer_Management.8')}
+            <div style={{display:'flex',alignItems:'center'}} onClick={handleOrderHistoryClick} className="nav-link">
+              <i><ShoppingCartIcon/></i> {t('Customer_Management.8')}
             </div>
-            <div onClick={handleUpdateAddressClick} className="nav-link">
-              <i className="fas fa-tag"></i> {t('Customer_Management.15')}
+            <div style={{display:'flex',alignItems:'center'}} onClick={handleCommentHistoryClick} className="nav-link">
+              <i><GradeIcon/></i> {t('Customer_Management.19')}
             </div>
-            <div onClick={handleCommentHistoryClick} className="nav-link">
-              <i className="fas fa-star-half-alt"></i> {t('Customer_Management.19')}
+            <div style={{display:'flex',alignItems:'center'}} onClick={handlePromotionClick} className="nav-link">
+            <i><MoneyIcon/></i> Mã khuyến mãi của tôi
             </div>
           </div>
         </div>

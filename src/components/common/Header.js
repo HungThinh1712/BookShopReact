@@ -130,17 +130,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PrimarySearchAppBar = (props) => {
   const { t, i18n } = useTranslation();
-  function handleClick_ChangeLang(lang) {
-    i18n.changeLanguage(lang);
-  }
-  // const [openNoti, setOpenNoti] = React.useState(false);
-  // const handleBellClick = () => {
-  //   setOpenNoti((prev) => !prev);
-  // };
-
-  // const handleClickAway = () => {
-  //   setOpenNoti(false);
-  // };
+ 
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -177,6 +167,7 @@ const PrimarySearchAppBar = (props) => {
   const userName = useSelector((state) =>
     state.auth.userData ? state.auth.userData.fullName : null
   );
+  const imgUrl = useSelector((state) => state.auth.userData ? state.auth.userData.imgUrl : null)
   //Get first name
   var split = userName ? userName.split(" ") : "";
   const displayName =
@@ -508,7 +499,8 @@ const PrimarySearchAppBar = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <Avatar
+                    {
+                      imgUrl &&  imgUrl !=="https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png" ? <img style={{width:'25px',height:'25px',borderRadius:'50%'}} src={imgUrl}/>:<Avatar
                       style={{
                         width: "25px",
                         height: "25px",
@@ -525,6 +517,7 @@ const PrimarySearchAppBar = (props) => {
                           split[split.length - 1][0]
                         : split[split.length - 1][0]}
                     </Avatar>
+                    }
                     <span
                       style={{
                         marginBottom: "0px !important",

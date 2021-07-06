@@ -134,7 +134,7 @@ const PublishingHouseManagementPageAdmin = (props) => {
                         </IconButton>
                       </div>
                     </div>
-                    <div className="row">
+                    <div style={{paddingBottom:'30px'}} className="row">
                       <PublishingHouseManageAdmin page={page} setPage={setPage} searchString={searchString} />
                     </div>
                   </div>

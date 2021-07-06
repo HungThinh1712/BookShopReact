@@ -66,8 +66,8 @@ const OrderManagementPageAdmin = (props) => {
                                             <div className="col-sm-8"><h2>{t('Admin_Home_BreadCrumbs.19')}</h2></div>
                                         </div>
                                     </div>
-                                    <div style={{paddingBottom:'260px'}} className="container">
-                                        <div   className="row">
+                                    <div  className="container">
+                                        <div style={{paddingBottom:'260px'}}   className="row">
                                             <OrderManagementAdmin />
                                         </div>
                                     </div>

@@ -42,6 +42,7 @@ import PromotionDetail from "./components/pages/Admin/detailPromotion"
 import TopFive from "./components/pages/Admin/topFiveBooks"
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
+import PromotionPage from "./components/pages/myPromotion"
 import UserRoute from "./privaterouter/userRoute";
 import { useTranslation } from "react-i18next"
 function App() {
@@ -57,6 +58,7 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <AdminRoute exact path="/admin/books" component={LstBookAdmin} />
             <UserRoute path="/order_history" component={OrderManageMentPage} />
+            <UserRoute path="/promotion" component={PromotionPage} />
             <UserRoute
               path="/comment_history"
               component={CommentManageMentPage}

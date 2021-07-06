@@ -18,6 +18,7 @@ import { Popconfirm } from "antd";
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
+    
   },
   header: {
     fontWeight: 900,
@@ -44,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   deleteIcon: {
+    padding:'10px',
+    marginRight:"20px",
     "&:hover": {
       cursor: "pointer",
       color: "red",
@@ -136,7 +139,7 @@ const BasicTable = (props) => {
                 {" "}
                 <Popconfirm
                   placement="topRight"
-                  title={"Bạn có chắc muốn xóa thể loại này không?"}
+                  title={"Bạn có chắc muốn xóa NXB này không?"}
                   onConfirm={() => handleDelete(row.id)}
                   okText="Có"
                   cancelText="Không"
@@ -161,7 +164,7 @@ const BasicTable = (props) => {
         ></Dialog>
       </Table>
       {total > 10 ? (
-        <div className={classes.pagination} style={{ marginTop: "10px" }}>
+        <div className={classes.pagination} style={{ marginTop: "10px",display:"flex",justifyContent:'flex-end' }}>
           <Pagination
             total={paging}
             onChange={handlePageChange}

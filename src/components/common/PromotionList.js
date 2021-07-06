@@ -14,6 +14,7 @@ import * as promotionAction from "../../actions/promontionAction";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 import { Tabs } from "antd";
+import {Empty} from "antd";
 const { TabPane } = Tabs;
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -91,7 +92,7 @@ const BasicTable = (props) => {
       <TabPane tab="Chưa kích hoạt" key="0">
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
-            <TableHead>
+            {rows.length > 0 ? <div><TableHead>
               <TableRow style={{ height: "80px", fontWeight: "900" }}>
                 <TableCell
                   className={classes.header}
@@ -170,7 +171,7 @@ const BasicTable = (props) => {
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody>
+            </TableBody></div> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Không có dữ liệu" style={{width:"1000px"}}/>}
           </Table>
           {total > 10 ? (
             <div className={classes.pagination} style={{ marginTop: "10px" }}>
@@ -185,7 +186,7 @@ const BasicTable = (props) => {
       </TabPane>
       <TabPane tab="Đã kích hoạt" key="1">
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+         {rows.length > 0 ?  <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow style={{ height: "80px", fontWeight: "900" }}>
                 <TableCell
@@ -266,7 +267,7 @@ const BasicTable = (props) => {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
+          </Table> : <Empty style={{width:'1000px'}} image={Empty.PRESENTED_IMAGE_SIMPLE} description="Không có dữ liệu"/>}
           {total > 10 ? (
             <div className={classes.pagination} style={{ marginTop: "10px" }}>
               <Pagination
@@ -280,7 +281,7 @@ const BasicTable = (props) => {
       </TabPane>
       <TabPane tab="Đang diễn ra" key="2">
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+          {rows.length > 0 ? <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow style={{ height: "80px", fontWeight: "900" }}>
                 <TableCell
@@ -361,7 +362,7 @@ const BasicTable = (props) => {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
+          </Table> : <Empty style={{width:'1000px'}} image ={Empty.PRESENTED_IMAGE_SIMPLE} description="Không có dữ liệu"/>}
           {total > 10 ? (
             <div className={classes.pagination} style={{ marginTop: "10px" }}>
               <Pagination
@@ -375,7 +376,7 @@ const BasicTable = (props) => {
       </TabPane>
       <TabPane tab="Đã hết hạn" key="3">
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+          {rows.length > 0 ? <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow style={{ height: "80px", fontWeight: "900" }}>
                 <TableCell
@@ -456,7 +457,7 @@ const BasicTable = (props) => {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
+          </Table> : <Empty style={{width:'1000px'}} image ={Empty.PRESENTED_IMAGE_SIMPLE} description="Không có dữ liệu"/>}
           {total > 10 ? (
             <div className={classes.pagination} style={{ marginTop: "10px" }}>
               <Pagination

@@ -2,6 +2,7 @@ import * as Types from "../constants/ActionType";
 const initialState = {
   promotions: [],
   promotionsByMe: [],
+  allPromotionsByMe: [],
   promotion: null,
 };
 
@@ -22,6 +23,11 @@ export default function promotionsReducer(state = initialState, action) {
         ...state,
         promotion: action.promotion,
       };
+      case Types.GET_ALL_PROMOTION_BY_ME:
+        return {
+          ...state,
+          allPromotionsByMe: action.promotions,
+        };
     default:
       return state;
   }
