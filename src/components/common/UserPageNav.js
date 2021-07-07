@@ -57,10 +57,14 @@ const UserPageNav = (props) => {
   const [loadingImg,setLoadingImg] =useState(false);
 
   const userName = useSelector((state) =>
-    state.auth.userData ? state.auth.userData.fullName : null
+    state.auth.userData ? state.auth.userData.fullName : ""
+  );
+  const topAdmin = useSelector((state) =>
+    state.auth.userData ? state.auth.userData.isTopAdmin : false
   );
   //Get first name
-  var split = userName ? userName.split(" ") : "";
+  var split = userName && userName.length > 0 ? userName.split(" ") : "";
+  console.log(userName)
   const displayName =
     split.length >= 2
       ? split[split.length - 2] + " " + split[split.length - 1]

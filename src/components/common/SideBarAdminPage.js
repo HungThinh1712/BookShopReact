@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import {useTranslation} from "react-i18next"
 import { Sidenav, Nav, Dropdown, Icon } from 'rsuite';
+import { useSelector } from "react-redux";
 import 'rsuite/dist/styles/rsuite-default.css';
 
 const styles = {
@@ -22,6 +23,9 @@ const panelStyles = {
   };
 const SideBarAdminPage = (props) => {
     const { t } = useTranslation();
+    const topAdmin = useSelector((state) =>
+    state.auth.userData ? state.auth.userData.isTopAdmin : false
+  );
     return (
         <div style={styles}>
             <div style={{color:"#114b5f !important"}}>
@@ -35,7 +39,7 @@ const SideBarAdminPage = (props) => {
                         <Dropdown eventKey="3" title={t('Admin_Home_BreadCrumbs.2')} icon={<Icon icon="magic" />}>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/books')} icon={<Icon icon="book2" />} eventKey="3-1">{t('Admin_Home_BreadCrumbs.20')}</Dropdown.Item>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/customer_page')} icon={<Icon icon="group" />} eventKey="3-1">{t('Admin_Home_BreadCrumbs.21')}</Dropdown.Item>
-                            <Dropdown.Item onClick={()=>props.history.push('/admin/usermanagement_page')} icon={<Icon icon="user-circle" />} eventKey="3-2">{t('Admin_Home_BreadCrumbs.22')}</Dropdown.Item>
+                           {topAdmin===true ? <Dropdown.Item onClick={()=>props.history.push('/admin/usermanagement_page')} icon={<Icon icon="user-circle" />} eventKey="3-2">{t('Admin_Home_BreadCrumbs.22')}</Dropdown.Item> : null}
                             <Dropdown.Item onClick={()=>props.history.push('/admin/typemanagement_page')} icon={<Icon icon="book" />} eventKey="3-3">{t('Admin_Home_BreadCrumbs.23')}</Dropdown.Item>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/ordermanagement_page')} icon={<Icon icon="shopping-cart" />} eventKey="3-4">{t('Admin_Home_BreadCrumbs.26')}</Dropdown.Item>
                             <Dropdown.Item onClick={()=>props.history.push('/admin/authormanagement_page')} icon={<Icon icon="peoples" />} eventKey="3-5">{t('Admin_Home_BreadCrumbs.25')}</Dropdown.Item>

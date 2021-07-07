@@ -53,7 +53,7 @@ const ForgetPasswordPage = (props) => {
         <div className="loginForm">
           <div style={{ display: "flex" }}>
             <ArrowBackIcon
-              onClick={() => props.history.push("/user_page")}
+              onClick={() => props.history.push("/login")}
               className={classes.icon}
               style={{
                 borderRadius: "5px",

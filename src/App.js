@@ -44,6 +44,7 @@ import PublishingHouseManagementPageAdmin from "./components/pages/Admin/Publish
 import AdminRoute from "./privaterouter/adminRoute";
 import PromotionPage from "./components/pages/myPromotion"
 import UserRoute from "./privaterouter/userRoute";
+import LoginPage from "./components/pages/LoginPage"
 import { useTranslation } from "react-i18next"
 function App() {
   const { i18n } = useTranslation();
@@ -56,6 +57,7 @@ function App() {
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/login" component={LoginPage} />
             <AdminRoute exact path="/admin/books" component={LstBookAdmin} />
             <UserRoute path="/order_history" component={OrderManageMentPage} />
             <UserRoute path="/promotion" component={PromotionPage} />
@@ -96,7 +98,7 @@ function App() {
             <AdminRoute path="/admin/customer_page" component={CustomerAdmin} />
             <AdminRoute path="/admin/report_page" component={ReportPage} />
             <AdminRoute path="/admin/topfivebooks" component={TopFive} />
-            <Route path="/user_page" component={UserPage} />
+            <UserRoute path="/user_page" component={UserPage} />
             <UserRoute path="/order_details/:id" component={OrderDetailPage} />
             <Route path="/confirm_code_page" component={ConfirmCodePage} />
             <UserRoute

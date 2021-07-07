@@ -168,6 +168,7 @@ const PrimarySearchAppBar = (props) => {
     state.auth.userData ? state.auth.userData.fullName : null
   );
   const imgUrl = useSelector((state) => state.auth.userData ? state.auth.userData.imgUrl : null)
+  const isAuth = useSelector(state =>state.auth.isAuthenticated ? state.auth.isAuthenticated : false )
   //Get first name
   var split = userName ? userName.split(" ") : "";
   const displayName =
@@ -184,6 +185,7 @@ const PrimarySearchAppBar = (props) => {
   const handleSearchClick = () => {
     props.history.push(`/search/${searchString}`);
   };
+  
   useEffect(() => {
     const fetchUser = () => {
       if (userId != null) {
@@ -349,7 +351,6 @@ const PrimarySearchAppBar = (props) => {
   );
 
   const handleClickHomePage = () => {
-    console.log(userData);
     if (userData && userData.isAdmin === false) {
       props.history.push("/");
     } else if (userData && userData.isAdmin === true) {
@@ -482,10 +483,10 @@ const PrimarySearchAppBar = (props) => {
             {userData && userData.isAdmin === true ? null : (
               <IconButton
                 color="inherit"
-                onClick={() => props.history.push("/user_page")}
+               
               >
                 {userId || userName ? (
-                  <div
+                  <div  onClick={() => props.history.push("/user_page")}
                     style={{
                       backgroundColor: "#88d498",
                       color: "white",
@@ -528,7 +529,7 @@ const PrimarySearchAppBar = (props) => {
                     </span>
                   </div>
                 ) : (
-                  <AccountCircle style={{ marginRight: "5px" }} />
+                  <AccountCircle onClick ={()=>props.history.push("/login")} style={{ marginRight: "5px" }} />
                 )}
               </IconButton>
             )}

@@ -40,7 +40,7 @@ const SignIn = (props) => {
       toastMessage(t("Toast_Message.9"));
     } else {
       dispatch(authAction.changePassword(userData, props.history));
-      props.history.push("/user_page");
+      props.history.push("/login");
       toastMessage(t("Toast_Message.1"));
     }
   };

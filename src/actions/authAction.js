@@ -364,7 +364,7 @@ export const changePassword = (userData, history) => async (dispatch) => {
     .put(url, userData)
     .then((res) => {
       if (res.status === 200) {
-        history.push("/user_page");
+        history.push("/login");
         dispatch(backdropAction.setCloseBackDrop);
       } else {
         toastMessage("Cập nhật thất bại");

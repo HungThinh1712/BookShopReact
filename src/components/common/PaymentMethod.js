@@ -183,7 +183,7 @@ const PaymentMethod = (props) => {
   return (
     <div className={classes.payment_method_zone}>
       <Modal
-        bodyStyle={{ backgroundColor: "#EDECE7" }}
+        bodyStyle={{ backgroundColor: "#EDECE7",borderRadius:"5px" }}
         footer={null}
         closable={false}
         visible={isModalVisible}
