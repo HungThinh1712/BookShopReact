@@ -69,7 +69,7 @@ const PieChart = () => {
           }}
         >
           <div style={{ marginTop: "120px", marginLeft: "10px" }}>
-            <BreadCrumb breadcrumb="Thống kê doanh thu theo năm"></BreadCrumb>
+            <BreadCrumb breadcrumb="Thống kê doanh thu theo sản phẩm bán chạy"></BreadCrumb>
           </div>
           <div
             style={{
