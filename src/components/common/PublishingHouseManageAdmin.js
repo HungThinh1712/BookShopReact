@@ -11,14 +11,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Pagination from "../common/Pagination";
 import * as publishHouseActions from "../../actions/publishHouseAction";
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import Dialog from "../common/DialogAdmin";
 import { Popconfirm } from "antd";
 
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
-    
   },
   header: {
     fontWeight: 900,
@@ -45,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   deleteIcon: {
-    padding:'10px',
-    marginRight:"20px",
+    padding: "10px",
+    marginRight: "20px",
     "&:hover": {
       cursor: "pointer",
       color: "red",
@@ -102,8 +101,16 @@ const BasicTable = (props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header} style={{ width: "500px"}}>{t('Admin_Other.34')}</TableCell>
-            <TableCell className={classes.header} style={{ width: "500px", borderBottom: "none" }}>{t('Admin_Other.32')}</TableCell>
+            <TableCell className={classes.header} style={{ width: "500px" }}>
+              {t("Admin_Other.34")}
+            </TableCell>
+            <TableCell
+              className={classes.header}
+              style={{ width: "500px", borderBottom: "none" }}
+            >
+              {" "}
+              <span style={{ fontWeight: "900" }}>Ngày tạo</span>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -164,7 +171,14 @@ const BasicTable = (props) => {
         ></Dialog>
       </Table>
       {total > 10 ? (
-        <div className={classes.pagination} style={{ marginTop: "10px",display:"flex",justifyContent:'flex-end' }}>
+        <div
+          className={classes.pagination}
+          style={{
+            marginTop: "10px",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
           <Pagination
             total={paging}
             onChange={handlePageChange}

@@ -277,15 +277,7 @@ const Book = (props) => {
                             {t("Admin_Book.9")}
                           </label>
                           <div style={{ flexGrow: "1" }}></div>
-                          <i
-                            onClick={() => handleClickOpen("Thêm nhà xuất bản")}
-                            style={{
-                              display: "flex",
-                              marginTop: "4px",
-                              color: "blue",
-                            }}
-                            className="fas fa-plus-circle"
-                          ></i>
+                          
                         </div>
                         <Select
                           onChange={handlePublishHouseInputChange}
@@ -302,16 +294,7 @@ const Book = (props) => {
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <label for="tagType">{t("Admin_Book.10")}</label>
                           <div style={{ flexGrow: "1" }}></div>
-                          <i
-                            onClick={() => handleClickOpen("Thêm loại sách")}
-                            style={{
-                              display: "flex",
-                              marginLeft: "5px",
-                              marginTop: "4px",
-                              color: "blue",
-                            }}
-                            className="fas fa-plus-circle"
-                          ></i>
+                          
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <Select
@@ -326,16 +309,7 @@ const Book = (props) => {
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <label for="tagType">{t("Admin_Book.11")}</label>
                           <div style={{ flexGrow: "1" }}></div>
-                          <i
-                            onClick={() => handleClickOpen("Thêm tác giả")}
-                            style={{
-                              display: "flex",
-                              marginLeft: "5px",
-                              marginTop: "4px",
-                              color: "blue",
-                            }}
-                            className="fas fa-plus-circle"
-                          ></i>
+                          
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <Select

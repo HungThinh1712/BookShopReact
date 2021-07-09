@@ -77,9 +77,11 @@ const BasicTable =(props) => {
           <TableRow style={{height:'80px',fontWeight:'900'}} >
             <TableCell className={classes.header}>{t('Admin_Other.9')}</TableCell>
             <TableCell className={classes.header} >Email</TableCell>
-            <TableCell className={classes.header} >{t('Admin_Other.15')}</TableCell>
+            <TableCell className={classes.header} >                  <span style={{fontWeight:"900"}}>Số điện thoại</span>
+</TableCell>
             <TableCell className={classes.header} >{t('Admin_Other.16')}</TableCell>
-            <TableCell className={classes.header} >{t('Admin_Other.17')}</TableCell>
+            <TableCell className={classes.header} >                  <span style={{fontWeight:"900"}}>Địa chỉ</span>
+</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

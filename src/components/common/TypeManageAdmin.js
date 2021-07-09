@@ -91,8 +91,10 @@ const BasicTable = (props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow style={{ height: "80px", fontWeight: "900" }}>
-            <TableCell className={classes.header}>{t('Admin_Other.28')}</TableCell>
-            <TableCell className={classes.header}>{t('Admin_Other.32')}</TableCell>
+            <TableCell className={classes.header}>                  <span style={{fontWeight:"900"}}>Thể loại</span>
+</TableCell>
+            <TableCell className={classes.header}>                  <span style={{fontWeight:"900"}}>Ngày tạo</span>
+</TableCell>
             <TableCell className={classes.header}></TableCell>
           </TableRow>
         </TableHead>
