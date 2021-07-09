@@ -75,7 +75,7 @@ const VerticalBar = () => {
           <div style={{ marginTop: "120px", marginLeft: "10px" }}>
             <BreadCrumb breadcrumb="Thống kê doanh thu theo năm"></BreadCrumb>
           </div>
-          <div style={{ width: "1100px" }}>
+          <div style={{ width: "1100px",paddingLeft:'50px' }}>
             <div
               style={{
                 display: "flex",
@@ -91,7 +91,7 @@ const VerticalBar = () => {
             </div>
 
             <Bar
-              style={{ background: "white" }}
+              style={{ background: "white",borderRadius:'5px',padding:'5px' }}
               data={data}
               options={options}
             />

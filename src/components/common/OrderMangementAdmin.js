@@ -777,12 +777,7 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.9")}
                   </TableCell>
-                  <TableCell
-                    className={classes.header}
-                    style={{ width: "200px" }}
-                  >
-                    Số điện thoại
-                  </TableCell>
+                  
                   <TableCell
                     className={classes.header}
                     style={{ width: "300px" }}
@@ -794,6 +789,12 @@ const BasicTable = () => {
                     style={{ width: "100px" }}
                   >
                     {t("Admin_Other.10")}
+                  </TableCell>
+                  <TableCell
+                    className={classes.header}
+                    style={{ width: "200px" }}
+                  >
+                    Lý do hủy
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -821,10 +822,8 @@ const BasicTable = () => {
                     <TableCell style={{ width: "150px" }}>
                       {row.orderAddress.fullName}
                     </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.orderAddress.phoneNumber}
-                    </TableCell>
-                    <TableCell style={{ width: "400px" }}>
+                   
+                    <TableCell style={{ width: "300px" }}>
                       {row.orderAddress.address}
                     </TableCell>
                     <TableCell style={{ width: "100px" }}>
@@ -838,6 +837,9 @@ const BasicTable = () => {
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
+                    </TableCell>
+                    <TableCell style={{ width: "200px" }}>
+                      {row.cancelReason}
                     </TableCell>
                    
                   </TableRow>

@@ -89,7 +89,7 @@ const OrderManagementPageAdmin = (props) => {
                         </IconButton>
                       </div>
                     </div>
-                    <div className="row">
+                    <div style={{paddingBottom:'230px'}} className="row">
                       <CustormerManage searchString={searchString} />
                     </div>
                   </div>

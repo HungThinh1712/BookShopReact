@@ -32,7 +32,8 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
   header: {
-    fontWeight: 900,
+    fontWeight: 600,
+    fontFamily:"Roboto"
   },
   row: {
     "&:hover": {
@@ -211,13 +212,13 @@ const BasicTable = (props) => {
                     {t("Admin_Other.6")}
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.7")}
+                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.10")}
+                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.8")}
+                  <span style={{fontWeight:"900"}}>Trạng thái</span>
                   </TableCell>
                   <TableCell className={classes.header}>Thao tác</TableCell>
                 </TableRow>
@@ -280,13 +281,13 @@ const BasicTable = (props) => {
                     {t("Admin_Other.6")}
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.7")}
+                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.10")}
+                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.8")}
+                  <span style={{fontWeight:"900"}}>Trạng thái</span>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -337,13 +338,16 @@ const BasicTable = (props) => {
                     {t("Admin_Other.6")}
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.7")}
+                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.10")}
+                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.8")}
+                  <span style={{fontWeight:"900"}}>Trạng thái</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>Thao tác</TableCell>
                 </TableRow>
@@ -359,7 +363,7 @@ const BasicTable = (props) => {
                     <TableCell
                       component="th"
                       scope="row"
-                      style={{ width: "100px" }}
+                      style={{ width: "150px" }}
                     >
                       {row.orderId}
                     </TableCell>
@@ -376,7 +380,7 @@ const BasicTable = (props) => {
                       đ
                     </TableCell>
                     <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
-                    <TableCell style={{ minWidth: "200px" }}>
+                    <TableCell style={{ minWidth: "180px" }}>
                       <span
                         onClick={(e) => {
                           handleConfirmOrderClick(row);
@@ -407,13 +411,16 @@ const BasicTable = (props) => {
                     {t("Admin_Other.6")}
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.7")}
+                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.10")}
+                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.8")}
+                  <span style={{fontWeight:"900"}}>Trạng thái</span>
+
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -463,13 +470,16 @@ const BasicTable = (props) => {
                     {t("Admin_Other.6")}
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.7")}
+                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.10")}
+                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
+
                   </TableCell>
                   <TableCell className={classes.header}>
-                    {t("Admin_Other.8")}
+                  <span style={{fontWeight:"900"}}>Trạng thái</span>
+
                   </TableCell>
                 </TableRow>
               </TableHead>

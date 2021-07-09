@@ -60,7 +60,7 @@ export default function FormDialog(props) {
   
   const handleSubmit = async () => {
     if (
-      name !== ""
+      name !== "" && birthday !==""
     ) {
       const formData = new FormData();
       formData.append("name", name);
@@ -77,7 +77,7 @@ export default function FormDialog(props) {
       setDescription("");
       setImgUrl("https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png");
     } else {
-      toastMessage("Vui lòng nhập tên tác giả");
+      toastMessage("Vui lòng kiểm tra lại thông tin");
     }
   };
   return (

@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { StopOutlined ,PoweroffOutlined } from "@ant-design/icons";
-
+import { Tag  } from 'antd';
 import * as userActions from "../../actions/userAction";
 import { Tooltip, Popconfirm } from "antd";
 import { useTranslation } from "react-i18next";
@@ -102,7 +102,7 @@ const BasicTable = (props) => {
                 {row.isTopAdmin === true ? "TopAdmin" : "Admin"}
               </TableCell>
               <TableCell>
-                {row.isActive === true ? "Đã kích hoạt" : "Chưa kích hoạt"}
+                {row.isActive === true ? <Tag color="#108ee9">Đã kích hoạt</Tag> : <Tag color="#f50">Chưa kích hoạt</Tag>}
               </TableCell>
               <TableCell>
                 {row.isActive===true ? <Popconfirm

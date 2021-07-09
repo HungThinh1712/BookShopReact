@@ -117,7 +117,7 @@ const AuthorManagementPageAdmin = (props) => {
                         </IconButton>
                       </div>
                     </div>
-                    <div className="row">
+                    <div style={{paddingBottom:'230px'}} className="row">
                       <AuthorManageAdmin page={page} setPage={setPage} searchString={searchString} />
                     </div>
                   </div>
