@@ -8,7 +8,7 @@ import * as authorActions from "../../../actions/authorAction";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
-import * as bookTagAction from "../../../actions/bookTagsAction"
+import * as bookTagAction from "../../../actions/bookTagsAction";
 import Dialog from "../../common/Dialog";
 import BreadCrumb from "../../common/Breadcrumbs";
 import { withRouter } from "react-router-dom";
@@ -17,7 +17,7 @@ import { Input, InputNumber, message } from "antd";
 import { Select } from "antd";
 import { DatePicker } from "antd";
 import { Button } from "antd";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { toastMessage } from "../../common/ToastHelper";
 const { Option } = Select;
 const { TextArea } = Input;
@@ -35,8 +35,8 @@ const Book = (props) => {
     state.type.types.entities ? state.type.types.entities : []
   );
   const tags = useSelector((state) =>
-  state.bookTags.bookTags ? state.bookTags.bookTags : []
-);
+    state.bookTags.bookTags ? state.bookTags.bookTags : []
+  );
   const authors = useSelector((state) =>
     state.author.authors.entities ? state.author.authors.entities : []
   );
@@ -73,13 +73,13 @@ const Book = (props) => {
     hiddenFileInput.current.click();
   };
   const [imgUrl, setImgUrl] = useState("/img/a.jpg");
-  const [loadingImg,setLoadingImg] =useState(false);
+  const [loadingImg, setLoadingImg] = useState(false);
 
   let clientId = "5afd6b67306a4cb";
   // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
   let auth = "Client-ID " + clientId;
   const handleUploadImageToImgur = async (e) => {
-    setLoadingImg(true)
+    setLoadingImg(true);
     const formDataTest = new FormData();
     if (e.target.files && e.target.files[0]) {
       formDataTest.append("image", e.target.files[0]);
@@ -92,14 +92,13 @@ const Book = (props) => {
         },
       }).then((res) => {
         if (res.status === 200) {
-          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`)
-          setLoadingImg(false)
+          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`);
+          setLoadingImg(false);
         }
       });
     }
   };
 
- 
   //Input
   const [bookName, setBookName] = useState("");
   const [typeId, setTypeId] = useState("0");
@@ -161,35 +160,32 @@ const Book = (props) => {
   };
 
   //Add book
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     const formData = new FormData();
-    if(!publishDate){
-      toastMessage("Vui lòng chọn ngày xuất bản")
-    }
-    else if(imgUrl==="/img/a.jpg"){
-      toastMessage("Vui lòng chọn hình ảnh")
-    }
-
-    else {
+    if (!publishDate) {
+      toastMessage("Vui lòng chọn ngày xuất bản");
+    } else if (imgUrl === "/img/a.jpg") {
+      toastMessage("Vui lòng chọn hình ảnh");
+    } else {
       formData.append("bookName", bookName);
-    formData.append("zoneType", zoneType);
-    formData.append("publishHouseId", publishHouseId);
-    formData.append("typeId", typeId);
-    formData.append("authorId", authorId);
-    formData.append("publishDate", publishDate.toISOString());
-    formData.append("amount", amount);
-    formData.append("price", price);
-    formData.append("coverPrice", coverPrice);
-    formData.append("pageAmount", pageAmount);
-    formData.append("size", size);
-    formData.append("coverType", coverType);
-    formData.append("tagId", tag);
-    formData.append("description", description);
-    formData.append("imgUrl", imgUrl);
+      formData.append("zoneType", zoneType);
+      formData.append("publishHouseId", publishHouseId);
+      formData.append("typeId", typeId);
+      formData.append("authorId", authorId);
+      formData.append("publishDate", publishDate.toISOString());
+      formData.append("amount", amount);
+      formData.append("price", price);
+      formData.append("coverPrice", coverPrice);
+      formData.append("pageAmount", pageAmount);
+      formData.append("size", size);
+      formData.append("coverType", coverType);
+      formData.append("tagId", tag);
+      formData.append("description", description);
+      formData.append("imgUrl", imgUrl);
     }
 
     //const bookData = {bookName,zoneType,publishHouseId,typeId,authorId,publishDate,amount,price,coverPrice,pageAmount,size,coverType,tagId,description,imageSrc,imageFile};
-     dispatch(bookActions.addBook(formData));
+    dispatch(bookActions.addBook(formData, props.history));
   };
 
   const [open, setOpen] = React.useState(false);
@@ -219,7 +215,7 @@ const Book = (props) => {
     }
   };
   const [tagType, setTagType] = useState("");
-  
+
   return (
     <div>
       <div id="wrapper">
@@ -232,7 +228,10 @@ const Book = (props) => {
         ></Dialog>
         <Header notShow="notShow" />
         <SideBarAdminPage />
-        <div id="content-wrapper" style={{ marginTop: "100px", marginLeft: "250px" }}>
+        <div
+          id="content-wrapper"
+          style={{ marginTop: "100px", marginLeft: "250px" }}
+        >
           <div className="container-fluid">
             <BreadCrumb
               breadcrumb={t("Admin_Book.2")}
@@ -277,7 +276,6 @@ const Book = (props) => {
                             {t("Admin_Book.9")}
                           </label>
                           <div style={{ flexGrow: "1" }}></div>
-                          
                         </div>
                         <Select
                           onChange={handlePublishHouseInputChange}
@@ -294,7 +292,6 @@ const Book = (props) => {
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <label for="tagType">{t("Admin_Book.10")}</label>
                           <div style={{ flexGrow: "1" }}></div>
-                          
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <Select
@@ -309,7 +306,6 @@ const Book = (props) => {
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <label for="tagType">{t("Admin_Book.11")}</label>
                           <div style={{ flexGrow: "1" }}></div>
-                          
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <Select
@@ -376,9 +372,7 @@ const Book = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="cover_type">{t("Admin_Book.18")}</label>
-                        <Input
-                          onChange={handleCoverTypeChange}
-                        />
+                        <Input onChange={handleCoverTypeChange} />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <label for="name">{t("Admin_Book.17")}</label>
@@ -415,14 +409,20 @@ const Book = (props) => {
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        {
-                          !loadingImg ? <img
-                          alt=""
-                          src={imgUrl}
-                          onClick={handleUpLoadClick}
-                          className="tm-product-img-dummy mx-auto"
-                        ></img> : <div style={{marginTop:'100px',marginLeft:"150px"}}><CircularProgress/></div>
-                        }
+                        {!loadingImg ? (
+                          <img
+                            alt=""
+                            src={imgUrl}
+                            onClick={handleUpLoadClick}
+                            className="tm-product-img-dummy mx-auto"
+                          ></img>
+                        ) : (
+                          <div
+                            style={{ marginTop: "100px", marginLeft: "150px" }}
+                          >
+                            <CircularProgress />
+                          </div>
+                        )}
                         <div className="custom-file mt-3 mb-3">
                           <input
                             id="fileInput"

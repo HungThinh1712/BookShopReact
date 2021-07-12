@@ -1,8 +1,8 @@
-import * as Types from '../constants/ActionType'
-import axios from 'axios'
-import * as backdropAction from './../actions/backdropAction'
-import * as CallApis from './../constants/Apis'
-import {toastMessage} from './../components/common/ToastHelper'
+import * as Types from "../constants/ActionType";
+import axios from "axios";
+import * as backdropAction from "./../actions/backdropAction";
+import * as CallApis from "./../constants/Apis";
+import { toastMessage } from "./../components/common/ToastHelper";
 
 export const getBooksRequest = (indexPage) => async (dispatch) => {
   dispatch(backdropAction.setOpenBackDrop);
@@ -48,7 +48,6 @@ export const getBooksByZoneRequest =
     await axios
       .get(url)
       .then((res) => {
-
         if (zone === "Sách tiếng việt") {
           dispatch({
             type: Types.GET_BOOK_BY_ZONE_VN, //this call test dispatch. to dispsatch to our reducer
@@ -89,7 +88,6 @@ export const getBooksByTypeHomeRequest =
         dispatch(backdropAction.setCloseBackDrop);
         console.log("Error" + err);
       });
-      
   };
 
 export const getBookByIdRequest = (id) => async (dispatch) => {
@@ -107,8 +105,7 @@ export const getBookByIdRequest = (id) => async (dispatch) => {
       dispatch(backdropAction.setCloseBackDrop);
       console.log("Error" + err);
     });
-    dispatch(backdropAction.setCloseBackDrop);
-
+  dispatch(backdropAction.setCloseBackDrop);
 };
 
 export const getBookByTypeIdRequest = (typeId, bookId) => async (dispatch) => {
@@ -159,61 +156,59 @@ export const searchBookByNameRequest =
       });
   };
 
-export const addBook = (bookData) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Books/Create`)
+export const addBook = (bookData, history) => async (dispatch) => {
+  const url = CallApis.API_URL.concat(`/Books/Create`);
 
-    await axios.post(url, bookData)
-        .then(res =>  {  
-            if (res.status===200 ) {
-               toastMessage('Thêm thành công')
-               dispatch({
-                type: Types.ADD_BOOK,  //this call test dispatch. to dispsatch to our reducer
-                item: res.data
-            });
-
-            }else {
-                let error = Object.values(res.data.errors)[0].toString();
-                dispatch({
-                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
-                    payload: error //sets payload to errors coming from server
-                })
-            }
-        })
-        .catch(err => {
-            console.log(err)
-                dispatch({
-                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
-                    payload: err //sets payload to errors coming from server
-                })
-            }
-        );
+  await axios
+    .post(url, bookData)
+    .then((res) => {
+      if (res.status === 200) {
+        toastMessage("Thêm thành công");
+        history.push("/admin/books");
+        dispatch({
+          type: Types.ADD_BOOK, //this call test dispatch. to dispsatch to our reducer
+          item: res.data,
+        });
+      } else {
+        let error = Object.values(res.data.errors)[0].toString();
+        dispatch({
+          type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+          payload: error, //sets payload to errors coming from server
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+        payload: err, //sets payload to errors coming from server
+      });
+    });
 };
 
 export const updateBook = (bookData) => async (dispatch) => {
-    const url = CallApis.API_URL.concat(`/Books/Update`)
-    dispatch(backdropAction.setOpenBackDrop)
-    await axios.put(url, bookData)
-        .then(res =>  {  
-          dispatch(backdropAction.setCloseBackDrop)
-            if (res.status===200 ) {
-               
-                toastMessage("Cập nhật thành công")           
-            
-            }else {
-                dispatch({
-                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
-                    payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server
-                })
-            }
-        })
-        .catch(err => {
-            console.log(err)
-                dispatch({
-                    type: Types.GET_ERRORS,  //this call test dispatch. to dispsatch to our reducer
-                    payload: "Vui lòng kiểm tra lại thông tin" //sets payload to errors coming from server
-                })
-            }
-        );
+  const url = CallApis.API_URL.concat(`/Books/Update`);
+  dispatch(backdropAction.setOpenBackDrop);
+  await axios
+    .put(url, bookData)
+    .then((res) => {
+      dispatch(backdropAction.setCloseBackDrop);
+      if (res.status === 200) {
+        toastMessage("Cập nhật thành công");
+      } else {
+        dispatch({
+          type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+          payload: "Vui lòng kiểm tra lại thông tin", //sets payload to errors coming from server
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+        payload: "Vui lòng kiểm tra lại thông tin", //sets payload to errors coming from server
+      });
+    });
 };
 
 export const getBooksAdminRequest = (name, indexPage) => async (dispatch) => {
