@@ -5,6 +5,7 @@ import { Input } from "antd";
 import * as userAction from "../../../actions/userAction";
 import * as bookAction from "../../../actions/booksAction";
 import * as promotionAction from "../../../actions/promontionAction";
+import * as CallApis from "../../../constants/Apis";
 import { Select } from "antd";
 import {
   SaveOutlined,
@@ -79,6 +80,27 @@ const AddPromotion = (props) => {
     } else {
       setCustomerIds([]);
       setCheckedUser(false);
+    }
+  };
+  const sendMessage = async () => {
+    const chatMessage = {
+      title: "Mã khuyến mãi",
+      content: `Bạn đã nhận được một mã khuyến mãi. Mã khuyến mãi: ${promotionCode} `,
+      type: "Promotion",
+      userIds: customerIds,
+    };
+
+    try {
+      const url = CallApis.API_URL.concat(`/Notification/messages`);
+      await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(chatMessage),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (e) {
+      console.log("Sending message failed.", e);
     }
   };
   const handleSelectUserChange = (value) => {
@@ -235,7 +257,7 @@ const AddPromotion = (props) => {
             <Tooltip title="Kích hoạt">
               <PoweroffOutlined
                 className={classes.activeIcon}
-                onClick={()=>active()}
+                onClick={() => active()}
                 style={{
                   fontSize: "22px",
                   marginRight: "5px",
@@ -268,42 +290,44 @@ const AddPromotion = (props) => {
     }
     if (status === 1) {
       return (
-     <div   style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-          <Tag
-          color="#87d068"
-          style={{
-            fontSize: "12px",
-            borderRadius: "20px",
-            fontWeight: "600",
-            width: "100px",
-            height: "30px",
-            marginLeft: "10px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <div
+          style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}
         >
-          Đã kích hoạt
-        </Tag>
-        <Popconfirm
-        placement="bottom"
-        title="Bạn có chắc muốn hủy kích hoạt mã khuyến mãi này?"
-        onConfirm={() => confirm()}
-        okText="Đồng ý"
-        cancelText="Thoát"
-      >
-        <Tooltip title="Hủy kích hoạt">
-          <StopOutlined
-            className={classes.activeIcon}
+          <Tag
+            color="#87d068"
             style={{
-              fontSize: "22px",
-              marginRight: "5px",
-              cursor: "pointer",
+              fontSize: "12px",
+              borderRadius: "20px",
+              fontWeight: "600",
+              width: "100px",
+              height: "30px",
+              marginLeft: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          />
-        </Tooltip>
-      </Popconfirm>
-     </div>
+          >
+            Đã kích hoạt
+          </Tag>
+          <Popconfirm
+            placement="bottom"
+            title="Bạn có chắc muốn hủy kích hoạt mã khuyến mãi này?"
+            onConfirm={() => confirm()}
+            okText="Đồng ý"
+            cancelText="Thoát"
+          >
+            <Tooltip title="Hủy kích hoạt">
+              <StopOutlined
+                className={classes.activeIcon}
+                style={{
+                  fontSize: "22px",
+                  marginRight: "5px",
+                  cursor: "pointer",
+                }}
+              />
+            </Tooltip>
+          </Popconfirm>
+        </div>
       );
     }
     if (status === 2) {
@@ -357,6 +381,7 @@ const AddPromotion = (props) => {
   const active = () => {
     const id = promotionId;
     dispatch(promotionAction.activePromotion(id, props.history));
+    sendMessage();
   };
   const dateFormat = "YYYY/MM/DD";
   return (

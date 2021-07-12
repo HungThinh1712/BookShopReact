@@ -21,7 +21,7 @@ import Confirmed from "../Images/Confirmed.png";
 import { Tabs } from "antd";
 import { Modal } from "antd";
 import { Input } from "antd";
-import { Empty } from 'antd';
+import { Empty } from "antd";
 
 const { TextArea } = Input;
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
   header: {
     fontWeight: 600,
-    fontFamily:"Roboto"
+    fontFamily: "Roboto",
   },
   row: {
     "&:hover": {
@@ -80,7 +80,6 @@ const BasicTable = (props) => {
     props.history.push(`/order_details/${row.id}`);
   };
 
-  
   const sendMessage = async () => {
     const chatMessage = {
       title: "Hủy đơn hàng",
@@ -180,10 +179,10 @@ const BasicTable = (props) => {
     await dispatch(orderActions.getOrdersRequest(props.page, 4, 0));
     sendMessage();
   };
-  const handleConfirmOrderClick = async(row) =>{
-    await dispatch(orderActions.confirmOder(row.id,3))
+  const handleConfirmOrderClick = async (row) => {
+    await dispatch(orderActions.confirmOder(row.id, 3));
     await dispatch(orderActions.getOrdersRequest(props.page, 4, 2));
-  }
+  };
 
   return (
     <div>
@@ -202,318 +201,352 @@ const BasicTable = (props) => {
       <Tabs defaultActiveKey="0" onChange={handleTabChange}>
         <TabPane tab="Đang chờ xác nhận" key="0">
           <TableContainer component={Paper}>
-           {rows.length > 0 ? <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-                <TableRow style={{ height: "70px", fontWeight: "900" }}>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.5")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.6")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Trạng thái</span>
-                  </TableCell>
-                  <TableCell className={classes.header}>Thao tác</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    onClick={() => handelRowClick(row)}
-                    style={{ height: "80px" }}
-                    className={classes.row}
-                    key={row.name}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      style={{ width: "150px" }}
-                    >
-                      {row.orderId}
+            {rows.length > 0 ? (
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow style={{ height: "70px", fontWeight: "900" }}>
+                    <TableCell className={classes.header}>
+                      {t("Admin_Other.5")}
                     </TableCell>
-                    <TableCell style={{ width: "150px" }}>
-                      {row.createAt}
+                    <TableCell className={classes.header}>
+                      {t("Admin_Other.6")}
                     </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.description}
+                    <TableCell className={classes.header}>
+                      <span style={{ fontWeight: "900" }}>Sản phẩm</span>
                     </TableCell>
-                    <TableCell>
-                      {row.totalMoney
-                        .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
-                      đ
+                    <TableCell className={classes.header}>
+                      <span style={{ fontWeight: "900" }}>Tổng tiền</span>
                     </TableCell>
-                    <TableCell>{showStatus(row.status)}</TableCell>
-                    <TableCell style={{ minWidth: "150px" }}>
-                      <span
-                        onClick={(e) => {
-                          handleCancelOrderClick(row);
-                          e.stopPropagation();
-                        }}
-                        className={classes.cancel}
-                        style={{ fontWeight: "600", color: "#114b5f" }}
-                      >
-                        Hủy đơn hàng
-                      </span>
+                    <TableCell className={classes.header}>
+                      <span style={{ fontWeight: "900" }}>Trạng thái</span>
                     </TableCell>
+                    <TableCell className={classes.header}>Thao tác</TableCell>
                   </TableRow>
-                ))}
-              </TableBody> 
-            </Table>:<Empty description="Chưa có đơn hàng"/> }
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      onClick={() => handelRowClick(row)}
+                      style={{ height: "80px" }}
+                      className={classes.row}
+                      key={row.name}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{ width: "150px" }}
+                      >
+                        {row.orderId}
+                      </TableCell>
+                      <TableCell style={{ width: "150px" }}>
+                        {row.createAt}
+                      </TableCell>
+                      <TableCell style={{ width: "200px" }}>
+                        {row.description}
+                      </TableCell>
+                      <TableCell>
+                        {row.totalMoney
+                          .toString()
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                        đ
+                      </TableCell>
+                      <TableCell>{showStatus(row.status)}</TableCell>
+                      <TableCell style={{ minWidth: "150px" }}>
+                        <span
+                          onClick={(e) => {
+                            handleCancelOrderClick(row);
+                            e.stopPropagation();
+                          }}
+                          className={classes.cancel}
+                          style={{ fontWeight: "600", color: "#114b5f" }}
+                        >
+                          Hủy đơn hàng
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            ) : (
+              <Empty description="Chưa có đơn hàng" />
+            )}
           </TableContainer>
         </TabPane>
         <TabPane tab="Đã xác nhận" key="1">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-             {rows.length > 0 ?<div> <TableHead>
-                <TableRow style={{ height: "80px", fontWeight: "900" }}>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.5")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.6")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Trạng thái</span>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    onClick={() => handelRowClick(row)}
-                    style={{ height: "80px" }}
-                    className={classes.row}
-                    key={row.name}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      style={{ width: "200px" }}
-                    >
-                      {row.orderId}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.createAt}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.description}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.totalMoney
-                        .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
-                      đ
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody></div>: <Empty description="Chưa có đơn hàng"/>}
+              {rows.length > 0 ? (
+                <div>
+                  {" "}
+                  <TableHead>
+                    <TableRow style={{ height: "80px", fontWeight: "900" }}>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.5")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.6")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Sản phẩm</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Tổng tiền</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Trạng thái</span>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        onClick={() => handelRowClick(row)}
+                        style={{ height: "80px" }}
+                        className={classes.row}
+                        key={row.name}
+                      >
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          style={{ width: "200px" }}
+                        >
+                          {row.orderId}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.createAt}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.description}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.totalMoney
+                            .toString()
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                          đ
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {showStatus(row.status)}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </div>
+              ) : (
+                <Empty description="Chưa có đơn hàng" />
+              )}
             </Table>
           </TableContainer>
         </TabPane>
         <TabPane tab="Đang giao hàng" key="2">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-              {rows.length > 0 ?<div>
-                <TableHead>
-                <TableRow style={{ height: "80px", fontWeight: "900" }}>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.5")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.6")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Trạng thái</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>Thao tác</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    onClick={() => handelRowClick(row)}
-                    style={{ height: "80px" }}
-                    className={classes.row}
-                    key={row.name}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      style={{ width: "150px" }}
-                    >
-                      {row.orderId}
-                    </TableCell>
-                    <TableCell style={{ width: "150px" }}>
-                      {row.createAt}
-                    </TableCell>
-                    <TableCell style={{ width: "150px" }}>
-                      {row.description}
-                    </TableCell>
-                    <TableCell style={{ width: "150px" }}>
-                      {row.totalMoney
-                        .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
-                      đ
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
-                    <TableCell style={{ minWidth: "180px" }}>
-                      <span
-                        onClick={(e) => {
-                          handleConfirmOrderClick(row);
-                          e.stopPropagation();
-                        }}
-                        className={classes.confirm}
-                        style={{ fontWeight: "600", color: "#114b5f" }}
+              {rows.length > 0 ? (
+                <div>
+                  <TableHead>
+                    <TableRow style={{ height: "80px", fontWeight: "900" }}>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.5")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.6")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Sản phẩm</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Tổng tiền</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Trạng thái</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>Thao tác</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        onClick={() => handelRowClick(row)}
+                        style={{ height: "80px" }}
+                        className={classes.row}
+                        key={row.name}
                       >
-                        Xác nhận nhận hàng
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-              </div>: <Empty description="Chưa có đơn hàng"/>}
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          style={{ width: "150px" }}
+                        >
+                          {row.orderId}
+                        </TableCell>
+                        <TableCell style={{ width: "150px" }}>
+                          {row.createAt}
+                        </TableCell>
+                        <TableCell style={{ width: "150px" }}>
+                          {row.description}
+                        </TableCell>
+                        <TableCell style={{ width: "150px" }}>
+                          {row.totalMoney
+                            .toString()
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                          đ
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {showStatus(row.status)}
+                        </TableCell>
+                        <TableCell style={{ minWidth: "180px" }}>
+                          <span
+                            onClick={(e) => {
+                              handleConfirmOrderClick(row);
+                              e.stopPropagation();
+                            }}
+                            className={classes.confirm}
+                            style={{ fontWeight: "600", color: "#114b5f" }}
+                          >
+                            Xác nhận nhận hàng
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </div>
+              ) : (
+                <Empty description="Chưa có đơn hàng" />
+              )}
             </Table>
           </TableContainer>
         </TabPane>
         <TabPane tab="Đã giao hàng" key="3">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-            {rows.length > 0 ? <div>  <TableHead>
-                <TableRow style={{ height: "80px", fontWeight: "900" }}>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.5")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.6")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Trạng thái</span>
-
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    onClick={() => handelRowClick(row)}
-                    style={{ height: "80px" }}
-                    className={classes.row}
-                    key={row.name}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      style={{ width: "200px" }}
-                    >
-                      {row.orderId}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.createAt}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.description}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.totalMoney
-                        .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
-                      đ
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody></div>:<Empty description="Chưa có đơn hàng" />}
+              {rows.length > 0 ? (
+                <div>
+                  {" "}
+                  <TableHead>
+                    <TableRow style={{ height: "80px", fontWeight: "900" }}>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.5")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.6")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Sản phẩm</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Tổng tiền</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Trạng thái</span>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        onClick={() => handelRowClick(row)}
+                        style={{ height: "80px" }}
+                        className={classes.row}
+                        key={row.name}
+                      >
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          style={{ width: "200px" }}
+                        >
+                          {row.orderId}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.createAt}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.description}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.totalMoney
+                            .toString()
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                          đ
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {showStatus(row.status)}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </div>
+              ) : (
+                <Empty description="Chưa có đơn hàng" />
+              )}
             </Table>
           </TableContainer>
         </TabPane>
         <TabPane tab="Đã hủy" key="4">
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-             {rows.length > 0 ? <div> <TableHead>
-                <TableRow style={{ height: "80px", fontWeight: "900" }}>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.5")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                    {t("Admin_Other.6")}
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Sản phẩm</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Tổng tiền</span>
-
-                  </TableCell>
-                  <TableCell className={classes.header}>
-                  <span style={{fontWeight:"900"}}>Trạng thái</span>
-
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    onClick={() => handelRowClick(row)}
-                    style={{ height: "80px" }}
-                    className={classes.row}
-                    key={row.name}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      style={{ width: "200px" }}
-                    >
-                      {row.orderId}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.createAt}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.description}
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>
-                      {row.totalMoney
-                        .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
-                      đ
-                    </TableCell>
-                    <TableCell style={{ width: "200px" }}>{showStatus(row.status)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody></div>:<Empty description="Chưa có đơn hàng"></Empty>}
+              {rows.length > 0 ? (
+                <div>
+                  {" "}
+                  <TableHead>
+                    <TableRow style={{ height: "80px", fontWeight: "900" }}>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.5")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        {t("Admin_Other.6")}
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Sản phẩm</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Tổng tiền</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Trạng thái</span>
+                      </TableCell>
+                      <TableCell className={classes.header}>
+                        <span style={{ fontWeight: "900" }}>Lý do</span>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        onClick={() => handelRowClick(row)}
+                        style={{ height: "80px" }}
+                        className={classes.row}
+                        key={row.name}
+                      >
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          style={{ width: "200px" }}
+                        >
+                          {row.orderId}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.createAt}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.description}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.totalMoney
+                            .toString()
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                          đ
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {showStatus(row.status)}
+                        </TableCell>
+                        <TableCell style={{ width: "200px" }}>
+                          {row.cancelReason}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </div>
+              ) : (
+                <Empty description="Chưa có đơn hàng"></Empty>
+              )}
             </Table>
           </TableContainer>
         </TabPane>

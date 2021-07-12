@@ -27,7 +27,7 @@ import * as authActions from "./../../actions/authAction";
 import * as cartActions from "./../../actions/cartAction";
 import { useTranslation } from "react-i18next";
 import Avatar from "@material-ui/core/Avatar";
-import { message, notification } from 'antd';
+import { message, notification } from "antd";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PrimarySearchAppBar = (props) => {
   const { t, i18n } = useTranslation();
- 
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -167,8 +167,12 @@ const PrimarySearchAppBar = (props) => {
   const userName = useSelector((state) =>
     state.auth.userData ? state.auth.userData.fullName : null
   );
-  const imgUrl = useSelector((state) => state.auth.userData ? state.auth.userData.imgUrl : null)
-  const isAuth = useSelector(state =>state.auth.isAuthenticated ? state.auth.isAuthenticated : false )
+  const imgUrl = useSelector((state) =>
+    state.auth.userData ? state.auth.userData.imgUrl : null
+  );
+  const isAuth = useSelector((state) =>
+    state.auth.isAuthenticated ? state.auth.isAuthenticated : false
+  );
   //Get first name
   var split = userName ? userName.split(" ") : "";
   const displayName =
@@ -185,7 +189,7 @@ const PrimarySearchAppBar = (props) => {
   const handleSearchClick = () => {
     props.history.push(`/search/${searchString}`);
   };
-  
+
   useEffect(() => {
     const fetchUser = () => {
       if (userId != null) {
@@ -202,27 +206,23 @@ const PrimarySearchAppBar = (props) => {
     fetchNotification();
   }, [dispatch]);
 
-
   useEffect(() => {
-      const connection = new HubConnectionBuilder()
+    const connection = new HubConnectionBuilder()
       .withUrl(CallApis.API_URL.concat(`/hubs/notification`))
       .withAutomaticReconnect()
       .build();
-      
-      connection
+
+    connection
       .start()
       .then((result) => {
-       
-
         connection.on("ReceiveMessage", (message) => {
           if (message.userId === userId && message) {
-            dispatch(notificationActions.getNotificationsRequest());           
+            dispatch(notificationActions.getNotificationsRequest());
           }
         });
       })
       .catch((e) => console.log("Connection failed: ", e));
-     
-  }, []);
+  }, [dispatch]);
 
   const [opacity, setOpacity] = useState("none");
 
@@ -234,10 +234,10 @@ const PrimarySearchAppBar = (props) => {
     else setOpacity("none");
   };
 
-  const sendMessage = async (id) => {
+  const sendMessage = async (notification) => {
     try {
       const url = CallApis.API_URL.concat(
-        `/Notification/ChangeStatus?id=${id}`
+        `/Notification/ChangeStatus?id=${notification.id}`
       );
       await fetch(url, {
         method: "GET",
@@ -246,11 +246,24 @@ const PrimarySearchAppBar = (props) => {
         },
       });
       if (userData.isAdmin === false) {
-        props.history.push("/order_history");
-        setOpacity("none");
-      } else if (userData.isAdmin === true) {
-        props.history.push("/admin/ordermanagement_page");
-        setOpacity("none");
+        if (notification.type === "Rate") {
+          props.history.push(`/details/${notification.orderId}`);
+          setOpacity("none");
+        } else if (notification.type === "Promotion") {
+          props.history.push("/promotion");
+          setOpacity("none");
+        } else {
+          props.history.push("/order_history");
+          setOpacity("none");
+        }
+      } else {
+        if (notification.type === "Rate") {
+          props.history.push(`/details/${notification.orderId}`);
+          setOpacity("none");
+        } else {
+          props.history.push("/admin/ordermanagement_page");
+          setOpacity("none");
+        }
       }
     } catch (e) {
       console.log("Sending message failed.", e);
@@ -284,7 +297,7 @@ const PrimarySearchAppBar = (props) => {
       timeAgo={notification.timeAgo}
       orderId={notification.orderId}
       imgSrc={notification.imgUrl}
-      onClick={() => sendMessage(notification.id)}
+      onClick={() => sendMessage(notification)}
       onDelete={() => deleteMessage(notification.id)}
       status={notification.status}
     ></NotificationItem>
@@ -305,10 +318,10 @@ const PrimarySearchAppBar = (props) => {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-  const markAsAllRead = async ()=>{
+  const markAsAllRead = async () => {
     await dispatch(notificationActions.markAsAllReadRequest());
     await dispatch(notificationActions.getNotificationsRequest());
-  }
+  };
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -428,13 +441,50 @@ const PrimarySearchAppBar = (props) => {
                   }}
                 >
                   {notifications.length > 0 ? (
-                    <div style={{display:'flex',justifyContent:'space-between',alignItems:"center",padding:'10px'}}>
-                      <span style={{color:'#111',fontSize:"25px",fontWeight:'700',marginRight:'10px'}}>Thông báo</span>
-                      <span onClick={markAsAllRead} className="read-all" style={{color:'#111',fontSize:"15px",fontWeight:'500',marginRight:'10px',color:'blue',cursor:'pointer'}}>Đã Xem tất cả</span>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "10px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "#111",
+                          fontSize: "25px",
+                          fontWeight: "700",
+                          marginRight: "10px",
+                        }}
+                      >
+                        Thông báo
+                      </span>
+                      <span
+                        onClick={markAsAllRead}
+                        className="read-all"
+                        style={{
+                          color: "#111",
+                          fontSize: "15px",
+                          fontWeight: "500",
+                          marginRight: "10px",
+                          color: "blue",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Đã Xem tất cả
+                      </span>
                     </div>
                   ) : (
-                    <span style={{color:'#111',fontSize:"25px",fontWeight:'700',marginRight:'10px'}}>Thông báo</span>
-
+                    <span
+                      style={{
+                        color: "#111",
+                        fontSize: "25px",
+                        fontWeight: "700",
+                        marginRight: "10px",
+                      }}
+                    >
+                      Thông báo
+                    </span>
                   )}
                   {showNotifications}
                 </div>
@@ -452,8 +502,16 @@ const PrimarySearchAppBar = (props) => {
                   {notifications.length > 0 ? (
                     <h2>{t("Customer_MyInform.1")} </h2>
                   ) : (
-                    <span style={{color:'#111',fontSize:"15px",fontWeight:'700',marginLeft:'15px'}}>Hiện chưa có thông báo nào</span>
-
+                    <span
+                      style={{
+                        color: "#111",
+                        fontSize: "15px",
+                        fontWeight: "700",
+                        marginLeft: "15px",
+                      }}
+                    >
+                      Hiện chưa có thông báo nào
+                    </span>
                   )}
                   {showNotifications}
                 </div>
@@ -481,12 +539,10 @@ const PrimarySearchAppBar = (props) => {
               </IconButton>
             )}
             {userData && userData.isAdmin === true ? null : (
-              <IconButton
-                color="inherit"
-               
-              >
+              <IconButton color="inherit">
                 {userId || userName ? (
-                  <div  onClick={() => props.history.push("/user_page")}
+                  <div
+                    onClick={() => props.history.push("/user_page")}
                     style={{
                       backgroundColor: "#88d498",
                       color: "white",
@@ -500,25 +556,36 @@ const PrimarySearchAppBar = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    {
-                      imgUrl &&  imgUrl !=="https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png" ? <img style={{width:'25px',height:'25px',borderRadius:'50%'}} src={imgUrl}/>:<Avatar
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        backgroundColor: "white",
-                        color: "black",
-                        marginRight: "3px",
-                        fontSize: "10px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {split.length >= 2
-                        ? split[split.length - 2][0] +
-                          " " +
-                          split[split.length - 1][0]
-                        : split[split.length - 1][0]}
-                    </Avatar>
-                    }
+                    {imgUrl &&
+                    imgUrl !==
+                      "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png" ? (
+                      <img
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          borderRadius: "50%",
+                        }}
+                        src={imgUrl}
+                      />
+                    ) : (
+                      <Avatar
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          backgroundColor: "white",
+                          color: "black",
+                          marginRight: "3px",
+                          fontSize: "10px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {split.length >= 2
+                          ? split[split.length - 2][0] +
+                            " " +
+                            split[split.length - 1][0]
+                          : split[split.length - 1][0]}
+                      </Avatar>
+                    )}
                     <span
                       style={{
                         marginBottom: "0px !important",
@@ -529,7 +596,10 @@ const PrimarySearchAppBar = (props) => {
                     </span>
                   </div>
                 ) : (
-                  <AccountCircle onClick ={()=>props.history.push("/login")} style={{ marginRight: "5px" }} />
+                  <AccountCircle
+                    onClick={() => props.history.push("/login")}
+                    style={{ marginRight: "5px" }}
+                  />
                 )}
               </IconButton>
             )}
