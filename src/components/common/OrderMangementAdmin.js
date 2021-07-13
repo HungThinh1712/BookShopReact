@@ -26,7 +26,7 @@ const { TabPane } = Tabs;
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650
+    minWidth: 650,
   },
   header: {
     fontWeight: 600,
@@ -115,7 +115,7 @@ const BasicTable = () => {
   //Cancel
   const [reason, setReason] = useState(null);
   const [orderId, setOrderId] = useState(null);
-  const [userId,setUserId] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [orderCode, setOrderCode] = useState(null);
 
   const handleResonChange = (e) => {
@@ -126,16 +126,15 @@ const BasicTable = () => {
     setModalVisible(true);
     setOrderId(row.id);
     setOrderCode(row.orderId);
-    setUserId(row.userId)
+    setUserId(row.userId);
   };
   const handleOkClick = async () => {
     await dispatch(orderActions.cancelOder(orderId, reason));
     setModalVisible(false);
     setPage(1);
     await dispatch(orderActions.getOrdersRequest(page, 4, 0));
-    sendMessage(userId,orderId,orderCode,4);
+    sendMessage(userId, orderId, orderCode, 4);
   };
- 
 
   const sendMessage = async (userId, id, orderId, status) => {
     let chatMessage = null;
@@ -173,7 +172,7 @@ const BasicTable = () => {
         userId: userId,
         orderCode: orderId,
         orderId: id,
-        type:"Cancel"
+        type: "Cancel",
       };
     }
 
@@ -186,10 +185,9 @@ const BasicTable = () => {
           "Content-Type": "application/json",
         },
       });
-      if(status!==4)
-        {
-          await dispatch(orderActions.confirmOder(id, status));
-        }
+      if (status !== 4) {
+        await dispatch(orderActions.confirmOder(id, status));
+      }
       await dispatch(orderActions.getAllOrdersRequest(page, 10, statusKey));
     } catch (e) {
       console.log("Sending message failed.", e);
@@ -214,12 +212,24 @@ const BasicTable = () => {
   const hanldeTooltip = (row) => {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <span>{`Phí ship: ${row.shippingFee
-          .toString()
-          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}</span>
-        <span>{`Tổng tiền: ${row.totalMoney
-          .toString()
-          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}</span>
+        <span>
+          {`Phí ship: ${row.shippingFee
+            .toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}
+          đ
+        </span>
+        <span>
+          {`Tiền giảm: ${row.discountMoney
+            .toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}
+          đ
+        </span>
+        <span>
+          {`Tổng tiền: ${row.totalMoney
+            .toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}
+          đ
+        </span>
       </div>
     );
   };
@@ -248,7 +258,7 @@ const BasicTable = () => {
 
   return (
     <div>
-       <Modal
+      <Modal
         title="Hủy đơn hàng"
         visible={modalVisible}
         style={{ top: 100 }}
@@ -358,35 +368,35 @@ const BasicTable = () => {
                         title={() => hanldeTooltip(row)}
                         size="small"
                       >
-                        {(row.totalMoney + row.shippingFee)
+                        {(row.totalMoney + row.shippingFee - row.discountMoney)
                           .toString()
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
                     </TableCell>
                     <TableCell style={{ width: "300px" }}>
-                     <div style={{display:'flex'}}>
-                     <Button
-                        variant="contained"
-                        style={{ fontWeight: "600",marginRight:'10px' }}
-                        size="small"
-                        onClick={() =>
-                          sendMessage(row.userId, row.id, row.orderId, 1)
-                        }
-                        className={classes.confirm}
-                      >
-                        Xác nhận
-                      </Button>
-                      <Button
-                        variant="contained"
-                        style={{ fontWeight: "600" }}
-                        size="small"
-                        onClick={()=>handleCancelOrderClick(row)}
-                        className={classes.cancelButton}
-                      >
-                        Hủy
-                      </Button>
-                     </div>
+                      <div style={{ display: "flex" }}>
+                        <Button
+                          variant="contained"
+                          style={{ fontWeight: "600", marginRight: "10px" }}
+                          size="small"
+                          onClick={() =>
+                            sendMessage(row.userId, row.id, row.orderId, 1)
+                          }
+                          className={classes.confirm}
+                        >
+                          Xác nhận
+                        </Button>
+                        <Button
+                          variant="contained"
+                          style={{ fontWeight: "600" }}
+                          size="small"
+                          onClick={() => handleCancelOrderClick(row)}
+                          className={classes.cancelButton}
+                        >
+                          Hủy
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -451,7 +461,7 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.10")}
                   </TableCell>
-                  
+
                   <TableCell
                     className={classes.header}
                     style={{ width: "200px" }}
@@ -496,12 +506,12 @@ const BasicTable = () => {
                         title={() => hanldeTooltip(row)}
                         size="small"
                       >
-                        {(row.totalMoney + row.shippingFee)
+                        {(row.totalMoney + row.shippingFee - row.discountMoney)
                           .toString()
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
-                    </TableCell>                   
+                    </TableCell>
                     <TableCell style={{ width: "250px" }}>
                       <Button
                         variant="contained"
@@ -572,7 +582,7 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.10")}
                   </TableCell>
-                  
+
                   <TableCell
                     className={classes.header}
                     style={{ width: "200px" }}
@@ -615,7 +625,7 @@ const BasicTable = () => {
                         title={() => hanldeTooltip(row)}
                         size="small"
                       >
-                        {(row.totalMoney + row.shippingFee)
+                        {(row.totalMoney + row.shippingFee - row.discountMoney)
                           .toString()
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
@@ -725,13 +735,12 @@ const BasicTable = () => {
                         title={() => hanldeTooltip(row)}
                         size="small"
                       >
-                        {(row.totalMoney + row.shippingFee)
+                        {(row.totalMoney + row.shippingFee - row.discountMoney)
                           .toString()
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </Tooltip>
                     </TableCell>
-                    
                   </TableRow>
                 ))}
               </TableBody>
@@ -777,7 +786,7 @@ const BasicTable = () => {
                   >
                     {t("Admin_Other.9")}
                   </TableCell>
-                  
+
                   <TableCell
                     className={classes.header}
                     style={{ width: "300px" }}
@@ -822,7 +831,7 @@ const BasicTable = () => {
                     <TableCell style={{ width: "150px" }}>
                       {row.orderAddress.fullName}
                     </TableCell>
-                   
+
                     <TableCell style={{ width: "300px" }}>
                       {row.orderAddress.address}
                     </TableCell>
@@ -832,7 +841,7 @@ const BasicTable = () => {
                         title={() => hanldeTooltip(row)}
                         size="small"
                       >
-                        {(row.totalMoney + row.shippingFee)
+                        {(row.totalMoney + row.shippingFee - row.discountMoney)
                           .toString()
                           .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
@@ -841,7 +850,6 @@ const BasicTable = () => {
                     <TableCell style={{ width: "200px" }}>
                       {row.cancelReason}
                     </TableCell>
-                   
                   </TableRow>
                 ))}
               </TableBody>

@@ -12,7 +12,7 @@ import * as commentActions from "./../../actions/commentAction";
 import { withRouter } from "react-router-dom";
 import * as CallApis from "../../constants/Apis";
 import Pagination from "../common/Pagination";
-
+import { Tag } from "antd";
 import { useTranslation } from "react-i18next";
 import StarIcon from "@material-ui/icons/Star";
 import Rating from "@material-ui/lab/Rating";
@@ -26,8 +26,9 @@ const useStyles = makeStyles({
     fontWeight: 900,
   },
   button: {
+    background: "#2db7f5",
+    padding: "5px 10px 5px 10px",
     "&:hover": {
-      color: "blue",
       cursor: "pointer",
     },
   },
@@ -101,7 +102,7 @@ const BasicTable = (props) => {
               </TableCell>
               <TableCell>
                 {row.isCheck === true ? (
-                  "Đã duyệt"
+                  <Tag color="#87d068">Đã duyệt</Tag>
                 ) : (
                   <span
                     className={classes.button}

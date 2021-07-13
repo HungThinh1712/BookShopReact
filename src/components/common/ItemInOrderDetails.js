@@ -1,10 +1,10 @@
-import React, { useState }  from "react";
-import {useTranslation} from 'react-i18next'
-import {Button} from "antd"
-
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Button } from "antd";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Dialog from "../common/DialogWriteComment"
-import { Tag } from 'antd';
+import Dialog from "../common/DialogWriteComment";
+import { Tag } from "antd";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -64,16 +64,22 @@ const useStyles = makeStyles((theme) => ({
 const ItemInOrderDetails = (props) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const [open,setOpen] = useState(false);
-  const handleClose =()=>{
-    setOpen(false)
-  }
-  const handleClick = ()=>{
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClick = () => {
     setOpen(true);
-  }
+  };
   return (
-    <div style={{ border: "none", background:'white',borderRadius:'5px'}}>
-      <Dialog open={open} bookId={props.bookId} orderId ={props.orderId} userId= {props.userId} onClose={handleClose}/>
+    <div style={{ border: "none", background: "white", borderRadius: "5px" }}>
+      <Dialog
+        open={open}
+        bookId={props.bookId}
+        orderId={props.orderId}
+        userId={props.userId}
+        onClose={handleClose}
+      />
       <div className={classes.item}>
         <div
           style={{
@@ -87,16 +93,28 @@ const ItemInOrderDetails = (props) => {
           <img
             src={props.imageSrc}
             alt="product "
-            style={{ maxWidth: "100%", maxHeight: "100%",padding:'5px' }}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              padding: "5px",
+              cursor: "pointer",
+            }}
+            onClick={() => props.history.push(`/details/${props.bookId}`)}
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span className={classes.title}>{props.name}</span>
           {props.authorName ? (
-            <div style={{display:'flex',flexDirection:'column'}}>
-              <span className={classes.author}>{t('Admin_Book.11')}: {props.authorName}</span>
-              <span style={{fontWeight:"600",color:'red'}} className={classes.author}>Số lượng: {props.amount}</span>
-
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span className={classes.author}>
+                {t("Admin_Book.11")}: {props.authorName}
+              </span>
+              <span
+                style={{ fontWeight: "600", color: "red" }}
+                className={classes.author}
+              >
+                Số lượng: {props.amount}
+              </span>
             </div>
           ) : null}
         </div>
@@ -133,16 +151,20 @@ const ItemInOrderDetails = (props) => {
             </span>
           </div>
         </div>
-        {
-          props.status ===3 ? <div className={classes.btn_group}>
-          {
-            props.itemStatus ===false ? <Button onClick={handleClick} type="primary">Đánh giá</Button> : <Tag color="#87d068">Đã đánh giá</Tag>
-          }
-        </div>: null
-        }
+        {props.status === 3 ? (
+          <div className={classes.btn_group}>
+            {props.itemStatus === false ? (
+              <Button onClick={handleClick} type="primary">
+                Đánh giá
+              </Button>
+            ) : (
+              <Tag color="#87d068">Đã đánh giá</Tag>
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );
 };
 
-export default ItemInOrderDetails;
+export default withRouter(ItemInOrderDetails);
