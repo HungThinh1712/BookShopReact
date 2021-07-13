@@ -14,9 +14,7 @@ import { Empty, Modal } from "antd";
 import { Input } from "antd";
 import * as promotionActions from "../../actions/promontionAction";
 import ItemPromotion from "../common/PromotionItem";
-import {
-  CloseOutlined
-} from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 
 const useStyles = makeStyles((theme) => ({
   payment_method_zone: {
@@ -35,11 +33,10 @@ const PaymentMethod = (props) => {
     (totalMoney, cartItem) => totalMoney + cartItem.amount * cartItem.price,
     0
   );
-  const [totalMoneyAfterDisCount,setTotalMoneyAfterDisCount] =useState(null );
-  const [discountMoney,setDiscountMoney] = useState(null);
+  const [totalMoneyAfterDisCount, setTotalMoneyAfterDisCount] = useState(null);
+  const [discountMoney, setDiscountMoney] = useState(null);
   const bookIds = cartItems.items.map((x) => x.bookId);
   const [paymentMethod, setPaymentMethod] = useState(1);
-
 
   //get protionsByMe
   useEffect(() => {
@@ -50,15 +47,15 @@ const PaymentMethod = (props) => {
     state.promotions.promotionsByMe ? state.promotions.promotionsByMe : []
   );
   const [promotionId, setPromotionId] = useState(null);
-  const [promotionCode,setPromotionCode] = useState(null)
+  const [promotionCode, setPromotionCode] = useState(null);
   const handlePromotionClick = (promotion) => {
     if (promotion.id === promotionId) {
       setPromotionId(null);
-      setPromotionCode(null)
+      setPromotionCode(null);
     } else {
       setPromotionId(promotion.id);
-      setPromotionCode(promotion.promotionCode)
-      console.log(promotion.promotionCode)
+      setPromotionCode(promotion.promotionCode);
+      console.log(promotion.promotionCode);
     }
   };
 
@@ -82,13 +79,9 @@ const PaymentMethod = (props) => {
     </div>
   ));
 
- 
-
   const userData = useSelector((state) =>
     state.auth.userData ? state.auth.userData : null
   );
-  
-
 
   const sendMessage = async (orderId) => {
     const chatMessage = {
@@ -113,7 +106,8 @@ const PaymentMethod = (props) => {
   const shippingFee = props.distanceAndFee
     ? props.distanceAndFee.shippingFee
     : null;
-  const [shippingFeeAfterDiscount,setShippingFeeAfterDiscount] = useState(null);
+  const [shippingFeeAfterDiscount, setShippingFeeAfterDiscount] =
+    useState(null);
   const distance = props.distanceAndFee ? props.distanceAndFee.distance : null;
 
   const handleClick = () => {
@@ -132,7 +126,12 @@ const PaymentMethod = (props) => {
       props.history.push("/order_success_page");
     } else {
       dispatch(
-        cartActions.payWithMomo(totalMoney ,shippingFee,discountMoney,promotionCode)
+        cartActions.payWithMomo(
+          totalMoney,
+          shippingFee,
+          discountMoney,
+          promotionCode
+        )
       );
     }
   };
@@ -145,55 +144,59 @@ const PaymentMethod = (props) => {
     setIsModalVisible(true);
   };
 
-
   const handleApplyPromotion = async () => {
-    if(promotionCode){
-      const url = CallApis.API_URL.concat("/Promotion/Apply")
-    const promotionModel = {promotionCode,totalMoney,bookIds}
-    await axios(url, {
-      method: "post",
-      data: promotionModel,
-    
-    }).then(async (res) => {
-      if (res.status === 200) {
-        setIsModalVisible(false);
-        
-         if(res.data.promotionType===0){
-          setDiscountMoney(res.data.discountMoney);
-          setTotalMoneyAfterDisCount(totalMoney - res.data.discountMoney);
-          setShippingFeeAfterDiscount(null);
-         }
-         if(res.data.promotionType===1){
-           setShippingFeeAfterDiscount(shippingFee);
-           setDiscountMoney(null);
-           setTotalMoneyAfterDisCount(null);
-
-         }
-      }
-    })
-    }else{
-          setDiscountMoney(null);
-          setTotalMoneyAfterDisCount(null);
-          setShippingFeeAfterDiscount(null);
+    if (promotionCode) {
+      const url = CallApis.API_URL.concat("/Promotion/Apply");
+      const promotionModel = { promotionCode, totalMoney, bookIds };
+      await axios(url, {
+        method: "post",
+        data: promotionModel,
+      }).then(async (res) => {
+        if (res.status === 200) {
           setIsModalVisible(false);
+
+          if (res.data.promotionType === 0) {
+            setDiscountMoney(res.data.discountMoney);
+            setTotalMoneyAfterDisCount(totalMoney - res.data.discountMoney);
+            setShippingFeeAfterDiscount(null);
+          }
+          if (res.data.promotionType === 1) {
+            setShippingFeeAfterDiscount(shippingFee);
+            setDiscountMoney(null);
+            setTotalMoneyAfterDisCount(null);
+          }
+        }
+      });
+    } else {
+      setDiscountMoney(null);
+      setTotalMoneyAfterDisCount(null);
+      setShippingFeeAfterDiscount(null);
+      setIsModalVisible(false);
     }
   };
 
- 
   return (
     <div className={classes.payment_method_zone}>
       <Modal
-        bodyStyle={{ backgroundColor: "#EDECE7",borderRadius:"5px" }}
+        bodyStyle={{ backgroundColor: "#EDECE7", borderRadius: "5px" }}
         footer={null}
         closable={false}
         visible={isModalVisible}
       >
-        <CloseOutlined onClick={()=>setIsModalVisible(false)} style ={{display:'flex',justifyContent:'flex-end',paddingBottom:'15px',cursor:'pointer'}}/>
+        <CloseOutlined
+          onClick={() => setIsModalVisible(false)}
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            paddingBottom: "15px",
+            cursor: "pointer",
+          }}
+        />
         <div style={{ display: "flex", marginBottom: "15px" }}>
-          <Input value ={promotionCode} placeholder="Nhập mã khuyến mãi" />
+          <Input value={promotionCode} placeholder="Nhập mã khuyến mãi" />
           <Button
             variant="contained"
-            onClick ={handleApplyPromotion}
+            onClick={handleApplyPromotion}
             style={{
               backgroundColor: "#8ba889",
               fontWeight: "600",
@@ -206,9 +209,16 @@ const PaymentMethod = (props) => {
             Áp dụng
           </Button>
         </div>
-       {promotionsByMe.length > 0 ?  <div style={{ maxHeight: "400px", overflow: "auto" }}>
-          {showPromotions}
-        </div>: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Không có mã khuyến mãi phù hợp"/>}
+        {promotionsByMe.length > 0 ? (
+          <div style={{ maxHeight: "400px", overflow: "auto" }}>
+            {showPromotions}
+          </div>
+        ) : (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="Không có mã khuyến mãi phù hợp"
+          />
+        )}
       </Modal>
       <div
         style={{
@@ -237,9 +247,9 @@ const PaymentMethod = (props) => {
         totalMoney={totalMoney}
         totalMoneyAfterDisCount={totalMoneyAfterDisCount}
         shippingFee={shippingFee}
-        shippingFeeAfterDiscount ={shippingFeeAfterDiscount}
+        shippingFeeAfterDiscount={shippingFeeAfterDiscount}
         distance={distance}
-        discountMoney ={discountMoney}
+        discountMoney={discountMoney}
         style={{ marginTop: "40px" }}
       />
       <Button

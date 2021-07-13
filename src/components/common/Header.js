@@ -304,20 +304,7 @@ const PrimarySearchAppBar = (props) => {
   ));
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+
   const markAsAllRead = async () => {
     await dispatch(notificationActions.markAsAllReadRequest());
     await dispatch(notificationActions.getNotificationsRequest());
@@ -333,33 +320,55 @@ const PrimarySearchAppBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
+      <MenuItem onClick={() => props.history.push("/cart")}>
+        <IconButton
+          style={{ outline: "none !important", boxShadow: "none" }}
+          color="inherit"
+        >
+          <Badge badgeContent={cartAmount} color="secondary">
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Giỏ hàng</p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+          <Badge
+            badgeContent={
+              notifications.length > 0 ? notifications[0].totalRead : 0
+            }
+            color="secondary"
+          >
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {userId ? (
+        <MenuItem onClick={() => props.history.push("/user_page")}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>Trang của bạn</p>
+        </MenuItem>
+      ) : (
+        <MenuItem onClick={() => props.history.push("/login")}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>Trang của bạn</p>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -630,7 +639,6 @@ const PrimarySearchAppBar = (props) => {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
       <SnackBar />
     </div>
   );
