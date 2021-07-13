@@ -3,6 +3,7 @@ import Rating from "@material-ui/lab/Rating";
 import Dialog from "./DialogComment";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
 
 const Comment = (props) => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const Comment = (props) => {
   const userId = useSelector((state) =>
     state.auth.userData ? state.auth.userData.id : ""
   );
-  const date = new Date(props.createAt);
+  const temp = props.createAt.split(" ");
   return (
     <div style={{ display: "flex" }}>
       <Dialog
@@ -42,13 +43,8 @@ const Comment = (props) => {
           <div>{props.name}</div>
         </div>
         <div className="review-block-date">
-          {date.getMonth() +
-            1 +
-            " tháng " +
-            date.getDate() +
-            "," +
-            "  " +
-            date.getUTCFullYear()}
+          {temp[0]}
+
           <br />
         </div>
       </div>

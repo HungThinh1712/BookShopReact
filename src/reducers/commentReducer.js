@@ -2,7 +2,8 @@ import * as Types from "../constants/ActionType";
 const initialState = {
   comments: [],
   ratings: [],
-  comment: null
+  comment: null,
+  adminComments: [],
 };
 
 export default function commentReducer(state = initialState, action) {
@@ -12,11 +13,15 @@ export default function commentReducer(state = initialState, action) {
         ...state,
         comments: action.comments,
       };
+    case Types.GET_ADMIN_COMMENTS:
+      return {
+        ...state,
+        adminComments: action.comments,
+      };
     case Types.GET_COMMENT:
       return {
-          ...state,
-          comments: action.comments,
-          
+        ...state,
+        comments: action.comments,
       };
     case Types.GET_RATINGS:
       return {

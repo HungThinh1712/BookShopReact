@@ -14,7 +14,7 @@ import UserPage from "./components/pages/UserPage";
 import PaymentPage from "./components/pages/PaymentPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 import BackDrop from "./components/common/BackDrop";
 import OrderSuccessPage from "./components/pages/OrderSuccessPage";
 import ConfirmCodePage from "./components/pages/ConfirmCodePage";
@@ -36,21 +36,23 @@ import OrderManagementPageAdmin from "./components/pages/Admin/OrderManagementPa
 import UserManagementPageAdmin from "./components/pages/Admin/UserManageAdmin";
 import AuthorManagementPageAdmin from "./components/pages/Admin/AuthorManageAdmin";
 import TypeManagementPageAdmin from "./components/pages/Admin/TypeManageAdmin";
-import ResetPassword from "./components/pages/ResetPassword"
+import ResetPassword from "./components/pages/ResetPassword";
 import ReportPage from "./components/pages/Admin/ReportPage";
-import PromotionDetail from "./components/pages/Admin/detailPromotion"
-import TopFive from "./components/pages/Admin/topFiveBooks"
+import PromotionDetail from "./components/pages/Admin/detailPromotion";
+import TopFive from "./components/pages/Admin/topFiveBooks";
 import PublishingHouseManagementPageAdmin from "./components/pages/Admin/PublishingHouseManageAdmin";
 import AdminRoute from "./privaterouter/adminRoute";
-import PromotionPage from "./components/pages/myPromotion"
+import PromotionPage from "./components/pages/myPromotion";
 import UserRoute from "./privaterouter/userRoute";
-import LoginPage from "./components/pages/LoginPage"
-import { useTranslation } from "react-i18next"
+import LoginPage from "./components/pages/LoginPage";
+import CommentManageAdminPage from "./components/pages/Admin/CommentManage";
+import { useTranslation } from "react-i18next";
+import CommentAdminManagement from "./components/common/CommentAdminManagement";
 function App() {
   const { i18n } = useTranslation();
-  i18n.changeLanguage('vi');
+  i18n.changeLanguage("vi");
   return (
-    <div style={{backgroundColor:"#EDECE7"}} className="App">
+    <div style={{ backgroundColor: "#EDECE7" }} className="App">
       <Router>
         <ToastContainer />
         <BackDrop />
@@ -59,6 +61,11 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
             <AdminRoute exact path="/admin/books" component={LstBookAdmin} />
+            <AdminRoute
+              exact
+              path="/admin/comments"
+              component={CommentManageAdminPage}
+            />
             <UserRoute path="/order_history" component={OrderManageMentPage} />
             <UserRoute path="/promotion" component={PromotionPage} />
             <UserRoute
@@ -72,7 +79,10 @@ function App() {
             <AdminRoute path="/admin/add_book_page" component={AddBooksAdmin} />
             <AdminRoute path="/admin/add_promotion" component={AddPromotion} />
             <AdminRoute path="/admin/promotions" component={PromotionList} />
-            <AdminRoute path="/admin/promotiondetail/:id" component={PromotionDetail} />
+            <AdminRoute
+              path="/admin/promotiondetail/:id"
+              component={PromotionDetail}
+            />
             <AdminRoute path="/admin/details/:id" component={DetailBookAdmin} />
             <AdminRoute path="/admin/update_book" component={UpdateBookAdmin} />
             <AdminRoute
