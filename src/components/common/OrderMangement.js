@@ -245,9 +245,9 @@ const BasicTable = (props) => {
                         {row.description}
                       </TableCell>
                       <TableCell>
-                        {row.totalMoney
+                        {(row.totalMoney + row.shippingFee - row.discountMoney)
                           .toString()
-                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                         đ
                       </TableCell>
                       <TableCell>{showStatus(row.status)}</TableCell>
@@ -319,9 +319,13 @@ const BasicTable = (props) => {
                           {row.description}
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
-                          {row.totalMoney
+                          {(
+                            row.totalMoney +
+                            row.shippingFee -
+                            row.discountMoney
+                          )
                             .toString()
-                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                           đ
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
@@ -384,9 +388,13 @@ const BasicTable = (props) => {
                           {row.description}
                         </TableCell>
                         <TableCell style={{ width: "150px" }}>
-                          {row.totalMoney
+                          {(
+                            row.totalMoney +
+                            row.shippingFee -
+                            row.discountMoney
+                          )
                             .toString()
-                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                           đ
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
@@ -461,9 +469,13 @@ const BasicTable = (props) => {
                           {row.description}
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
-                          {row.totalMoney
+                          {(
+                            row.totalMoney +
+                            row.shippingFee -
+                            row.discountMoney
+                          )
                             .toString()
-                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                           đ
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
@@ -529,9 +541,13 @@ const BasicTable = (props) => {
                           {row.description}
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
-                          {row.totalMoney
+                          {(
+                            row.totalMoney +
+                            row.shippingFee -
+                            row.discountMoney
+                          )
                             .toString()
-                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
                           đ
                         </TableCell>
                         <TableCell style={{ width: "200px" }}>
