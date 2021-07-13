@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Footer from "../common/Footer";
 import SexCheckBox from "../common/SexCheckBok";
 import { Checkbox } from "antd";
-import Button from "@material-ui/core/Button";
+import PersonIcon from "@material-ui/icons/Person";
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as authActions from "./../../actions/authAction";
@@ -13,7 +13,12 @@ import { toastMessage } from "./../common/ToastHelper";
 import { useTranslation } from "react-i18next";
 import MessengerChat from "../common/MessengerCustomerChat";
 import { SaveFilled } from "@ant-design/icons";
+import MailIcon from "@material-ui/icons/Mail";
+import PhoneIcon from "@material-ui/icons/Phone";
+import DateRangeIcon from "@material-ui/icons/DateRange";
+import LockIcon from "@material-ui/icons/Lock";
 import { Tooltip } from "antd";
+import EmailIcon from "@material-ui/icons/Email";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -154,8 +159,13 @@ const ProfileUserPage = (props) => {
                     />
                   </Tooltip>
                 </div>
-                <div className="input-field-userpage">
-                  <i className="fas fa-user"></i>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="input-field-userpage"
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <PersonIcon />
+                  </div>
                   <input
                     value={name}
                     onChange={handleNameInputChange}
@@ -166,8 +176,13 @@ const ProfileUserPage = (props) => {
                 <div className="sex">
                   <SexCheckBox value={sex} onChange={handleSexInputChange} />
                 </div>
-                <div className="input-field-userpage">
-                  <i className="fas fa-envelope"></i>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="input-field-userpage"
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <EmailIcon />
+                  </div>
                   <input
                     value={email}
                     disabled
@@ -176,8 +191,13 @@ const ProfileUserPage = (props) => {
                   />
                 </div>
 
-                <div className="input-field-userpage">
-                  <i className="fas fa-phone"></i>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="input-field-userpage"
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <PhoneIcon />
+                  </div>
                   <input
                     value={phone}
                     onChange={handlePhoneInputChange}
@@ -186,7 +206,9 @@ const ProfileUserPage = (props) => {
                   />
                 </div>
                 <div className="input-field-userpage">
-                  <i className="fas fa-calendar-alt"></i>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <DateRangeIcon />
+                  </div>
                   <input
                     value={birthday === "0001-01-01" ? null : birthday}
                     onChange={handleBirthdayInputChange}
@@ -204,7 +226,9 @@ const ProfileUserPage = (props) => {
                 {checked ? (
                   <div>
                     <div className="input-field-userpage">
-                      <i className="fas fa-lock"></i>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <LockIcon />
+                      </div>
                       <input
                         type="password"
                         onChange={handleOldPassWordInputChange}
@@ -212,7 +236,9 @@ const ProfileUserPage = (props) => {
                       />
                     </div>
                     <div className="input-field-userpage">
-                      <i className="fas fa-lock"></i>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <LockIcon />
+                      </div>
                       <input
                         type="password"
                         onChange={handleNewPassWordInputChange}
@@ -220,7 +246,9 @@ const ProfileUserPage = (props) => {
                       />
                     </div>
                     <div className="input-field-userpage">
-                      <i className="fas fa-lock"></i>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <LockIcon />
+                      </div>
                       <input
                         type="password"
                         onChange={handleConfirmPassWordInputChange}

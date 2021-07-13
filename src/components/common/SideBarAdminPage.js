@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Sidenav, Nav, Dropdown, Icon } from "rsuite";
 import { useSelector } from "react-redux";
 import "rsuite/dist/styles/rsuite-default.css";
-
+import { StarFilled } from "@ant-design/icons";
 const styles = {
   width: 240,
   height: "100%",
@@ -119,7 +119,7 @@ const SideBarAdminPage = (props) => {
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => props.history.push("/admin/comments")}
-                  icon={<Icon icon="audio-description" />}
+                  icon={<Icon icon="star" />}
                   eventKey="3-7"
                 >
                   Bình luận
