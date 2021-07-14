@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as cartAction from "./../../actions/cartAction";
 import { withRouter } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Divider } from '@material-ui/core';
+import { Divider } from "@material-ui/core";
 
 const ListItemIPayment = (props) => {
   const { t } = useTranslation();
@@ -30,38 +30,50 @@ const ListItemIPayment = (props) => {
 
   const sumMoney = props.totalMoney + props.shippingFee;
 
-  const sumMoneyAfterDiscount = ()=>{
-    let  sumMoneyDiscount
-    if(props.discountMoney){
-      sumMoneyDiscount = props.totalMoney + props.shippingFee - props.discountMoney;
-      return <span>{`${sumMoneyDiscount
-        .toString()
-        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}</span>
+  const sumMoneyAfterDiscount = () => {
+    let sumMoneyDiscount;
+    if (props.discountMoney) {
+      sumMoneyDiscount =
+        props.totalMoney + props.shippingFee - props.discountMoney;
+      return (
+        <span>{`${sumMoneyDiscount
+          .toString()
+          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}</span>
+      );
+    } else if (props.shippingFeeAfterDiscount)
+      return (
+        <span>
+          {`${props.totalMoney
+            .toString()
+            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}
+        </span>
+      );
+    else {
+      return (
+        <span>
+          {`${sumMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}
+        </span>
+      );
     }
-    else if(props.shippingFeeAfterDiscount)
-      return <span>
-        {`${props.totalMoney
-        .toString()
-        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}
-      </span>;
-    else{
-      return null;
-    }
-  }
+  };
 
-  const showDiscountMoney = ()=>{
-    if(props.discountMoney){
-      return <span>{`-${props.discountMoney
-        .toString()
-        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}</span>
+  const showDiscountMoney = () => {
+    if (props.discountMoney) {
+      return (
+        <span>{`-${props.discountMoney
+          .toString()
+          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}</span>
+      );
+    } else if (props.shippingFeeAfterDiscount) {
+      return (
+        <span>{`-${props.shippingFee
+          .toString()
+          .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}</span>
+      );
+    } else {
+      return <span>0đ</span>;
     }
-    else if(props.shippingFeeAfterDiscount){
-      console.log(props.shippingFeeAfterDiscount);
-      return <span>{`-${props.shippingFee
-        .toString()
-        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ`}</span>
-    }
-  }
+  };
 
   const showCartItems = Object.values(cartItems.items).map((cartItem) => (
     <div>
@@ -70,98 +82,183 @@ const ListItemIPayment = (props) => {
         title={cartItem.name}
         price={cartItem.price}
         amount={cartItem.amount}
+        imageSrc={cartItem.imageSrc}
       />
     </div>
   ));
   return (
-    <div>
+    <div style={{ width: "75%" }}>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          borderStyle: "solid",
-          borderWidth: "2px",
-          marginTop: "20px",
+          backgroundColor: "white",
           borderColor: "#253528",
-          borderRadius: "5px",
+          borderRadius: "10px",
+          padding: "10px 15px 10px 15px",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ fontWeight: "700", fontSize: "17px", padding: "10px" }}>
-            {t("Customer_Shopping_Payment.23")}
-          </div>
-          <div style={{ padding: "10px", marginLeft: "200px" }}>
-            <Button
-              onClick={() => props.history.push("/cart")}
-              variant="contained"
-              size="small"
-            >
-              {t("Customer_Shopping_Payment.10")}
-            </Button>
-          </div>
-        </div>
-        <div style={{ backgroundColor: "#253528", height: "1px" }}></div>
-        {showCartItems}
-        <div style={{ backgroundColor: "#253528", height: "1px" }}></div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "0 15px 0 15px",
+          }}
+        >
+          <span
             style={{
-              fontWeight: "600",
-              fontSize: "13px",
-              padding: "2px",
-              marginLeft: "10px",
+              cursor: "pointer",
+              fontSize: "18px",
+              fontWeight: "500",
             }}
           >
+            Thông tin đơn hàng
+          </span>
+          <span
+            style={{
+              color: "blueviolet",
+              cursor: "pointer",
+              fontSize: "15px",
+              fontWeight: "500",
+            }}
+            onClick={() => props.history.push("/cart")}
+          >
+            Chỉnh sửa
+          </span>
+        </div>
+
+        {showCartItems}
+      </div>
+
+      <div
+        style={{
+          padding: "10px",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          marginTop: "10px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            paddingTop: "5px",
+            paddingBottom: "5px",
+          }}
+        >
+          <span style={{ fontSize: "14px", fontWeight: "500", opacity: "0.7" }}>
+            Tạm tính
+          </span>
+          <span style={{ fontSize: "15px", fontWeight: "700" }}>
+            {props.totalMoney
+              .toString()
+              .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+            đ
+          </span>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            paddingTop: "5px",
+            paddingBottom: "5px",
+          }}
+        >
+          <span style={{ fontSize: "14px", fontWeight: "500", opacity: "0.7" }}>
             Phí vận chuyển
-          </div>
-          <div style={{ padding: "2px", marginRight: "10px" }}>
-            <div style={{ fontSize: "13px", fontWeight: "500" }}>{`${
-              props.shippingFee 
+          </span>
+          <span style={{ fontSize: "15px", fontWeight: "700" }}>
+            {`${
+              props.shippingFee
                 ? props.shippingFee
                     .toString()
                     .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
                 : null
-            }đ (${props.distance})`}</div>
-          </div>
+            }đ `}
+            <span style={{ opacity: "0.7", fontSize: "13px" }}>
+              {`(${props.distance})`}
+            </span>
+          </span>
         </div>
-
-        <div style={{ backgroundColor: "#253528", height: "0.5px" }}></div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ fontWeight: "600", fontSize: "17px", padding: "10px" }}>
-            {t("Customer_Shopping_Payment.4")}
-          </div>
-          <div style={{ padding: "10px", marginLeft: "200px" }}>
-            <div>
-            <div style={{ color: "red", fontSize: "20px", fontWeight: "500" }}>
-              {sumMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}đ
-            </div>
-              <div
-                style={{ color: "red", fontSize: "15px", fontWeight: "500",display:'flex',justifyContent:'flex-end' }}
-              >
-                {showDiscountMoney()}
-              </div>
-          </div>
-          {props.discountMoney || props.shippingFeeAfterDiscount ? <Divider/> : null}
-          <div
-                style={{ color: "red", fontSize: "20px", fontWeight: "500" }}
-              >
-                {sumMoneyAfterDiscount()}
-              </div>
-            </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            paddingTop: "5px",
+            paddingBottom: "5px",
+          }}
+        >
+          <span style={{ fontSize: "14px", fontWeight: "500", opacity: "0.7" }}>
+            Giảm giá
+          </span>
+          <span style={{ fontSize: "15px", fontWeight: "700" }}>
+            {showDiscountMoney()}
+          </span>
         </div>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <div
-            className="txt-promotion"
-            onClick={props.showModal}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            paddingTop: "5px",
+            paddingBottom: "5px",
+          }}
+        >
+          <span style={{ fontSize: "14px", fontWeight: "500", opacity: "0.7" }}>
+            Thành tiền
+          </span>
+          <span style={{ fontSize: "25px", fontWeight: "700", color: "red" }}>
+            {sumMoneyAfterDiscount()}
+          </span>
+        </div>
+        <div
+          onClick={props.showModal}
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            cursor: "pointer",
+            fontSize: "16px",
+            fontWeight: "600",
+            color: "rgb(20, 53, 195)",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            paddingTop: "5px",
+            paddingBottom: "5px",
+          }}
+        >
+          Chọn mã khuyến mãi
+        </div>
+        <div
+          style={{
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            paddingTop: "5px",
+            paddingBottom: "5px",
+          }}
+        >
+          <Button
+            onClick={props.purchaseButtonClick}
             style={{
-              fontWeight: "600",
-              fontSize: "15px",
-              paddingRight: "10px",
-              color: "rgb(13, 92, 182)",
+              width: "100%",
+              backgroundColor: "#114b5f",
+              color: "white",
+              fontWeight: "500",
             }}
           >
-            Chọn mã khuyến mãi
-          </div>
+            Đặt hàng
+          </Button>
         </div>
       </div>
     </div>

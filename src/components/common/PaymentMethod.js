@@ -18,7 +18,9 @@ import { CloseOutlined } from "@ant-design/icons";
 
 const useStyles = makeStyles((theme) => ({
   payment_method_zone: {
-    display: "inline-block",
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
   },
 }));
 
@@ -220,27 +222,102 @@ const PaymentMethod = (props) => {
           />
         )}
       </Modal>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          borderStyle: "solid",
-          borderWidth: "2px",
-          borderColor: "#253528",
-          borderRadius: "5px",
-          height: "127px",
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          <div style={{ fontWeight: "700", fontSize: "17px", padding: "10px" }}>
-            {t("Customer_Shopping_Payment.12")}
+      <div style={{ marginRight: "10px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            backgroundColor: "white",
+            borderRadius: "10px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "10px",
+            }}
+          >
+            <span
+              style={{
+                cursor: "pointer",
+                fontSize: "18px",
+                fontWeight: "500",
+              }}
+            >
+              Địa chỉ giao hàng
+            </span>
+            <span
+              style={{
+                color: "blueviolet",
+                cursor: "pointer",
+                fontSize: "15px",
+                fontWeight: "500",
+              }}
+              onClick={() => props.history.push("/address_shipping")}
+            >
+              Chỉnh sửa
+            </span>
+          </div>
+          <div style={{ padding: "0 10px 10px 10px" }}>
+            <div
+              style={{
+                fontWeight: "700",
+              }}
+            >
+              {userData.fullName}
+            </div>
+            <div style={{ display: "flex" }}>
+              <div
+                style={{ fontSize: "13px", fontWeight: "500", opacity: "0.7" }}
+              >
+                {userData.phone}
+              </div>
+            </div>
+            <div
+              style={{ fontSize: "13px", fontWeight: "500", opacity: "0.7" }}
+            >
+              {userData.specificAddress}
+            </div>
           </div>
         </div>
-        <div style={{ backgroundColor: "#253528", height: "1px" }}></div>
-        <CheckBox
-          value={paymentMethod}
-          onChange={handlePaymentMethodInputChange}
-        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "white",
+            borderRadius: "10px",
+            marginTop: "10px",
+            height: "127px",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              paddingLeft: "15px",
+              paddingRight: "15px",
+              paddingTop: "10px",
+            }}
+          >
+            <span
+              style={{
+                cursor: "pointer",
+                fontSize: "18px",
+                fontWeight: "500",
+              }}
+            >
+              Phương thức thanh toán
+            </span>
+          </div>
+          <CheckBox
+            value={paymentMethod}
+            onChange={handlePaymentMethodInputChange}
+          />
+        </div>
       </div>
       <ListItemInPayment
         showModal={showModal}
@@ -251,21 +328,8 @@ const PaymentMethod = (props) => {
         distance={distance}
         discountMoney={discountMoney}
         style={{ marginTop: "40px" }}
+        purchaseButtonClick={handleClick}
       />
-      <Button
-        onClick={handleClick}
-        variant="contained"
-        style={{
-          width: "100%",
-          marginTop: "10px",
-          backgroundColor: "#8ba889",
-          fontWeight: "600",
-          color: "white",
-        }}
-        color="primary"
-      >
-        {t("Customer_Shopping_Payment.15")}
-      </Button>
     </div>
   );
 };

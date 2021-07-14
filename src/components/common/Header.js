@@ -247,7 +247,7 @@ const PrimarySearchAppBar = (props) => {
       });
       if (userData.isAdmin === false) {
         if (notification.type === "Rate") {
-          props.history.push(`/details/${notification.orderId}`);
+          props.history.push(`/admin/comments}`);
           setOpacity("none");
         } else if (notification.type === "Promotion") {
           props.history.push("/promotion");
@@ -258,7 +258,7 @@ const PrimarySearchAppBar = (props) => {
         }
       } else {
         if (notification.type === "Rate") {
-          props.history.push(`/details/${notification.orderId}`);
+          props.history.push(`/admin/comments`);
           setOpacity("none");
         } else {
           props.history.push("/admin/ordermanagement_page");

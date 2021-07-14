@@ -14,7 +14,7 @@ import * as CallApis from "../../constants/Apis";
 import { useTranslation } from "react-i18next";
 import { toastMessage } from "./ToastHelper";
 import CancelIcon from "../Images/cancel.png";
-import Delivery from "../Images/Delivery.jpg";
+import Delivery from "../Images/Delivery.png";
 import Confirming from "../Images/Confirming.png";
 import Deliveried from "../Images/Deliveried.png";
 import Confirmed from "../Images/Confirmed.png";

@@ -65,7 +65,7 @@ const HeaderinPayment = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [hideAddressForm, setHideAdressForm] = useState("none");
-  const [tempAddress,setTempAddress] = useState("");
+  const [tempAddress, setTempAddress] = useState("");
   const userData = useSelector((state) =>
     state.auth.userData ? state.auth.userData : null
   );
@@ -76,9 +76,9 @@ const HeaderinPayment = (props) => {
         : null
     )
   );
-  const [ward,setWard] = useState("")
-  const [province,setProvince] = useState("")
-  const [district,setDistrict] =useState("")
+  const [ward, setWard] = useState("");
+  const [province, setProvince] = useState("");
+  const [district, setDistrict] = useState("");
   const [phone, setPhone] = useState(
     useSelector((state) =>
       state.auth.userData && state.auth.userData.phone
@@ -86,13 +86,12 @@ const HeaderinPayment = (props) => {
         : null
     )
   );
-  
+
   const specificAddress = useSelector((state) =>
     state.auth.userData && state.auth.userData.specificAddress
       ? state.auth.userData.specificAddress
       : null
   );
-
 
   const id = useSelector((state) =>
     state.auth.userData && state.auth.userData.id
@@ -114,27 +113,28 @@ const HeaderinPayment = (props) => {
   const handlePaymentClick = () => {
     dispatch(cartActions.updateBookAmount(props.history));
   };
-  const [address, setAddress] = useState(specificAddress ? specificAddress : "");
+  const [address, setAddress] = useState(
+    specificAddress ? specificAddress : ""
+  );
   const handleSelect = (value) => {
-   
-    const arr = value.split(",")
+    const arr = value.split(", ");
     setAddress(arr[0]);
-    setWard(arr[1] );
-    setDistrict(arr[2] )
+    setWard(arr[1]);
+    setDistrict(arr[2]);
     setProvince(arr[3]);
     setTempAddress(`${arr[0]}, ${arr[1]}, ${arr[2]}, ${arr[3]}`);
     //setAddress(value);
   };
-  
-  useEffect(()=>{
-   if(specificAddress){
-    const arrAddress = specificAddress.split(",")
-    setAddress(arrAddress[0]);
-    setWard(arrAddress[1] ? arrAddress[1] : "");
-    setDistrict(arrAddress[2] ? arrAddress[2] : "")
-    setProvince(arrAddress[3] ? arrAddress[3] : "");
-   }
-  },[specificAddress])
+
+  useEffect(() => {
+    if (specificAddress) {
+      const arrAddress = specificAddress.split(", ");
+      setAddress(arrAddress[0]);
+      setWard(arrAddress[1] ? arrAddress[1] : "");
+      setDistrict(arrAddress[2] ? arrAddress[2] : "");
+      setProvince(arrAddress[3] ? arrAddress[3] : "");
+    }
+  }, [specificAddress]);
 
   const handleNameInputChange = (e) => {
     setName(e.target.value);
@@ -179,7 +179,7 @@ const HeaderinPayment = (props) => {
         visible={visible}
         onOk={handleSubmit}
         onCancel={hidenModal}
-        style={{top:30}}
+        style={{ top: 30 }}
         width={500}
         okText="Cập nhật"
         cancelText="Hủy"
@@ -255,9 +255,8 @@ const HeaderinPayment = (props) => {
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
                 placeholder="Nhập xã/ phường"
                 onChange={handleWardInputChange}
-
               ></Input>
-               <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              <label style={{ fontSize: "12px", fontWeight: "600" }}>
                 Quận/ Huyện
               </label>
               <Input
@@ -272,11 +271,9 @@ const HeaderinPayment = (props) => {
               <Input
                 value={province}
                 onChange={handleProvniceInputChange}
-
                 style={{ marginBottom: "10px", borderRadius: "5px" }}
                 placeholder="Nhập tỉnh/thành phố"
               ></Input>
-
             </div>
           )}
         </PlacesAutocomplete>
@@ -284,16 +281,17 @@ const HeaderinPayment = (props) => {
       {specificAddress ? (
         <div className={classes.address_zone}>
           <div>
-            <div style={{ fontWeight: "700", fontSize: "30px", color: "red" }}>
+            <div
+              style={{ fontWeight: "700", fontSize: "30px", color: "#49654E" }}
+            >
               2. {t("Customer_Shopping_Payment.6")}
             </div>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                borderStyle: "solid",
-                borderWidth: "2px",
-                padding: "10px",
+                backgroundColor: "white",
+                padding: "15px",
                 marginTop: "20px",
                 borderColor: "#253528",
                 borderRadius: "5px",
@@ -301,9 +299,9 @@ const HeaderinPayment = (props) => {
             >
               <div
                 style={{
-                  fontWeight: "800",
-                  color: "red",
-                  fontFamily: "Roboto ",
+                  fontWeight: "bold",
+                  color: "black",
+                  fontSize: "20px",
                 }}
               >
                 {userData.fullName}
@@ -339,7 +337,7 @@ const HeaderinPayment = (props) => {
                   size="small"
                   style={{
                     marginRight: "10px",
-                    backgroundColor: "#8ba889",
+                    backgroundColor: "#114b5f",
                     fontWeight: "700",
                     color: "white",
                   }}
