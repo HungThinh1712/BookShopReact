@@ -6,8 +6,9 @@ import { useTranslation } from "react-i18next";
 const useStyles = makeStyles((theme) => ({
   table_info: {
     marginLeft: "87px",
-    width: "100%",
+    minWidth: "44%",
     backgroundColor: "#dae6d6 ",
+    borderRadius: "5px",
     [theme.breakpoints.down("sm")]: {
       marginTop: "5px",
       marginLeft: "0px",
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up("lg")]: {
       marginLeft: "87px",
-      width: "25%",
     },
   },
 }));

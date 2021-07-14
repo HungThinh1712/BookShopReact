@@ -6,13 +6,15 @@ const useStyles = makeStyles((theme) => ({
   paragraph: {
     backgroundColor: "#dae6d6 ",
     color: "#114b5f",
+    paddingLeft: "10px",
+    paddingRight: "10px",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "0px",
       marginRight: "0px",
-      marginTop: "30px",
+      marginTop: "10px",
     },
     [theme.breakpoints.up("lg")]: {
-      marginLeft: "87px",
+      marginLeft: "10px",
       marginRight: "87px",
       wordWrap: "break-word",
       marginTop: "10px",

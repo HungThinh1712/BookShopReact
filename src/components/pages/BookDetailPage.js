@@ -33,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "30px",
     },
   },
+  tableInfo: {
+    [theme.breakpoints.down("sm")]: {
+      flexWrap: "wrap",
+    },
+
+    [theme.breakpoints.down("xs")]: {
+      flexWrap: "wrap",
+    },
+  },
   paragraph: {
     [theme.breakpoints.up("sm")]: {
       marginLeft: "0px",
@@ -120,9 +129,9 @@ const BookDetailPage = (props) => {
 
   return (
     <div style={{ backgroundColor: "#EDECE7" }}>
-      <Header/>
+      <Header />
       {selectedBook != null ? (
-        <div >
+        <div>
           <div
             style={{
               marginTop: "90px",
@@ -175,17 +184,19 @@ const BookDetailPage = (props) => {
           <div className={classes.container}>
             <h4> {t("Customer_Detail.9")}</h4>
           </div>
-          <TableInfo
-            publishingHouseName={selectedBook.publishingHouseName}
-            size={selectedBook.size}
-            pageAmount={selectedBook.pageAmount}
-            coverType={selectedBook.cover_Type}
-            publishDate={selectedBook.publishDate}
-          />
-          <div className={classes.container}>
+          <div style={{ display: "flex" }} className={classes.tableInfo}>
+            <TableInfo
+              publishingHouseName={selectedBook.publishingHouseName}
+              size={selectedBook.size}
+              pageAmount={selectedBook.pageAmount}
+              coverType={selectedBook.cover_Type}
+              publishDate={selectedBook.publishDate}
+            />
+            {/* <div className={classes.container}>
             <h4>{t("Customer_Detail.17")}</h4>
+          </div> */}
+            <Description description={selectedBook.description} />
           </div>
-          <Description description={selectedBook.description} />
           <div className={classes.container}>
             <h4>{t("Customer_Detail.18")}</h4>
             <Comment

@@ -84,7 +84,7 @@ const BasicTable = (props) => {
               <TableCell>{row.title}</TableCell>
               <TableCell>{row.content}</TableCell>
               <TableCell>
-                <Rating disabled value={row.rate} />
+                <Rating readOnly value={row.rate} />
               </TableCell>
             </TableRow>
           ))}

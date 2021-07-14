@@ -8,8 +8,8 @@ import Button from "@material-ui/core/Button";
 import CartIcon from "../../image/ic-cart@2x.png";
 import { useSelector, useDispatch } from "react-redux";
 import * as cartActions from "./../../actions/cartAction";
-import {useTranslation} from 'react-i18next'
-import * as backDropAction from '../../actions/backdropAction'
+import { useTranslation } from "react-i18next";
+import * as backDropAction from "../../actions/backdropAction";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       alignItem: "center",
     },
-    paddingLeft:'-50px'
+    paddingLeft: "-50px",
   },
   card_title_detail: {
     fontSize: "2vw",
@@ -144,12 +144,12 @@ const BookDetail = (props) => {
             </div>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
-              {t('Customer_Detail.1')}: {props.authorName}
+                {t("Customer_Detail.1")}: {props.authorName}
               </span>
             </p>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
-              {t('Customer_Detail.2')}: {props.bookTypeName}
+                {t("Customer_Detail.2")}: {props.bookTypeName}
               </span>
             </p>
 
@@ -163,12 +163,12 @@ const BookDetail = (props) => {
             </p>
             <p style={{ marginBottom: "0.5em" }}>
               <span className={classes.card_info}>
-              {t('Customer_Detail.3')}: {props.discount}%
+                {t("Customer_Detail.3")}: {props.discount}%
               </span>
             </p>
             <p style={{ marginBottom: "1em" }}>
               <span className={classes.card_info}>
-              {t('Customer_Detail.4')}:{" "}
+                {t("Customer_Detail.4")}:{" "}
                 {props.coverPrice
                   .toString()
                   .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
@@ -177,31 +177,18 @@ const BookDetail = (props) => {
             </p>
             <div style={{ display: "flex", marginBottom: "0.5em" }}>
               <p style={{ marginBottom: "0.5em" }}>
-                <span className={classes.card_info}>{t('Customer_Detail.6')}</span>
+                <span className={classes.card_info}>
+                  {t("Customer_Detail.6")}
+                </span>
               </p>
               <div style={{ marginBottom: "0.5em", marginLeft: "10px" }}>
-                <ButtonGroup
-                  size="small"
-                  color="primary"
-                  aria-label="outlined secondary button group"
-                >
-                  <Button
-                    style={{ borderColor: "blue" }}
-                    onClick={handleDecrease}
-                  >
-                    -
+                <ButtonGroup size="small">
+                  <Button onClick={handleDecrease}>
+                    <span style={{ fontSize: "15px", fontWeight: 900 }}>-</span>
                   </Button>
-                  <Button
-                    style={{ borderColor: "blue", fontWeight: 900 }}
-                    disabled
-                  >
-                    {amount}
-                  </Button>
-                  <Button
-                    style={{ borderColor: "blue" }}
-                    onClick={handleIncrease}
-                  >
-                    +
+                  <Button style={{ fontWeight: 900 }}>{amount}</Button>
+                  <Button onClick={handleIncrease}>
+                    <span style={{ fontSize: "15px", fontWeight: 900 }}>+</span>
                   </Button>
                 </ButtonGroup>
               </div>
@@ -211,7 +198,12 @@ const BookDetail = (props) => {
                 onClick={handleAddToCart}
                 size="medium"
                 variant="contained"
-                style={{ fontSize: "15px",background:'#1a936f',color:"white",fontWeight:"600" }}
+                style={{
+                  fontSize: "15px",
+                  background: "#1a936f",
+                  color: "white",
+                  fontWeight: "600",
+                }}
               >
                 <img
                   src={CartIcon}
@@ -223,7 +215,7 @@ const BookDetail = (props) => {
                   }}
                   alt={"a cart icon"}
                 />
-                {t('Customer_Detail.7')}
+                {t("Customer_Detail.7")}
               </Button>
             </div>
           </div>
