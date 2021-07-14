@@ -306,25 +306,23 @@ const HeaderinPayment = (props) => {
               >
                 {userData.fullName}
               </div>
-              <div style={{ fontSize: "14px", fontWeight: "500" }}>
-                {t("Customer_Shopping_Payment.6")}: {userData.specificAddress}
-              </div>
               <div style={{ display: "flex" }}>
                 <div
                   style={{
-                    fontSize: "14px",
+                    fontSize: "16px",
                     fontWeight: "500",
-                    paddingRight: "5px",
+                    opacity: "0.7",
                   }}
-                >
-                  {t("Customer_Shopping_Payment.7")}{" "}
-                </div>
-                <div
-                  style={{ fontSize: "14px", fontWeight: "500", color: "red" }}
                 >
                   {userData.phone}
                 </div>
               </div>
+              <div
+                style={{ fontSize: "16px", fontWeight: "500", opacity: "0.7" }}
+              >
+                {userData.specificAddress}
+              </div>
+
               <div
                 style={{
                   display: "flex",

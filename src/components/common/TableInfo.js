@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
   table_info: {
     marginLeft: "87px",
     width: "100%",
-    backgroundColor: "#1a936f",
+    backgroundColor: "#dae6d6 ",
     [theme.breakpoints.down("sm")]: {
       marginTop: "5px",
       marginLeft: "0px",
@@ -36,10 +36,10 @@ const TableInfo = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {t("Admin_Book.9")}{" "}
         </h6>
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {props.publishingHouseName}
         </h6>
       </div>
@@ -51,10 +51,10 @@ const TableInfo = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {t("Admin_Book.27")}
         </h6>
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>{props.size}</h6>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>{props.size}</h6>
       </div>
       <Divider />
       <div
@@ -64,10 +64,10 @@ const TableInfo = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {t("Admin_Book.16")}
         </h6>
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {props.pageAmount}
         </h6>
       </div>
@@ -79,10 +79,10 @@ const TableInfo = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {t("Admin_Book.18")}
         </h6>
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {props.coverType}
         </h6>
       </div>
@@ -94,10 +94,10 @@ const TableInfo = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {t("Admin_Book.12")}
         </h6>
-        <h6 style={{ color: "#f3e9d2", fontWeight: "600" }}>
+        <h6 style={{ color: "#114b5f", fontWeight: "600" }}>
           {props.publishDate}
         </h6>
       </div>
