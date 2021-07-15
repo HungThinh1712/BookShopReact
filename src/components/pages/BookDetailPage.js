@@ -181,8 +181,20 @@ const BookDetailPage = (props) => {
               <div></div>
             </Paper>
           )}
-          <div className={classes.container}>
+          <div
+            style={{ display: "flex", justifyContent: "space-between" }}
+            className={classes.container}
+          >
             <h4> {t("Customer_Detail.9")}</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                width: "50%",
+              }}
+            >
+              <h4> Mô tả</h4>
+            </div>
           </div>
           <div style={{ display: "flex" }} className={classes.tableInfo}>
             <TableInfo
