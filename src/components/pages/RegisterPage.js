@@ -4,27 +4,24 @@ import SexCheckBox from "./../common/SexCheckBok";
 import { useDispatch } from "react-redux";
 import { toastMessage } from "../common/ToastHelper";
 import * as authActions from "../../actions/authAction";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 import { useTranslation } from "react-i18next";
 import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { DatePicker } from "antd";
-import background from "../Images/background.jpg"
+import background from "../Images/background.jpg";
 const useStyles = makeStyles((theme) => ({
-  
-
   icon: {
     "&:hover": {
       backgroundColor: "#f2f2f2 !important",
       cursor: "pointer",
     },
   },
-  
 }));
 const RegisterPage = (props) => {
-  const classes = useStyles()
+  const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -69,13 +66,33 @@ const RegisterPage = (props) => {
   };
   return (
     <div
-    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})`,display:'flex',justifyContent:'flex-end' }}
-    className="signin-signup"
+      style={{
+        height: "100%",
+        width: "100%",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundImage: `url(${background})`,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+      className="signin-signup"
     >
       <form className="sign-up-form">
         <div className="loginForm">
-        <div style={{display:'flex'}}>
-          <ArrowBackIcon onClick={()=>props.history.push('/user_page')} className={classes.icon}  style={{borderRadius:'5px',marginTop:'0.4em',marginRight:'1px',padding:'4px',width:'40px',fontSize:'30px'}}/>
+          <div style={{ display: "flex" }}>
+            <ArrowBackIcon
+              onClick={() => props.history.push("/login")}
+              className={classes.icon}
+              style={{
+                borderRadius: "5px",
+                marginTop: "0.4em",
+                marginRight: "1px",
+                padding: "4px",
+                width: "40px",
+                fontSize: "30px",
+              }}
+            />
             <h2 style={{ fontWeight: "600" }}>Đăng ký</h2>
           </div>
           <label style={{ fontSize: "12px", fontWeight: "600" }}>
@@ -165,10 +182,10 @@ const RegisterPage = (props) => {
                 alignItems: "center",
                 display: "flex",
                 justifyContent: "center",
-                width:"100%",
-                borderRadius: '5px',
-                background:"#49654e",
-                color:'#fff'
+                width: "100%",
+                borderRadius: "5px",
+                background: "#49654e",
+                color: "#fff",
               }}
               onClick={handleSubmit}
             >
@@ -176,8 +193,13 @@ const RegisterPage = (props) => {
             </Button>
           </div>
           <div
-            style={{ color: "#49654e", cursor: "pointer",display:'flex',justifyContent:'center'}}
-            onClick={() => props.history.push("/user_page")}
+            style={{
+              color: "#49654e",
+              cursor: "pointer",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            onClick={() => props.history.push("/login")}
           >
             <span>{t("Customer_Management.44")}</span>
           </div>

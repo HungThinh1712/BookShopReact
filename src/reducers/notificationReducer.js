@@ -13,7 +13,7 @@ export default function notificationReducer(state = initialState, action) {
     case Types.LOG_OUT:
       return {
         ...state,
-        notifications: [],
+        notifications: action.payload,
       };
 
     default:

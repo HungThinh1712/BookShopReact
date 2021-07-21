@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { toastMessage } from "../common/ToastHelper";
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
 import Footer from "../common/Footer";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   flex_div: {
     display: "flex",
-    backgroundColor:"9fe6a0",
+    backgroundColor: "9fe6a0",
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       flexDirection: "column",
@@ -84,7 +84,7 @@ const ShoppingCartPage = (props) => {
   );
 
   const showCartItems = Object.values(cartItems.items).map((cartItem) => (
-    <div >
+    <div>
       <IteminCart
         key={cartItem.bookId}
         title={cartItem.name}
@@ -109,19 +109,15 @@ const ShoppingCartPage = (props) => {
     0
   );
   const handleClick = () => {
-    if (userData !== null) {
-      props.history.push("/address_shipping");
-    } else {
-      props.history.push("/user_page");
-      toastMessage("Bạn chưa đăng nhập. Đăng nhập để tiếp tục!");
-    }
+    props.history.push("/address_shipping");
   };
   return (
-    <div >
+    <div>
       <Header></Header>
       {Object.values(cartItems.items).length > 0 ? (
         <div className={classes.flex_div}>
-          <Paper  style={{marginBottom:'200px'}}
+          <Paper
+            style={{ marginBottom: "200px" }}
             className={classes.container}
             style={{ display: "flex", flexDirection: "column" }}
           >
@@ -136,10 +132,13 @@ const ShoppingCartPage = (props) => {
                   flexDirection: "row",
                 }}
               >
-                <h6>{t('Customer_Shopping_Payment.3')}: </h6>
+                <h6>{t("Customer_Shopping_Payment.3")}: </h6>
                 <div style={{ flexGrow: "1" }} />
                 <h6>
-                  {GetTotalMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                  {GetTotalMoney.toString().replace(
+                    /(\d)(?=(\d\d\d)+(?!\d))/g,
+                    "$1."
+                  )}
                   đ
                 </h6>
               </div>
@@ -151,10 +150,13 @@ const ShoppingCartPage = (props) => {
                   flexDirection: "row",
                 }}
               >
-                <h6>{t('Customer_Shopping_Payment.4')}: </h6>
+                <h6>{t("Customer_Shopping_Payment.4")}: </h6>
                 <div style={{ flexGrow: "1" }} />
                 <h6>
-                  {GetTotalMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                  {GetTotalMoney.toString().replace(
+                    /(\d)(?=(\d\d\d)+(?!\d))/g,
+                    "$1."
+                  )}
                   đ
                 </h6>
               </div>
@@ -162,51 +164,65 @@ const ShoppingCartPage = (props) => {
             <Button
               className={classes.button_order}
               variant="contained"
-               style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}
+              style={{
+                backgroundColor: "#1a936f",
+                color: "#fff",
+                fontWeight: "600",
+              }}
               onClick={handleClick}
             >
-              {t('Customer_Shopping_Payment.5')}
+              {t("Customer_Shopping_Payment.5")}
             </Button>
           </div>
         </div>
       ) : (
-        <div style={{display:'flex',alignContent:'center',justifyContent:'center',backgroundColor:"#EDECE7",paddingTop:'200px'}}>
-          <div >
-          <div className="row">
-            <div className="col-md-12">
-              <div className="card">
-                <div className="card-body cart">
-                  <div className="col-sm-12 empty-cart-cls text-center">
-                    {" "}
-                    <img
-                      alt="Giỏ hàng"
-                      src="https://i.pinimg.com/originals/c6/0f/ea/c60fea3ac3aab2e82c2f7ea901ef55f6.jpg?fbclid=IwAR1nrsHtpUGScp40zEzmSxUzNT1X5-h3uT92t64Hq7nzF3Rxpfo86f9qt9k"
-                      width="200"
-                      height="200"
-                      className="img-fluid mb-4 mr-3"
-                    />
-                    <h3>
-                      <strong>{t('Customer_Shopping_Payment.19')}</strong>
-                    </h3>
-                    <h4>
-                      {t('Customer_Shopping_Payment.20')}
-                    </h4>{" "}
-                    <Button
-                       variant="contained"
-                        style={{backgroundColor:"#1a936f",color:"#fff",fontWeight:'600'}}
-                      onClick={() => props.history.push("/")}
-                    >
-                      {t('Customer_Shopping_Payment.18')}
-                    </Button>
+        <div
+          style={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+            backgroundColor: "#EDECE7",
+            paddingTop: "200px",
+          }}
+        >
+          <div>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="card">
+                  <div className="card-body cart">
+                    <div className="col-sm-12 empty-cart-cls text-center">
+                      {" "}
+                      <img
+                        alt="Giỏ hàng"
+                        src="https://i.pinimg.com/originals/c6/0f/ea/c60fea3ac3aab2e82c2f7ea901ef55f6.jpg?fbclid=IwAR1nrsHtpUGScp40zEzmSxUzNT1X5-h3uT92t64Hq7nzF3Rxpfo86f9qt9k"
+                        width="200"
+                        height="200"
+                        className="img-fluid mb-4 mr-3"
+                      />
+                      <h3>
+                        <strong>{t("Customer_Shopping_Payment.19")}</strong>
+                      </h3>
+                      <h4>{t("Customer_Shopping_Payment.20")}</h4>{" "}
+                      <Button
+                        variant="contained"
+                        style={{
+                          backgroundColor: "#1a936f",
+                          color: "#fff",
+                          fontWeight: "600",
+                        }}
+                        onClick={() => props.history.push("/")}
+                      >
+                        {t("Customer_Shopping_Payment.18")}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       )}
-      <div style={{marginTop:'300px'}} >
+      <div style={{ marginTop: "300px" }}>
         <Footer />
       </div>
     </div>
