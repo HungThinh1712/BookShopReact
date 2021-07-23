@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Input } from "antd";
 import { Button } from "antd";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import background from "../Images/background.jpg"
+import background from "../Images/background.jpg";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -34,20 +34,27 @@ const ForgetPasswordPage = (props) => {
   const handleSubmitSend = async (e) => {
     dispatch(authActions.sendCodeResetPassWord(email, changeFlag));
   };
-  const handleSubmitConfirm =  () => {
+  const handleSubmitConfirm = () => {
     const userData = { email, code };
-    console.log(userData)
-     dispatch(
-      authActions.confirmCodeReset(userData, props.history)
-    );
+    console.log(userData);
+    dispatch(authActions.confirmCodeReset(userData, props.history));
   };
   const handleCodeInputChange = (e) => {
     setCode(e.target.value);
   };
   return (
     <div
-    style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background})`,display:'flex',justifyContent:'flex-end' }}
-    className="signin-signup"
+      style={{
+        height: "100%",
+        width: "100%",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundImage: `url(${background})`,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+      className="signin-signup"
     >
       <form>
         <div className="loginForm">
@@ -78,7 +85,7 @@ const ForgetPasswordPage = (props) => {
             placeholder="Nhập email"
           />
           {flag === true ? (
-            <div style={{display:'flex',flexDirection:'column'}}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <label style={{ fontSize: "12px", fontWeight: "600" }}>
                 Code
               </label>
@@ -103,8 +110,8 @@ const ForgetPasswordPage = (props) => {
                 alignItems: "center",
                 display: "flex",
                 justifyContent: "center",
-                background:"#49654e",
-                color:"#fff"
+                background: "#49654e",
+                color: "#fff",
               }}
               onClick={handleSubmitSend}
             >

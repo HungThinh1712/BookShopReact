@@ -2,28 +2,22 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authActions from "./../../actions/authAction";
 import { withRouter } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import GoogleLogin from "react-google-login";
 import { Input } from "antd";
 import { Button } from "antd";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import background1 from "../Images/background.jpg"
-import FacebookIcon from '@material-ui/icons/Facebook';
-import {
-  GoogleOutlined,
-  FaceBookOutlined
-} from '@ant-design/icons';
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import background1 from "../Images/background.jpg";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import { GoogleOutlined, FaceBookOutlined } from "@ant-design/icons";
 const useStyles = makeStyles((theme) => ({
-  
-
   icon: {
     "&:hover": {
       backgroundColor: "#f2f2f2 !important",
       cursor: "pointer",
     },
   },
-  
 }));
 const SignIn = (props) => {
   const dispatch = useDispatch();
@@ -69,7 +63,7 @@ const SignIn = (props) => {
     }
   };
   const responseGoogle = (response) => {
-    console.log(response)
+    console.log(response);
     dispatch(
       authActions.loginUserFacebook(
         response.profileObj.email,
@@ -82,18 +76,40 @@ const SignIn = (props) => {
   const classes = useStyles();
   return (
     <div
-      style={{ height: "100%",width:'100%', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage: `url(${background1})`,display:'flex',justifyContent:'flex-end' }}
+      style={{
+        height: "100%",
+        width: "100%",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundImage: `url(https://i.imgur.com/R98y0u7.png)`,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
       className="signin-signup"
     >
-    
       <form>
-        <div style={{display:'flex',justifyContent:'flex-end'}} className="loginForm">
+        <div
+          style={{ display: "flex", justifyContent: "flex-end" }}
+          className="loginForm"
+        >
           {/* <img  style={{width:'70px',height:'80px'}} src={Logo} alt=""/> */}
-          <div style={{display:'flex'}}>
-          <ArrowBackIcon onClick={()=>props.history.push('/')} className={classes.icon}  style={{borderRadius:'5px',marginTop:'0.4em',marginRight:"1px",padding:'4px',width:'40px',fontSize:'30px'}}/>
+          <div style={{ display: "flex" }}>
+            <ArrowBackIcon
+              onClick={() => props.history.push("/")}
+              className={classes.icon}
+              style={{
+                borderRadius: "5px",
+                marginTop: "0.4em",
+                marginRight: "1px",
+                padding: "4px",
+                width: "40px",
+                fontSize: "30px",
+              }}
+            />
             <h2 style={{ fontWeight: "600" }}>Đăng nhập</h2>
           </div>
-          <label style={{ fontSize: "12px", fontWeight: "600"}}>Email</label>
+          <label style={{ fontSize: "12px", fontWeight: "600" }}>Email</label>
           <Input
             style={{
               borderRadius: "5px",
@@ -121,31 +137,40 @@ const SignIn = (props) => {
             }}
           >
             <div
-                          className={classes.icon}
-
+              className={classes.icon}
               onClick={() => props.history.push("/forget_password")}
-              style={{color: "#49654e", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
+              style={{
+                color: "#49654e",
+                cursor: "pointer",
+                padding: "6px",
+                borderRadius: "5px",
+              }}
             >
               Quên mật khẩu
             </div>
             <div
               className={classes.icon}
-              style={{color: "#49654e", cursor: "pointer",padding:'6px',borderRadius:'5px' }}
+              style={{
+                color: "#49654e",
+                cursor: "pointer",
+                padding: "6px",
+                borderRadius: "5px",
+              }}
               onClick={() => props.history.push("/register")}
             >
               Đăng ký
             </div>
           </div>
           <Button
-            style={{ marginBottom: "10px"}}
+            style={{ marginBottom: "10px" }}
             size="large"
             style={{
               alignItems: "center",
               display: "flex",
               justifyContent: "center",
-              borderRadius:'5px',
-              background:'#253528',
-              color:"White"
+              borderRadius: "5px",
+              background: "#253528",
+              color: "White",
             }}
             onClick={handleSubmit}
           >
@@ -153,28 +178,56 @@ const SignIn = (props) => {
           </Button>
 
           <div className="social-media" style={{ marginTop: "10px" }}>
-            <div style={{ cursor: "pointer",alignItems:'center',justifyContent:'center' }} className="social-icon">
+            <div
+              style={{
+                cursor: "pointer",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="social-icon"
+            >
               <FacebookLogin
                 appId="513590556436339"
                 callback={responseFacebook}
                 render={(renderProps) => (
-                  <div style={{ cursor: "pointer",display:"flex",alignItems:'center',justifyContent:'center' }}
-                    
+                  <div
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                     onClick={renderProps.onClick}
-                  ><FacebookIcon /></div>
+                  >
+                    <FacebookIcon />
+                  </div>
                 )}
                 icon="fa-facebook"
               />
             </div>
-            <div style={{ cursor: "pointer",alignItems:'center',justifyContent:'center' }} className="social-icon">
+            <div
+              style={{
+                cursor: "pointer",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="social-icon"
+            >
               <GoogleLogin
                 clientId="466677084136-koq86l9ktvvdolnitinanfcv1men5te2.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 render={(renderProps) => (
-                  <div style={{ cursor: "pointer",display:"flex",alignItems:'center',justifyContent:'center' }}
-                    
+                  <div
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                     onClick={renderProps.onClick}
-                  ><GoogleOutlined/></div>
+                  >
+                    <GoogleOutlined />
+                  </div>
                 )}
                 cookiePolicy={"single_host_origin"}
               />
