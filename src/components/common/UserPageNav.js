@@ -125,6 +125,7 @@ const UserPageNav = (props) => {
                   fontWeight: "500",
                   color: "white",
                   fontWeight: "600",
+                  textTransform: "uppercase",
                 }}
               >
                 {" "}

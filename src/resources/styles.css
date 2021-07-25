@@ -2,7 +2,7 @@
         Vnese Books
 ======================*/
 .home-header {
-  background: #EDECE7;
+  background: #edece7;
   height: 40px;
   margin-top: 20px;
   margin-bottom: 15px;
@@ -57,7 +57,7 @@ button:hover {
 }
 .cover_container {
   display: grid;
-  background-color: #EDECE7;
+  background-color: #edece7;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   padding-left: 15px;
 }
@@ -262,7 +262,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   width: 100%;
-  background:#114b5f;
+  background: #114b5f;
 }
 .main-content {
   display: flex;
@@ -502,7 +502,7 @@ cbbox:hover {
 
   border-radius: 5px;
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 8% 92%;
   padding: 0 0.4rem;
   position: relative;
 }
@@ -518,7 +518,7 @@ cbbox:hover {
 .input-field-login input {
   background: none;
   outline: none;
-  width:320px;
+  width: 320px;
   height: 40px;
   border: none;
   line-height: 1;
@@ -600,16 +600,16 @@ cbbox:hover {
 .btn-loginpage:hover {
   background-color: #4d84e2;
 }
-.txt-promotion{
+.txt-promotion {
   color: #4466f2;
 }
-.txt-promotion:hover{
+.txt-promotion:hover {
   cursor: pointer;
 }
-.promotion_card{
+.promotion_card {
   background-color: white;
 }
-.promotion_card:hover{
+.promotion_card:hover {
   cursor: pointer;
   background-color: rgb(136, 212, 152);
 }
@@ -1006,16 +1006,12 @@ label.star:before {
   background-color: rgb(255, 255, 255);
 }
 
-
-
 .notifications h2 {
   font-size: 20px;
   font-weight: 700;
   margin-left: 10px;
   color: #111;
 }
-
-
 
 .notifications-item {
   display: flex;
@@ -1029,7 +1025,6 @@ label.star:before {
   background-color: #eee;
 }
 
-
 .notifications-item img {
   display: block;
   width: 50px;
@@ -1041,7 +1036,6 @@ label.star:before {
 .notifications-item .text h4 {
   color: #777;
   font-size: 16px;
-
 }
 
 .notifications-item .text p {
@@ -1049,33 +1043,30 @@ label.star:before {
   font-size: 12px;
 }
 
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 5px;
-  padding:2px
+  padding: 2px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
   border-radius: 5px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
-
 tr:hover {
- 
   cursor: pointer;
 }

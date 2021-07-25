@@ -284,7 +284,7 @@ const HeaderinPayment = (props) => {
             <div
               style={{ fontWeight: "700", fontSize: "30px", color: "#49654E" }}
             >
-              2. {t("Customer_Shopping_Payment.6")}
+              2. Địa chỉ giao hàng
             </div>
             <div
               style={{
@@ -358,34 +358,31 @@ const HeaderinPayment = (props) => {
       ) : (
         <div className={classes.address_zone}>
           <div>
-            <h8 style={{ fontWeight: "800" }}>
-              2. {t("Customer_Shopping_Payment.6")}
-            </h8>
+            <div
+              style={{ fontWeight: "700", fontSize: "30px", color: "#49654E" }}
+            >
+              2. Địa chỉ giao hàng
+            </div>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                borderStyle: "solid",
-                borderWidth: "2px",
-                borderColor: "#253528",
+                borderRadius: "5px",
+                background: "white",
                 padding: "10px",
                 marginTop: "20px",
               }}
             >
-              <div style={{ fontSize: "20px", fontWeight: "500" }}>
-                {t("Customer_Shopping_Payment.21")}
+              <div style={{ fontSize: "16px", fontWeight: "500" }}>
+                Bạn chưa cập nhật địa chỉ giao hàng
               </div>
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
                   marginTop: "10px",
                 }}
               >
                 <Button
-                  size="medium"
                   style={{
-                    marginRight: "10px",
                     backgroundColor: "#8ba889",
                     fontWeight: "600",
                     color: "white",
@@ -393,7 +390,9 @@ const HeaderinPayment = (props) => {
                   }}
                   onClick={() => setVisible(true)}
                 >
-                  Cập nhật đỉa chỉ giao hàng
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    Cập nhật địa chỉ giao hàng
+                  </span>
                 </Button>
               </div>
             </div>

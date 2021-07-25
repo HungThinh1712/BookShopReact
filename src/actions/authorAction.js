@@ -23,6 +23,26 @@ export const getAuthorsRequest = (name, page, pageSize) => async (dispatch) => {
     });
 };
 
+export const getAuthorsIncludeDeleteRequest =
+  (name, page, pageSize) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(
+      `/Authors/GetIncludeDeleted?name=${name}&page=${page}&pageSize=${pageSize}`
+    );
+    dispatch(backdropAction.setOpenBackDrop);
+    await axios
+      .get(url)
+      .then((res) => {
+        dispatch(backdropAction.setCloseBackDrop);
+        dispatch({
+          type: Types.GET_AUTHORS, //this call test dispatch. to dispsatch to our reducer
+          authors: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch(backdropAction.setCloseBackDrop);
+      });
+  };
+
 export const getAuthorRequest = (id) => async (dispatch) => {
   const url = CallApis.API_URL.concat(`/Authors/GET?id=${id}`);
   dispatch(backdropAction.setOpenBackDrop);

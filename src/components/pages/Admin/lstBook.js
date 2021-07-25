@@ -1,150 +1,176 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../../common/Header'
-import Footer from '../../common/Footer'
-import SideBarAdminPage from '../../common/SideBarAdminPage'
-import ItemBookInAdmin from '../Admin/ItemBookInAdmin'
-import { useDispatch, useSelector } from 'react-redux';
-import * as bookActions from '../../../actions/booksAction';
-import { withRouter } from 'react-router-dom';
-import Pagination from '../../common/Pagination'
-import { makeStyles } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-import IconButton from '@material-ui/core/IconButton';
+import React, { useEffect, useState } from "react";
+import Header from "../../common/Header";
+import Footer from "../../common/Footer";
+import SideBarAdminPage from "../../common/SideBarAdminPage";
+import ItemBookInAdmin from "../Admin/ItemBookInAdmin";
+import { useDispatch, useSelector } from "react-redux";
+import * as bookActions from "../../../actions/booksAction";
+import { withRouter } from "react-router-dom";
+import Pagination from "../../common/Pagination";
+import { makeStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "@material-ui/core/IconButton";
 import BreadCrumb from "../../common/Breadcrumbs";
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
-
-    search: {
-        padding: '2px 4px',
-        display: 'flex',
-        alignItems: 'center',
-        width: '30%',
-        backgroundColor: 'white',
-        borderRadius: theme.shape.borderRadius,
-        border:'solid',
-        borderWidth:'1px',
-        height: '35px',
-        [theme.breakpoints.down('xs')]: {
-            width: '80ch',
-        },
-
+  search: {
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    width: "30%",
+    backgroundColor: "white",
+    borderRadius: theme.shape.borderRadius,
+    border: "solid",
+    borderWidth: "1px",
+    height: "35px",
+    [theme.breakpoints.down("xs")]: {
+      width: "80ch",
     },
-    searchIcon: {
-        padding: theme.spacing(0, 2),
-        height: '80%',
-        pointerEvents: 'none',
-        display: 'none',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'black',
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "80%",
+    pointerEvents: "none",
+    display: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "black",
+  },
+  inputRoot: {
+    color: "black",
+    marginLeft: "10px",
+    flex: 26,
+    [theme.breakpoints.up("sm")]: {
+      width: "80ch",
     },
-    inputRoot: {
-        color: 'black',
-        marginLeft: '10px',
-        flex: 26,
-        [theme.breakpoints.up('sm')]: {
-            width: '80ch',
-        },
-
-    }
-
-
+  },
 }));
 const LstBook = (props) => {
-    const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const classes = useStyles();
-  
-    const [page, setPage] = useState(1);
-    const [name,setName] = useState('')
-    const handlePageChange = (event, value) => {
-        setPage(value);
-    };
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const classes = useStyles();
 
-    useEffect(() => {
-        dispatch(bookActions.getBooksAdminRequest(name, page));
-    }, [dispatch,name,page])
+  const [page, setPage] = useState(1);
+  const [name, setName] = useState("");
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
-    const handleItemClick = (id) => {
-        props.history.push(`/admin/details/${id}`)
-    }
+  useEffect(() => {
+    dispatch(bookActions.getBooksAdminRequest(name, page));
+  }, [dispatch, name, page]);
 
-    const total = useSelector(state => state.books.booksAdmin.total ? state.books.booksAdmin.total : 0)
-    const books = useSelector(state => state.books.booksAdmin.entities ? state.books.booksAdmin.entities : []);
+  const handleItemClick = (id) => {
+    props.history.push(`/admin/update_book/${id}`);
+  };
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [page])
-    const showBooks = books.map((book, index) => <ItemBookInAdmin
-        key={book.id}
-        price={book.price}
-        title={book.bookName}
-        imageSrc={book.imgUrl}
-        id={book.id}
-        onClick={() => handleItemClick(book.id)}
-    ></ItemBookInAdmin>)
-    const paging = total % 16 === 0 ? total / 16 : Math.floor(total / 16) + 1
-    const handleInputChange = (e)=>{
-        setName(e.target.value);
-    }
+  const total = useSelector((state) =>
+    state.books.booksAdmin.total ? state.books.booksAdmin.total : 0
+  );
+  const books = useSelector((state) =>
+    state.books.booksAdmin.entities ? state.books.booksAdmin.entities : []
+  );
 
-    return (
-        <div>
-            <div id="wrapper">
-                <Header notShow="notShow" />
-                <SideBarAdminPage />
-                <div id="content-wrapper" style={{ marginTop: '100px', marginLeft: '260px' }}> 
-                    <div className="container-fluid">
-                    <BreadCrumb
-                        breadcrumb={t('Admin_Home_BreadCrumbs.4')} onClick={()=>props.history.push("/admin")} onClick2={()=>props.history.push("/admin/books")}>
-                    </BreadCrumb>
-                        <div className="card mb-3">
-                            <div className="card-body">
-                                <div className="table-wrapper">
-                                    <div className="table-title">
-                                        <div className="row">
-                                            <div className="col-sm-8"><h2>{t('Admin_Book.1')}</h2></div>
-                                            <div className="col-sm-4">
-                                                <div >
-                                                    <button onClick = {() => props.history.push('/admin/add_book_page')} type="button" className="btn btn-info add-new"><i className="fa fa-plus"></i> {t('Admin_Book.2')}</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="container">
-                                    <div className="row">
-                                            <div className={classes.search}>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
+  const showBooks = books.map((book, index) => (
+    <ItemBookInAdmin
+      key={book.id}
+      price={book.price}
+      title={book.bookName}
+      imageSrc={book.imgUrl}
+      id={book.id}
+      onClick={() => handleItemClick(book.id)}
+    ></ItemBookInAdmin>
+  ));
+  const paging = total % 16 === 0 ? total / 16 : Math.floor(total / 16) + 1;
+  const handleInputChange = (e) => {
+    setName(e.target.value);
+  };
 
-                                                <InputBase
-                                                    placeholder={t('Admin_Other.14')}
-                                                    value={name}
-                                                    onChange={handleInputChange}
-                                                    classes={{
-                                                        root: classes.inputRoot,
-                                                    }}
-                                                />
-                                                <IconButton   >
-                                                    <SearchIcon />
-                                                </IconButton>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            {showBooks}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+  return (
+    <div>
+      <div id="wrapper">
+        <Header notShow="notShow" />
+        <SideBarAdminPage />
+        <div
+          id="content-wrapper"
+          style={{ marginTop: "100px", marginLeft: "260px" }}
+        >
+          <div className="container-fluid">
+            <BreadCrumb
+              breadcrumb={t("Admin_Home_BreadCrumbs.4")}
+              onClick={() => props.history.push("/admin")}
+              onClick2={() => props.history.push("/admin/books")}
+            ></BreadCrumb>
+            <div className="card mb-3">
+              <div className="card-body">
+                <div className="table-wrapper">
+                  <div className="table-title">
+                    <div className="row">
+                      <div className="col-sm-8">
+                        <h2>{t("Admin_Book.1")}</h2>
+                      </div>
+                      <div className="col-sm-4">
+                        <div>
+                          <button
+                            onClick={() =>
+                              props.history.push("/admin/add_book_page")
+                            }
+                            type="button"
+                            className="btn btn-info add-new"
+                          >
+                            <i className="fa fa-plus"></i> {t("Admin_Book.2")}
+                          </button>
                         </div>
+                      </div>
                     </div>
-                    {total > 16 ? <div style={{ display: 'flex', alignItems: 'center', padding: '20px', justifyContent: 'center' }}>
-                        <Pagination total={paging} onChange={handlePageChange} page={page} />
-                    </div> : null}
+                  </div>
+                  <div className="container">
+                    <div className="row">
+                      <div className={classes.search}>
+                        <InputBase
+                          placeholder={t("Admin_Other.14")}
+                          value={name}
+                          onChange={handleInputChange}
+                          classes={{
+                            root: classes.inputRoot,
+                          }}
+                        />
+                        <IconButton>
+                          <SearchIcon />
+                        </IconButton>
+                      </div>
+                    </div>
+                    <div className="row">{showBooks}</div>
+                  </div>
                 </div>
-            </div> 
+              </div>
+            </div>
+          </div>
+          {total > 16 ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "20px",
+                justifyContent: "center",
+              }}
+            >
+              <Pagination
+                total={paging}
+                onChange={handlePageChange}
+                page={page}
+              />
+            </div>
+          ) : null}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default withRouter(LstBook);

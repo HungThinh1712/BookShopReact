@@ -50,7 +50,7 @@ const ForgetPasswordPage = (props) => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        backgroundImage: `url(${background})`,
+        backgroundImage: `url(https://i.imgur.com/R98y0u7.png)`,
         display: "flex",
         justifyContent: "flex-end",
       }}

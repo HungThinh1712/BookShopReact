@@ -10,6 +10,7 @@ import { Button } from "antd";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import background1 from "../Images/background.jpg";
 import FacebookIcon from "@material-ui/icons/Facebook";
+import CheckIcon from "@material-ui/icons/Check";
 import { GoogleOutlined, FaceBookOutlined } from "@ant-design/icons";
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -63,7 +64,6 @@ const SignIn = (props) => {
     }
   };
   const responseGoogle = (response) => {
-    console.log(response);
     dispatch(
       authActions.loginUserFacebook(
         response.profileObj.email,

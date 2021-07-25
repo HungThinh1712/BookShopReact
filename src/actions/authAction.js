@@ -7,6 +7,7 @@ import * as CallApis from "./../constants/Apis";
 import * as backdropAction from "./../actions/backdropAction";
 import { toastMessage } from "./../components/common/ToastHelper";
 import { message } from "antd";
+import { toast } from "react-toastify";
 
 // 🔓  Login - Get user token
 export const loginUser =
@@ -135,6 +136,7 @@ export const updateAddressOfCurrentUser =
   };
 export const logOut = () => (dispatch) => {
   localStorage.clear();
+  setAuthToken(null);
   dispatch({
     type: Types.LOG_OUT,
     payload: [],
@@ -438,6 +440,9 @@ export const loginUserFacebook =
           if (decoded.admin === "False") {
             dispatch(cartActions.addToCartofCurrentUser(shoppingCartData));
             history.push("/");
+          } else {
+            dispatch(setCurrentUser(decoded));
+            history.push("/admin");
           }
         } else {
           let error;

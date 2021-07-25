@@ -588,11 +588,13 @@ const PrimarySearchAppBar = (props) => {
                           fontWeight: "600",
                         }}
                       >
-                        {split.length >= 2
-                          ? split[split.length - 2][0] +
-                            " " +
-                            split[split.length - 1][0]
-                          : split[split.length - 1][0]}
+                        <span style={{ textTransform: "uppercase" }}>
+                          {split.length >= 2
+                            ? split[split.length - 2][0] +
+                              " " +
+                              split[split.length - 1][0]
+                            : split[split.length - 1][0]}
+                        </span>
                       </Avatar>
                     )}
                     <span

@@ -315,191 +315,198 @@ const HomePage = (props) => {
       <div>
         <MessengerChat />
         <Header></Header>
-         {booksVnese && booksVnese.length > 0 ? <div>
-          <div
-          style={{
-            marginTop: "70px",
-            marginLeft: "100px",
-            marginBottom: "-100px",
-          }}
-        ></div>
-        <div>
-          <div style={{ display: "flex", paddingTop: "108px" }}></div>
-          <BookNav
-            title={t("Customer_Home.2")}
-            style={{ marginTop: "200px" }}
-          />
-          <div
-            className={classes.container}
-            style={{
-              display: "flex",
-              padding: "20px",
-              backgroundColor: "#EDECE7",
-              borderRadius: "0 0 0 0",
-              justifyContent: "center",
-            }}
-          >
-            {showTagVnese}
-          </div>
-          <div
-            style={{ display: "grid", backgroundColor: "#EDECE7" }}
-            className={classes.container}
-          >
-            {booksVnese.length > 0 ? (
-              <div className={`cover_container `}>{showBooksVnese}</div>
-            ) : (
-              <Empty />
-            )}
-            {booksVnese.length > 0 ? (
+        {booksVnese && booksVnese.length > 0 ? (
+          <div>
+            <div
+              style={{
+                marginTop: "70px",
+                marginLeft: "100px",
+                marginBottom: "-100px",
+              }}
+            ></div>
+            <div>
+              <div style={{ display: "flex", paddingTop: "108px" }}></div>
+              <BookNav
+                title={t("Customer_Home.2")}
+                style={{ marginTop: "200px" }}
+              />
               <div
+                className={classes.container}
                 style={{
                   display: "flex",
+                  padding: "20px",
+                  backgroundColor: "#EDECE7",
+                  borderRadius: "0 0 0 0",
                   justifyContent: "center",
-                  marginTop: "25px",
                 }}
               >
-                <Fab
-                  variant="outlined"
-                  color="#4aa96c"
-                  size="medium"
-                  style={{
-                    padding: "0.5em",
-                    width: "200px",
-                    backgroundColor: "#1a936f",
-                    color: "white",
-                    fontWeight: "600",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                  }}
-                  onClick={loadMoreVnese}
-                >
-                  {t("Customer_Home.7")}
-                </Fab>
+                {showTagVnese}
               </div>
-            ) : null}
-          </div>
-
-          <div style={{ marginTop: "80px", zIndex: 2 }}></div>
-          <BookNav type="EN" title={t("Customer_Home.3")} />
-          <div
-            className={classes.container}
-            style={{
-              display: "flex",
-              backgroundColor: "#EDECE7",
-              borderRadius: "0 0 0 0",
-              justifyContent: "center",
-              padding: "20px",
-            }}
-          >
-            {showTagEng}
-          </div>
-          <div
-            style={{ display: "grid", backgroundColor: "#EDECE7" }}
-            className={classes.container}
-          >
-            {booksEng.length > 0 ? (
-              <div className={`cover_container `}>{showBooksEng}</div>
-            ) : (
-              <Empty />
-            )}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "25px",
-              }}
-            >
-              <Fab
-                variant="outlined"
-                size="medium"
-                style={{
-                  padding: "0.5em",
-                  width: "200px",
-                  fontWeight: "600",
-                  paddingLeft: "4em",
-                  paddingRight: "4em",
-                  marginBottom: "1.7em",
-                  color: "white",
-                  backgroundColor: "#1a936f",
-                }}
-                onClick={loadMoreEng}
+              <div
+                style={{ display: "grid", backgroundColor: "#EDECE7" }}
+                className={classes.container}
               >
-                {t("Customer_Home.7")}
-              </Fab>
-            </div>
-          </div>
-          <div style={{ marginTop: "80px", zIndex: 2 }}></div>
-          <BookNav type="CT" title="Thể loại khác" />
-          {types ? (
-            <div
-              className={classes.container}
-              style={{
-                display: "flex",
-                padding: "20px",
-                backgroundColor: "#EDECE7",
-                justifyContent: "center",
-                borderRadius: "5px 5px 0 0",
-              }}
-            >
-              {showTypes}
-            </div>
-          ) : null}
-          <div
-            style={{ display: "grid", backgroundColor: "#EDECE7" }}
-            className={classes.container}
-          >
-            {booksByType.length > 0 && booksByType ? (
-              <div>
-                {booksByType.length > 2 ? (
-                  <div className={`cover_container `}>{showBooksByType}</div>
+                {booksVnese.length > 0 ? (
+                  <div className={`cover_container `}>{showBooksVnese}</div>
                 ) : (
-                  <div className={`cover_container `}>
-                    {showBooksByType}
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
+                  <Empty />
                 )}
+                {booksVnese.length > 0 ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Fab
+                      variant="extended"
+                      color="#4aa96c"
+                      size="medium"
+                      style={{
+                        padding: "0.5em",
+                        width: "200px",
+                        backgroundColor: "#1a936f",
+                        color: "white",
+                        fontWeight: "600",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                        flexWrap: "nowrap",
+                      }}
+                      onClick={loadMoreVnese}
+                    >
+                      {t("Customer_Home.7")}
+                    </Fab>
+                  </div>
+                ) : null}
               </div>
-            ) : (
-              <Empty />
-            )}
-            {booksByType.length > 0 && booksByType ? (
+
+              <div style={{ marginTop: "80px", zIndex: 2 }}></div>
+              <BookNav type="EN" title={t("Customer_Home.3")} />
               <div
+                className={classes.container}
                 style={{
                   display: "flex",
+                  backgroundColor: "#EDECE7",
+                  borderRadius: "0 0 0 0",
                   justifyContent: "center",
-                  marginTop: "25px",
+                  padding: "20px",
                 }}
               >
-                <Fab
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  style={{
-                    padding: "0.5em",
-                    width: "200px",
-                    fontWeight: "600",
-                    backgroundColor: "#1a936f",
-                    color: "white",
-                    paddingLeft: "4em",
-                    paddingRight: "4em",
-                    marginBottom: "1.7em",
-                  }}
-                  onClick={loadMoreBooksByType}
-                >
-                  {t("Customer_Home.7")}
-                </Fab>
+                {showTagEng}
               </div>
-            ) : null}
+              <div
+                style={{ display: "grid", backgroundColor: "#EDECE7" }}
+                className={classes.container}
+              >
+                {booksEng.length > 0 ? (
+                  <div className={`cover_container `}>{showBooksEng}</div>
+                ) : (
+                  <Empty />
+                )}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "25px",
+                  }}
+                >
+                  <Fab
+                    variant="extended"
+                    size="medium"
+                    style={{
+                      padding: "0.5em",
+                      width: "200px",
+                      fontWeight: "600",
+                      paddingLeft: "4em",
+                      paddingRight: "4em",
+                      marginBottom: "1.7em",
+                      color: "white",
+                      backgroundColor: "#1a936f",
+                    }}
+                    onClick={loadMoreEng}
+                  >
+                    {t("Customer_Home.7")}
+                  </Fab>
+                </div>
+              </div>
+              <div style={{ marginTop: "80px", zIndex: 2 }}></div>
+              <BookNav type="CT" title="Thể loại khác" />
+              {types ? (
+                <div
+                  className={classes.container}
+                  style={{
+                    display: "flex",
+                    padding: "20px",
+                    backgroundColor: "#EDECE7",
+                    justifyContent: "center",
+                    borderRadius: "5px 5px 0 0",
+                  }}
+                >
+                  {showTypes}
+                </div>
+              ) : null}
+              <div
+                style={{ display: "grid", backgroundColor: "#EDECE7" }}
+                className={classes.container}
+              >
+                {booksByType.length > 0 && booksByType ? (
+                  <div>
+                    {booksByType.length > 2 ? (
+                      <div className={`cover_container `}>
+                        {showBooksByType}
+                      </div>
+                    ) : (
+                      <div className={`cover_container `}>
+                        {showBooksByType}
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Empty />
+                )}
+                {booksByType.length > 0 && booksByType ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "25px",
+                    }}
+                  >
+                    <Fab
+                      variant="extended"
+                      color="primary"
+                      size="medium"
+                      style={{
+                        padding: "0.5em",
+                        width: "200px",
+                        fontWeight: "600",
+                        backgroundColor: "#1a936f",
+                        color: "white",
+                        paddingLeft: "4em",
+                        paddingRight: "4em",
+                        marginBottom: "1.7em",
+                      }}
+                      onClick={loadMoreBooksByType}
+                    >
+                      {t("Customer_Home.7")}
+                    </Fab>
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
-        </div>
-         </div>: null}
+        ) : null}
       </div>
-      {booksVnese && booksVnese.length > 0 ? <div style={{ paddingTop: "180px" }}>
-        <Footer />
-      </div>:null}
+      {booksVnese && booksVnese.length > 0 ? (
+        <div style={{ paddingTop: "180px" }}>
+          <Footer />
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -7,13 +7,13 @@ import * as authorActions from "../../../actions/authorAction";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
 import * as bookActions from "../../../actions/booksAction";
+import * as tagsAction from "../../../actions/bookTagsAction";
 import Dialog from "../../common/Dialog";
 import { toastMessage } from "./../../common/ToastHelper";
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next";
 import { Input, InputNumber } from "antd";
-import axios from 'axios';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import * as bookTagAction from "../../../actions/bookTagsAction"
+import axios from "axios";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { Select } from "antd";
 import { Button } from "antd";
 const { Option } = Select;
@@ -22,14 +22,21 @@ const { TextArea } = Input;
 const UpdateBook = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const bookData = props.history.location.state.bookData
-    ? props.history.location.state.bookData
-    : [];
+  const id = props.match.params.id;
+
+  const bookData = useSelector((state) =>
+    state.books.selectedBook ? state.books.selectedBook : null
+  );
+
   useEffect(() => {
-    dispatch(typeActions.getTypesRequest("", 1, 9999));
-    dispatch(publishHouseActions.getPublishHousesRequest("", 1, 9999));
-    dispatch(authorActions.getAuthorsRequest("", 1, 9999));
-  }, [dispatch]);
+    dispatch(typeActions.getTypesIncludeDeleteRequest("", 1, 9999));
+    dispatch(
+      publishHouseActions.getPublishHousesIncludeDeleteRequest("", 1, 9999)
+    );
+    dispatch(authorActions.getAuthorsIncludeDeleteRequest("", 1, 9999));
+    dispatch(tagsAction.getBookTagsRequest("", 1, 9999));
+    dispatch(bookActions.getBookByIdRequest(id));
+  }, [dispatch, id]);
   const types = useSelector((state) =>
     state.type.types.entities ? state.type.types.entities : []
   );
@@ -37,59 +44,95 @@ const UpdateBook = (props) => {
     state.author.authors.entities ? state.author.authors.entities : []
   );
   const tags = useSelector((state) =>
-  state.bookTags.bookTags ? state.bookTags.bookTags : []
-);
+    state.bookTags.bookTags ? state.bookTags.bookTags : []
+  );
   const publishHouses = useSelector((state) =>
     state.publishHouse.publishHouses.entities
       ? state.publishHouse.publishHouses.entities
       : []
   );
   //Get Data types, tags,authors,publishhouse,
-  const showTypes = types.map((type, index) => (
-    <Option key={index} value={type.id}>
-      {type.name}
-    </Option>
-  ));
+  const showTypes = types.map((type, index) =>
+    type.deleteAt ? (
+      <Option disabled key={index} value={type.id}>
+        {type.name}
+      </Option>
+    ) : (
+      <Option key={index} value={type.id}>
+        {type.name}
+      </Option>
+    )
+  );
   const showTags = tags.map((tag, index) => (
     <Option key={index} value={tag.id}>
       {tag.name}
     </Option>
   ));
-  const showAuthors = authors.map((author, index) => (
-    <Option key={index} value={author.id}>
-      {author.name}
-    </Option>
-  ));
-  const showPublishHouses = publishHouses.map((publishHouse, index) => (
-    <Option key={index} value={publishHouse.id}>
-      {publishHouse.name}
-    </Option>
-  ));
+  const showAuthors = authors.map((author, index) =>
+    author.deleteAt ? (
+      <Option disabled key={index} value={author.id}>
+        {author.name}
+      </Option>
+    ) : (
+      <Option key={index} value={author.id}>
+        {author.name}
+      </Option>
+    )
+  );
+  const showPublishHouses = publishHouses.map((publishHouse, index) =>
+    publishHouse.deleteAt ? (
+      <Option disabled key={index} value={publishHouse.id}>
+        {publishHouse.name}
+      </Option>
+    ) : (
+      <Option key={index} value={publishHouse.id}>
+        {publishHouse.name}
+      </Option>
+    )
+  );
+
+  //Input
+  const [bookName, setBookName] = useState(null);
+  const [typeId, setTypeId] = useState(null);
+  const [authorId, setAuthorId] = useState(null);
+  const [publishDate, setPublishDate] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [publishHouseId, setPublishHouseId] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [coverPrice, setCoverPrice] = useState(null);
+  const [pageAmount, setPageAmount] = useState(null);
+  const [size, setSize] = useState(null);
+  const [coverType, setCoverType] = useState(null);
+  const [tag, setbookTag] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
+  const [zoneType, setZoneType] = useState(null);
+
+  useEffect(() => {
+    if (bookData) {
+      setBookName(bookData.bookName);
+      setTypeId(bookData.typeId);
+      setAuthorId(bookData.authorId);
+      setPublishDate(bookData.publishDate);
+      setAmount(bookData.amount);
+      setPublishHouseId(bookData.publishingHouseId);
+      setPrice(bookData.price);
+      setPageAmount(bookData.pageAmount);
+      setCoverPrice(bookData.coverPrice);
+      setSize(bookData.size);
+      setCoverType(bookData.cover_Type);
+      setbookTag(bookData.tagId);
+      setDescription(bookData.description);
+      setImgUrl(bookData.imgUrl);
+      setZoneType(bookData.zoneType);
+    }
+  }, [bookData]);
 
   const hiddenFileInput = React.useRef(null);
 
   const handleUpLoadClick = (event) => {
     hiddenFileInput.current.click();
   };
-  
-  //Input
-  const [bookName, setBookName] = useState(bookData.bookName);
-  const [typeId, setTypeId] = useState(bookData.typeId);
-  const [authorId, setAuthorId] = useState(bookData.authorId);
-  const [publishDate, setPublishDate] = useState(bookData.publishDate);
-  const [amount, setAmount] = useState(bookData.amount);
-  const [publishHouseId, setPublishHouseId] = useState(
-    bookData.publishingHouseId
-  );
-  const [price, setPrice] = useState(bookData.price);
-  const [coverPrice, setCoverPrice] = useState(bookData.coverPrice);
-  const [pageAmount, setPageAmount] = useState(bookData.pageAmount);
-  const [size, setSize] = useState(bookData.size);
-  const [coverType, setCoverType] = useState(bookData.cover_Type);
-  const [tag, setbookTag] = useState(bookData.tagId);
-  const [description, setDescription] = useState(bookData.description);
-  const [imgUrl, setImgUrl] = useState(bookData.imgUrl);
-  const [zoneType, setZoneType] = useState(bookData.zoneType);
 
   //HandelInputChange
   const handleNameInputChange = (e) => {
@@ -146,14 +189,8 @@ const UpdateBook = (props) => {
     formData.append("authorId", authorId);
     formData.append("publishDate", publishDate);
     formData.append("amount", amount);
-    formData.append(
-      "price",
-      price
-    );
-    formData.append(
-      "coverPrice",
-      coverPrice
-    );
+    formData.append("price", price);
+    formData.append("coverPrice", coverPrice);
     formData.append("pageAmount", pageAmount);
     formData.append("size", size);
     formData.append("coverType", coverType);
@@ -193,13 +230,13 @@ const UpdateBook = (props) => {
     }
   };
 
-  const [loadingImg,setLoadingImg] =useState(0);
+  const [loadingImg, setLoadingImg] = useState(0);
 
   let clientId = "5afd6b67306a4cb";
   // let clientSecret = "04608dcd172ef4ac90272149c4ed50f9f9f45f2f";
   let auth = "Client-ID " + clientId;
   const handleUploadImageToImgur = async (e) => {
-    setLoadingImg(true)
+    setLoadingImg(true);
     const formDataTest = new FormData();
     if (e.target.files && e.target.files[0]) {
       formDataTest.append("image", e.target.files[0]);
@@ -212,8 +249,8 @@ const UpdateBook = (props) => {
         },
       }).then((res) => {
         if (res.status === 200) {
-          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`)
-          setLoadingImg(false)
+          setImgUrl(`https://i.imgur.com/${res.data.data.id}.png`);
+          setLoadingImg(false);
         }
       });
     }
@@ -223,30 +260,26 @@ const UpdateBook = (props) => {
   return (
     <div>
       <div id="wrapper">
-        <Dialog
-          open={open}
-          onClick={handleButtonAddClick}
-          onClose={handleClose}
-          tagType={tagType}
-          onChange={handleChangeName}
-        ></Dialog>
         <Header />
         <SideBarAdminPage />
-        <div id="content-wrapper" style={{ marginTop: "100px", marginLeft:'250px' }}>
+        <div
+          id="content-wrapper"
+          style={{ marginTop: "100px", marginLeft: "250px" }}
+        >
           <div className="container-fluid">
             <div className="card-body">
               <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div className="row">
                   <div className="col-12">
                     <h4 className="tm-block-title d-inline-block">
-                      {t('Admin_Book.20')}
+                      {t("Admin_Book.20")}
                     </h4>
                   </div>
                 </div>
                 <div className="row tm-edit-product-row">
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <div className="form-group mb-3">
-                      <label for="name">{t('Admin_Book.6')}</label>
+                      <label for="name">{t("Admin_Book.6")}</label>
                       <Input
                         value={bookName}
                         onChange={handleNameInputChange}
@@ -254,21 +287,22 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="name">{t('Admin_Book.7')}</label>
+                        <label for="name">{t("Admin_Book.7")}</label>
 
                         <Select
                           value={tag}
                           onChange={handleTagInputChange}
                           style={{ width: "100%" }}
                         >
-                         {showTags}
+                          {showTags}
                         </Select>
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="publishing_house">{t('Admin_Book.9')}</label>
+                          <label for="publishing_house">
+                            {t("Admin_Book.9")}
+                          </label>
                           <div style={{ flexGrow: "1" }}></div>
-                          
                         </div>
                         <Select
                           value={publishHouseId}
@@ -283,9 +317,8 @@ const UpdateBook = (props) => {
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="tagType">{t('Admin_Book.10')}</label>
+                          <label for="tagType">{t("Admin_Book.10")}</label>
                           <div style={{ flexGrow: "1" }}></div>
-                          
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <Select
@@ -299,9 +332,8 @@ const UpdateBook = (props) => {
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <label for="tagType">{t('Admin_Book.11')}</label>
+                          <label for="tagType">{t("Admin_Book.11")}</label>
                           <div style={{ flexGrow: "1" }}></div>
-                         
                         </div>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <Select
@@ -316,7 +348,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="publish_date">{t('Admin_Book.12')}</label>
+                        <label for="publish_date">{t("Admin_Book.12")}</label>
                         <Input
                           value={publishDate}
                           onChange={handlePublishDateInputChange}
@@ -324,7 +356,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="amount">{t('Admin_Book.13')}</label>
+                        <label for="amount">{t("Admin_Book.13")}</label>
                         <InputNumber
                           value={amount}
                           onChange={handleAmountInputChange}
@@ -334,7 +366,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="price">{t('Admin_Book.14')}</label>
+                        <label for="price">{t("Admin_Book.14")}</label>
                         <InputNumber
                           value={price}
                           onChange={handlePriceInputChange}
@@ -342,7 +374,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="price">{t('Admin_Book.15')}</label>
+                        <label for="price">{t("Admin_Book.15")}</label>
                         <InputNumber
                           value={coverPrice}
                           id="price"
@@ -353,7 +385,7 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="page_amount">{t('Admin_Book.16')}</label>
+                        <label for="page_amount">{t("Admin_Book.16")}</label>
                         <InputNumber
                           value={pageAmount}
                           id="page_amount"
@@ -362,7 +394,7 @@ const UpdateBook = (props) => {
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="size">{t('Admin_Book.27')}</label>
+                        <label for="size">{t("Admin_Book.27")}</label>
                         <Input
                           value={size}
                           onChange={handleSizeInputChange}
@@ -375,16 +407,15 @@ const UpdateBook = (props) => {
                     </div>
                     <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="cover_type">{t('Admin_Book.18')}</label>
+                        <label for="cover_type">{t("Admin_Book.18")}</label>
                         <Input
                           value={coverType}
                           id="size"
                           onChange={handleCoverTypeChange}
-
                         />
                       </div>
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        <label for="name">{t('Admin_Book.17')}</label>
+                        <label for="name">{t("Admin_Book.17")}</label>
 
                         <Select
                           value={zoneType}
@@ -393,9 +424,11 @@ const UpdateBook = (props) => {
                           style={{ width: "100%" }}
                         >
                           <Option value="Sách tiếng việt">
-                            {t('Customer_Home.2')}
+                            {t("Customer_Home.2")}
                           </Option>
-                          <Option value="Sách tiếng anh">{t('Customer_Home.3')}</Option>
+                          <Option value="Sách tiếng anh">
+                            {t("Customer_Home.3")}
+                          </Option>
                         </Select>
                       </div>
                     </div>
@@ -416,20 +449,26 @@ const UpdateBook = (props) => {
                       className="btn btn-info form-group mb-3"
                       style={{ width: "100%" }}
                     >
-                      {t('Admin_Book.20')}
+                      {t("Admin_Book.20")}
                     </Button>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                     <div className="row">
-                    <div className="form-group mb-3 col-xs-12 col-sm-6">
-                        {
-                          !loadingImg ? <img
-                          alt=""
-                          src={imgUrl}
-                          onClick={handleUpLoadClick}
-                          className="tm-product-img-dummy mx-auto"
-                        ></img> : <div style={{marginTop:'100px',marginLeft:"150px"}}><CircularProgress/></div>
-                        }
+                      <div className="form-group mb-3 col-xs-12 col-sm-6">
+                        {!loadingImg ? (
+                          <img
+                            alt=""
+                            src={imgUrl}
+                            onClick={handleUpLoadClick}
+                            className="tm-product-img-dummy mx-auto"
+                          ></img>
+                        ) : (
+                          <div
+                            style={{ marginTop: "100px", marginLeft: "150px" }}
+                          >
+                            <CircularProgress />
+                          </div>
+                        )}
                         <div className="custom-file mt-3 mb-3">
                           <input
                             id="fileInput"

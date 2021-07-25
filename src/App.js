@@ -84,7 +84,10 @@ function App() {
               component={PromotionDetail}
             />
             <AdminRoute path="/admin/details/:id" component={DetailBookAdmin} />
-            <AdminRoute path="/admin/update_book" component={UpdateBookAdmin} />
+            <AdminRoute
+              path="/admin/update_book/:id"
+              component={UpdateBookAdmin}
+            />
             <AdminRoute
               path="/admin/ordermanagement_page"
               component={OrderManagementPageAdmin}

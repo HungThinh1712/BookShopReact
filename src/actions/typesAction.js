@@ -20,6 +20,24 @@ export const getTypesRequest = (name, page, pageSize) => async (dispatch) => {
     });
 };
 
+export const getTypesIncludeDeleteRequest =
+  (name, page, pageSize) => async (dispatch) => {
+    const url = CallApis.API_URL.concat(
+      `/Types/GetAllIncludesDeleted?name=${name}&page=${page}&pageSize=${pageSize}`
+    );
+    await axios
+      .get(url)
+      .then((res) => {
+        dispatch({
+          type: Types.GET_TYPES, //this call test dispatch. to dispsatch to our reducer
+          types: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log("Error" + err);
+      });
+  };
+
 export const addType = (type) => async (dispatch) => {
   const url = CallApis.API_URL.concat(`/Types/Create`);
   await axios
@@ -82,7 +100,6 @@ export const deleteType = (id) => async (dispatch) => {
     .then((res) => {
       if (res.status === 200) {
         toastMessage("Xóa thành công");
-       
       } else {
         let error = Object.values(res.data.errors)[0].toString();
         dispatch({

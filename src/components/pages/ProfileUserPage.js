@@ -159,10 +159,7 @@ const ProfileUserPage = (props) => {
                     />
                   </Tooltip>
                 </div>
-                <div
-                  style={{ display: "flex", alignItems: "center" }}
-                  className="input-field-userpage"
-                >
+                <div className="input-field-userpage">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <PersonIcon />
                   </div>
@@ -176,10 +173,7 @@ const ProfileUserPage = (props) => {
                 <div className="sex">
                   <SexCheckBox value={sex} onChange={handleSexInputChange} />
                 </div>
-                <div
-                  style={{ display: "flex", alignItems: "center" }}
-                  className="input-field-userpage"
-                >
+                <div className="input-field-userpage">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <EmailIcon />
                   </div>
@@ -191,10 +185,7 @@ const ProfileUserPage = (props) => {
                   />
                 </div>
 
-                <div
-                  style={{ display: "flex", alignItems: "center" }}
-                  className="input-field-userpage"
-                >
+                <div className="input-field-userpage">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <PhoneIcon />
                   </div>
