@@ -95,11 +95,9 @@ const PaymentPage = (props) => {
   return (
     <div style={{ backgroundColor: "#EDECE7", height: "760px" }}>
       <HeaderInPayment step={2} />
-      <div className={classes.title}>
-        3. {t("Customer_Shopping_Payment.11")}
-      </div>
+      <div className={classes.title}>3. Thanh toán và đặt hàng</div>
       <div className={classes.wraper}>
-        <PaymentMethod distanceAndFee={distanceAndFee} />
+        <PaymentMethod />
       </div>
     </div>
   );

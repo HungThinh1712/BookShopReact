@@ -182,9 +182,6 @@ const ListItemIPayment = (props) => {
                     .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
                 : null
             }đ `}
-            <span style={{ opacity: "0.7", fontSize: "13px" }}>
-              {`(${props.distance})`}
-            </span>
           </span>
         </div>
         <div

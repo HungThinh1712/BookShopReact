@@ -105,9 +105,7 @@ const PaymentMethod = (props) => {
       console.log("Sending message failed.", e);
     }
   };
-  const shippingFee = props.distanceAndFee
-    ? props.distanceAndFee.shippingFee
-    : null;
+  const shippingFee = 15000;
   const [shippingFeeAfterDiscount, setShippingFeeAfterDiscount] =
     useState(null);
   const distance = props.distanceAndFee ? props.distanceAndFee.distance : null;
@@ -255,6 +253,7 @@ const PaymentMethod = (props) => {
                 cursor: "pointer",
                 fontSize: "15px",
                 fontWeight: "500",
+                marginTop: "3px",
               }}
               onClick={() => props.history.push("/address_shipping")}
             >

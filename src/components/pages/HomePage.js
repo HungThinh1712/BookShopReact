@@ -361,7 +361,6 @@ const HomePage = (props) => {
                   >
                     <Fab
                       variant="extended"
-                      color="#4aa96c"
                       size="medium"
                       style={{
                         padding: "0.5em",

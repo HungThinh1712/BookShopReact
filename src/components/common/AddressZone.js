@@ -7,12 +7,13 @@ import * as cartActions from "../../actions/cartAction";
 import { useTranslation } from "react-i18next";
 import { Modal, Button, Input, Spin } from "antd";
 import { toastMessage } from "./ToastHelper";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
+import { Select } from "antd";
+import * as districtAction from "../../actions/districtAction";
+import * as proviceAction from "../../actions/provinceAction";
+import * as wardAction from "../../actions/wardAction";
 import * as authActions from "./../../actions/authAction";
+import { stat } from "@nodelib/fs.stat";
+const { Option } = Select;
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -64,8 +65,6 @@ const HeaderinPayment = (props) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [hideAddressForm, setHideAdressForm] = useState("none");
-  const [tempAddress, setTempAddress] = useState("");
   const userData = useSelector((state) =>
     state.auth.userData ? state.auth.userData : null
   );
@@ -76,9 +75,9 @@ const HeaderinPayment = (props) => {
         : null
     )
   );
-  const [ward, setWard] = useState("");
-  const [province, setProvince] = useState("");
-  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState(null);
+  const [province, setProvince] = useState(null);
+  const [district, setDistrict] = useState(null);
   const [phone, setPhone] = useState(
     useSelector((state) =>
       state.auth.userData && state.auth.userData.phone
@@ -99,13 +98,6 @@ const HeaderinPayment = (props) => {
       : null
   );
 
-  // const handleOpenAddressFormClick = (value) => {
-  //   if (value === "" || value === undefined) {
-  //     setHideAdressForm("none");
-  //   } else {
-  //     setHideAdressForm("");
-  //   }
-  // };
   const [visible, setVisible] = useState(false);
   const hidenModal = () => {
     setVisible(false);
@@ -113,28 +105,10 @@ const HeaderinPayment = (props) => {
   const handlePaymentClick = () => {
     dispatch(cartActions.updateBookAmount(props.history));
   };
-  const [address, setAddress] = useState(
-    specificAddress ? specificAddress : ""
-  );
-  const handleSelect = (value) => {
-    const arr = value.split(", ");
-    setAddress(arr[0]);
-    setWard(arr[1]);
-    setDistrict(arr[2]);
-    setProvince(arr[3]);
-    setTempAddress(`${arr[0]}, ${arr[1]}, ${arr[2]}, ${arr[3]}`);
-    //setAddress(value);
+  const [address, setAddress] = useState("");
+  const handleAdressInputChange = (e) => {
+    setAddress(e.target.value);
   };
-
-  useEffect(() => {
-    if (specificAddress) {
-      const arrAddress = specificAddress.split(", ");
-      setAddress(arrAddress[0]);
-      setWard(arrAddress[1] ? arrAddress[1] : "");
-      setDistrict(arrAddress[2] ? arrAddress[2] : "");
-      setProvince(arrAddress[3] ? arrAddress[3] : "");
-    }
-  }, [specificAddress]);
 
   const handleNameInputChange = (e) => {
     setName(e.target.value);
@@ -143,13 +117,13 @@ const HeaderinPayment = (props) => {
     setPhone(e.target.value);
   };
   const handleWardInputChange = (e) => {
-    setWard(e.target.value);
+    setWard(e);
   };
   const handleDistrictInputChange = (e) => {
-    setDistrict(e.target.value);
+    setDistrict(e);
   };
   const handleProvniceInputChange = (e) => {
-    setProvince(e.target.value);
+    setProvince(e);
   };
 
   const handleSubmit = (e) => {
@@ -164,7 +138,10 @@ const HeaderinPayment = (props) => {
         id,
         name,
         phone,
-        tempAddress,
+        address,
+        province,
+        district,
+        ward,
       };
       dispatch(
         authActions.updateAddressOfCurrentUser(userAddress, props.history, "1")
@@ -172,9 +149,44 @@ const HeaderinPayment = (props) => {
       setVisible(false);
     }
   };
+  //get data provice,district,ward
+  useEffect(() => {
+    dispatch(proviceAction.getProvincesRequest());
+    dispatch(districtAction.getDistrictsRequest(province));
+    dispatch(wardAction.getWardsRequest(district));
+  }, [province, district]);
+
+  useEffect(() => {
+    if (specificAddress) {
+      setProvince(userData.provinceId);
+      setAddress(specificAddress);
+      setWard(userData.wardId);
+      setDistrict(userData.districtId);
+    }
+  }, [specificAddress]);
+  const provinces = useSelector((state) =>
+    state.province.provinces ? state.province.provinces : []
+  );
+  console.log(provinces);
+  const districts = useSelector((state) =>
+    state.district.districts ? state.district.districts : []
+  );
+  const wards = useSelector((state) =>
+    state.ward.wards ? state.ward.wards : []
+  );
+  const showProvinces = provinces.map((province, index) => (
+    <Option value={province.id}>{province.name}</Option>
+  ));
+  const showDistricts = districts.map((district, index) => (
+    <Option value={district.id}>{district.name}</Option>
+  ));
+  const showWards = wards.map((ward, index) => (
+    <Option value={ward.id}>{ward.name}</Option>
+  ));
   return (
     <div>
-      <Modal
+      {
+        /* <Modal
         title="Cập nhật địa chỉ"
         visible={visible}
         onOk={handleSubmit}
@@ -277,7 +289,87 @@ const HeaderinPayment = (props) => {
             </div>
           )}
         </PlacesAutocomplete>
-      </Modal>
+      </Modal> */
+        <Modal
+          title="Cập nhật địa chỉ"
+          visible={visible}
+          onOk={handleSubmit}
+          onCancel={hidenModal}
+          style={{ top: 30 }}
+          width={500}
+          okText="Cập nhật"
+          cancelText="Hủy"
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignContent: "space-between",
+            }}
+          >
+            <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              Họ và tên
+            </label>
+            <Input
+              onChange={handleNameInputChange}
+              value={name}
+              placeholder="Nhập họ tên"
+              style={{ marginBottom: "10px", borderRadius: "5px" }}
+            ></Input>
+            <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              Số điện thoại
+            </label>
+            <Input
+              onChange={handlePhoneInputChange}
+              value={phone}
+              style={{ marginBottom: "10px", borderRadius: "5px" }}
+              placeholder="Nhập số điện thoại"
+            ></Input>
+            <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              Tỉnh/ Thành phố
+            </label>
+            <Select
+              value={province}
+              style={{ marginBottom: "10px", borderRadius: "5px" }}
+              onChange={handleProvniceInputChange}
+              placeholder="Chọn tỉnh/thành phố"
+            >
+              {showProvinces}
+            </Select>
+            <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              Quận/ Huyện
+            </label>
+            <Select
+              value={district}
+              onChange={handleDistrictInputChange}
+              style={{ marginBottom: "10px", borderRadius: "5px" }}
+              placeholder="Nhập quận/ huyện"
+            >
+              {showDistricts}
+            </Select>
+            <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              Xã/ Phường
+            </label>
+            <Select
+              value={ward}
+              style={{ marginBottom: "10px", borderRadius: "5px" }}
+              placeholder="Nhập xã/ phường"
+              onChange={handleWardInputChange}
+            >
+              {showWards}
+            </Select>
+
+            <label style={{ fontSize: "12px", fontWeight: "600" }}>
+              Địa chỉ
+            </label>
+            <Input
+              style={{ borderRadius: "5px", marginBottom: "10px" }}
+              onChange={handleAdressInputChange}
+            ></Input>
+          </div>
+        </Modal>
+      }
       {specificAddress ? (
         <div className={classes.address_zone}>
           <div>
@@ -399,25 +491,6 @@ const HeaderinPayment = (props) => {
           </div>
         </div>
       )}
-      <div style={{ display: `${hideAddressForm}` }}>
-        {/* <Zoom>
-          <AddressInputForm
-            display={hideAddressForm}
-            onClick={(hideAddressForm) =>
-              handleOpenAddressFormClick(hideAddressForm)
-            }
-            name={fullName ? userData.fullName : fullName}
-            phone={fullName ? userData.phone : ""}
-            provinceId={fullName ? userData.provinceId : "0"}
-            districtId={fullName ? userData.districtId : "0"}
-            wardId={fullName ? userData.wardId : "0"}
-            specificAddress={fullName ? userData.specificAddress : ""}
-            id={id}
-            props={props}
-            tag="1"
-          />
-        </Zoom> */}
-      </div>
     </div>
   );
 };
