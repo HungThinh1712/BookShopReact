@@ -101,6 +101,11 @@ const HeaderinPayment = (props) => {
   const [visible, setVisible] = useState(false);
   const hidenModal = () => {
     setVisible(false);
+    setProvince(userData.provinceId);
+    setAddress(specificAddress.split(",")[0]);
+    setWard(userData.wardId);
+
+    setDistrict(userData.districtId);
   };
   const handlePaymentClick = () => {
     dispatch(cartActions.updateBookAmount(props.history));
@@ -121,9 +126,12 @@ const HeaderinPayment = (props) => {
   };
   const handleDistrictInputChange = (e) => {
     setDistrict(e);
+    setWard(null);
   };
   const handleProvniceInputChange = (e) => {
     setProvince(e);
+    setDistrict(null);
+    setWard(null);
   };
 
   const handleSubmit = (e) => {
@@ -157,17 +165,18 @@ const HeaderinPayment = (props) => {
   }, [province, district]);
 
   useEffect(() => {
-    if (specificAddress) {
+    if (userData.specificAddress && userData) {
       setProvince(userData.provinceId);
-      setAddress(specificAddress);
+      setAddress(specificAddress.split(",")[0]);
       setWard(userData.wardId);
+
       setDistrict(userData.districtId);
     }
-  }, [specificAddress]);
+  }, []);
   const provinces = useSelector((state) =>
     state.province.provinces ? state.province.provinces : []
   );
-  console.log(provinces);
+
   const districts = useSelector((state) =>
     state.district.districts ? state.district.districts : []
   );
@@ -364,6 +373,7 @@ const HeaderinPayment = (props) => {
               Địa chỉ
             </label>
             <Input
+              value={address}
               style={{ borderRadius: "5px", marginBottom: "10px" }}
               onChange={handleAdressInputChange}
             ></Input>
