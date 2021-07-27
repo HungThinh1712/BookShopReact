@@ -109,7 +109,7 @@ const ShoppingCartPage = (props) => {
     0
   );
   const handleClick = () => {
-    props.history.push("/address_shipping");
+    dispatch(cartActions.updateBookAmount(props.history));
   };
   return (
     <div>

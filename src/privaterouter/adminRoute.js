@@ -5,7 +5,9 @@ import { toastMessage } from "./../components/common/ToastHelper";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userData = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) =>
+    state.auth.userData ? state.auth.userData : null
+  );
 
   return (
     <Route

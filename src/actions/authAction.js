@@ -52,8 +52,11 @@ export const loginUser =
             error = "Tài khoản của bạn cần xác thực ";
           } else if (res.data === "Email hoặc mật khẩu không đúng!") {
             error = res.data;
-            message.info("Email hoặc mật khẩu không đúng!");
           } else error = Object.values(res.data.errors)[0].toString();
+          dispatch({
+            type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
+            payload: error, //sets payload to errors coming from server
+          });
         }
       })
       .catch((err) => {
@@ -448,11 +451,9 @@ export const loginUserFacebook =
           let error;
           dispatch(backdropAction.setCloseBackDrop);
 
-          if (res.data === "Email hoặc mật khẩu không đúng!") error = res.data;
-          else error = Object.values(res.data.errors)[0].toString();
           dispatch({
             type: Types.GET_ERRORS, //this call test dispatch. to dispsatch to our reducer
-            payload: error, //sets payload to errors coming from server
+            payload: "Thông tin đăng nhập không đúng!", //sets payload to errors coming from server
           });
         }
       })

@@ -75,9 +75,13 @@ const HeaderinPayment = (props) => {
         : null
     )
   );
-  const [ward, setWard] = useState(null);
-  const [province, setProvince] = useState(null);
-  const [district, setDistrict] = useState(null);
+  const [ward, setWard] = useState(userData ? userData.wardId : null);
+  const [province, setProvince] = useState(
+    userData ? userData.provinceId : null
+  );
+  const [district, setDistrict] = useState(
+    userData ? userData.districtId : null
+  );
   const [phone, setPhone] = useState(
     useSelector((state) =>
       state.auth.userData && state.auth.userData.phone
@@ -108,9 +112,12 @@ const HeaderinPayment = (props) => {
     setDistrict(userData.districtId);
   };
   const handlePaymentClick = () => {
-    dispatch(cartActions.updateBookAmount(props.history));
+    //dispatch(cartActions.updateBookAmount(props.history));
+    props.history.push("/payment");
   };
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(
+    specificAddress ? specificAddress.split(",")[0] : null
+  );
   const handleAdressInputChange = (e) => {
     setAddress(e.target.value);
   };
@@ -164,15 +171,6 @@ const HeaderinPayment = (props) => {
     dispatch(wardAction.getWardsRequest(district));
   }, [province, district]);
 
-  useEffect(() => {
-    if (userData.specificAddress && userData) {
-      setProvince(userData.provinceId);
-      setAddress(specificAddress.split(",")[0]);
-      setWard(userData.wardId);
-
-      setDistrict(userData.districtId);
-    }
-  }, []);
   const provinces = useSelector((state) =>
     state.province.provinces ? state.province.provinces : []
   );

@@ -6,7 +6,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import * as cartActions from "./../../actions/cartAction";
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   author: {
     marginLeft: "30px",
     marginTop: "16px",
-    fontWeight:'600',
+    fontWeight: "600",
     fontSize: "14px",
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0px",
@@ -76,15 +76,18 @@ const IteminCart = (props) => {
   const handleDecrease = () => {
     if (amount - 1 > 0) {
       setAmount(amount - 1);
-    }
-    if (userId !== null) {
-      dispatch(
-        cartActions.updateAmountBookCurrentUser_Server(props.bookId, amount - 1)
-      );
-    } else {
-      dispatch(
-        cartActions.updateAmountBookCurrentUser_Local(props, amount - 1)
-      );
+      if (userId !== null) {
+        dispatch(
+          cartActions.updateAmountBookCurrentUser_Server(
+            props.bookId,
+            amount - 1
+          )
+        );
+      } else {
+        dispatch(
+          cartActions.updateAmountBookCurrentUser_Local(props, amount - 1)
+        );
+      }
     }
   };
   const handleIncrease = () => {
@@ -132,12 +135,14 @@ const IteminCart = (props) => {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span className={classes.title}>{props.name}</span>
-          <span className={classes.author}>{t('Admin_Book.11')}: {props.authorName}</span>
+          <span className={classes.author}>
+            {t("Admin_Book.11")}: {props.authorName}
+          </span>
           <Link
             className={classes.delete_link}
             onClick={handleDeleteButtonClick}
           >
-            {t('Customer_Shopping_Payment.2')}
+            {t("Customer_Shopping_Payment.2")}
           </Link>
         </div>
         <div className={classes.flex}></div>
@@ -150,14 +155,16 @@ const IteminCart = (props) => {
               color: "red",
             }}
           >
-            {props.price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ
+            {props.price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+            đ
           </span>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <span style={{ marginTop: "6px", fontSize: "14px" }}>
               <s>
                 {props.coverPrice
                   .toString()
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ
+                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}{" "}
+                đ
               </s>
             </span>
             <span
@@ -179,7 +186,7 @@ const IteminCart = (props) => {
             <Button style={{ borderColor: "#1a936f" }} onClick={handleDecrease}>
               -
             </Button>
-            <Button style={{ borderColor: "#1a936f"}} disabled>
+            <Button style={{ borderColor: "#1a936f" }} disabled>
               {amount}
             </Button>
             <Button style={{ borderColor: "#1a936f" }} onClick={handleIncrease}>

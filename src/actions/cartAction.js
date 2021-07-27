@@ -122,7 +122,7 @@ export const updateBookAmount = (history) => async (dispatch) => {
     .then((res) => {
       dispatch(backdropAction.setCloseBackDrop);
       if (res.status === 200) {
-        history.push("/payment");
+        history.push("/address_shipping");
       } else {
         toastMessage(res.data);
         history.push("/cart");
