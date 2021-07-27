@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
-const MessengerChat = () => (  
+const MessengerChat = () => (
   <div>
     <MessengerCustomerChat
       pageId="106415988259716"
-      appId="197404338770972"
+      appId="513590556436339"
       version="2.1"
       htmlRef={window.location.pathname}
       themeColor="#35B835"
-      language= 'vi'
+      language="vi"
       debug={false}
       autoLogAppEvents={true}
     />
