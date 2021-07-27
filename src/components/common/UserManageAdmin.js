@@ -195,7 +195,7 @@ const BasicTable = (props) => {
               style={{ height: "80px" }}
               className={classes.row}
               key={index}
-              onClick={() => handelRowClick(row)}
+              onDoubleClick={() => handelRowClick(row)}
             >
               <TableCell component="th" scope="row" style={{ width: "150px" }}>
                 {row.fullName}

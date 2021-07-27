@@ -415,6 +415,17 @@ form {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 2rem;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  background-color: white;
+  border-radius: 15px;
+}
 form.sign-up-form {
   opacity: 1;
   z-index: 2;

@@ -93,7 +93,7 @@ const PaymentPage = (props) => {
       });
   }, [dispatch]);
   return (
-    <div style={{ backgroundColor: "#EDECE7", height: "760px" }}>
+    <div style={{ backgroundColor: "#EDECE7", paddingBottom: "175px" }}>
       <HeaderInPayment step={2} />
       <div className={classes.title}>3. Thanh toán và đặt hàng</div>
       <div className={classes.wraper}>

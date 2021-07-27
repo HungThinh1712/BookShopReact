@@ -79,21 +79,7 @@ const AuthorManagementPageAdmin = (props) => {
                     </div>
                   </div>
                   <div className="container">
-                    <div className="row">
-                      <div className={classes.search}>
-                        <InputBase
-                          placeholder={t("Admin_Other.14")}
-                          value={searchString}
-                          onChange={handleInputChange}
-                          classes={{
-                            root: classes.inputRoot,
-                          }}
-                        />
-                        <IconButton>
-                          <SearchIcon />
-                        </IconButton>
-                      </div>
-                    </div>
+                    <div className="row"></div>
                     <div style={{ paddingBottom: "230px" }} className="row">
                       <CommentManage page={page} setPage={setPage} />
                     </div>

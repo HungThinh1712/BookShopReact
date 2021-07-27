@@ -381,6 +381,24 @@ export const changePassword = (userData, history) => async (dispatch) => {
     });
 };
 
+export const changePasswordByAdmin = (userData) => async (dispatch) => {
+  const url = CallApis.API_URL.concat(`/Users/ChangePassword`);
+  dispatch(backdropAction.setOpenBackDrop);
+  await axios
+    .put(url, userData)
+    .then((res) => {
+      if (res.status === 200) {
+        toastMessage("Cập nhật thành công");
+        dispatch(backdropAction.setCloseBackDrop);
+      } else {
+        dispatch(backdropAction.setCloseBackDrop);
+      }
+    })
+    .catch((err) => {
+      dispatch(backdropAction.setCloseBackDrop);
+    });
+};
+
 export const sendCodeActive = (email) => async (dispatch) => {
   const url = CallApis.API_URL.concat(
     `/Users/ResendConfirmCode?email=${email}`
