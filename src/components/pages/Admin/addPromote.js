@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {withRouter} from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import { Button } from "antd";
 import { Input } from "antd";
 import * as userAction from "../../../actions/userAction";
@@ -19,7 +19,7 @@ const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { Option } = Select;
 
-const AddPromotion=(props)  =>{
+const AddPromotion = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -123,38 +123,28 @@ const AddPromotion=(props)  =>{
   const handleDiscountMoneyChange = (e) => {
     setDiscountMoney(e.target.value);
   };
-  const  handleAddPromotion =async () => {
-    if(!promotionCode){
+  const handleAddPromotion = async () => {
+    if (!promotionCode) {
       toastMessage("Vui lòng nhập mã khuyến mãi");
-    }
-    else if(!promotionName){
+    } else if (!promotionName) {
       toastMessage("Vui lòng nhập tên khuyến mãi");
-    }
-    else if(!promotionCode){
+    } else if (!promotionCode) {
       toastMessage("Vui lòng nhập mã khuyến mãi");
-    }
-    else if(!customerIds){
+    } else if (!customerIds) {
       toastMessage("Vui lòng chọn đối tượng áp dụng");
-    }
-    else if(!startDate){
+    } else if (!startDate) {
       toastMessage("Vui lòng chọn ngày bắt đầu");
-    }
-    else if(!endDate){
+    } else if (!endDate) {
       toastMessage("Vui lòng ngày kết thúc");
-    }
-    else if(!countApply){
+    } else if (!countApply) {
       toastMessage("Vui lòng nhập số lần áp dụng");
-    }
-    else if(promotionType===0 && !discountMoney){
+    } else if (promotionType === 0 && !discountMoney) {
       toastMessage("Vui lòng nhập số tiền giảm giá");
-    }
-    else if(!bookIds){
-      toastMessage("Vui lòng chọn sản phẩm")
-    }
-    else if(!minMoney){
-      toastMessage("Vui lòng nhập số tiền tối thiểu")
-    }
-    else {
+    } else if (!bookIds) {
+      toastMessage("Vui lòng chọn sản phẩm");
+    } else if (!minMoney) {
+      toastMessage("Vui lòng nhập số tiền tối thiểu");
+    } else {
       const promotion = {
         promotionCode,
         promotionName,
@@ -168,8 +158,8 @@ const AddPromotion=(props)  =>{
         discountMoney,
         bookIds,
       };
-      await dispatch(promotionAction.addPromotion(promotion,props.history));
-      await dispatch(promotionAction.getPromontions(1,10,0))
+      await dispatch(promotionAction.addPromotion(promotion, props.history));
+      await dispatch(promotionAction.getPromontions(1, 10, 0));
     }
   };
 
@@ -430,7 +420,7 @@ const AddPromotion=(props)  =>{
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-4">
-                          <Tooltip title="Tất cả khách hàng">
+                          <Tooltip title="Tất cả sản phẩm">
                             <Checkbox
                               checked={checkedBook}
                               onChange={handleCheckBoxAllBooksChange}
@@ -460,8 +450,11 @@ const AddPromotion=(props)  =>{
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-4">
                           <label>Tổng tiền đơn hàng tối thiểu</label>
-                          <Input  value={minMoney}
-                            onChange={handlePromotionMinMoneyChange} placeholder="Nhập số tiền" />
+                          <Input
+                            value={minMoney}
+                            onChange={handlePromotionMinMoneyChange}
+                            placeholder="Nhập số tiền"
+                          />
                         </div>
                       </div>
                       <div
@@ -511,6 +504,6 @@ const AddPromotion=(props)  =>{
       </div>
     </div>
   );
-}
+};
 
 export default withRouter(AddPromotion);

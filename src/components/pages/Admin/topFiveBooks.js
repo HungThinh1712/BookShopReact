@@ -9,7 +9,8 @@ import BreadCrumb from "../../common/Breadcrumbs";
 import moment from "moment";
 import { ConfigProvider } from "antd";
 import Vi from "antd/lib/locale/vi_VN";
-const PieChart = () => {
+import { withRouter } from "react-router-dom";
+const PieChart = (props) => {
   const dispatch = useDispatch();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -51,9 +52,8 @@ const PieChart = () => {
       },
     ],
   };
-  function monthCellRender(value,locale) {
-   
-   return <span>{`Tháng ${value.month() + 1}`}</span>
+  function monthCellRender(value, locale) {
+    return <span>{`Tháng ${value.month() + 1}`}</span>;
   }
   return (
     <div>
@@ -69,7 +69,11 @@ const PieChart = () => {
           }}
         >
           <div style={{ marginTop: "120px", marginLeft: "10px" }}>
-            <BreadCrumb breadcrumb="Thống kê doanh thu theo sản phẩm bán chạy"></BreadCrumb>
+            <BreadCrumb
+              breadcrumb="Thống kê sản phẩm bán chạy"
+              onClick={() => props.history.push("/admin")}
+              onClick2={() => props.history.push("/admin/topfivebooks")}
+            ></BreadCrumb>
           </div>
           <div
             style={{
@@ -115,4 +119,4 @@ const PieChart = () => {
   );
 };
 
-export default PieChart;
+export default withRouter(PieChart);

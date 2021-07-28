@@ -126,6 +126,7 @@ const ForgetPasswordPage = (props) => {
                 alignItems: "center",
                 display: "flex",
                 justifyContent: "center",
+                background: "#49654e",
               }}
               onClick={handleSubmitConfirm}
             >

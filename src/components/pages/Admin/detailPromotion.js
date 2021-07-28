@@ -227,6 +227,7 @@ const AddPromotion = (props) => {
         minMoney,
         discountMoney,
         bookIds,
+        status,
       };
       dispatch(promotionAction.updatePromotion(promotion, props.history));
     }
@@ -670,7 +671,7 @@ const AddPromotion = (props) => {
                         </div>
                         <div className="row">
                           <div className="form-group mb-3 col-xs-12 col-sm-12">
-                            <Tooltip title="Tất cả khách hàng">
+                            <Tooltip title="Tất cả sản phẩm">
                               <Checkbox
                                 checked={checkedBook}
                                 onChange={handleCheckBoxAllBooksChange}

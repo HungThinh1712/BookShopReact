@@ -57,8 +57,10 @@ const RegisterPage = (props) => {
   };
 
   const handleSubmit = async (e) => {
-    if (confirmPassword !== password) toastMessage(t("Toast_Message.9"));
-    else if (birthDay === "") toastMessage(t("Toast_Message.14"));
+    const now = new Date();
+    if (confirmPassword !== password) toastMessage("Ngày sinh không hợp lệ");
+    else if (birthDay === "" || new Date(birthDay) >= now)
+      toastMessage(t("Toast_Message.14"));
     else {
       const userData = { email, password, fullName, phone, birthDay, sex };
       await dispatch(authActions.registerUser(userData, props.history));

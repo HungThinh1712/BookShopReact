@@ -68,11 +68,21 @@ const ProfileUserPage = (props) => {
   const handleButtonClick = async () => {
     if (checked === false) {
       const userData = { id, name, phone, birthday, sex };
-      await dispatch(authActions.updateProfileUser(userData));
-      toastMessage("Cập nhật thành công");
+      const now = new Date();
+
+      if (birthday === "" || new Date(birthday) >= now) {
+        toastMessage("Ngày sinh không hợp lệ");
+      } else if (name === "") {
+        toastMessage("Tên không hợp lệ");
+      } else if (phone === "") {
+        toastMessage("Số điện thoại không hợp lệ");
+      } else {
+        await dispatch(authActions.updateProfileUser(userData));
+        toastMessage("Cập nhật thành công");
+      }
     } else {
       if (oldPassword === "" || newPassword === "" || confirmPassword === "")
-        toastMessage("Thông tin không được để trống");
+        toastMessage("Mật khẩu không được để trống");
       else if (newPassword !== confirmPassword)
         toastMessage("Mật khẩu không trùng nhau");
       else {

@@ -16,8 +16,10 @@ export const getStatisticByMonths = (year) => async (dispatch) => {
       console.log("Error" + err);
     });
 };
-export const getTopFive = (month,year) => async (dispatch) => {
-  const url = CallApis.API_URL.concat(`/Orders/Admin/GetTopFives?month=${month}&year=${year}`);
+export const getTopFive = (month, year) => async (dispatch) => {
+  const url = CallApis.API_URL.concat(
+    `/Orders/Admin/GetTopFives?month=${month}&year=${year}`
+  );
   await axios
     .get(url)
     .then((res) => {
