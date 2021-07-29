@@ -79,8 +79,8 @@ const ShoppingCartPage = (props) => {
   const cartItems = useSelector((state) =>
     state.cart.items ? state.cart : []
   );
-  const userData = useSelector((state) =>
-    state.auth.userData ? state.auth.userData : null
+  const isAuth = useSelector((state) =>
+    state.auth.isAuthenticated ? state.auth.isAuthenticated : false
   );
 
   const showCartItems = Object.values(cartItems.items).map((cartItem) => (
@@ -109,7 +109,7 @@ const ShoppingCartPage = (props) => {
     0
   );
   const handleClick = () => {
-    if (userData) {
+    if (isAuth) {
       dispatch(cartActions.updateBookAmount(props.history));
     } else {
       props.history.push("/address_shipping");

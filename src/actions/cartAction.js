@@ -131,6 +131,27 @@ export const updateBookAmount = (history) => async (dispatch) => {
     .catch((err) => {});
 };
 
+export const checkBookAmount =
+  (history, bookId, amount) => async (dispatch) => {
+    dispatch(backdropAction.setOpenBackDrop);
+    const url = CallApis.API_URL.concat(
+      `/ShoppingCarts/CheckAmountBook?bookId=${bookId}&amount=${amount}`
+    );
+    await axios({
+      method: "get",
+      url: url,
+    })
+      .then((res) => {
+        dispatch(backdropAction.setCloseBackDrop);
+        if (res.status === 200) {
+          history.push("/cart");
+        } else {
+          toastMessage(res.data);
+        }
+      })
+      .catch((err) => {});
+  };
+
 export const updateAmountBookCurrentUser_Server =
   (bookId, amount) => async (dispatch) => {
     dispatch(backdropAction.setOpenBackDrop);
